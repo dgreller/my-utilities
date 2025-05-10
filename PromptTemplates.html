@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Template Library</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Tailwind gray-100 */
+        }
+        .category-tile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            text-align: center;
+            aspect-ratio: 1 / 1; 
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .category-tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind shadow-lg */
+        }
+        .prompt-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .prompt-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Tailwind shadow-md */
+        }
+        .back-button {
+            transition: background-color 0.2s ease;
+        }
+        .copy-button {
+            transition: background-color 0.2s ease;
+        }
+        #promptTemplateTextContainer { /* Renamed for clarity */
+            white-space: pre-wrap; 
+            word-wrap: break-word; 
+            background-color: #f9fafb; 
+            border: 1px solid #e5e7eb; 
+            border-radius: 0.375rem; 
+            padding: 1rem; 
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            max-height: 60vh; /* Adjusted height */
+            overflow-y: auto;
+            color: #1f2937; /* Darker text for better readability */
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 24px; /* Increased padding */
+            border-radius: 6px; /* Slightly more rounded */
+            color: white;
+            font-size: 1em; /* Slightly larger font */
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success {
+            background-color: #22c55e; /* Tailwind green-500 */
+        }
+        .toast.error {
+            background-color: #ef4444; /* Tailwind red-500 */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-slate-800 text-white shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <h1 class="text-3xl font-bold tracking-tight">Professional Prompt Library</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+
+        <div id="categoriesView">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Prompt Categories</h2>
+            <div id="categoryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                </div>
+        </div>
+
+        <div id="promptListView" class="hidden">
+            <button id="backToCategoriesBtn" class="mb-6 bg-slate-600 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded-lg shadow back-button">&larr; Back to Categories</button>
+            <h2 id="categoryTitle" class="text-3xl font-bold text-gray-800 mb-6"></h2>
+            <div id="promptList" class="space-y-4">
+                </div>
+        </div>
+
+        <div id="promptDetailView" class="hidden">
+            <button id="backToPromptListBtn" class="mb-6 bg-slate-600 hover:bg-slate-700 text-white font-semibold py-2 px-4 rounded-lg shadow back-button">&larr; Back to Prompts</button>
+            <h2 id="promptTitle" class="text-3xl font-bold text-gray-800 mb-2"></h2>
+            <p id="promptDescription" class="text-gray-700 mb-6 text-lg"></p>
+            <h3 class="text-xl font-semibold text-gray-700 mb-3">Prompt Template:</h3>
+            <div id="promptTemplateTextContainer" class="text-sm"> 
+                <pre id="promptTemplateTextPre"></pre> </div>
+            <button id="copyPromptBtn" class="mt-6 bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-6 rounded-lg shadow-md copy-button">
+                Copy Prompt
+            </button>
+            <div id="usageNotes" class="mt-8 p-4 bg-sky-50 border-l-4 border-sky-500 text-sky-700 rounded-md">
+                <h4 class="font-bold mb-1">Usage Notes:</h4>
+                <p class="text-sm">Replace placeholders like <strong>[Your Topic Here]</strong> or <strong>{{INSERT_DETAIL}}</strong> with your specific information. The more context you provide in the placeholders, the better the AI's response will be.</p>
+            </div>
+        </div>
+    </main>
+
+    <div id="toastNotification" class="toast"></div>
+
+    <footer class="text-center py-8 text-gray-500 text-sm mt-12">
+        <p>&copy; <span id="currentYear"></span> Prompt Template Library. For professional use.</p>
+    </footer>
+
+    <script>
+        // Data for prompt categories and templates
+        const promptCategories = [
+          {
+            name: "Email & Communication",
+            color: "bg-blue-500", 
+            icon: "📧",
+            prompts: [
+              {
+                title: "Professional Email Drafter",
+                description: "Helps craft clear and concise professional emails for various situations.",
+                template: "Draft an email to [Recipient Name/Group] regarding [Subject]. The key points to convey are:\n1. [Point 1]\n2. [Point 2]\n3. [Point 3]\nThe desired tone is [Tone, e.g., formal, assertive, friendly]. Please include a clear call to action: [Call to Action]."
+              },
+              {
+                title: "Meeting Follow-Up Email",
+                description: "Generate a summary and action item list after a meeting.",
+                template: "Compose a follow-up email for the meeting held on [Date] regarding [Meeting Topic].\nKey discussion points were:\n- [Discussion Point A]\n- [Discussion Point B]\n\nAction items assigned are:\n- [Action Item 1] (Assigned to: [Name], Deadline: [Date])\n- [Action Item 2] (Assigned to: [Name], Deadline: [Date])\n\nConfirm the next steps: [Next Steps]."
+              },
+              {
+                title: "Request for Information Email",
+                description: "Draft a polite email asking for specific information.",
+                template: "Subject: Request for Information: [Specific Topic]\n\nDear [Recipient Name],\n\nI am writing to respectfully request information regarding [Specific Topic of Inquiry]. Specifically, I would appreciate it if you could provide details on:\n- [Question 1]\n- [Question 2]\n- [Any specific format for the information, e.g., a report, a link]\n\nPlease let me know if this is something you can assist with and an estimated timeframe for a response. Thank you for your time and consideration.\n\nSincerely,\n[Your Name]"
+              },
+              {
+                title: "Networking Outreach Email",
+                description: "Craft an email to connect with a new professional contact.",
+                template: "Subject: Connecting with a Fellow [Your Profession/Industry] Professional\n\nDear [Contact's Name],\n\nMy name is [Your Name], and I am a [Your Role] at [Your Company]. I came across your work on [Specific Project/Article/Achievement] and was very impressed by [Specific Aspect You Admired].\n\nI am passionate about [Your Area of Interest/Expertise] and would welcome the opportunity to connect and learn more about your experiences in [Their Area of Expertise/Industry].\n\nWould you be open to a brief virtual coffee chat sometime in the coming weeks? Please let me know what time might work best for you.\n\nThank you for your time and consideration.\n\nBest regards,\n[Your Name]\n[Your LinkedIn Profile URL (Optional)]"
+              },
+              {
+                title: "Declining an Invitation Email",
+                description: "Politely decline an invitation while maintaining a positive relationship.",
+                template: "Subject: Regarding your invitation to [Event/Meeting Name]\n\nDear [Sender's Name],\n\nThank you so much for inviting me to [Event/Meeting Name] on [Date]. I truly appreciate you thinking of me.\n\nUnfortunately, due to [Brief, General Reason, e.g., a prior commitment, scheduling conflict], I will be unable to attend.\n\nI was very interested in [Mention something specific about the event/meeting if possible] and regret that I will miss it. I hope it's a great success.\n\nThank you again for the invitation.\n\nBest regards,\n[Your Name]"
+              },
+              {
+                title: "Internal Announcement Email",
+                description: "Draft an email for an internal company announcement.",
+                template: "Subject: Important Announcement: [Announcement Topic]\n\nTeam,\n\nI'm writing to share an important update regarding [Briefly state the topic, e.g., our new software launch, changes to the Q3 roadmap, welcoming a new team member].\n\n[Provide key details of the announcement. Use bullet points for clarity if there are multiple points]:\n- [Detail 1]\n- [Detail 2]\n- [Detail 3]\n\n[Explain the impact or what this means for the team/company].\n\n[If applicable, state any required actions or next steps].\n\nWe will be holding a brief meeting on [Date] at [Time] in [Location/Virtual Meeting Link] to discuss this further and answer any questions you may have.\n\nPlease feel free to reach out to [Contact Person/Department] if you have immediate questions.\n\nBest regards,\n[Your Name/Management]"
+              },
+              {
+                title: "Request for Feedback Email",
+                description: "Professionally ask for feedback on a project, document, or performance.",
+                template: "Subject: Request for Feedback: [Project/Document Name or Performance Period]\n\nHi [Recipient's Name],\n\nI hope this email finds you well.\n\nI would greatly appreciate it if you could provide some feedback on [Specific Project/Document Name, e.g., 'the Q2 sales report draft'] or [Specific Performance Area, e.g., 'my presentation skills during the client meeting on Date'].\n\nI am particularly interested in your thoughts on:\n- [Specific Aspect 1, e.g., 'the clarity of the main arguments']\n- [Specific Aspect 2, e.g., 'the effectiveness of the proposed solution']\n- [Any other areas you'd like feedback on]\n\nPlease be as candid as possible, as your insights will be invaluable for [Reason, e.g., 'improving the final version', 'my professional development'].\n\nWould you have some time to discuss this briefly, or would you prefer to provide written feedback by [Suggested Date]?\n\nThank you for your time and expertise.\n\nBest,\n[Your Name]"
+              },
+              {
+                title: "Apology Email for a Minor Issue",
+                description: "Craft a professional apology for a minor error or inconvenience.",
+                template: "Subject: Apology Regarding [Briefly Mention Issue]\n\nDear [Recipient's Name],\n\nPlease accept my sincere apologies for [Briefly and clearly state the error/issue, e.g., 'the delay in sending the report', 'the oversight in the previous email', 'any inconvenience caused by the system glitch this morning'].\n\nI understand this may have caused [Briefly mention potential impact, e.g., 'some inconvenience', 'a delay in your workflow'], and I take full responsibility.\n\nTo address this, I have [State action taken or planned, e.g., 'already sent the corrected report', 'implemented a fix that should prevent this in the future'].\n\nThank you for your understanding.\n\nSincerely,\n[Your Name]"
+              },
+              {
+                title: "Congratulations Email (Professional Achievement)",
+                description: "Send a congratulatory note for a colleague's or contact's achievement.",
+                template: "Subject: Congratulations on Your [Achievement]!\n\nDear [Recipient's Name],\n\nI was so pleased to hear about your recent [Specific Achievement, e.g., promotion to Senior Manager, successful project launch, award recognition]!\n\nThis is a fantastic accomplishment and a testament to your hard work and dedication to [Mention specific skill or quality, e.g., 'your team', 'the project', 'the industry'].\n\nI wish you all the best in your [New Role/Continued Success].\n\nWarm regards,\n[Your Name]"
+              },
+              {
+                title: "Gentle Reminder Email",
+                description: "Send a polite reminder about a pending task or deadline.",
+                template: "Subject: Gentle Reminder: [Original Subject or Task]\n\nHi [Recipient's Name],\n\nHope you’re having a productive week.\n\nThis is just a friendly reminder regarding [Original Request/Task, e.g., 'the feedback on the proposal document', 'the information needed for the Q3 report'] which we discussed on [Date, if applicable]. The deadline is approaching on [Deadline Date, if applicable].\n\nIf you’ve already completed this, please disregard this email. If there’s anything I can do to help or if you have any questions, please let me know.\n\nThanks,\n[Your Name]"
+              }
+            ]
+          },
+          {
+            name: "Content Creation & Writing",
+            color: "bg-green-500",
+            icon: "✍️",
+            prompts: [
+              {
+                title: "Blog Post Outline Generator",
+                description: "Creates a structured outline for a blog post on a given topic.",
+                template: "Generate a comprehensive blog post outline for the topic: \"[Blog Post Topic]\".\nThe target audience is [Target Audience Description].\nKey areas to cover should include:\n- Introduction (hook, main argument)\n- Section 1: [Main Point 1 with sub-points]\n- Section 2: [Main Point 2 with sub-points]\n- Section 3: [Main Point 3 with sub-points]\n- Conclusion (summary, call to action)\nSuggest a catchy title for this blog post."
+              },
+              {
+                title: "Summarize Text Concisely",
+                description: "Condenses a long piece of text into a brief summary, highlighting key points.",
+                template: "Summarize the following text into [Number] key bullet points or a concise paragraph of no more than [Word Count] words. Focus on the main arguments, findings, and conclusions.\n\nText to summarize:\n\"\"\"\n[Paste Text Here]\n\"\"\""
+              },
+              {
+                title: "Brainstorm Article Ideas",
+                description: "Generates a list of article ideas based on a theme or keyword.",
+                template: "Brainstorm [Number] unique and engaging article ideas related to the central theme of \"[Central Theme/Keyword]\". For each idea, provide a potential title and a brief (1-2 sentence) description of the angle or focus. The target audience is [Target Audience Description]."
+              },
+              {
+                title: "Write an Introduction Paragraph",
+                description: "Drafts an engaging introduction for an article or report.",
+                template: "Write an engaging introductory paragraph for an article/report on the topic: \"[Topic Title/Subject]\".\nThe introduction should:\n1. Start with a compelling hook (e.g., a surprising statistic, a relatable question, a brief anecdote).\n2. Briefly introduce the main subject and its importance.\n3. Clearly state the purpose or main argument of the piece.\n4. Provide a roadmap of what the reader can expect.\nTarget audience: [Target Audience Description]."
+              },
+              {
+                title: "Write a Conclusion Paragraph",
+                description: "Drafts a strong concluding paragraph to summarize and offer final thoughts.",
+                template: "Write a strong concluding paragraph for an article/report on \"[Topic Title/Subject]\".\nThe main points covered were:\n- [Main Point 1 Summarized]\n- [Main Point 2 Summarized]\n- [Main Point 3 Summarized]\n\nThe conclusion should:\n1. Briefly reiterate the main argument or purpose.\n2. Summarize the key takeaways.\n3. Offer a final thought, implication, or call to action.\nAvoid introducing new information."
+              },
+              {
+                title: "Rephrase for Clarity and Conciseness",
+                description: "Rewrites a piece of text to be clearer and more concise.",
+                template: "Please rephrase the following text to improve its clarity and conciseness, while retaining the original meaning. Aim for a [Target Audience, e.g., general professional, technical expert] understanding.\n\nOriginal Text:\n\"\"\"\n[Paste Text Here]\n\"\"\"\n\nFocus on:\n- Simplifying complex sentences.\n- Removing jargon or explaining it if necessary.\n- Eliminating redundancy."
+              },
+              {
+                title: "Generate FAQs for a Topic/Product",
+                description: "Creates a list of frequently asked questions (FAQs) and their answers.",
+                template: "Generate a list of [Number] frequently asked questions (FAQs) and their concise answers regarding [Topic/Product/Service Name].\n\nKey aspects to cover in the FAQs include:\n- [Aspect 1, e.g., Core functionality, Key benefits]\n- [Aspect 2, e.g., Pricing, How to get started]\n- [Aspect 3, e.g., Common troubleshooting, Support]\n\nProvide both the question and a clear, helpful answer for each."
+              },
+              {
+                title: "Create a Case Study Outline",
+                description: "Outlines the structure for a compelling business case study.",
+                template: "Create a detailed outline for a business case study about [Company/Client Name] and their success with [Product/Service/Strategy].\n\nThe case study should highlight:\n- Client Background: Brief overview of [Company/Client Name].\n- The Challenge: What problem or pain point were they facing?\n- The Solution: How did [Your Product/Service/Strategy] address this challenge?\n- Implementation: Briefly describe the process of implementing the solution.\n- The Results: Quantifiable achievements and benefits (e.g., X% increase in Y, Z cost savings).\n- Client Testimonial (Placeholder for a quote).\n- Conclusion & Call to Action."
+              },
+              {
+                title: "Write a Press Release Draft",
+                description: "Generates a draft for a press release announcing news.",
+                template: "Draft a press release for [Company Name] announcing [Specific News, e.g., a new product launch, a major partnership, a company milestone].\n\nKey information to include:\n- Headline: [Suggest a compelling headline]\n- Dateline: [City, State – Date]\n- Introduction: Briefly summarize the announcement (who, what, when, where, why).\n- Body Paragraph 1: Elaborate on the news, providing more details and context.\n- Body Paragraph 2: Include a quote from [Key Person, e.g., CEO, Product Manager] about the announcement.\n- Body Paragraph 3 (Optional): Provide further supporting details or benefits.\n- About [Company Name]: Standard boilerplate about your company.\n- Contact Information: [Name, Title, Email, Phone (Optional)]\n- ### (End marker)"
+              },
+              {
+                title: "Generate Persuasive Copy (AIDA)",
+                description: "Uses the AIDA (Attention, Interest, Desire, Action) framework to write persuasive copy.",
+                template: "Write persuasive marketing copy for [Product/Service Name] using the AIDA framework.\nProduct/Service Description: [Briefly describe the product/service and its key benefit].\nTarget Audience: [Describe the target audience].\n\n- Attention: How can we grab the audience's attention immediately? (e.g., a bold question, a surprising fact)\n- Interest: How can we build their interest by highlighting relevance to their needs or problems?\n- Desire: How can we make them desire the product/service by showcasing benefits and creating an emotional connection?\n- Action: What specific action do we want them to take, and how can we make it easy and compelling?\n\nDraft the copy based on these points."
+              }
+            ]
+          },
+          {
+            name: "Data Analysis & Reporting",
+            color: "bg-yellow-500",
+            icon: "📊",
+            prompts: [
+              {
+                title: "Executive Summary of Data Findings",
+                description: "Drafts an executive summary based on provided data points and key findings.",
+                template: "Write an executive summary for a report based on the following data analysis findings. The primary audience is [Target Audience, e.g., Senior Management].\n\nKey Data Points/Findings:\n- [Finding 1 with supporting data/metric]\n- [Finding 2 with supporting data/metric]\n- [Finding 3 with supporting data/metric]\n\nKey Trends Observed:\n- [Trend 1]\n- [Trend 2]\n\nMain Conclusions:\n- [Conclusion 1]\n- [Conclusion 2]\n\nRecommendations (if any):\n- [Recommendation 1]\n\nKeep the summary concise, impactful, and no longer than [Number] paragraphs or [Word Count] words."
+              },
+              {
+                title: "Interpret Data Trends",
+                description: "Helps explain observed trends in a dataset and suggest potential causes.",
+                template: "Analyze the following dataset/description of trends and provide an interpretation. What are the potential underlying causes or implications of these trends?\n\nDataset/Trend Description:\n\"\"\"\n[Describe the data, variables, and observed trends. E.g., 'Sales of product X have increased by 20% quarter-over-quarter for the last year, while sales of product Y have declined by 10% in the same period.']\n\"\"\"\n\nConsider factors such as [Factor 1, e.g., market conditions], [Factor 2, e.g., marketing campaigns], and [Factor 3, e.g., competitor actions]. Provide 2-3 plausible explanations for the observed trends."
+              },
+              {
+                title: "Identify Key Insights from Data",
+                description: "Extracts the most important insights from a provided dataset or summary.",
+                template: "From the following data summary or raw data, identify the top [Number, e.g., 3-5] key insights that would be most relevant to [Specific Stakeholder, e.g., the marketing team, product developers]. For each insight, briefly explain its significance.\n\nData/Summary:\n\"\"\"\n[Paste data summary or describe raw data source here]\n\"\"\""
+              },
+              {
+                title: "Generate Report Outline from Data",
+                description: "Creates a structured report outline based on available data and analysis goals.",
+                template: "Create a report outline for presenting findings from an analysis of [Type of Data, e.g., customer survey data, website traffic data].\nThe main objective of the report is to [Report Objective, e.g., 'understand customer satisfaction drivers', 'identify opportunities to improve user engagement'].\nKey data points available include: [List key metrics or data categories available].\n\nThe outline should include sections for:\n- Introduction (Purpose, Scope)\n- Methodology (Briefly, if applicable)\n- Key Findings (Organized by theme or metric)\n- Analysis & Interpretation of Findings\n- Conclusions\n- Recommendations (Based on findings)\n- Appendix (If needed for detailed data)"
+              },
+              {
+                title: "Suggest Data Visualizations",
+                description: "Recommends appropriate chart types to visualize specific data relationships.",
+                template: "I need to visualize the following data. Suggest the most effective chart type(s) for each scenario and briefly explain why.\n\n1. Data: [Description of data, e.g., 'Sales figures for 5 different products over the last 12 months']. Goal: [Visualization Goal, e.g., 'Compare product performance and show trends over time'].\n2. Data: [Description of data, e.g., 'Percentage breakdown of customer demographics (age groups)']. Goal: [Visualization Goal, e.g., 'Show the proportion of each age group'].\n3. Data: [Description of data, e.g., 'Relationship between marketing spend and website conversions']. Goal: [Visualization Goal, e.g., 'Identify if there is a correlation between the two variables']."
+              },
+              {
+                title: "Formulate Hypotheses from Data",
+                description: "Generates testable hypotheses based on observed data patterns.",
+                template: "Based on the following observed data pattern: \"[Describe the observed pattern or correlation, e.g., 'We noticed that customers who purchase Product A are 50% more likely to purchase Product B within 30 days']\", generate [Number] testable hypotheses that could explain this observation. For each hypothesis, suggest a potential way to test it."
+              },
+              {
+                title: "Data Cleaning & Preprocessing Ideas",
+                description: "Suggests steps for cleaning and preprocessing a dataset for analysis.",
+                template: "I have a dataset with the following characteristics: [Describe dataset, e.g., 'customer data with columns for name, email, purchase history, and last login date'].\nI suspect there might be issues like [List potential issues, e.g., 'missing email addresses', 'inconsistent date formats', 'outliers in purchase amounts'].\n\nSuggest a list of potential data cleaning and preprocessing steps I should consider before analysis. For each step, briefly explain its purpose."
+              },
+              {
+                title: "KPI Definition & Tracking",
+                description: "Helps define Key Performance Indicators (KPIs) for a specific goal or project.",
+                template: "Help me define [Number, e.g., 3-5] Key Performance Indicators (KPIs) to track the success of [Project/Initiative/Business Goal, e.g., 'our new marketing campaign', 'improving customer retention', 'website redesign launch'].\nFor each KPI, please specify:\n- KPI Name:\n- Description: (What does it measure?)\n- Formula/Calculation: (How is it calculated?)\n- Target/Benchmark: (What would be a good target? If applicable)\n- Data Source: (Where would this data come from?)"
+              },
+              {
+                title: "Write Narrative for Data Story",
+                description: "Crafts a compelling narrative around data findings to make them engaging.",
+                template: "I have the following key data findings from an analysis on [Topic of Analysis]:\n- Finding 1: [Describe finding and key metric]\n- Finding 2: [Describe finding and key metric]\n- Finding 3: [Describe finding and key metric]\n\nHelp me craft a compelling narrative or story around these findings. The story should be aimed at [Target Audience] and should make the data memorable and impactful. What is the 'so what?' of these findings?"
+              },
+              {
+                title: "Compare Two Datasets/Scenarios",
+                description: "Outlines key points of comparison between two datasets or scenarios.",
+                template: "I need to compare [Dataset/Scenario A Description, e.g., 'customer feedback from Q1'] with [Dataset/Scenario B Description, e.g., 'customer feedback from Q2'].\nKey metrics to compare include: [Metric 1], [Metric 2], [Metric 3].\n\nProvide a structured approach to this comparison, highlighting:\n- Key similarities.\n- Key differences.\n- Potential reasons for the differences.\n- What conclusions can be drawn from this comparison regarding [Specific Goal, e.g., 'the impact of our new support system']?"
+              }
+            ]
+          },
+          {
+            name: "Project Management & Planning",
+            color: "bg-purple-500",
+            icon: "📅",
+            prompts: [
+              {
+                title: "Project Kickoff Meeting Agenda",
+                description: "Generates a standard agenda for a project kickoff meeting.",
+                template: "Create a detailed agenda for a project kickoff meeting for \"[Project Name]\".\nMeeting Objectives:\n- [Objective 1]\n- [Objective 2]\n\nAttendees: [List key roles or individuals]\nDate & Time: [Date], [Time]\nDuration: [Duration]\n\nAgenda Items:\n1. Welcome & Introductions ([Time Allocation])\n2. Project Overview & Goals (Presenter: [Name]) ([Time Allocation])\n3. Scope & Deliverables (Presenter: [Name]) ([Time Allocation])\n4. Project Timeline & Milestones (Presenter: [Name]) ([Time Allocation])\n5. Roles & Responsibilities (Presenter: [Name]) ([Time Allocation])\n6. Communication Plan (Presenter: [Name]) ([Time Allocation])\n7. Risk Assessment (Initial Thoughts) (Group Discussion) ([Time Allocation])\n8. Q&A ([Time Allocation])\n9. Next Steps ([Time Allocation])"
+              },
+              {
+                title: "Risk Assessment Brainstorm",
+                description: "Helps identify potential risks for a project and categorize them.",
+                template: "For the project named \"[Project Name]\" (briefly described as: [Short Project Description]), identify at least [Number] potential risks. For each risk, categorize it by [Category Type, e.g., Technical, Resource, External, Financial] and suggest a potential mitigation strategy.\n\nExample Format:\n- Risk: [Description of Risk]\n  - Category: [Category]\n  - Potential Mitigation: [Strategy]"
+              },
+              {
+                title: "Create a Work Breakdown Structure (WBS) Outline",
+                description: "Helps outline the major phases and tasks for a project WBS.",
+                template: "Help me create a high-level Work Breakdown Structure (WBS) outline for a project titled \"[Project Name]\".\nThe main deliverables/objectives of the project are:\n- [Deliverable/Objective 1]\n- [Deliverable/Objective 2]\n- [Deliverable/Objective 3]\n\nBreak these down into major phases and then list key tasks or task groups under each phase. For example:\nPhase 1: [Phase Name, e.g., Planning]\n  - Task 1.1: [Task Name]\n  - Task 1.2: [Task Name]\nPhase 2: [Phase Name, e.g., Design]\n  - Task 2.1: [Task Name]\n  - Task 2.2: [Task Name]\n(Continue for all major phases)"
+              },
+              {
+                title: "Stakeholder Communication Update",
+                description: "Drafts an update email for project stakeholders.",
+                template: "Draft a project status update email for stakeholders of the \"[Project Name]\" project.\n\nKey updates to convey:\n- Overall Status: [e.g., On Track, Slightly Delayed, At Risk]\n- Progress This Period ([Date Range]):\n  - [Accomplishment 1]\n  - [Accomplishment 2]\n- Upcoming Activities Next Period ([Date Range]):\n  - [Planned Activity 1]\n  - [Planned Activity 2]\n- Issues/Risks (if any):\n  - [Issue/Risk 1 and its status/mitigation]\n- Budget Status (Optional): [e.g., On Budget, Over Budget by X%]\n\nKeep the tone professional and concise."
+              },
+              {
+                title: "Task Delegation Instructions",
+                description: "Helps formulate clear instructions for delegating a task.",
+                template: "I need to delegate the following task: \"[Task Description]\".\nHelp me draft clear delegation instructions for [Team Member's Name/Role].\n\nThe instructions should include:\n- Clear description of the task and expected outcome.\n- Specific deliverables.\n- Deadline: [Date/Time].\n- Available resources or tools: [List any].\n- Level of authority: [e.g., Make decisions independently, Consult before major decisions].\n- How and when to report progress: [e.g., Daily email update, Weekly check-in].\n- Any critical context or background information."
+              },
+              {
+                title: "Post-Project Review (Lessons Learned) Agenda",
+                description: "Creates an agenda for a post-project review meeting.",
+                template: "Create an agenda for a Post-Project Review (Lessons Learned) meeting for the \"[Project Name]\" project.\n\nMeeting Objectives:\n- Identify what went well.\n- Identify what could have gone better.\n- Document key learnings for future projects.\n\nAgenda Items:\n1. Project Overview Recap (Brief summary of goals and outcomes) ([Time Allocation])\n2. What Went Well? (Open discussion, gather positives) ([Time Allocation])\n   - Aspects to consider: [e.g., Planning, Communication, Execution, Tools, Teamwork]\n3. What Were the Challenges? (Open discussion, identify areas for improvement) ([Time Allocation])\n   - Aspects to consider: [e.g., Scope creep, Resource constraints, Unexpected issues]\n4. Key Learnings & Insights (Synthesize discussion into actionable takeaways) ([Time Allocation])\n5. Recommendations for Future Projects (Specific suggestions) ([Time Allocation])\n6. Action Items (If any, for disseminating learnings) ([Time Allocation])"
+              },
+              {
+                title: "Develop a Project Timeline (High-Level)",
+                description: "Outlines key phases and estimated durations for a project.",
+                template: "Develop a high-level project timeline for a project to [Project Goal, e.g., 'launch a new website', 'develop a new software feature'].\nKey phases to include are:\n1. [Phase 1 Name, e.g., 'Requirements Gathering & Planning'] (Estimated duration: [e.g., 2 weeks])\n2. [Phase 2 Name, e.g., 'Design & Prototyping'] (Estimated duration: [e.g., 3 weeks])\n3. [Phase 3 Name, e.g., 'Development'] (Estimated duration: [e.g., 6 weeks])\n4. [Phase 4 Name, e.g., 'Testing & QA'] (Estimated duration: [e.g., 2 weeks])\n5. [Phase 5 Name, e.g., 'Deployment & Launch'] (Estimated duration: [e.g., 1 week])\n\nIdentify 1-2 key milestones within each phase."
+              },
+              {
+                title: "Meeting Agenda for Problem Solving",
+                description: "Creates an agenda for a meeting focused on solving a specific problem.",
+                template: "Create a meeting agenda focused on solving the following problem: \"[Clearly define the problem]\".\n\nDesired Outcome of the Meeting: [e.g., Identify 3 potential solutions, Decide on a course of action]\nAttendees: [List key roles/individuals needed]\nDuration: [e.g., 60 minutes]\n\nAgenda Items:\n1. Problem Definition & Clarification (Ensure everyone understands the issue) ([Time Allocation])\n2. Root Cause Analysis (Briefly explore underlying causes) ([Time Allocation])\n3. Brainstorming Potential Solutions (Open idea generation) ([Time Allocation])\n4. Evaluating Solutions (Discuss pros, cons, feasibility of top ideas) ([Time Allocation])\n5. Decision Making / Next Steps (Agree on a solution or plan for further evaluation) ([Time Allocation])\n6. Assign Action Items (If applicable) ([Time Allocation])"
+              },
+              {
+                title: "Change Request Impact Analysis",
+                description: "Helps outline the points to consider when analyzing a project change request.",
+                template: "A change request has been submitted for the project \"[Project Name]\". The request is: \"[Describe the Change Request]\".\nHelp me outline the key areas to analyze for its potential impact. The analysis should cover:\n- Impact on Scope: (How does this change affect project deliverables?)\n- Impact on Timeline: (Will this cause delays? By how much?)\n- Impact on Resources: (Are additional resources needed? Will existing resources be strained?)\n- Impact on Budget: (What are the cost implications?)\n- Impact on Quality: (Are there any quality risks?)\n- Impact on Stakeholders: (Who is affected and how?)\n- Potential Risks Introduced by the Change:\n\nWhat is your recommendation regarding this change request (e.g., Approve, Reject, Approve with conditions) and why?"
+              },
+              {
+                title: "Project Budget Outline",
+                description: "Helps create a high-level budget outline for a project.",
+                template: "Create a high-level budget outline for the project \"[Project Name]\" with an estimated total budget of [Total Estimated Budget, if known, or leave as TBD].\nKey budget categories to consider include:\n- Personnel/Labor: ([Sub-categories like 'Project Manager', 'Developers', 'Designers', etc.])\n- Software/Tools: ([Specific software or tool costs])\n- Hardware (if applicable): ([Specific hardware costs])\n- Training (if applicable):\n- Marketing/Promotion (if applicable):\n- Contingency (e.g., 10-15% of total):\n- Other Direct Costs: ([e.g., Travel, External Consultants])\n\nFor each category, provide a placeholder for estimated cost or percentage of total budget."
+              }
+            ]
+          },
+          {
+            name: "Problem Solving & Decision Making",
+            color: "bg-red-500",
+            icon: "💡",
+            prompts: [
+              {
+                title: "SWOT Analysis Generator",
+                description: "Guides the creation of a SWOT analysis for a given subject.",
+                template: "Conduct a SWOT analysis for [Subject of Analysis - e.g., a product, a company, a project, a personal skill].\n\n- Strengths: What are the internal positive attributes or advantages of [Subject of Analysis]? (List at least [Number])\n- Weaknesses: What are the internal negative attributes or disadvantages of [Subject of Analysis]? (List at least [Number])\n- Opportunities: What are the external factors or situations that [Subject of Analysis] could leverage to its advantage? (List at least [Number])\n- Threats: What are the external factors or situations that could pose a challenge or risk to [Subject of Analysis]? (List at least [Number])\n\nFor each point, provide a brief explanation."
+              },
+              {
+                title: "Pros and Cons List for Decision",
+                description: "Helps weigh the pros and cons of a specific decision.",
+                template: "I need to make a decision about: \"[Specific Decision to be Made]\".\nHelp me evaluate this by generating a list of potential pros and cons.\n\n- Pros: What are the potential benefits or advantages of choosing this option? (List at least [Number])\n- Cons: What are the potential drawbacks or disadvantages of choosing this option? (List at least [Number])\n\nFor each pro and con, provide a brief explanation or elaboration."
+              },
+              {
+                title: "Root Cause Analysis (5 Whys)",
+                description: "Uses the '5 Whys' technique to explore the root cause of a problem.",
+                template: "Help me conduct a Root Cause Analysis using the '5 Whys' technique for the following problem: \"[Clearly state the problem]\".\n\nStart with the problem statement and ask 'Why?' iteratively at least five times, or until the root cause is likely identified. Document each 'Why?' and its corresponding answer.\n\nProblem: [Problem Statement]\n1. Why? [Answer 1]\n2. Why? (Based on Answer 1) [Answer 2]\n3. Why? (Based on Answer 2) [Answer 3]\n4. Why? (Based on Answer 3) [Answer 4]\n5. Why? (Based on Answer 4) [Answer 5 - potential root cause]"
+              },
+              {
+                title: "Brainstorm Solutions for a Challenge",
+                description: "Generates a diverse list of potential solutions for a given challenge.",
+                template: "Brainstorm at least [Number] potential solutions for the following challenge: \"[Clearly describe the challenge or problem]\".\nEncourage a diverse range of ideas, including conventional, creative, and even seemingly unconventional approaches. For each solution, provide a brief (1-sentence) description."
+              },
+              {
+                title: "Decision Matrix Framework",
+                description: "Helps set up a decision matrix to compare options systematically.",
+                template: "I need to decide between the following options for [Decision Context, e.g., 'choosing a new software vendor']:\n- Option A: [Name/Description of Option A]\n- Option B: [Name/Description of Option B]\n- Option C: [Name/Description of Option C]\n\nHelp me set up a decision matrix. The key criteria for evaluation are:\n1. [Criterion 1, e.g., Cost] (Weight: [Assign weight, e.g., 1-5, or %])\n2. [Criterion 2, e.g., Ease of Use] (Weight: [Assign weight])\n3. [Criterion 3, e.g., Scalability] (Weight: [Assign weight])\n4. [Criterion 4, e.g., Customer Support] (Weight: [Assign weight])\n\nFor each option, I will score it against each criterion (e.g., on a scale of 1-10). The template should show how to calculate a weighted score for each option."
+              },
+              {
+                title: "Pre-Mortem Analysis (Anticipating Failure)",
+                description: "Facilitates a pre-mortem exercise to identify potential failures before starting a project.",
+                template: "We are about to start a new project: \"[Project Name/Goal]\".\nImagine it's [Future Date, e.g., 6 months from now] and the project has failed spectacularly. Conduct a 'pre-mortem' analysis.\n\nBrainstorm all the possible reasons why this project might have failed. Consider factors like:\n- Planning & Strategy\n- Resources (Time, Money, People)\n- Execution & Operations\n- Team Dynamics & Communication\n- External Factors (Market, Competitors, Technology)\n- Assumptions that proved incorrect\n\nList at least [Number] potential reasons for failure and briefly explain each."
+              },
+              {
+                title: "Generate Alternative Perspectives",
+                description: "Helps look at a problem or situation from different viewpoints.",
+                template: "I am currently facing a situation: \"[Describe the situation or problem clearly]\".\nMy current perspective is largely focused on [Describe your current viewpoint or main concern].\n\nHelp me generate alternative perspectives on this situation. Consider it from the viewpoint of:\n- [Perspective 1, e.g., A customer]\n- [Perspective 2, e.g., A competitor]\n- [Perspective 3, e.g., An employee in a different department]\n- [Perspective 4, e.g., A long-term strategic thinker vs. short-term operational thinker]\n\nFor each perspective, briefly outline their likely concerns, priorities, and interpretation of the situation."
+              },
+              {
+                title: "Cost-Benefit Analysis Outline",
+                description: "Provides a structure for conducting a cost-benefit analysis.",
+                template: "Outline the key components of a cost-benefit analysis for the proposed initiative: \"[Name or Description of Initiative]\".\n\nThe analysis should include sections for:\nI. Identifying Costs:\n   A. Direct Costs (List potential direct costs, e.g., [Cost 1], [Cost 2])\n   B. Indirect Costs (List potential indirect costs, e.g., [Cost 1], [Cost 2])\n   C. Intangible Costs (List potential intangible costs, e.g., [Cost 1])\n   D. Opportunity Costs\n\nII. Identifying Benefits:\n    A. Direct Benefits (List potential direct benefits, e.g., [Benefit 1], [Benefit 2])\n    B. Indirect Benefits (List potential indirect benefits, e.g., [Benefit 1], [Benefit 2])\n    C. Intangible Benefits (List potential intangible benefits, e.g., [Benefit 1])\n\nIII. Quantifying Costs and Benefits (Where possible, describe how they might be measured or estimated)\n\nIV. Comparison and Conclusion (Net Present Value, ROI, Payback Period, Qualitative Summary)"
+              },
+              {
+                title: "Ethical Considerations Checklist",
+                description: "Helps identify potential ethical issues related to a decision or project.",
+                template: "We are considering [Decision/Project/Action: Describe briefly].\nHelp me create a checklist of potential ethical considerations we should evaluate. The checklist should prompt questions related to areas such as:\n- Fairness and Equity: (e.g., Does it disproportionately affect any group?)\n- Transparency and Honesty: (e.g., Are all stakeholders being fully informed?)\n- Privacy: (e.g., Are there any data privacy concerns?)\n- Potential for Harm: (e.g., Could this lead to negative unintended consequences?)\n- Conflicts of Interest:\n- Impact on Environment/Society:\n- Alignment with Company Values:\n\nSuggest at least [Number] specific questions to consider."
+              },
+              {
+                title: "Six Thinking Hats Framework Application",
+                description: "Applies De Bono's Six Thinking Hats to a problem or idea.",
+                template: "Let's analyze the idea/problem: \"[State the Idea or Problem clearly]\" using Edward de Bono's Six Thinking Hats framework.\n\n- White Hat (Facts & Information): What are the objective facts and data we have about this? What information is missing?\n- Red Hat (Feelings & Intuition): What are our gut reactions, emotions, and intuitions about this, without justification?\n- Black Hat (Caution & Critical Judgment): What are the potential risks, downsides, weaknesses, and reasons this might not work? (The 'devil's advocate' hat)\n- Yellow Hat (Optimism & Benefits): What are the positives, benefits, and opportunities? Why will this work?\n- Green Hat (Creativity & New Ideas): What are some new ideas, alternatives, or creative possibilities related to this? How can we overcome the Black Hat concerns?\n- Blue Hat (Process Control & Overview): How should we organize our thinking about this? What are the next steps? What have we concluded?\n\nGuide me through exploring each hat."
+              }
+            ]
+          },
+          {
+            name: "Research & Learning",
+            color: "bg-teal-500",
+            icon: "📚",
+            prompts: [
+              {
+                title: "Explain Complex Topic Simply (ELI5)",
+                description: "Breaks down a complex topic into simple, easy-to-understand terms.",
+                template: "Explain the concept of \"[Complex Topic]\" as if you were explaining it to a 5-year-old (ELI5). Use simple language, analogies, and avoid jargon. The explanation should cover the core idea and its basic importance."
+              },
+              {
+                title: "Generate Study Guide Outline",
+                description: "Creates an outline for a study guide on a specific subject.",
+                template: "Create a study guide outline for the subject: \"[Subject Name/Topic]\". The guide should be aimed at [Target Learner, e.g., a beginner, someone preparing for an exam].\nKey sections should include:\n1. Core Concepts: [List 3-5 fundamental concepts]\n2. Key Terminology: [Suggest categories of terms to define]\n3. Important Theories/Models: [If applicable, list key theories]\n4. Practical Applications/Examples: [Suggest areas for examples]\n5. Review Questions/Practice Problems: [Suggest types of questions]\n6. Further Reading/Resources: [Suggest types of resources]"
+              },
+              {
+                title: "Summarize Research Paper Abstract",
+                description: "Condenses the key information from a research paper abstract.",
+                template: "Summarize the key findings, methodology, and conclusions from the following research paper abstract in no more than [Number] sentences or [Word Count] words.\n\nAbstract:\n\"\"\"\n[Paste Research Paper Abstract Here]\n\"\"\""
+              },
+              {
+                title: "Compare and Contrast Two Concepts",
+                description: "Highlights similarities and differences between two related concepts.",
+                template: "Provide a comparison and contrast between \"[Concept A]\" and \"[Concept B]\".\nFocus on:\n- Key definitions of each.\n- At least [Number] key similarities.\n- At least [Number] key differences.\n- Contexts where one might be more relevant or applicable than the other."
+              },
+              {
+                title: "Identify Key Arguments in a Text",
+                description: "Extracts the main arguments from a piece of academic or opinion text.",
+                template: "Read the following text and identify the [Number] key arguments the author is making. For each argument, briefly state it and identify any supporting evidence or reasoning the author provides.\n\nText:\n\"\"\"\n[Paste Text Here]\n\"\"\""
+              },
+              {
+                title: "Generate Quiz Questions on a Topic",
+                description: "Creates a set of quiz questions (with answers) for a given topic.",
+                template: "Generate a quiz with [Number] questions to test understanding of \"[Specific Topic]\".\nInclude a mix of question types, such as:\n- [Number] Multiple Choice questions (provide 3-4 options and indicate the correct answer).\n- [Number] True/False questions (indicate the correct answer).\n- [Number] Short Answer questions (provide the ideal answer).\n\nThe difficulty level should be appropriate for [Target Learner, e.g., an introductory college student, a professional needing a refresher]."
+              },
+              {
+                title: "Brainstorm Research Questions",
+                description: "Generates potential research questions around a broad topic area.",
+                template: "Brainstorm [Number] potential research questions related to the broad topic of \"[Broad Topic Area, e.g., climate change impact on agriculture, artificial intelligence in healthcare]\".\nThe questions should be specific enough to guide research and explore different facets of the topic. Categorize them if possible (e.g., by sub-topic, by research methodology)."
+              },
+              {
+                title: "Literature Review Starting Points",
+                description: "Suggests key authors, papers, or theories for starting a literature review.",
+                template: "I am starting a literature review on the topic: \"[Specific Research Topic]\".\nCan you suggest [Number] key authors, seminal papers, or foundational theories that I should definitely include or be aware of? For each suggestion, provide a brief reason for its importance to this topic."
+              },
+              {
+                title: "Explain a Technical Term to a Novice",
+                description: "Provides a simple explanation of a technical term for a non-expert.",
+                template: "Explain the technical term \"[Technical Term]\" in a way that someone with no prior knowledge of [Field/Industry] could understand. Use an analogy if it helps. What is its basic function or significance?"
+              },
+              {
+                title: "Identify Knowledge Gaps",
+                description: "Helps identify what is NOT known or well-researched in a specific area.",
+                template: "Based on the current understanding of \"[Specific Topic or Field of Study, e.g., 'the long-term psychological effects of remote work']\", what are some potential knowledge gaps or areas that require further research? List at least [Number] such gaps."
+              }
+            ]
+          },
+          {
+            name: "Marketing & Sales",
+            color: "bg-indigo-500",
+            icon: "📈",
+            prompts: [
+              {
+                title: "Value Proposition Crafting",
+                description: "Helps define a clear and compelling value proposition for a product/service.",
+                template: "Help me craft a compelling value proposition for [Product/Service Name].\nOur target customer is [Target Customer Profile/Persona].\nThe main problem our product/service solves is [Customer Pain Point].\nOur key features/benefits are:\n- [Feature/Benefit 1]\n- [Feature/Benefit 2]\n- [Feature/Benefit 3]\nOur unique differentiator compared to competitors like [Competitor 1] and [Competitor 2] is [Unique Selling Proposition].\n\nGenerate 2-3 value proposition statements that are clear, concise, and highlight the primary benefit for the customer."
+              },
+              {
+                title: "Social Media Post Ideas",
+                description: "Generates ideas for social media posts for a specific platform and goal.",
+                template: "Generate [Number] social media post ideas for [Social Media Platform, e.g., LinkedIn, Twitter, Instagram] for our product/service: [Product/Service Name or Description].\nThe goal of these posts is [Goal, e.g., increase engagement, drive traffic to website, announce new feature].\nThe target audience is [Target Audience Description].\nPost ideas should be [Type of Post, e.g., informative, question-based, behind-the-scenes, user-generated content callout]. Include a suggested caption or angle for each idea."
+              },
+              {
+                title: "Customer Persona Development",
+                description: "Helps create a detailed customer persona for marketing.",
+                template: "Help me develop a customer persona for our [Product/Service Category].\nKey information about our ideal customer includes:\n- Demographics (Age range, Gender, Location, Occupation, Income level): [Provide details]\n- Goals & Motivations: What are they trying to achieve? [Provide details]\n- Challenges & Pain Points: What problems do they face that our product/service can solve? [Provide details]\n- Watering Holes (Where do they spend time online/offline?): [e.g., LinkedIn, specific forums, industry events]\n- Preferred Communication Style: [e.g., Formal, informal, data-driven, story-driven]\n\nBased on this, create a persona profile including a name, a brief bio, their goals, pain points, and how our [Product/Service Name] can help them."
+              },
+              {
+                title: "Competitor Analysis Summary Points",
+                description: "Identifies key areas to focus on when summarizing competitor analysis.",
+                template: "I have conducted a competitor analysis on [Competitor Name] who operates in the [Industry/Market] and offers [Competitor's Product/Service].\nWhat are the key points I should focus on summarizing for an internal team meeting? Suggest a structure for the summary, covering areas like:\n- Competitor's Strengths\n- Competitor's Weaknesses\n- Their Key Marketing Strategies\n- Their Pricing Model\n- Apparent Target Audience\n- Key Differentiators (compared to us)\n- Potential Opportunities or Threats they pose to us."
+              },
+              {
+                title: "Product Description Generator (Feature-Benefit)",
+                description: "Writes a product description focusing on features and their benefits.",
+                template: "Write a compelling product description for \"[Product Name]\".\nKey Features:\n- Feature 1: [Describe Feature 1]\n- Feature 2: [Describe Feature 2]\n- Feature 3: [Describe Feature 3]\n\nFor each feature, translate it into a clear benefit for the target customer, who is [Describe Target Customer].\nThe description should be approximately [Word Count] words and have a [Desired Tone, e.g., enthusiastic, professional] tone. Include a call to action."
+              },
+              {
+                title: "Sales Email Subject Line Brainstorm",
+                description: "Generates catchy and effective subject lines for a sales email.",
+                template: "Brainstorm [Number] catchy and effective email subject lines for a sales email promoting [Product/Service Name].\nThe email's main purpose is to [Email Goal, e.g., schedule a demo, introduce a new offer, highlight a key benefit].\nThe target recipient is [Target Recipient Profile, e.g., a busy executive, a technical manager].\nSubject lines should be [Style, e.g., intriguing, benefit-driven, urgent (if applicable)]."
+              },
+              {
+                title: "Elevator Pitch Crafting",
+                description: "Helps draft a concise and impactful elevator pitch.",
+                template: "Help me craft a 30-60 second elevator pitch for [My Company/Product/Service/Idea].\n\n1. Who are we/What is it? ([Briefly describe])\n2. What problem do we solve? ([Customer pain point])\n3. How do we solve it? ([Our solution/Key benefit])\n4. What makes us unique? ([Unique Selling Proposition])\n5. What is the desired outcome of the pitch? ([e.g., Spark interest for a follow-up conversation, Get a business card])\n\nDraft the pitch."
+              },
+              {
+                title: "Content Pillar Ideas for Marketing Strategy",
+                description: "Brainstorms content pillars for a marketing strategy around a core topic.",
+                template: "Our core business/product is [Core Business/Product Description]. We want to establish thought leadership in [Industry/Niche].\nBrainstorm [Number, e.g., 3-5] content pillars that we can build our marketing strategy around. For each pillar:\n- Suggest a pillar name/theme.\n- List 3-4 subtopics or types of content (e.g., blog posts, webinars, case studies) that could fall under this pillar.\nOur target audience is [Target Audience Description]."
+              },
+              {
+                title: "Testimonial Request Template",
+                description: "Drafts a polite request for a customer testimonial.",
+                template: "Subject: Sharing Your Success with [Your Company Name]?\n\nHi [Customer Name],\n\nWe've really enjoyed working with you and are thrilled that [mention specific positive outcome or aspect of their experience with your product/service, e.g., 'you've seen great results with Product X', 'your team has successfully implemented Solution Y'].\n\nWe're currently gathering feedback from our valued customers, and we were hoping you might be willing to share your experience in a brief testimonial. Your insights would be incredibly helpful for others who are considering [Your Company Name/Product/Service].\n\nWould you be open to providing a short quote (2-3 sentences) about your experience? If so, you could focus on [suggest a focus area, e.g., 'the biggest benefit you've received' or 'how it solved a particular problem'].\n\nAlternatively, if you're open to it, we'd be happy to schedule a quick 5-10 minute call to capture your thoughts.\n\nThank you for being a valued customer!\n\nBest regards,\n[Your Name]\n[Your Title]"
+              },
+              {
+                title: "Objection Handling for Sales",
+                description: "Prepares responses for common sales objections.",
+                template: "I am a salesperson for [Product/Service Name], which helps [Target Audience] achieve [Key Benefit].\nHelp me prepare responses for the following common sales objections:\n1. Objection: \"[Common Objection 1, e.g., It's too expensive.]\"\n   - Key points to address in response:\n2. Objection: \"[Common Objection 2, e.g., We're already using a competitor's solution.]\"\n   - Key points to address in response:\n3. Objection: \"[Common Objection 3, e.g., I don't have time to implement this right now.]\"\n   - Key points to address in response:\n\nFor each, provide a polite, empathetic, and persuasive response framework that turns the objection into an opportunity for further discussion."
+              }
+            ]
+          },
+          {
+            name: "Productivity & Efficiency",
+            color: "bg-orange-500",
+            icon: "⏱️",
+            prompts: [
+              {
+                title: "Meeting Minutes Summarizer",
+                description: "Takes raw meeting notes and structures them into concise minutes.",
+                template: "Based on the following raw meeting notes, please generate concise and structured meeting minutes.\n\nRaw Notes:\n\"\"\"\n[Paste Raw Meeting Notes Here - include discussion points, decisions, attendees if available]\n\"\"\"\n\nThe minutes should include:\n- Meeting Title/Topic: [If not in notes, suggest one]\n- Date & Time:\n- Attendees:\n- Key Discussion Points (bulleted):\n- Decisions Made (bulleted):\n- Action Items (with assigned owner and deadline if mentioned):\n- Next Steps (if any):"
+              },
+              {
+                title: "Task Prioritization Assistant",
+                description: "Helps prioritize a list of tasks based on urgency and importance.",
+                template: "I have the following list of tasks to complete: \n[Task 1 description]\n[Task 2 description]\n[Task 3 description]\n[Task 4 description]\n[Add more tasks as needed]\n\nPlease help me prioritize these tasks. For each task, consider its urgency (e.g., deadline) and importance (e.g., impact on goals). You can use a framework like the Eisenhower Matrix (Urgent/Important) or simply rank them with a brief justification for the top 3 priorities.\n\nOptional context: My main goal for this week is [Main Goal]."
+              },
+              {
+                title: "Daily Plan Generator",
+                description: "Helps create a structured plan for the day.",
+                template: "Help me create a structured daily plan for today, [Date].\nMy top 3 priorities are:\n1. [Priority 1]\n2. [Priority 2]\n3. [Priority 3]\n\nOther tasks I need to do:\n- [Task A]\n- [Task B]\n\nMeetings scheduled:\n- [Meeting 1] at [Time] for [Duration]\n\nAllocate time blocks for focused work on priorities, include breaks, and account for meetings. Suggest a schedule from [Start Time] to [End Time]."
+              },
+              {
+                title: "Workflow Optimization Ideas",
+                description: "Brainstorms ways to improve the efficiency of a specific workflow.",
+                template: "Analyze the following workflow and suggest ways to optimize it for better efficiency and productivity.\n\nWorkflow Description: \"[Describe the current workflow step-by-step, e.g., 'To publish a blog post, I first write the draft in Google Docs, then send it for review via email, then incorporate feedback, then upload to WordPress, then find images, then schedule for publishing.']\"\n\nIdentify potential bottlenecks, redundancies, or areas where automation or different tools could help. Suggest at least [Number] specific improvements."
+              },
+              {
+                title: "Overcoming Procrastination Strategies",
+                description: "Suggests strategies to overcome procrastination for a specific task.",
+                template: "I am procrastinating on the following task: \"[Describe the task you are avoiding]\".\nReasons I think I'm procrastinating: [e.g., It feels overwhelming, I'm unsure where to start, I'm afraid of not doing it perfectly].\n\nSuggest [Number] actionable strategies to help me overcome this procrastination and get started on the task. Strategies could include breaking it down, time-blocking, reward systems, changing my environment, etc."
+              },
+              {
+                title: "Email Management Strategy",
+                description: "Provides tips and strategies for managing email overload.",
+                template: "I am struggling with email overload. I receive approximately [Number] emails per day and find it hard to stay on top of them, leading to [Consequence, e.g., missed deadlines, stress].\n\nSuggest a comprehensive email management strategy that includes tips for:\n- Reducing incoming emails.\n- Processing emails efficiently (e.g., touch it once rule, batching).\n- Organizing emails (e.g., folders, labels, archiving).\n- Prioritizing responses.\n- Tools or techniques that might help."
+              },
+              {
+                title: "Focus & Concentration Booster",
+                description: "Suggests techniques to improve focus and concentration during work.",
+                template: "I find it difficult to maintain focus and concentration for extended periods while working on [Type of Task, e.g., writing reports, coding, deep analysis].\nCommon distractions include: [List distractions, e.g., social media notifications, noisy environment, mind-wandering].\n\nSuggest [Number] practical techniques or habits I can implement to improve my focus and concentration. Examples could include the Pomodoro Technique, minimizing distractions, mindfulness exercises, etc."
+              },
+              {
+                title: "Weekly Review & Planning Prompts",
+                description: "Provides a set of questions to guide a weekly review and planning session.",
+                template: "Generate a list of guiding questions for a personal weekly review and planning session. The goal is to reflect on the past week and prepare for the upcoming week effectively.\n\nQuestions should cover areas like:\n- Accomplishments from the past week.\n- Challenges faced and lessons learned.\n- Progress towards larger goals.\n- Priorities for the upcoming week.\n- Potential obstacles for the upcoming week and how to address them.\n- Something to improve or learn next week."
+              },
+              {
+                title: "Effective Note-Taking Strategies",
+                description: "Suggests different methods for taking effective notes in meetings or while learning.",
+                template: "I need to improve my note-taking skills for [Context, e.g., 'client meetings', 'online courses', 'reading technical documents']. My current notes are often [Problem, e.g., 'disorganized', 'too verbose', 'missing key points'].\n\nSuggest [Number] different effective note-taking strategies or methods (e.g., Cornell Method, outlining, mind mapping, sketchnoting). For each method, briefly explain how it works and what kind of information or context it's best suited for."
+              },
+              {
+                title: "Time Blocking Schedule Creator",
+                description: "Helps create a time-blocked schedule for a specific project or set of tasks.",
+                template: "Help me create a time-blocked schedule for the next [Number] days to work on \"[Project/Goal Name]\".\nThe key tasks involved are:\n- Task 1: [Description] (Estimated time: [X hours/minutes])\n- Task 2: [Description] (Estimated time: [Y hours/minutes])\n- Task 3: [Description] (Estimated time: [Z hours/minutes])\n\nI am available to work on this from [Start Time] to [End Time] each day, with a preference for [e.g., focused work in the mornings, shorter blocks in the afternoon]. Remember to include short breaks. Present the schedule in a clear, day-by-day format."
+              }
+            ]
+          },
+          {
+            name: "Coding & Technical Tasks",
+            color: "bg-gray-700",
+            icon: "💻",
+            prompts: [
+              {
+                title: "Explain Code Snippet",
+                description: "Provides an explanation of what a given code snippet does.",
+                template: "Explain the following [Programming Language, e.g., Python, JavaScript] code snippet in plain English. What is its purpose, how does it work, and what would be the expected output or behavior given a sample input?\n\n```[Programming Language]\n[Paste Code Snippet Here]\n```\n\nSample Input (if applicable): [Provide Sample Input]"
+              },
+              {
+                title: "Generate Unit Test Cases",
+                description: "Helps generate ideas for unit test cases for a function or module.",
+                template: "I have the following function in [Programming Language]:\n\n```[Programming Language]\n[Paste Function Code Here]\n```\n\nIts purpose is to [Briefly describe what the function does and its expected inputs/outputs].\n\nHelp me generate a list of unit test cases to ensure its correctness. For each test case, describe:\n- The input(s).\n- The expected output or behavior.\n- The reason for this test case (e.g., testing edge case, normal operation, error handling)."
+              },
+              {
+                title: "Debug Code Error",
+                description: "Assists in identifying potential causes for a code error message.",
+                template: "I am getting the following error message in my [Programming Language] code:\n\n\"\"\"\n[Paste Full Error Message Here]\n\"\"\"\n\nHere is the relevant code snippet that seems to be causing the error:\n\n```[Programming Language]\n[Paste Relevant Code Snippet Here]\n```\n\nWhat are the potential causes of this error, and what steps can I take to debug it?"
+              },
+              {
+                title: "Write Technical Documentation Outline",
+                description: "Creates an outline for technical documentation for a piece of software or API.",
+                template: "Create an outline for technical documentation for [Software/API Name], which is a [Brief Description of Software/API, e.g., 'Python library for data analysis', 'REST API for managing user accounts'].\nThe target audience for the documentation is [Target Audience, e.g., 'experienced developers', 'users new to the system'].\n\nThe outline should include sections like:\n- Introduction (Overview, Purpose)\n- Getting Started (Installation, Setup, Quick Start Guide)\n- Core Concepts/Architecture (Explanation of key components)\n- API Reference / Functionality Details (Endpoints, Functions, Parameters, Examples)\n- Tutorials/How-To Guides (For common use cases)\n- Troubleshooting/FAQ\n- Changelog/Version History"
+              },
+              {
+                title: "Code Refactoring Suggestions",
+                description: "Provides suggestions on how to refactor a piece of code for improvement.",
+                template: "Review the following [Programming Language] code snippet and suggest ways to refactor it for improved [Specific Goal, e.g., readability, performance, maintainability, adherence to best practices like DRY principle].\n\n```[Programming Language]\n[Paste Code Snippet Here]\n```\n\nFor each suggestion, briefly explain the rationale behind it and, if possible, show a small example of the refactored code."
+              },
+              {
+                title: "Generate Regex Pattern",
+                description: "Helps create a regular expression for a specific pattern matching task.",
+                template: "I need a regular expression (regex) to match the following pattern: \"[Describe the pattern you want to match clearly and with examples. E.g., 'Email addresses', 'Dates in Plymouth-MM-DD format', 'Lines that start with the word Error']\".\n\nPlease provide the regex pattern and a brief explanation of how it works. If possible, specify if it's for a particular regex flavor (e.g., Python, JavaScript, PCRE)."
+              },
+              {
+                title: "Translate Code to Another Language",
+                description: "Attempts to translate a code snippet from one programming language to another.",
+                template: "Translate the following code snippet from [Source Programming Language] to [Target Programming Language]. Preserve the original logic and functionality as much as possible.\n\nSource Code ([Source Language]):\n```[Source Language]\n[Paste Source Code Snippet Here]\n```\n\nProvide the translated code in [Target Language]. Point out any potential differences in behavior or areas where a direct translation might not be perfect."
+              },
+              {
+                title: "Database Schema Design Ideas",
+                description: "Brainstorms a basic database schema for a given application.",
+                template: "I am designing an application for [Application Purpose, e.g., 'a simple to-do list app', 'an online bookstore', 'a project management tool'].\nHelp me brainstorm a basic database schema. Key entities and their relationships I anticipate are:\n- Entity 1: [Name, e.g., Users] (Potential attributes: [e.g., UserID, Username, Email, PasswordHash])\n- Entity 2: [Name, e.g., Tasks] (Potential attributes: [e.g., TaskID, UserID, Description, DueDate, IsCompleted])\n- Relationship between Entity 1 and 2: [e.g., One User can have Many Tasks]\n\nSuggest table structures (table name, column names, data types, primary/foreign keys) for these entities and any necessary join tables. This is for a [Database Type, e.g., relational SQL database, NoSQL document store] if relevant."
+              },
+              {
+                title: "API Endpoint Design Suggestions",
+                description: "Suggests RESTful API endpoints for a given resource.",
+                template: "I am designing a RESTful API for managing a resource: \"[Resource Name, e.g., Product, Article, User]\".\nSuggest standard CRUD (Create, Read, Update, Delete) and any other relevant API endpoints for this resource.\nFor each endpoint, specify:\n- HTTP Method (e.g., GET, POST, PUT, DELETE)\n- URL Path (e.g., /products, /products/{id})\n- Brief Description of its purpose\n- Example Request Body (for POST/PUT, if applicable)\n- Example Response Body (for GET, if applicable)"
+              },
+              {
+                title: "Explain Technical Concept (Analogy)",
+                description: "Explains a complex technical concept using an analogy.",
+                template: "Explain the complex technical concept of \"[Technical Concept, e.g., Docker containers, Blockchain, Machine Learning Model Training]\" using a simple analogy that would make it understandable to someone who is not a technical expert in this specific field. The analogy should capture the essence of how it works or what it achieves."
+              }
+            ]
+          }
+        ];
+
+        // DOM Elements
+        const categoriesView = document.getElementById('categoriesView');
+        const promptListView = document.getElementById('promptListView');
+        const promptDetailView = document.getElementById('promptDetailView');
+
+        const categoryGrid = document.getElementById('categoryGrid');
+        const categoryTitleEl = document.getElementById('categoryTitle');
+        const promptListEl = document.getElementById('promptList');
+
+        const promptTitleEl = document.getElementById('promptTitle');
+        const promptDescriptionEl = document.getElementById('promptDescription');
+        const promptTemplateTextPreEl = document.getElementById('promptTemplateTextPre'); // For <pre>
+        const copyPromptBtn = document.getElementById('copyPromptBtn');
+        
+        const backToCategoriesBtn = document.getElementById('backToCategoriesBtn');
+        const backToPromptListBtn = document.getElementById('backToPromptListBtn');
+
+        const toastNotification = document.getElementById('toastNotification');
+        let currentCategoryIndex = -1; // To store the currently viewed category index
+
+        // --- Toast Notification Function ---
+        function showToast(message, type = 'success', duration = 3000) {
+            toastNotification.textContent = message;
+            toastNotification.className = 'toast show'; // Reset classes
+            if (type === 'success') {
+                toastNotification.classList.add('success', 'bg-green-500');
+            } else {
+                toastNotification.classList.add('error', 'bg-red-500');
+            }
+            
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+            }, duration);
+        }
+
+
+        // --- Display Functions ---
+        function displayCategories() {
+            categoriesView.classList.remove('hidden');
+            promptListView.classList.add('hidden');
+            promptDetailView.classList.add('hidden');
+            categoryGrid.innerHTML = ''; // Clear previous tiles
+
+            promptCategories.forEach((category, index) => {
+                const tile = document.createElement('div');
+                tile.className = `category-tile p-6 rounded-xl shadow-lg text-white hover:shadow-xl ${category.color}`; // Added Tailwind shadow
+                tile.innerHTML = `
+                    <div class="text-4xl mb-3">${category.icon}</div>
+                    <h3 class="text-xl font-semibold">${category.name}</h3>
+                `;
+                tile.addEventListener('click', () => displayPromptsForCategory(index));
+                categoryGrid.appendChild(tile);
+            });
+        }
+
+        function displayPromptsForCategory(categoryIndex) {
+            currentCategoryIndex = categoryIndex; // Store current category index
+            const category = promptCategories[categoryIndex];
+            
+            categoriesView.classList.add('hidden');
+            promptListView.classList.remove('hidden');
+            promptDetailView.classList.add('hidden');
+
+            categoryTitleEl.textContent = category.name;
+            promptListEl.innerHTML = ''; // Clear previous prompts
+
+            category.prompts.forEach((prompt, promptIndex) => {
+                const card = document.createElement('div');
+                card.className = 'prompt-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg'; // Added Tailwind shadow
+                card.innerHTML = `
+                    <h4 class="text-xl font-semibold text-sky-700 mb-1">${prompt.title}</h4>
+                    <p class="text-gray-600 text-sm">${prompt.description}</p>
+                `;
+                card.addEventListener('click', () => displayPromptDetail(categoryIndex, promptIndex));
+                promptListEl.appendChild(card);
+            });
+        }
+
+        function displayPromptDetail(categoryIndex, promptIndex) {
+            const prompt = promptCategories[categoryIndex].prompts[promptIndex];
+
+            categoriesView.classList.add('hidden');
+            promptListView.classList.add('hidden');
+            promptDetailView.classList.remove('hidden');
+
+            promptTitleEl.textContent = prompt.title;
+            promptDescriptionEl.textContent = prompt.description;
+            promptTemplateTextPreEl.textContent = prompt.template; // Set text content for <pre>
+
+            copyPromptBtn.onclick = () => { // Reassign onclick to ensure correct prompt is copied
+                navigator.clipboard.writeText(prompt.template)
+                    .then(() => {
+                        showToast('Prompt copied to clipboard!', 'success');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        showToast('Failed to copy prompt.', 'error');
+                    });
+            };
+        }
+
+        // --- Event Listeners for Navigation ---
+        backToCategoriesBtn.addEventListener('click', displayCategories);
+        
+        backToPromptListBtn.addEventListener('click', () => {
+            if (currentCategoryIndex !== -1) {
+                displayPromptsForCategory(currentCategoryIndex);
+            } else {
+                displayCategories(); // Fallback if no category was selected
+            }
+        });
+
+        // --- Footer Year ---
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // --- Initial Display ---
+        displayCategories(); // Show categories on page load
+
+    </script>
+</body>
+</html>
