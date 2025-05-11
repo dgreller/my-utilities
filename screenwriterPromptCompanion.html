@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenwriter's Prompt Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Tailwind gray-900 */
+            color: #d1d5db; /* Tailwind gray-300 */
+        }
+        .category-tile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            aspect-ratio: 1 / 1;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .category-tile:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+        }
+        .prompt-card, .global-search-result-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+            border-radius: 0.5rem; /* rounded-lg */
+            background-color: #1f2937; /* Tailwind gray-800 */
+            border: 1px solid #374151; /* Tailwind gray-700 */
+        }
+        .prompt-card:hover, .global-search-result-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px -1px rgba(0, 0, 0, 0.2), 0 2px 6px -1px rgba(0, 0, 0, 0.15);
+            border-color: #0ea5e9; /* Tailwind sky-500 */
+        }
+        .back-button, .copy-button {
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .back-button:hover, .copy-button:hover {
+            transform: translateY(-1px);
+        }
+        .back-button:active, .copy-button:active {
+            transform: translateY(0px);
+        }
+
+        #promptTemplateTextContainer {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #030712; /* Tailwind gray-950 */
+            border: 1px solid #374151; /* Tailwind gray-700 */
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 1rem;
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            max-height: 60vh;
+            overflow-y: auto;
+            color: #e5e7eb; /* Tailwind gray-200 */
+        }
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100%); /* Start off-screen */
+            padding: 12px 24px;
+            border-radius: 6px;
+            color: white;
+            font-size: 1em;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast.success {
+            background-color: #10b981; /* Tailwind emerald-500 */
+        }
+        .toast.error {
+            background-color: #ef4444; /* Tailwind red-500 */
+        }
+        .search-input {
+            padding: 0.75rem 1rem;
+            border: 1px solid #4b5563; /* Tailwind gray-600 */
+            border-radius: 0.375rem; /* rounded-md */
+            background-color: #1f2937; /* Tailwind gray-800 */
+            color: #d1d5db; /* Tailwind gray-300 */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+        .search-input::placeholder {
+            color: #6b7280; /* Tailwind gray-500 */
+        }
+        .search-input:focus {
+            border-color: #0ea5e9; /* Tailwind sky-500 */
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+            outline: none;
+        }
+        .header-glow {
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.5), 0 0 16px rgba(56, 189, 248, 0.3);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-gray-950 shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-5">
+            <h1 class="text-4xl font-bold tracking-tight text-sky-400 header-glow text-center sm:text-left">Screenwriter's Prompt Companion</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8">
+
+        <div id="categoriesView">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+                <h2 id="mainPageTitle" class="text-3xl font-semibold text-sky-300 text-center sm:text-left">Prompt Categories</h2>
+                <input type="search" id="globalPromptSearchInput" placeholder="Search all prompts..." class="search-input sm:w-auto w-full max-w-md">
+            </div>
+            <div id="categoryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                </div>
+            <div id="globalSearchResultsView" class="hidden space-y-4">
+                </div>
+            <p id="noGlobalResultsMessage" class="text-gray-400 mt-6 text-center hidden">No prompts found matching your search across all categories.</p>
+        </div>
+
+        <div id="promptListView" class="hidden">
+            <button id="backToCategoriesBtn" class="mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4 shadow-md back-button">&larr; Back to Categories</button>
+            
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                <h2 id="categoryTitle" class="text-3xl font-bold text-sky-300 text-center sm:text-left"></h2>
+                <input type="search" id="promptSearchInput" placeholder="Search this category..." class="search-input sm:w-auto w-full max-w-md">
+            </div>
+
+            <div id="promptList" class="space-y-4">
+                </div>
+            <p id="noPromptResultsMessage" class="text-gray-400 mt-6 text-center hidden">No prompts found matching your search in this category.</p>
+        </div>
+
+        <div id="promptDetailView" class="hidden">
+            <button id="backToPreviousViewBtn" class="mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4 shadow-md back-button">&larr; Back</button>
+            <h2 id="promptTitle" class="text-4xl font-bold text-sky-300 mb-3"></h2>
+            <p id="promptDescription" class="text-gray-300 mb-6 text-lg"></p>
+            <h3 class="text-2xl font-semibold text-sky-400 mb-3">Prompt Template:</h3>
+            <div id="promptTemplateTextContainer" class="text-sm">
+                <pre id="promptTemplateTextPre"></pre>
+            </div>
+            <button id="copyPromptBtn" class="mt-8 bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-3 px-6 shadow-md copy-button">
+                Copy Prompt
+            </button>
+            <div id="usageNotes" class="mt-10 p-5 bg-gray-800 border-l-4 border-sky-500 text-sky-200 rounded-md shadow">
+                <h4 class="font-bold text-lg mb-2 text-sky-400">Usage Notes:</h4>
+                <p class="text-sm">Replace placeholders like <strong>[Character Name]</strong>, <strong>[Genre]</strong>, <strong>[Plot Point]</strong>, or <strong>INSERT_DETAIL_HERE</strong> with your specific screenplay information. The more context and detail you provide in these placeholders, the more tailored and useful the AI's response will be for your creative process.</p>
+            </div>
+        </div>
+    </main>
+
+    <div id="toastNotification" class="toast"></div>
+
+    <footer class="text-center py-10 text-gray-500 text-sm mt-16 border-t border-gray-700">
+        <p>&copy; <span id="currentYear"></span> Screenwriter's Prompt Companion. Unleash Your Story.</p>
+    </footer>
+
+    <script>
+        // Data for prompt categories and templates for Screenwriters
+        const screenwriterPromptCategories = [
+          {
+            name: "Concept & Idea Generation",
+            color: "bg-yellow-500", // Bright and inspiring
+            icon: "💡",
+            prompts: [
+              {
+                title: "Logline Generator",
+                description: "Craft compelling loglines to pitch your story.",
+                template: "Generate 5 distinct loglines for a [Specify Genre, e.g., sci-fi thriller, romantic comedy] film about a [Describe Protagonist Type, e.g., disgraced detective, ambitious young chef] who must [State Core Objective, e.g., solve a forgotten case, win a culinary competition] before [State Stakes, e.g., an old enemy exacts revenge, they lose their restaurant]."
+              },
+              {
+                title: "High-Concept 'What If'",
+                description: "Explore unique story premises with a 'what if' scenario.",
+                template: "Explore the premise: What if [Describe an Unusual Event or Discovery, e.g., humans could suddenly hear animals' thoughts, a gateway to another dimension opened in a high school locker] happened in [Describe a Familiar or Contrasting Setting, e.g., modern-day New York City, a remote Amish village] to a [Describe Character Archetype, e.g., cynical journalist, naive teenager]? Outline three key plot points that would follow."
+              },
+              {
+                title: "Genre Mashup Creator",
+                description: "Brainstorm innovative stories by blending genres.",
+                template: "Brainstorm 3 story concepts that combine the genres of [Genre 1, e.g., Western] and [Genre 2, e.g., Horror]. For each concept, define:\n- A central conflict related to [Core Conflict Element, e.g., a cursed artifact, a hidden town secret].\n- A potential protagonist and antagonist.\n- A unique visual or thematic element that arises from the genre blend."
+              },
+              {
+                title: "Theme to Story Idea",
+                description: "Develop a story concept from a core theme.",
+                template: "Take the theme of '[Chosen Theme, e.g., Redemption, The Price of Power, The Nature of True Friendship]' and develop a story idea around it.\n- Who is the protagonist and how do they embody or struggle with this theme?\n- What is their core conflict related to this theme?\n- What is a potential resolution that explores the nuances of this theme?"
+              },
+              {
+                title: "Twist on a Classic Tale",
+                description: "Reimagine a familiar story with a fresh perspective.",
+                template: "Take the classic story/myth of [Familiar Story/Myth, e.g., Romeo and Juliet, The Odyssey, King Arthur] and put a modern or unexpected twist on it.\n- What is the core twist (e.g., different setting, gender-swapped characters, alternate ending)?\n- How does this twist change the original story's message or themes?\n- Who is the target audience for this reimagining?"
+              }
+            ]
+          },
+          {
+            name: "Character Development",
+            color: "bg-sky-500", // Calm and thoughtful
+            icon: "🎭",
+            prompts: [
+              {
+                title: "Deep Character Profile",
+                description: "Build well-rounded characters with depth.",
+                template: "Create a detailed profile for a [Specify Role: Protagonist/Antagonist/Supporting Character/Mentor] in a [Specify Genre] script named [Character Name Placeholder]. Include:\n- Age & Physical Appearance:\n- Core Motivation (What do they want above all else?):\n- Greatest Fear (What are they terrified of?):\n- Defining Positive Trait (e.g., resilient, compassionate):\n- Defining Flaw/Weakness (e.g., arrogant, indecisive):\n- A Significant Secret They Keep:\n- A Key Relationship (and its nature, e.g., strained with parent, loyal to best friend):\n- A Quirky Habit or Mannerism:\n- Brief Backstory (1-2 formative events that shaped them):"
+              },
+              {
+                title: "Character Arc Planner",
+                description: "Outline the transformative journey of a character.",
+                template: "Outline a compelling character arc for [Character Name] who starts the story as [Describe Initial State/Flaw, e.g., selfish and isolated, naive and idealistic]. Through the events of the story, they will become [Describe Transformed State/Realization, e.g., altruistic and connected, cynical but wise].\nIdentify 3-4 key turning points or events in their journey that catalyze this change. For each turning point, describe:\n1. The event.\n2. How it challenges the character.\n3. The internal shift or lesson learned."
+              },
+              {
+                title: "Internal vs. External Conflict",
+                description: "Explore the driving conflicts of your character.",
+                template: "For your character, [Character Name], describe their primary INTERNAL conflict (e.g., their desire for love vs. their fear of vulnerability, their ambition vs. their moral code) and their primary EXTERNAL conflict (e.g., battling a specific antagonist, surviving a natural disaster, trying to achieve a difficult goal against societal pressure).\n- How do these internal and external conflicts intersect and influence each other?\n- Provide an example of a scene where both conflicts are at play."
+              },
+              {
+                title: "Unlikely Character Duo",
+                description: "Create dynamic relationships between contrasting characters.",
+                template: "Design an unlikely duo of characters who are forced to work together in a [Specify Genre] story.\n- Character A: [Brief description, e.g., a by-the-book cop]. Their primary goal is [Goal A].\n- Character B: [Brief description, e.g., a free-spirited con artist]. Their primary goal is [Goal B].\nWhat initially brings them together despite their differences? What are the core sources of conflict in their dynamic? What could they potentially learn from each other by the end?"
+              },
+              {
+                title: "Villain's Motivation",
+                description: "Craft a believable and compelling antagonist.",
+                template: "Develop the motivation for your antagonist, [Antagonist's Name/Title].\n- What is their ultimate goal? Why is it so important to them?\n- What past event or belief system fuels their actions? Make it understandable, even if not justifiable.\n- How do they see themselves? (e.g., as a hero, a necessary evil, a victim?)\n- What is their relationship or connection to the protagonist?"
+              }
+            ]
+          },
+          {
+            name: "Plot & Structure",
+            color: "bg-emerald-500", // Growth and development
+            icon: "🗺️",
+            prompts: [
+              {
+                title: "Three-Act Structure Outline",
+                description: "Map your story using the classic three-act structure.",
+                template: "Outline a basic three-act structure for a story about [Brief Premise of your story].\n\nACT I: SETUP ([Approx. 25% of story])\n- Opening Image/Introduction of Protagonist & World:\n- Inciting Incident (The event that kicks off the story):\n- Protagonist's Initial Goal & Stakes:\n- Plot Point 1 (Turning point that locks protagonist into Act II):\n\nACT II: CONFRONTATION ([Approx. 50% of story])\n- Rising Action (Series of challenges, obstacles, and new allies/enemies):\n- Midpoint (Major turning point, often a point of no return or false victory/defeat):\n- Protagonist's approach changes/stakes are raised:\n- Plot Point 2 (Lowest point for protagonist, all seems lost, leading to Act III):\n\nACT III: RESOLUTION ([Approx. 25% of story])\n- Climax (The final showdown, protagonist faces main conflict head-on):\n- Resolution/Denouement (The aftermath of the climax, tying up loose ends):\n- Final Image (Often mirrors or contrasts the opening image, showing change):"
+              },
+              {
+                title: "Inciting Incident Generator",
+                description: "Spark the beginning of your story's conflict.",
+                template: "My protagonist is [Briefly describe your protagonist, e.g., a timid librarian, a retired spy]. They are currently living a [Describe their normal life, e.g., quiet and predictable, restless in retirement].\nGenerate 3 distinct and compelling inciting incidents that would forcibly thrust them into the main conflict of a [Specify Genre] story. Each incident should clearly raise the stakes and present an unavoidable challenge."
+              },
+              {
+                title: "Midpoint Shaker",
+                description: "Develop a game-changing midpoint for your script.",
+                template: "My story is about [Brief Premise]. The protagonist, [Protagonist's Name], is currently trying to [Protagonist's Goal in Act 2A].\nBrainstorm 3 potential Midpoint events that could drastically alter the course of the story. A good midpoint often involves:\n- A point of no return.\n- A major revelation.\n- The stakes being significantly raised.\n- A shift in the protagonist's goal or understanding.\nFor each idea, explain its impact."
+              },
+              {
+                title: "Subplot Weaver",
+                description: "Add depth with meaningful subplots.",
+                template: "My main plot involves [Briefly summarize the A-story and the protagonist's main goal].\nSuggest a compelling subplot for a supporting character, [Supporting Character's Name/Type, e.g., the protagonist's cynical best friend, a rookie detective]. This subplot should:\n1. Thematically resonate with or contrast the main plot (e.g., if A-story is about finding love, subplot could be about losing it, or a different kind of love).\n2. Provide character development for the supporting character.\n3. Intersect with the main plot in at least one significant way."
+              },
+              {
+                title: "Opening Scene Hook",
+                description: "Craft an opening scene that grabs the audience.",
+                template: "Craft an opening scene (approx. 1-3 pages in script format) for a [Specify Genre] film that achieves the following:\n- Introduces the protagonist, [Protagonist's Name], in a memorable way.\n- Establishes the tone and/or genre of the film immediately.\n- Hints at the central conflict or an impending change.\n- Creates a strong hook or question that makes the audience want to see more.\n\nConsider using: [Suggest elements like: Action, Mystery, Intriguing Dialogue, Unique Visuals, Character Introduction through a specific activity]."
+              }
+            ]
+          },
+          {
+            name: "Dialogue & Scene Writing",
+            color: "bg-purple-500", // Creativity and expression
+            icon: "💬",
+            prompts: [
+              {
+                title: "Dialogue with Subtext",
+                description: "Write scenes where characters say one thing but mean another.",
+                template: "Write a short scene (approx. 1 page) between [Character A Name/Description] and [Character B Name/Description].\nThey are ostensibly discussing [Superficial Topic, e.g., the weather, a mundane task, a neutral news item].\nHowever, the true subtext of the conversation is about [Hidden Meaning/Underlying Conflict, e.g., a past betrayal, an unspoken attraction, a power struggle].\n- [Character A]'s hidden goal in the conversation: [Describe A's true objective]\n- [Character B]'s hidden goal in the conversation: [Describe B's true objective]\nEnsure the dialogue hints at the subtext without stating it overtly."
+              },
+              {
+                title: "High-Stakes Confrontation",
+                description: "Craft intense dialogue for pivotal confrontations.",
+                template: "Draft a dialogue-heavy scene (1-2 pages) where [Character A] confronts [Character B] about [A Major Secret, Betrayal, or Accusation, e.g., 'stealing the company funds,' 'lying about their identity,' 'sabotaging the mission'].\nThe stakes are [Describe the severe consequences if the confrontation goes badly for either character].\n- What does Character A want to achieve with this confrontation?\n- How does Character B react (e.g., denial, anger, confession, manipulation)?"
+              },
+              {
+                title: "Character Voice Differentiator",
+                description: "Ensure your characters sound unique.",
+                template: "Write a short monologue (5-7 lines each) for three different characters reacting to the SAME event: [Describe the Event, e.g., a sudden city-wide power outage, news of an alien landing, winning a small lottery prize].\n- Character X: [Briefly describe personality, e.g., a cynical old man, pragmatic and world-weary].\n- Character Y: [Briefly describe personality, e.g., an optimistic young woman, easily excitable].\n- Character Z: [Briefly describe personality, e.g., a conspiracy theorist, paranoid and suspicious].\nFocus on how their word choice, sentence structure, and emotional reaction would differ."
+              },
+              {
+                title: "Show, Don't Tell Scene",
+                description: "Convey information visually and through action, not just words.",
+                template: "Describe a scene (no more than 1 page of action lines, minimal dialogue) that reveals [A Key Piece of Information or Character Trait, e.g., 'Character A is secretly a spy,' 'Character B is deeply in debt,' 'Character C is grieving a loss'] without any character explicitly stating it. Focus on actions, objects, setting details, and character expressions."
+              },
+              {
+                title: "Building Tension in a Scene",
+                description: "Develop techniques to increase suspense and tension.",
+                template: "Outline a scene where [Protagonist's Name] is trying to [Achieve a specific, time-sensitive goal, e.g., 'disarm a bomb,' 'sneak past a guard,' 'find a hidden document'] in [A specific location that might add to tension, e.g., 'a crowded public place,' 'a dark, confined space'].\nWhat elements can be used to build tension? Consider:\n- A ticking clock (literal or implied).\n- Unexpected obstacles or interruptions.\n- The risk of discovery or failure.\n- Sensory details (e.g., sounds, shadows).\n- The protagonist's internal state (fear, determination)."
+              }
+            ]
+          },
+          {
+            name: "Worldbuilding & Setting",
+            color: "bg-orange-500", // Adventure and exploration
+            icon: "🏰",
+            prompts: [
+              {
+                title: "Sensory Setting Description",
+                description: "Create immersive settings using vivid sensory details.",
+                template: "Describe [Specific Location in your story, e.g., an ancient, forgotten library; a bustling, futuristic spaceport; a seemingly idyllic suburban street with a dark secret] using details that appeal to at least four of the five senses (sight, sound, smell, touch, taste).\n- Sight: [What are the dominant visuals, colors, light/shadow?]\n- Sound: [What are the ambient noises, specific sounds?]\n- Smell: [What scents are present, pleasant or unpleasant?]\n- Touch/Texture: [What would characters feel, e.g., temperature, textures of objects?]\n- (Optional) Taste: [If applicable, what tastes are associated with this place?]"
+              },
+              {
+                title: "Rules of Your World",
+                description: "Define the unique laws governing your fictional world.",
+                template: "For your [Fantasy/Sci-Fi/Supernatural/Alternate History] story, define 3-5 unique and consistent rules or laws that govern [A Key Aspect of the World, e.g., its magic system, advanced technology, societal structure, supernatural beings, the consequences of time travel].\nFor each rule:\n1. Clearly state the rule.\n2. Explain its implications or consequences within the story.\n3. How does it affect the protagonist or the plot?"
+              },
+              {
+                title: "Setting as a Character",
+                description: "Describe a setting so it reflects mood or theme.",
+                template: "Choose a key setting in your screenplay (e.g., an old, dilapidated house; a sterile, high-tech laboratory; a vast, empty desert). Describe this setting in a way that gives it a distinct 'personality' and reflects:\n- The overall mood of the story (e.g., oppressive, mysterious, hopeful).\n- A specific theme (e.g., decay, isolation, progress).\n- The internal state of a character who inhabits or interacts with this setting."
+              },
+              {
+                title: "Creating Atmosphere",
+                description: "Establish a specific mood for a scene through setting.",
+                template: "Write a short paragraph (action lines only, no dialogue) establishing a [Specific Atmosphere, e.g., suspenseful and eerie, romantic and magical, chaotic and dangerous] for a scene set in [Specific Location] at [Specific Time of Day/Weather Condition]. Focus on how light, sound, weather, and small details contribute to this atmosphere."
+              },
+              {
+                title: "Unique Cultural Detail",
+                description: "Add depth to your world with specific cultural elements.",
+                template: "For a society or group within your story world ([Name of Society/Group]), invent one unique cultural detail. This could be:\n- A specific ritual or tradition (and its meaning).\n- A unique form of communication or art.\n- A particular belief about the world or afterlife.\n- A distinct social custom or taboo.\nDescribe this detail and how it might be shown or impact a scene in your screenplay."
+              }
+            ]
+          },
+          {
+            name: "Refinement & Production Prep",
+            color: "bg-indigo-500", // Focus and finalization
+            icon: "🎬",
+            prompts: [
+              {
+                title: "Logline Polish",
+                description: "Sharpen your logline for maximum impact.",
+                template: "My current logline is: \"[Paste Your Original Logline Here]\"\nHelp me refine this logline to be more concise, active, and compelling. Focus on:\n- Clearly identifying the protagonist.\n- Stating their primary, active goal.\n- Highlighting the central conflict or main obstacle.\n- Hinting at the stakes.\nGenerate 2-3 revised options."
+              },
+              {
+                title: "Synopsis Writer (Key Beats)",
+                description: "Draft a concise synopsis hitting all crucial plot points.",
+                template: "Write a 250-300 word synopsis for a screenplay with the following premise: [Briefly state the core idea of your screenplay].\nThe synopsis should cover these key beats in a compelling narrative flow:\n- Introduction of the protagonist and their world.\n- The inciting incident that disrupts their world.\n- The protagonist's main goal and the primary obstacles they face (Rising Action).\n- The Midpoint: A significant turning point.\n- The Climax: The final confrontation or resolution of the main conflict.\n- The Resolution/Denouement: The aftermath and new status quo."
+              },
+              {
+                title: "Thematic Statement Clarifier",
+                description: "Articulate the core message or theme of your story.",
+                template: "My screenplay explores [General Topic or Central Conflict, e.g., 'the consequences of unchecked ambition,' 'the challenges of forgiveness,' 'the meaning of family'].\nHelp me formulate a clear and concise theme statement (1-2 sentences) that articulates what the story is ultimately trying to say or explore about this topic. What is the underlying message or question posed to the audience?"
+              },
+              {
+                title: "Pacing Adjustment for a Scene",
+                description: "Fine-tune the rhythm and speed of a specific scene.",
+                template: "I have a scene where [Briefly describe the scene's content and current pacing, e.g., 'two characters argue, and it feels too slow,' or 'an action sequence feels rushed and confusing'].\nI want the pacing to feel more [Desired Pacing, e.g., urgent and frantic, deliberately slow and suspenseful, emotionally resonant, brisk and witty].\nSuggest 3-5 specific techniques to achieve this. Consider:\n- Length of sentences in action lines.\n- Frequency of cuts (implied by new action lines).\n- Use of dialogue vs. action.\n- Inclusion or removal of small details.\n- Sound design suggestions (if applicable)."
+              },
+              {
+                title: "Elevator Pitch (30-60 Seconds)",
+                description: "Craft a quick, engaging pitch for your screenplay.",
+                template: "Draft a 30-60 second verbal elevator pitch for a screenplay titled '[Your Screenplay Title]' which is a [Genre] about [Your Logline or Core Concept].\nThe pitch should:\n1. Start with a strong hook to grab attention.\n2. Briefly introduce the protagonist and their core dilemma.\n3. Hint at the unique appeal or central conflict.\n4. End with a compelling question or statement that makes the listener want to know more.\n(Optional: Mention a comparable film or TV show if it helps clarify tone/style: 'It's [Comparable Film A] meets [Comparable Film B].')"
+              }
+            ]
+          },
+          {
+            name: "Creative Exploration",
+            color: "bg-pink-500", // Imagination and novelty
+            icon: "🧠",
+            prompts: [
+              {
+                title: "Writer's Block Buster",
+                description: "Generate fresh ideas when you're feeling stuck.",
+                template: "I'm experiencing writer's block regarding [Specify the story problem, e.g., 'how my protagonist should escape from a locked room,' 'what the next major plot point should be after X event,' 'a believable motivation for a secondary character's betrayal'].\nGenerate 3-5 unconventional or unexpected solutions/ideas to help me break through this block. Encourage thinking outside the box."
+              },
+              {
+                title: "Alternative Ending Brainstorm",
+                description: "Explore different resolutions for your story.",
+                template: "My current ending for the story ([Brief Premise]) is: [Briefly describe your current ending].\nBrainstorm 2-3 completely different alternative endings. For each alternative:\n- Describe the ending.\n- Explain how it would change the overall theme or message of the story.\n- Consider the potential audience reaction to this ending."
+              },
+              {
+                title: "Character 'What If' Scenario",
+                description: "Test your characters by putting them in unexpected situations.",
+                template: "Take my character, [Character Name], who is typically [Describe their usual personality/role, e.g., 'a brave hero,' 'a cautious academic,' 'a ruthless CEO'].\nWhat if this character was suddenly forced into a situation completely alien to their nature or skills: [Describe the 'What If' Scenario, e.g., 'had to perform stand-up comedy to save someone,' 'found themselves stranded on a desert island with their worst enemy,' 'woke up with the ability to read minds but only of squirrels'].\n- How would they react initially?\n- What hidden aspects of their personality might emerge?\n- How could this scenario lead to character growth or a new plot direction?"
+              },
+              {
+                title: "Visual Storytelling Exercise",
+                description: "Practice conveying story through images, not words.",
+                template: "Describe a key character emotion (e.g., profound grief, quiet joy, simmering rage, crippling fear) purely through visual storytelling for a specific scene. Do NOT use any dialogue or direct exposition from a narrator.\nConsider:\n- Character's actions and body language.\n- Objects in their environment and how they interact with them.\n- Camera focus, angle, and movement (implied).\n- Lighting and color palette.\n- Setting details that reinforce the emotion."
+              },
+              {
+                title: "Unexpected Obstacle Generator",
+                description: "Raise the stakes by introducing new challenges.",
+                template: "My protagonist, [Protagonist's Name], is just about to achieve their goal of [State the Protagonist's Goal].\nIntroduce an unexpected and significant obstacle that appears right before they succeed. This obstacle should:\n1. Genuinely raise the stakes.\n2. Force the protagonist to adapt or make a difficult choice.\n3. Not feel like a random event, but something that could believably happen within the story's world or due to previous actions.\nDescribe the obstacle and its immediate impact."
+              }
+            ]
+          }
+        ];
+
+        // DOM Elements
+        const categoriesView = document.getElementById('categoriesView');
+        const promptListView = document.getElementById('promptListView');
+        const promptDetailView = document.getElementById('promptDetailView');
+        const mainPageTitle = document.getElementById('mainPageTitle');
+
+        const categoryGrid = document.getElementById('categoryGrid');
+        const globalPromptSearchInput = document.getElementById('globalPromptSearchInput');
+        const globalSearchResultsView = document.getElementById('globalSearchResultsView');
+        const noGlobalResultsMessage = document.getElementById('noGlobalResultsMessage');
+
+        const categoryTitleEl = document.getElementById('categoryTitle');
+        const promptListEl = document.getElementById('promptList');
+        const promptSearchInput = document.getElementById('promptSearchInput');
+        const noPromptResultsMessage = document.getElementById('noPromptResultsMessage');
+
+        const promptTitleEl = document.getElementById('promptTitle');
+        const promptDescriptionEl = document.getElementById('promptDescription');
+        const promptTemplateTextPreEl = document.getElementById('promptTemplateTextPre');
+        const copyPromptBtn = document.getElementById('copyPromptBtn');
+        
+        const backToCategoriesBtn = document.getElementById('backToCategoriesBtn');
+        const backToPreviousViewBtn = document.getElementById('backToPreviousViewBtn');
+
+        const toastNotification = document.getElementById('toastNotification');
+        let currentCategoryIndex = -1;
+        let cameFromGlobalSearch = false; // To track if detail view was entered from global search
+
+        // --- Toast Notification Function ---
+        function showToast(message, type = 'success', duration = 2500) {
+            toastNotification.textContent = message;
+            toastNotification.className = 'toast show'; // Base classes
+            if (type === 'success') {
+                toastNotification.classList.add('success');
+            } else {
+                toastNotification.classList.add('error');
+            }
+            
+            // Hide the toast after duration
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+            }, duration);
+        }
+
+        // --- Display Functions ---
+
+        // Function to display the main categories view
+        function displayCategoriesView(searchTerm = '') {
+            categoriesView.classList.remove('hidden');
+            promptListView.classList.add('hidden');
+            promptDetailView.classList.add('hidden');
+            globalSearchResultsView.classList.add('hidden'); 
+            categoryGrid.classList.remove('hidden'); 
+            mainPageTitle.textContent = "Prompt Categories"; 
+
+            globalPromptSearchInput.value = searchTerm; // Keep search term in input
+            const lowerSearchTerm = searchTerm.toLowerCase().trim();
+
+            if (lowerSearchTerm) { // If there's a global search term
+                categoryGrid.classList.add('hidden'); // Hide category tiles
+                globalSearchResultsView.classList.remove('hidden'); // Show global search results container
+                globalSearchResultsView.innerHTML = ''; // Clear previous results
+                mainPageTitle.textContent = `Search Results for "${searchTerm}"`;
+
+                let foundPrompts = [];
+                screenwriterPromptCategories.forEach((category, catIdx) => {
+                    category.prompts.forEach((prompt, pIdx) => {
+                        if (prompt.title.toLowerCase().includes(lowerSearchTerm) ||
+                            prompt.description.toLowerCase().includes(lowerSearchTerm) ||
+                            prompt.template.toLowerCase().includes(lowerSearchTerm)) {
+                            // Store original indices to correctly display prompt later
+                            foundPrompts.push({ ...prompt, categoryName: category.name, originalCatIndex: catIdx, originalPromptIndex: pIdx });
+                        }
+                    });
+                });
+
+                if (foundPrompts.length === 0) {
+                    noGlobalResultsMessage.classList.remove('hidden');
+                } else {
+                    noGlobalResultsMessage.classList.add('hidden');
+                    foundPrompts.forEach(promptData => {
+                        const card = document.createElement('div');
+                        card.className = 'global-search-result-card p-5 shadow hover:shadow-lg'; // Adjusted padding
+                        card.innerHTML = `
+                            <h4 class="text-xl font-semibold text-sky-400 mb-1">${promptData.title}</h4>
+                            <p class="text-gray-500 text-xs mb-2">Category: ${promptData.categoryName}</p>
+                            <p class="text-gray-300 text-sm">${promptData.description}</p>
+                        `;
+                        card.addEventListener('click', () => {
+                            cameFromGlobalSearch = true; // Set flag indicating navigation from global search
+                            displayPromptDetail(promptData.originalCatIndex, promptData.originalPromptIndex);
+                        });
+                        globalSearchResultsView.appendChild(card);
+                    });
+                }
+            } else { // No global search term, display category tiles
+                categoryGrid.innerHTML = ''; // Clear previous tiles
+                screenwriterPromptCategories.forEach((category, index) => {
+                    const tile = document.createElement('div');
+                    tile.className = `category-tile p-6 text-white shadow-lg hover:shadow-xl ${category.color} transform hover:scale-105`;
+                    tile.innerHTML = `
+                        <div class="text-5xl mb-4">${category.icon || '✨'}</div>
+                        <h3 class="text-xl font-semibold">${category.name}</h3>
+                    `;
+                    tile.addEventListener('click', () => {
+                        cameFromGlobalSearch = false; // Reset flag
+                        displayPromptsForCategory(index);
+                    });
+                    categoryGrid.appendChild(tile);
+                });
+                 noGlobalResultsMessage.classList.add('hidden');
+            }
+        }
+
+        // Function to display prompts for a selected category
+        function displayPromptsForCategory(categoryIndex, searchTerm = '') {
+            currentCategoryIndex = categoryIndex;
+            const category = screenwriterPromptCategories[categoryIndex];
+            
+            categoriesView.classList.add('hidden');
+            promptListView.classList.remove('hidden');
+            promptDetailView.classList.add('hidden');
+
+            categoryTitleEl.textContent = category.name;
+            promptListEl.innerHTML = ''; // Clear previous prompts
+            promptSearchInput.value = searchTerm; // Keep search term in input
+
+            const lowerSearchTerm = searchTerm.toLowerCase().trim();
+            const filteredPrompts = category.prompts.filter(prompt => 
+                prompt.title.toLowerCase().includes(lowerSearchTerm) || 
+                prompt.description.toLowerCase().includes(lowerSearchTerm) ||
+                prompt.template.toLowerCase().includes(lowerSearchTerm)
+            );
+
+            if (filteredPrompts.length === 0 && searchTerm) {
+                noPromptResultsMessage.classList.remove('hidden');
+            } else {
+                noPromptResultsMessage.classList.add('hidden');
+            }
+
+            filteredPrompts.forEach((prompt) => {
+                // Find the original index of the prompt within its category
+                const actualPromptIndex = category.prompts.findIndex(p => p.title === prompt.title && p.template === prompt.template);
+                const card = document.createElement('div');
+                card.className = 'prompt-card p-5 shadow hover:shadow-lg'; // Adjusted padding
+                card.innerHTML = `
+                    <h4 class="text-xl font-semibold text-sky-400 mb-1">${prompt.title}</h4>
+                    <p class="text-gray-300 text-sm">${prompt.description}</p>
+                `;
+                card.addEventListener('click', () => {
+                    cameFromGlobalSearch = false; // Navigating from category list
+                    displayPromptDetail(categoryIndex, actualPromptIndex);
+                });
+                promptListEl.appendChild(card);
+            });
+        }
+
+        // Function to display the detail view for a selected prompt
+        function displayPromptDetail(categoryIndex, promptIndex) {
+            // Basic validation
+            if (categoryIndex < 0 || categoryIndex >= screenwriterPromptCategories.length || 
+                promptIndex < 0 || promptIndex >= screenwriterPromptCategories[categoryIndex].prompts.length) {
+                console.error("Invalid category or prompt index:", categoryIndex, promptIndex);
+                showToast("Error: Could not load prompt.", "error");
+                displayCategoriesView(); // Go back to safety
+                return;
+            }
+            const prompt = screenwriterPromptCategories[categoryIndex].prompts[promptIndex];
+
+            categoriesView.classList.add('hidden');
+            promptListView.classList.add('hidden');
+            promptDetailView.classList.remove('hidden');
+
+            promptTitleEl.textContent = prompt.title;
+            promptDescriptionEl.textContent = prompt.description;
+            promptTemplateTextPreEl.textContent = prompt.template;
+
+            // Setup copy button for the current prompt
+            copyPromptBtn.onclick = () => { // Use onclick to easily reassign for new prompts
+                navigator.clipboard.writeText(prompt.template)
+                    .then(() => {
+                        showToast('Prompt copied to clipboard!', 'success');
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        showToast('Failed to copy prompt. Try manual copy.', 'error');
+                    });
+            };
+        }
+
+        // --- Event Listeners for Navigation and Search ---
+
+        // Global search input listener
+        globalPromptSearchInput.addEventListener('input', (e) => {
+            displayCategoriesView(e.target.value);
+        });
+
+        // Back to categories button from prompt list view
+        backToCategoriesBtn.addEventListener('click', () => {
+            promptSearchInput.value = ''; // Clear category search
+            globalPromptSearchInput.value = ''; // Clear global search
+            displayCategoriesView();
+        });
+        
+        // Back button from prompt detail view
+        backToPreviousViewBtn.addEventListener('click', () => {
+            if (cameFromGlobalSearch) {
+                // If came from global search, return to global search results with the term
+                displayCategoriesView(globalPromptSearchInput.value);
+            } else if (currentCategoryIndex !== -1) {
+                // If came from a category list, return to that category list with its search term
+                displayPromptsForCategory(currentCategoryIndex, promptSearchInput.value);
+            } else {
+                // Fallback: should ideally not happen if logic is correct
+                displayCategoriesView();
+            }
+        });
+
+        // Category-specific search input listener
+        promptSearchInput.addEventListener('input', (e) => {
+            if (currentCategoryIndex !== -1) { // Ensure a category is selected
+                displayPromptsForCategory(currentCategoryIndex, e.target.value);
+            }
+        });
+
+        // --- Footer Year ---
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // --- Initial Display ---
+        // Display the categories view when the page loads
+        displayCategoriesView();
+
+    </script>
+</body>
+</html>
