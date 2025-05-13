@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>macOS Shortcut Cheat Sheet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; 
+            color: #e2e8f0; 
+        }
+        .category-tile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            aspect-ratio: 1 / 1;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+            border-radius: 0.75rem; 
+            border: 1px solid #2d3748; 
+        }
+        .category-tile:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+            border-color: #4299e1; 
+        }
+        .shortcut-card {
+            background-color: #2d3748; 
+            border: 1px solid #4a5568; 
+            border-radius: 0.5rem; 
+            padding: 1rem 1.5rem; 
+            margin-bottom: 0.75rem; 
+            transition: border-color 0.2s ease;
+        }
+        .shortcut-card:hover {
+            border-color: #4299e1; 
+        }
+        .shortcut-keys-container {
+            display: flex;
+            align-items: center; 
+            flex-wrap: wrap; 
+        }
+        .shortcut-keys { /* For actual key symbols */
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            background-color: #718096; 
+            color: #f7fafc; 
+            padding: 0.35rem 0.7rem; 
+            border-radius: 0.375rem; 
+            display: inline-block;
+            font-size: 1.15em; 
+            font-weight: 600; 
+            border: 1px solid #a0aec0; 
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.3); 
+        }
+        .setting-path { /* For descriptive paths like "System Settings > Display" */
+            font-family: 'Inter', sans-serif; /* Use body font */
+            background-color: #4a5568; /* Slightly different background for distinction */
+            color: #e2e8f0;
+            padding: 0.35rem 0.7rem;
+            border-radius: 0.375rem;
+            display: inline-block;
+            font-size: 0.95em; /* Slightly smaller than keys */
+            font-weight: 500;
+            border: 1px solid #718096;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        .shortcut-connector { 
+            color: #a0aec0; 
+            margin-left: 0.25rem; 
+            margin-right: 0.25rem; 
+            font-size: 1em; 
+        }
+        .shortcut-description {
+            color: #a0aec0; 
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .nav-button {
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border-radius: 0.5rem; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .nav-button:hover {
+            transform: translateY(-1px);
+        }
+        .nav-button:active {
+            transform: translateY(0px);
+        }
+        .search-input {
+            padding: 0.75rem 1rem;
+            border: 1px solid #4a5568; 
+            border-radius: 0.375rem; 
+            background-color: #2d3748; 
+            color: #e2e8f0; 
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+        .search-input::placeholder {
+            color: #718096; 
+        }
+        .search-input:focus {
+            border-color: #4299e1; 
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+            outline: none;
+        }
+        .header-glow {
+            text-shadow: 0 0 8px rgba(66, 153, 225, 0.5), 0 0 16px rgba(66, 153, 225, 0.3);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-gray-900 shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-5">
+            <h1 class="text-4xl font-bold tracking-tight text-blue-400 header-glow text-center sm:text-left">macOS Shortcut Cheat Sheet</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8">
+
+        <div id="categoriesViewEl">
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+                <h2 id="mainPageTitleEl" class="text-3xl font-semibold text-blue-300 text-center sm:text-left">Categories</h2>
+                <input type="search" id="globalShortcutSearchInputEl" placeholder="Search all items..." class="search-input sm:w-auto w-full max-w-md">
+            </div>
+            <div id="categoryGridEl" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                </div>
+            <div id="globalSearchResultsViewEl" class="hidden space-y-3 mt-6">
+                </div>
+            <p id="noGlobalResultsMessageEl" class="text-gray-400 mt-6 text-center hidden">No items found matching your search.</p>
+        </div>
+
+        <div id="shortcutListViewEl" class="hidden">
+            <button id="backToCategoriesBtnEl" class="nav-button mb-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                <h2 id="categoryTitleEl" class="text-3xl font-bold text-blue-300 text-center sm:text-left"></h2>
+                <input type="search" id="categoryShortcutSearchInputEl" placeholder="Search this category..." class="search-input sm:w-auto w-full max-w-md">
+            </div>
+
+            <div id="shortcutListEl" class="space-y-3">
+                </div>
+            <p id="noCategoryResultsMessageEl" class="text-gray-400 mt-6 text-center hidden">No items found in this category matching your search.</p>
+        </div>
+
+        <div id="allShortcutsViewEl" class="hidden">
+            <button id="backToCategoriesFromAllBtnEl" class="nav-button mb-6 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+                <h2 class="text-3xl font-bold text-blue-300 text-center sm:text-left">All Items</h2>
+                <input type="search" id="allShortcutsSearchInputEl" placeholder="Search all listed items..." class="search-input sm:w-auto w-full max-w-md">
+            </div>
+            <div id="allShortcutsListContainerEl" class="space-y-6">
+                </div>
+            <p id="noAllShortcutsResultsMessageEl" class="text-gray-400 mt-6 text-center hidden">No items found matching your search.</p>
+        </div>
+    </main>
+
+    <footer class="text-center py-10 text-gray-500 text-sm mt-16 border-t border-gray-700">
+        <p>&copy; <span id="currentYearEl"></span> macOS Cheat Sheet. Boost Your Productivity!</p>
+    </footer>
+
+    <script>
+        // Data for macOS shortcuts and settings
+        const shortcutCategories = [
+            {
+                name: "General & System-Wide",
+                icon: "💻",
+                color: "bg-sky-700", 
+                shortcuts: [
+                    { keys: "⌘ + C", description: "Copy the selected item to the Clipboard. This also works for files in the Finder." },
+                    { keys: "⌘ + X", description: "Cut the selected item and copy it to the Clipboard." },
+                    { keys: "⌘ + V", description: "Paste the contents of the Clipboard into the current document or app." },
+                    { keys: "⌘ + Z", description: "Undo the previous command." },
+                    { keys: "⇧ + ⌘ + Z", description: "Redo, reversing the undo command." },
+                    { keys: "⌘ + A", description: "Select All items." },
+                    { keys: "⌘ + F", description: "Find items in a document or open a Find window." },
+                    { keys: "⌘ + S", description: "Save the current document." },
+                    { keys: "⇧ + ⌘ + S", description: "Save As, or duplicate the current document." },
+                    { keys: "⌘ + P", description: "Print the current document." },
+                    { keys: "⌘ + Q", description: "Quit the front app." },
+                    { keys: "⌥ + ⌘ + Esc", description: "Force Quit: Choose an app to force quit. Or press and hold these keys for three seconds to force quit the front app." },
+                    { keys: "⌘ + Space bar", description: "Show or hide the Spotlight search field." },
+                    { keys: "⌘ + Tab", description: "Switch to the next most recently used app among your open apps." },
+                    { keys: "⇧ + ⌘ + Tab", description: "Switch to the previously used app among your open apps." },
+                    { keys: "Control + ⌘ + F", description: "Use the app in full screen, if supported by the app." },
+                    { keys: "Control + Up Arrow", description: "Show Mission Control (view all open windows and spaces)." },
+                    { keys: "Control + Down Arrow", description: "Show all windows of the front app (App Exposé)." },
+                    { keys: "⇧ + ⌘ + 3", description: "Take a screenshot of the entire screen." },
+                    { keys: "⇧ + ⌘ + 4", description: "Take a screenshot of a selected portion of the screen. Drag the crosshair to select an area." },
+                    { keys: "⇧ + ⌘ + 4, then Space bar, then click a window", description: "Take a screenshot of a specific window." },
+                    { keys: "⇧ + ⌘ + 5", description: "Open Screenshot app with options for screen recording and timed screenshots (macOS Mojave or later)." },
+                    { keys: "⌘ + H", description: "Hide the windows of the front app." },
+                    { keys: "⌥ + ⌘ + H", description: "View the front app but hide all other apps." },
+                    { keys: "⌘ + M", description: "Minimize the front window to the Dock." },
+                    { keys: "⌥ + ⌘ + M", description: "Minimize all windows of the front app." },
+                    { keys: "⌘ + W", description: "Close the front window." },
+                    { keys: "⌥ + ⌘ + W", description: "Close all windows of the app." },
+                    { keys: "Control + Shift + Eject / Power", description: "Put your displays to sleep. (Use Eject on Macs with an Eject key, Power button on others)." },
+                    { keys: "Control + ⌘ + Q", description: "Immediately lock your screen." },
+                    { keys: "Shift + ⌘ + Q", description: "Log out of your macOS user account (you'll be asked to confirm)." },
+                    { keys: "Option + Shift + ⌘ + Q", description: "Log out of your macOS user account immediately, without being asked to confirm." },
+                ]
+            },
+            {
+                name: "Finder",
+                icon: "📁",
+                color: "bg-blue-700",
+                shortcuts: [
+                    { keys: "⌘ + D", description: "Duplicate the selected files." },
+                    { keys: "⌘ + E", description: "Eject the selected disk or volume." },
+                    // ... (rest of Finder shortcuts)
+                    { keys: "⌘ + 4", description: "View items in a Finder window in a gallery." },
+                ]
+            },
+            {
+                name: "Safari", 
+                icon: "🌐",
+                color: "bg-indigo-700",
+                shortcuts: [
+                    { keys: "⌘ + T", description: "Open a new tab." },
+                    // ... (rest of Safari shortcuts)
+                    { keys: "⌘ + Y", description: "Show or hide History." },
+                ]
+            },
+            {
+                name: "Text Editing",
+                icon: "✏️",
+                color: "bg-emerald-700", 
+                shortcuts: [
+                    { keys: "⌘ + B", description: "Boldface the selected text, or turn boldfacing on or off." },
+                    // ... (rest of Text Editing shortcuts)
+                    { keys: "⇧ + ⌥ + Right Arrow", description: "Extend text selection to the end of the current word, then to the end of the following word if pressed again." },
+                ]
+            },
+            {
+                name: "Window Management",
+                icon: "🖼️",
+                color: "bg-purple-700",
+                shortcuts: [
+                    { keys: "⌘ + ` (Backtick)", description: "Switch to the next window of the front app." },
+                    // ... (rest of Window Management shortcuts)
+                    { keys: "⌥ + Mission Control key (F3)", description: "Open Mission Control preferences." },
+                ]
+            },
+            {
+                name: "Trackpad Gestures",
+                icon: "🖐️",
+                color: "bg-teal-700",
+                shortcuts: [ // Gestures are described, keys might be "Action"
+                    { keys: "Tap with one finger", description: "Tap to click (enable in Trackpad settings)." },
+                    { keys: "Click / Tap with two fingers", description: "Secondary click (right-click)." },
+                    { keys: "Double-tap with two fingers", description: "Smart zoom (on webpage or PDF)." },
+                    { keys: "Slide two fingers up or down", description: "Scroll." },
+                    { keys: "Pinch with two fingers", description: "Zoom in or out." },
+                    { keys: "Rotate with two fingers", description: "Rotate photos and other items." },
+                    { keys: "Swipe left / right with two fingers", description: "Swipe between pages (e.g., Safari history, Finder)." },
+                    { keys: "Swipe left from right edge with two fingers", description: "Open Notification Center." },
+                    { keys: "Spread with thumb and three fingers", description: "Show desktop." },
+                    { keys: "Pinch with thumb and three fingers", description: "Show Launchpad." },
+                    { keys: "Swipe up with three / four fingers", description: "Open Mission Control." },
+                    { keys: "Swipe down with three / four fingers", description: "App Exposé (show all windows of current app)." },
+                    { keys: "Swipe left / right with three / four fingers", description: "Swipe between full-screen apps or spaces." },
+                    { keys: "Tap with three fingers", description: "Look up and data detectors." },
+                ]
+            },
+            {
+                name: "Terminal Commands",
+                icon: ">_",
+                color: "bg-gray-700", // Using a more neutral gray for terminal
+                shortcuts: [ // 'keys' here will be the command itself
+                    { keys: "ls", description: "List directory contents." },
+                    { keys: "cd [directory]", description: "Change directory." },
+                    { keys: "pwd", description: "Print working directory (show current path)." },
+                    { keys: "mkdir [name]", description: "Create a new directory." },
+                    { keys: "rm [file]", description: "Remove (delete) a file." },
+                    { keys: "rm -r [dir]", description: "Remove a directory and its contents." },
+                    { keys: "cp [source] [dest]", description: "Copy a file or directory." },
+                    { keys: "mv [source] [dest]", description: "Move or rename a file or directory." },
+                    { keys: "cat [file]", description: "Display file contents." },
+                    { keys: "less [file]", description: "View file contents page by page (q to quit)." },
+                    { keys: "man [command]", description: "Show the manual page for a command." },
+                    { keys: "sudo [command]", description: "Execute a command as superuser." },
+                    { keys: "clear", description: "Clear the Terminal screen." },
+                    { keys: "history", description: "Show command history." },
+                    { keys: "ping [host]", description: "Test network connectivity." },
+                    { keys: "top / htop", description: "Display system processes and resource usage (q to quit)." },
+                ]
+            },
+            {
+                name: "Mail App",
+                icon: "📧",
+                color: "bg-cyan-700",
+                shortcuts: [
+                    { keys: "⌘ + N", description: "New Message." },
+                    { keys: "⇧ + ⌘ + N", description: "Get New Mail." },
+                    { keys: "⌘ + R", description: "Reply to selected message." },
+                    { keys: "⇧ + ⌘ + R", description: "Reply All." },
+                    { keys: "⌘ + J / Control + ⌘ + A", description: "Archive selected message(s)." },
+                    { keys: "Delete", description: "Delete selected message(s)." },
+                    { keys: "⇧ + ⌘ + J", description: "Mark as Junk Mail." },
+                    { keys: "⌥ + ⌘ + F", description: "Search all mailboxes." },
+                ]
+            },
+            {
+                name: "Messages App",
+                icon: "💬",
+                color: "bg-green-600",
+                shortcuts: [
+                    { keys: "⌘ + N", description: "New Message." },
+                    { keys: "Enter / Return", description: "Send message (after typing)." },
+                    { keys: "Control + ⌘ + Space bar", description: "Show Character Viewer (emojis & symbols)." },
+                    { keys: "⌘ + F", description: "Search conversations." },
+                    { keys: "⌥ + ⌘ + I", description: "Show or hide message details." },
+                ]
+            },
+            {
+                name: "Notes App",
+                icon: "📝",
+                color: "bg-yellow-600",
+                shortcuts: [
+                    { keys: "⌘ + N", description: "New Note." },
+                    { keys: "⇧ + ⌘ + L", description: "Create a checklist." },
+                    { keys: "⌘ + B", description: "Bold selected text." },
+                    { keys: "⌘ + I", description: "Italicize selected text." },
+                    { keys: "⌘ + U", description: "Underline selected text." },
+                    { keys: "⌥ + ⌘ + T", description: "Show or hide Toolbar." },
+                ]
+            },
+            {
+                name: "Startup Keys",
+                icon: "🚀",
+                color: "bg-orange-700",
+                shortcuts: [
+                    { keys: "Shift (⇧)", description: "Start up in Safe Mode." },
+                    { keys: "Option (⌥) / Alt", description: "Start up to Startup Manager." },
+                    { keys: "⌘ + R", description: "Start up from macOS Recovery." },
+                    { keys: "Option + ⌘ + R", description: "Start up from macOS Recovery over the internet (latest macOS compatible with your Mac)." },
+                    { keys: "Shift + Option + ⌘ + R", description: "Start up from macOS Recovery over the internet (macOS that came with your Mac, or closest still available)." },
+                    { keys: "T", description: "Start up in target disk mode." },
+                    { keys: "D", description: "Start up to Apple Diagnostics." },
+                    { keys: "Option + D", description: "Start up to Apple Diagnostics over the internet." },
+                    { keys: "N", description: "Start up from a NetBoot server." },
+                ]
+            },
+            {
+                name: "Symbols & Characters",
+                icon: "©",
+                color: "bg-pink-700",
+                shortcuts: [
+                    { keys: "Control + ⌘ + Space bar", description: "Show Character Viewer (emojis, symbols)." },
+                    { keys: "⌥ + G", description: "Copyright symbol (©)." },
+                    { keys: "⌥ + 2", description: "Trademark symbol (™)." },
+                    { keys: "⌥ + R", description: "Registered trademark symbol (®)." },
+                    { keys: "⇧ + ⌥ + 8", description: "Degree symbol (°)." },
+                    { keys: "⌥ + P", description: "Pi symbol (π)." },
+                    { keys: "⌥ + Hyphen (-)", description: "En dash (–)." },
+                    { keys: "⇧ + ⌥ + Hyphen (-)", description: "Em dash (—)." },
+                    { keys: "⌥ + Semicolon (;)", description: "Ellipsis (…)." },
+                    { keys: "⇧ + ⌥ + K", description: "Apple logo () (May not render everywhere)." },
+                ]
+            },
+            {
+                name: "Tips & Tricks",
+                icon: "✨",
+                color: "bg-lime-600",
+                shortcuts: [
+                    { keys: "⌘ + , (Comma)", description: "Open preferences for the front app." },
+                    { keys: "Hold ⌥ (Option) + Click Menu", description: "Often reveals alternative menu commands." },
+                    { keys: "Hold ⌥ (Option) + Drag File", description: "Creates a copy instead of moving." },
+                    { keys: "⌘ + Click Window Title", description: "Show path to current document/folder (in some apps)." },
+                    { keys: "Space bar (in Open/Save dialog)", description: "Quick Look selected file." },
+                    { keys: "Control + F2 / Fn + Control + F2", description: "Move focus to the menu bar." },
+                    { keys: "Control + F3 / Fn + Control + F3", description: "Move focus to the Dock." },
+                ]
+            },
+            { // NEW CATEGORY for Common Settings
+                name: "Common Settings",
+                icon: "⚙️",
+                color: "bg-rose-700",
+                shortcuts: [ // Using 'keys' to store the path/action, 'description' for what it does
+                    { keys: "System Settings > Display", description: "Adjust brightness, resolution, arrangement, Night Shift." },
+                    { keys: "System Settings > Sound", description: "Manage output/input devices, sound effects, volume." },
+                    { keys: "System Settings > Network (Wi-Fi / Ethernet)", description: "Configure Wi-Fi, Ethernet, VPN, and other network services." },
+                    { keys: "System Settings > Bluetooth", description: "Connect and manage Bluetooth devices." },
+                    { keys: "System Settings > Mouse / Trackpad", description: "Customize tracking speed, scrolling, gestures." },
+                    { keys: "System Settings > Keyboard", description: "Adjust key repeat, shortcuts, input sources, dictation." },
+                    { keys: "System Settings > Users & Groups", description: "Manage user accounts, login items, parental controls." },
+                    { keys: "System Settings > General > Time Machine", description: "Set up and manage backups." },
+                    { keys: "System Settings > General > Software Update", description: "Check for and install macOS updates." },
+                    { keys: "System Settings > Privacy & Security", description: "Manage Firewall, FileVault, Location Services, app permissions." },
+                    { keys: "System Settings > Notifications", description: "Customize app notifications and Do Not Disturb / Focus modes." },
+                    { keys: "System Settings > Siri & Spotlight", description: "Configure Siri settings and Spotlight search results." },
+                    { keys: "System Settings > Accessibility", description: "Access features for vision, hearing, motor, and cognitive needs." },
+                    { keys: "System Settings > Desktop & Dock", description: "Customize wallpaper, screen saver, Dock behavior, Hot Corners." },
+                    { keys: "Spotlight Search (⌘ + Space bar) then type setting name", description: "Quickly open specific System Settings panes (e.g., 'Display')." },
+                ]
+            },
+            {
+                name: "All Items (Comprehensive)", // Updated name for clarity
+                icon: "📚",
+                color: "bg-gray-600", 
+                type: "all_shortcuts_list" 
+            }
+        ];
+
+        // DOM Elements
+        const categoriesViewEl = document.getElementById('categoriesViewEl');
+        const mainPageTitleEl = document.getElementById('mainPageTitleEl');
+        const categoryGridEl = document.getElementById('categoryGridEl');
+        const globalShortcutSearchInputEl = document.getElementById('globalShortcutSearchInputEl');
+        const globalSearchResultsViewEl = document.getElementById('globalSearchResultsViewEl');
+        const noGlobalResultsMessageEl = document.getElementById('noGlobalResultsMessageEl');
+
+        const shortcutListViewEl = document.getElementById('shortcutListViewEl');
+        const categoryTitleEl = document.getElementById('categoryTitleEl');
+        const shortcutListEl = document.getElementById('shortcutListEl');
+        const categoryShortcutSearchInputEl = document.getElementById('categoryShortcutSearchInputEl');
+        const noCategoryResultsMessageEl = document.getElementById('noCategoryResultsMessageEl');
+        const backToCategoriesBtnEl = document.getElementById('backToCategoriesBtnEl');
+        
+        const allShortcutsViewEl = document.getElementById('allShortcutsViewEl');
+        const backToCategoriesFromAllBtnEl = document.getElementById('backToCategoriesFromAllBtnEl');
+        const allShortcutsListContainerEl = document.getElementById('allShortcutsListContainerEl');
+        const allShortcutsSearchInputEl = document.getElementById('allShortcutsSearchInputEl'); 
+        const noAllShortcutsResultsMessageEl = document.getElementById('noAllShortcutsResultsMessageEl'); 
+
+
+        // State
+        let currentCategoryIndex = -1;
+
+        // --- Display Functions ---
+        function displayCategoriesView(searchTerm = '') {
+            categoriesViewEl.classList.remove('hidden');
+            shortcutListViewEl.classList.add('hidden');
+            allShortcutsViewEl.classList.add('hidden'); 
+            
+            globalShortcutSearchInputEl.value = searchTerm;
+            const lowerSearchTerm = searchTerm.toLowerCase().trim();
+
+            if (lowerSearchTerm) {
+                categoryGridEl.classList.add('hidden'); 
+                globalSearchResultsViewEl.classList.remove('hidden');
+                globalSearchResultsViewEl.innerHTML = ''; 
+                mainPageTitleEl.textContent = `Search Results for "${searchTerm}"`;
+
+                let foundShortcuts = [];
+                shortcutCategories.forEach((category) => {
+                    if (category.shortcuts && category.shortcuts.length > 0) {
+                        category.shortcuts.forEach((shortcut) => {
+                            if (shortcut.keys.toLowerCase().includes(lowerSearchTerm) ||
+                                shortcut.description.toLowerCase().includes(lowerSearchTerm)) {
+                                foundShortcuts.push({ ...shortcut, categoryName: category.name });
+                            }
+                        });
+                    }
+                });
+
+                if (foundShortcuts.length === 0) {
+                    noGlobalResultsMessageEl.classList.remove('hidden');
+                } else {
+                    noGlobalResultsMessageEl.classList.add('hidden');
+                    foundShortcuts.forEach(data => {
+                        const card = createShortcutCard(data, true); 
+                        globalSearchResultsViewEl.appendChild(card);
+                    });
+                }
+            } else {
+                mainPageTitleEl.textContent = "Categories"; // Updated title
+                categoryGridEl.classList.remove('hidden');
+                globalSearchResultsViewEl.classList.add('hidden');
+                noGlobalResultsMessageEl.classList.add('hidden');
+                categoryGridEl.innerHTML = ''; 
+                shortcutCategories.forEach((category, index) => {
+                    const tile = document.createElement('div');
+                    tile.className = `category-tile p-6 text-white shadow-lg ${category.color || 'bg-gray-700'} hover:shadow-xl transform hover:scale-105`;
+                    tile.innerHTML = `
+                        <div class="text-5xl mb-4">${category.icon || '✨'}</div>
+                        <h3 class="text-xl font-semibold">${category.name}</h3>
+                    `;
+                    tile.addEventListener('click', () => {
+                        if (category.type === 'all_shortcuts_list') {
+                            displayAllShortcutsView(); 
+                        } else {
+                            displayShortcutListView(index);
+                        }
+                    });
+                    categoryGridEl.appendChild(tile);
+                });
+            }
+        }
+
+        function createShortcutCard(shortcutData, isGlobalSearchItem = false) {
+            const card = document.createElement('div');
+            card.className = 'shortcut-card flex flex-col sm:flex-row sm:items-center';
+            
+            const keysContainer = document.createElement('div');
+            keysContainer.className = 'shortcut-keys-container mb-2 sm:mb-0'; 
+
+            // Check if the "keys" string looks like a path or a key combination
+            const isPathLike = shortcutData.keys.includes(">"); // Simple check for path-like strings
+
+            if (isPathLike) {
+                const pathSpan = document.createElement('span');
+                pathSpan.className = 'setting-path'; // Use new class for paths
+                pathSpan.textContent = shortcutData.keys.trim();
+                keysContainer.appendChild(pathSpan);
+            } else {
+                shortcutData.keys.split(/\s*\+\s*|\s*then\s*|, then\s*|\s*\/\s*/).forEach((keyPart, index, arr) => {
+                    const keySpan = document.createElement('span');
+                    keySpan.className = 'shortcut-keys';
+                    keySpan.textContent = keyPart.trim();
+                    keysContainer.appendChild(keySpan);
+
+                    if (index < arr.length - 1) {
+                        const connectorSpan = document.createElement('span');
+                        connectorSpan.className = 'shortcut-connector'; 
+                        if (shortcutData.keys.includes(" then ") || shortcutData.keys.includes(", then ")) {
+                            connectorSpan.textContent = "then";
+                        } else if (shortcutData.keys.includes(" / ")) {
+                            connectorSpan.textContent = "or";
+                        } else {
+                            connectorSpan.textContent = "+";
+                        }
+                        keysContainer.appendChild(connectorSpan);
+                    }
+                });
+            }
+
+
+            const descriptionDiv = document.createElement('div');
+            descriptionDiv.className = 'sm:ml-4 flex-grow';
+            descriptionDiv.innerHTML = `<p class="shortcut-description">${shortcutData.description}</p>`;
+
+            card.appendChild(keysContainer);
+            card.appendChild(descriptionDiv);
+
+            if (isGlobalSearchItem && shortcutData.categoryName) {
+                const categoryInfoP = document.createElement('p');
+                const displayCategoryName = shortcutData.categoryName.replace(" (Comprehensive)", "").replace(" (All Items)", "");
+                categoryInfoP.className = 'text-xs text-sky-400 mt-1 sm:mt-0 sm:ml-auto';
+                categoryInfoP.textContent = `Category: ${displayCategoryName}`;
+                card.appendChild(categoryInfoP);
+            }
+            
+            return card;
+        }
+
+        function displayShortcutListView(categoryIndex, searchTerm = '') {
+            currentCategoryIndex = categoryIndex;
+            const category = shortcutCategories[categoryIndex];
+            
+            categoriesViewEl.classList.add('hidden');
+            shortcutListViewEl.classList.remove('hidden');
+            allShortcutsViewEl.classList.add('hidden');
+
+
+            categoryTitleEl.textContent = category.name.replace(" (Comprehensive)", ""); // Clean title
+            shortcutListEl.innerHTML = ''; 
+            categoryShortcutSearchInputEl.value = searchTerm; 
+
+            const lowerSearchTerm = searchTerm.toLowerCase().trim();
+            const shortcutsToFilter = category.shortcuts || [];
+            const filteredShortcuts = shortcutsToFilter.filter(shortcut => 
+                shortcut.keys.toLowerCase().includes(lowerSearchTerm) || 
+                shortcut.description.toLowerCase().includes(lowerSearchTerm)
+            );
+
+            if (filteredShortcuts.length === 0 && searchTerm) {
+                noCategoryResultsMessageEl.classList.remove('hidden');
+            } else {
+                noCategoryResultsMessageEl.classList.add('hidden');
+            }
+
+            filteredShortcuts.forEach((shortcut) => {
+                const card = createShortcutCard(shortcut);
+                shortcutListEl.appendChild(card);
+            });
+        }
+
+        function displayAllShortcutsView(searchTerm = '') { 
+            categoriesViewEl.classList.add('hidden');
+            shortcutListViewEl.classList.add('hidden');
+            allShortcutsViewEl.classList.remove('hidden');
+
+            allShortcutsSearchInputEl.value = searchTerm; 
+            const lowerSearchTerm = searchTerm.toLowerCase().trim();
+            allShortcutsListContainerEl.innerHTML = ''; 
+            noAllShortcutsResultsMessageEl.classList.add('hidden'); 
+
+            let totalMatches = 0;
+
+            shortcutCategories.forEach(category => {
+                if (category.type !== 'all_shortcuts_list' && category.shortcuts && category.shortcuts.length > 0) {
+                    
+                    const matchingShortcuts = lowerSearchTerm ? category.shortcuts.filter(shortcut =>
+                        shortcut.keys.toLowerCase().includes(lowerSearchTerm) ||
+                        shortcut.description.toLowerCase().includes(lowerSearchTerm)
+                    ) : category.shortcuts; 
+
+                    if (matchingShortcuts.length > 0) {
+                        const categoryHeading = document.createElement('h3');
+                        categoryHeading.className = 'text-2xl font-semibold text-sky-400 mt-8 mb-4 pt-4 border-t border-gray-700 first:mt-0 first:pt-0 first:border-t-0';
+                        categoryHeading.textContent = category.name.replace(" (Comprehensive)", ""); // Clean title
+                        allShortcutsListContainerEl.appendChild(categoryHeading);
+
+                        const categoryShortcutsDiv = document.createElement('div');
+                        categoryShortcutsDiv.className = 'space-y-3';
+
+                        matchingShortcuts.forEach(shortcut => {
+                            const card = createShortcutCard(shortcut, false); 
+                            categoryShortcutsDiv.appendChild(card);
+                            totalMatches++;
+                        });
+                        allShortcutsListContainerEl.appendChild(categoryShortcutsDiv);
+                    }
+                }
+            });
+
+            if (totalMatches === 0 && lowerSearchTerm) {
+                noAllShortcutsResultsMessageEl.classList.remove('hidden');
+            }
+        }
+
+
+        // --- Event Listeners ---
+        globalShortcutSearchInputEl.addEventListener('input', (e) => { 
+            displayCategoriesView(e.target.value);
+        });
+
+        backToCategoriesBtnEl.addEventListener('click', () => {
+            displayCategoriesView(globalShortcutSearchInputEl.value);
+        });
+        
+        backToCategoriesFromAllBtnEl.addEventListener('click', () => {
+            displayCategoriesView(globalShortcutSearchInputEl.value); 
+        });
+
+        allShortcutsSearchInputEl.addEventListener('input', (e) => {
+            displayAllShortcutsView(e.target.value);
+        });
+
+        categoryShortcutSearchInputEl.addEventListener('input', (e) => {
+            if (currentCategoryIndex !== -1) {
+                 const category = shortcutCategories[currentCategoryIndex];
+                 if (category && category.type !== 'all_shortcuts_list') {
+                    displayShortcutListView(currentCategoryIndex, e.target.value);
+                 }
+            }
+        });
+
+        // --- Footer Year ---
+        document.getElementById('currentYearEl').textContent = new Date().getFullYear();
+
+        // --- Initial Display ---
+        displayCategoriesView(); 
+
+    </script>
+</body>
+</html>
