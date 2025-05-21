@@ -193,7 +193,7 @@
         </svg>
     </button>
 
-    <main class="flex-1 p-6 md:p-10 overflow-y-auto bg-white">
+    <main class="flex-1 p-6 md:px-10 md:pt-10 md:pb-20 overflow-y-auto bg-white">
         <div id="contentArea">
             </div>
         <div id="navButtonsContainer" class="nav-buttons-container">
@@ -1268,7 +1268,19 @@ Focus on ideas that emphasize community and authenticity."</code></pre>
         });
 
         renderSidebar();
-        renderContent();
+        renderContent(); // This also calls updateNavButtons
+
+        // Add the Main Menu button
+        const navContainer = document.getElementById('navButtonsContainer');
+        if (navContainer) {
+            const mainMenuButton = document.createElement('a');
+            mainMenuButton.href = 'Index.html';
+            mainMenuButton.textContent = 'Back to Main Menu';
+            mainMenuButton.className = 'nav-button'; // Use existing styling
+            // To make it appear more distinct or centrally, we might need more sophisticated CSS or structure changes.
+            // For now, let's prepend it, so it appears on the left.
+            navContainer.prepend(mainMenuButton);
+        }
 
     </script>
 </body>
