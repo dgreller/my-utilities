@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Study Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            margin: 0;
+            background-color: #f0f2f5; /* Light gray background */
+            color: #333; /* Dark gray text for better readability */
+        }
+
+        #sidebar {
+            width: 280px; /* Increased width for better readability */
+            background-color: #ffffff; /* White sidebar */
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+            transition: width 0.3s ease;
+            border-right: 1px solid #e0e0e0; /* Subtle border */
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05); /* Soft shadow for depth */
+        }
+
+        #sidebar.collapsed {
+            width: 0;
+            padding: 20px 0; /* Adjust padding when collapsed */
+        }
+
+        #sidebar h1 {
+            font-size: 1.5em; /* Slightly larger for emphasis */
+            font-weight: 700; /* Bolder */
+            margin-bottom: 20px; /* More space below heading */
+            color: #1a202c; /* Darker heading color */
+        }
+
+        #contentArea {
+            flex-grow: 1;
+            padding: 30px; /* Increased padding */
+            overflow-y: auto;
+            height: 100vh;
+            background-color: #f9fafb; /* Off-white content area */
+        }
+
+        #contentArea h2 {
+            font-size: 2em; /* Larger for main section titles */
+            font-weight: 700;
+            color: #2c5282; /* Tailwind blue-700 */
+            margin-top: 0; /* Remove default top margin */
+            margin-bottom: 25px; /* More space below */
+            border-bottom: 2px solid #e2e8f0; /* Subtle underline */
+            padding-bottom: 10px; /* Space for underline */
+        }
+
+        #contentArea h3 {
+            font-size: 1.6em; /* Slightly larger for subsections */
+            font-weight: 600;
+            color: #2d3748; /* Tailwind gray-700 */
+            margin-top: 25px; /* More space above */
+            margin-bottom: 15px;
+        }
+
+        #contentArea h4 {
+            font-size: 1.3em; /* For smaller headings */
+            font-weight: 600;
+            color: #4a5568; /* Tailwind gray-600 */
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        #contentArea p {
+            line-height: 1.7; /* Increased line height for readability */
+            margin-bottom: 18px; /* More space between paragraphs */
+            color: #4a5568; /* Tailwind gray-600 for paragraph text */
+        }
+
+        #contentArea ul, #contentArea ol {
+            margin-left: 25px; /* Indent lists */
+            margin-bottom: 18px;
+            list-style-position: outside;
+        }
+        #contentArea ul {
+            list-style-type: disc;
+        }
+        #contentArea ol {
+            list-style-type: decimal;
+        }
+        #contentArea ul li, #contentArea ol li {
+            margin-bottom: 8px; /* Space between list items */
+        }
+
+        #contentArea code {
+            background-color: #edf2f7; /* Tailwind gray-200 */
+            color: #2d3748; /* Tailwind gray-700 */
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em; /* Slightly smaller for inline code */
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+        }
+
+        #contentArea pre {
+            background-color: #1a202c; /* Tailwind gray-900 for dark code blocks */
+            color: #e2e8f0; /* Tailwind gray-300 for text in code blocks */
+            padding: 20px; /* More padding */
+            border-radius: 8px; /* More rounded corners */
+            overflow-x: auto;
+            margin-bottom: 20px;
+            position: relative; /* For copy button positioning */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Subtle shadow */
+            font-size: 0.9em; /* Consistent code block font size */
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+        }
+        #contentArea pre code { /* Reset style for code within pre */
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+            border-radius: 0;
+            font-size: 1em; /* Normal font size relative to pre */
+            font-family: inherit; /* Inherit monospace font from pre */
+        }
+
+
+        .copy-code-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #4a5568; /* Tailwind gray-600 */
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: background-color 0.2s ease;
+        }
+
+        .copy-code-button:hover {
+            background-color: #2d3748; /* Tailwind gray-700 */
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 10px 15px; /* Increased padding */
+            color: #2d3748; /* Tailwind gray-700 */
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500; /* Medium weight */
+            transition: background-color 0.2s ease, color 0.2s ease;
+            margin-bottom: 5px; /* Space between links */
+        }
+
+        .sidebar-link:hover {
+            background-color: #e2e8f0; /* Tailwind gray-200 */
+            color: #1a202c; /* Tailwind gray-900 */
+        }
+
+        .sidebar-link.active {
+            background-color: #2c5282; /* Tailwind blue-700 */
+            color: white;
+            font-weight: 600; /* Bolder for active link */
+        }
+        .sidebar-sublink {
+            display: block;
+            padding: 8px 15px 8px 30px; /* Indented sublink */
+            color: #4a5568; /* Tailwind gray-600 */
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em; /* Slightly smaller */
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .sidebar-sublink:hover {
+            background-color: #edf2f7; /* Tailwind gray-100 */
+            color: #1a202c; /* Tailwind gray-900 */
+        }
+
+        .sidebar-sublink.active {
+            background-color: #3182ce; /* Tailwind blue-600 */
+            color: white;
+            font-weight: 500;
+        }
+
+
+        #menuToggle {
+            display: none; /* Hidden by default, shown in media query */
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1000; /* Ensure it's above other content */
+            background-color: #2c5282; /* Tailwind blue-700 */
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .nav-buttons-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px; /* More space above nav buttons */
+            padding-top: 20px; /* Space for border */
+            border-top: 1px solid #e0e0e0; /* Subtle border */
+        }
+
+        .nav-button {
+            background-color: #2c5282; /* Tailwind blue-700 */
+            color: white;
+            padding: 12px 25px; /* Larger padding */
+            border: none;
+            border-radius: 6px; /* More rounded */
+            cursor: pointer;
+            font-size: 1em; /* Standard font size */
+            font-weight: 500; /* Medium weight */
+            transition: background-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background-color: #2a4365; /* Tailwind blue-800 */
+        }
+
+        .nav-button:disabled {
+            background-color: #a0aec0; /* Tailwind gray-400 */
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: -300px; /* Start off-screen */
+            background-color: #2d3748; /* Tailwind gray-700 */
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: right 0.5s ease-in-out;
+            z-index: 2000; /* Ensure toast is on top */
+        }
+
+        .toast.show {
+            right: 20px; /* Slide in */
+        }
+
+        .toast.success {
+            background-color: #38a169; /* Tailwind green-600 */
+        }
+
+        .note-box {
+            background-color: #feebc8; /* Tailwind orange-200 for background */
+            border-left: 4px solid #dd6b20; /* Tailwind orange-600 for border */
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #704214; /* Darker orange for text, adjusted for contrast */
+        }
+        .note-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        #contentArea dl {
+            margin-bottom: 18px;
+        }
+        #contentArea dt {
+            font-weight: 600;
+            margin-top: 12px;
+            color: #2d3748; /* Tailwind gray-700 */
+        }
+        #contentArea dt code { /* Ensure code within dt matches dt style */
+             color: #2d3748;
+             background-color: #e2e8f0; /* Lighter gray for contrast */
+        }
+        #contentArea dd {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            color: #4a5568; /* Tailwind gray-600 */
+            line-height: 1.6;
+        }
+        #contentArea dd code {  /* Ensure code within dd matches dd style */
+            color: #2d3748; 
+            background-color: #edf2f7;
+        }
+
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            #sidebar {
+                width: 100%;
+                height: auto;
+                position: fixed; /* Changed to fixed for better mobile UX */
+                top: 0;
+                left: -100%; /* Start collapsed off-screen */
+                z-index: 1001; /* Ensure sidebar is above contentArea but below menuToggle */
+                transition: left 0.3s ease; /* Animate left property */
+                box-shadow: none; /* Remove shadow for mobile fixed view */
+                border-right: none; /* Remove border */
+            }
+            #sidebar.collapsed {
+                left: -100%; /* Ensure it's off-screen when collapsed */
+                width: 80%; /* Take up most of the screen when open */
+                padding: 20px; /* Restore padding */
+            }
+            #sidebar.open { /* New class to control open state on mobile */
+                left: 0;
+                width: 80%;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1); /* Add shadow when open */
+            }
+            #menuToggle {
+                display: block;
+            }
+            #contentArea {
+                padding: 20px;
+                padding-top: 70px; /* Add padding to account for fixed menu toggle */
+                height: calc(100vh - 70px); /* Adjust height */
+            }
+            #contentArea.sidebar-open-content { /* Class to push content when sidebar is open */
+                margin-left: 80%; /* Same width as sidebar */
+                overflow: hidden; /* Prevent scrolling of content when sidebar is open */
+            }
+
+            .nav-buttons-container {
+                flex-direction: column; /* Stack buttons on mobile */
+                align-items: stretch; /* Make buttons full width */
+            }
+            .nav-button {
+                width: 100%;
+                margin-bottom: 10px; /* Space between stacked buttons */
+            }
+            .nav-button:last-child {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <aside id="sidebar" class="bg-white p-6 h-screen overflow-y-auto shadow-lg">
+        <h1 class="text-2xl font-bold mb-6 text-gray-800">LLM Study Guide Sections</h1>
+        <nav id="sidebarNav">
+            <!-- Navigation links will be populated by JavaScript -->
+        </nav>
+    </aside>
+
+    <button id="menuToggle" class="p-2 bg-gray-800 text-white rounded-md md:hidden fixed top-4 left-4 z-50">
+        Menu
+    </button>
+
+    <main id="contentArea" class="flex-1 p-8 overflow-y-auto">
+        <!-- Content will be loaded here by JavaScript -->
+        <h2 id="mainTitle">Welcome to the LLM Study Guide!</h2>
+        <p>Select a topic from the sidebar to get started.</p>
+
+        <div id="navButtonsContainer" class="mt-8 pt-4 border-t border-gray-300 flex justify-between">
+            <button id="prevButton" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                Previous
+            </button>
+            <button id="nextButton" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                Next
+            </button>
+        </div>
+    </main>
+
+    <div id="toastNotification" class="fixed bottom-5 right-5 bg-gray-700 text-white py-3 px-5 rounded-lg shadow-md opacity-0 transition-opacity duration-300">
+        This is a toast notification!
+    </div>
+
+    <script>
+        const llmStudyData = [
+            { 
+                id: "introduction", 
+                title: "Introduction to LLMs", 
+                content: `
+                    <h2>Understanding Large Language Models (LLMs)</h2>
+                    <p>Large Language Models (LLMs) are a cutting-edge type of artificial intelligence (AI) model specifically designed to understand, generate, and interact with human language. They represent a significant leap forward in the field of Natural Language Processing (NLP).</p>
+                    
+                    <h3>How Do They Work? (A Brief Overview)</h3>
+                    <p>At their core, LLMs are sophisticated neural networks, typically with many billions of parameters. They are trained on vast amounts of text and code data. This extensive training allows them to learn intricate patterns, grammar, context, and even some level of common-sense reasoning from the data.</p>
+                    <p>The fundamental mechanism often involves predicting the next word in a sequence, given the preceding words. By repeatedly performing this task on a massive scale, LLMs develop a deep understanding of language structure and meaning.</p>
+                    
+                    <h3>Significance and Impact</h3>
+                    <p>LLMs are transforming various fields and creating entirely new capabilities. Their significance lies in their ability to:</p>
+                    <ul>
+                        <li>Generate human-quality text, from creative writing to technical documentation.</li>
+                        <li>Translate languages with increasing accuracy.</li>
+                        <li>Answer questions in a comprehensive and conversational manner.</li>
+                        <li>Summarize long documents and extract key information.</li>
+                        <li>Assist in code generation and debugging.</li>
+                        <li>Power chatbots and virtual assistants that are more engaging and helpful.</li>
+                    </ul>
+                    <p>The impact is already visible in areas like content creation, customer service, education, software development, and scientific research.</p>
+
+                    <div class="note-box">
+                        <p><strong>How This Study Guide is Structured:</strong></p>
+                        <p>This guide is designed to provide a comprehensive overview of LLMs, starting from the basics and progressing to more advanced topics. Each section builds upon the previous one, allowing you to develop a solid understanding of LLM technology, its applications, and its implications. Use the sidebar to navigate through the sections at your own pace.</p>
+                    </div>
+                ` 
+            },
+            { 
+                id: "key-concepts", 
+                title: "Key LLM Concepts", 
+                content: `
+                    <h2>Key LLM Concepts Explained</h2>
+                    <p>Understanding the terminology used with LLMs is crucial. Here are some of the fundamental concepts:</p>
+                    
+                    <h3>Core Components & Processes</h3>
+                    <ul>
+                        <li><strong><code>Tokens</code></strong>: These are the basic units of text that an LLM processes. A token can be a word, part of a word (subword), or even a single character. For example, the sentence "LLMs are powerful" might be tokenized into "LLMs", "are", "power", "ful".</li>
+                        <li><strong><code>Context Window</code></strong>: This refers to the maximum amount of text (measured in tokens) that a model can consider at any given time when processing input or generating output. A larger context window allows the model to maintain coherence over longer passages of text.</li>
+                        <li><strong><code>Parameters</code></strong>: These are the values that the model learns during its training phase. They are essentially the internal "knowledge" of the model, defining how it responds to input. LLMs can have billions or even trillions of parameters.</li>
+                    </ul>
+
+                    <h3>Training Concepts</h3>
+                    <ul>
+                        <li><strong><code>Pre-training</code></strong>: This is the initial and most resource-intensive training phase. The LLM is trained on a massive, diverse dataset of text and code (e.g., books, websites, articles). The goal is for the model to learn general language patterns, grammar, and world knowledge.</li>
+                        <li><strong><code>Fine-tuning</code></strong>: After pre-training, an LLM can be further trained on a smaller, more specific dataset tailored to a particular task or domain. This process, known as fine-tuning, adapts the general knowledge of the pre-trained model to excel at specific applications, like medical text analysis or customer support interactions.</li>
+                    </ul>
+
+                    <h3>Representing Meaning</h3>
+                    <ul>
+                        <li><strong><code>Embeddings</code></strong>: These are numerical representations (vectors) of tokens, words, or even entire sentences. Embeddings capture the semantic meaning and relationships between different pieces of text. For instance, words with similar meanings will have embeddings that are close together in the vector space. This allows LLMs to understand context and nuance.</li>
+                    </ul>
+                ` 
+            },
+            { 
+                id: "architectures", 
+                title: "LLM Architectures (Focus on Transformers)", 
+                content: `
+                    <h2>LLM Architectures: The Rise of the Transformer</h2>
+                    <p>While various neural network architectures have been used for language tasks, the <code>Transformer</code> architecture has become the de facto standard for state-of-the-art LLMs.</p>
+
+                    <h3>Early Architectures and Their Limitations</h3>
+                    <p>Before Transformers, architectures like:</p>
+                    <ul>
+                        <li><strong>Recurrent Neural Networks (<code>RNNs</code>)</strong></li>
+                        <li><strong>Long Short-Term Memory networks (<code>LSTMs</code>)</strong></li>
+                    </ul>
+                    <p>were common for sequence processing tasks. However, they faced challenges with handling long-range dependencies in text (i.e., understanding relationships between words far apart in a sentence or paragraph) and often struggled with parallel processing, making training on very large datasets slow.</p>
+
+                    <h3>The Transformer Architecture</h3>
+                    <p>Introduced in the paper "Attention Is All You Need" by Google researchers in 2017, the Transformer architecture revolutionized NLP. Its key innovation is the <code>Self-Attention Mechanism</code>.</p>
+                    
+                    <h4>Key Components of Transformers:</h4>
+                    <ul>
+                        <li><strong><code>Self-Attention Mechanism</code></strong>: This is the heart of the Transformer. It allows the model to weigh the importance of different tokens within an input sequence when processing each token. For example, when processing the word "it" in a sentence, self-attention helps the model determine which preceding noun "it" refers to. It does this by calculating attention scores between all pairs of tokens in the sequence.</li>
+                        <li><strong><code>Encoders</code></strong>: In the original Transformer architecture (often used for tasks like machine translation), the encoder processes the input sequence and builds a rich representation of it. It typically consists of multiple layers, each containing a self-attention mechanism and a feed-forward neural network.</li>
+                        <li><strong><code>Decoders</code></strong>: The decoder takes the encoder's representation (and the previously generated output tokens) to generate the output sequence, token by token. Decoders also use self-attention and attention mechanisms that look at the encoder's output. Many modern LLMs used for generation tasks are "decoder-only" architectures, meaning they are essentially a stack of decoder layers.</li>
+                    </ul>
+
+                    <h3>Why Transformers are Effective for LLMs</h3>
+                    <ul>
+                        <li><strong>Handling Long-Range Dependencies</strong>: Self-attention allows direct connections between any two tokens in a sequence, regardless of their distance, making it easier to capture long-range context.</li>
+                        <li><strong>Parallel Processing</strong>: Computations within Transformer layers, especially the self-attention mechanism, can be heavily parallelized, leading to significantly faster training times on modern hardware (like GPUs and TPUs) compared to RNNs/LSTMs.</li>
+                        <li><strong>Scalability</strong>: The architecture scales well with increasing model size (more parameters) and dataset size, which has been a key factor in the development of very large and powerful LLMs.</li>
+                    </ul>
+                ` 
+            },
+            { 
+                id: "training-llms", 
+                title: "Training LLMs", 
+                content: `
+                    <h2>Training Large Language Models</h2>
+                    <p>Training LLMs is a complex, multi-stage process that requires vast amounts of data and computational power. It generally involves pre-training and then fine-tuning.</p>
+
+                    <h3>Data Collection and Preparation</h3>
+                    <p>The foundation of any powerful LLM is its training data.</p>
+                    <ul>
+                        <li><strong>Importance of Large, Diverse Datasets</strong>: LLMs learn from the data they are fed. To achieve broad knowledge and understanding, this data must be extensive (often petabytes) and diverse, encompassing books, articles, websites, code, and more.</li>
+                        <li><strong>Cleaning and Pre-processing</strong>: Raw data is often messy. It needs to be cleaned to remove irrelevant content (like HTML tags, ads), de-duplicated, and filtered for quality. Pre-processing also involves tokenization, where text is broken down into smaller units (tokens) that the model can understand.</li>
+                    </ul>
+
+                    <h3>Pre-training Objectives</h3>
+                    <p>During pre-training, the model learns general language understanding and generation capabilities. Common objectives include:</p>
+                    <ul>
+                        <li><strong><code>Masked Language Modeling (MLM)</code></strong>: In this approach (famously used by models like BERT), some percentage of tokens in the input text are randomly "masked" (e.g., replaced with a special <code>[MASK]</code> token). The model's goal is to predict the original masked tokens based on the surrounding unmasked tokens. This helps the model learn bidirectional context.</li>
+                        <li><strong><code>Next Token Prediction (NTP)</code></strong>: This objective is common in autoregressive models like GPT. The model is given a sequence of tokens and its goal is to predict the very next token in the sequence. By training on this task repeatedly, the model learns to generate coherent and contextually relevant text.</li>
+                    </ul>
+
+                    <h3>Fine-tuning Strategies</h3>
+                    <p>After pre-training, LLMs can be adapted for specific tasks or to behave in desired ways through fine-tuning.</p>
+                    <ul>
+                        <li><strong>Full Fine-tuning vs. <code>Parameter-Efficient Fine-Tuning (PEFT)</code></strong>:
+                            <ul>
+                                <li><strong>Full fine-tuning</strong> involves updating all of the model's parameters using a smaller, task-specific dataset. While effective, it can be computationally expensive for very large models.</li>
+                                <li><strong>PEFT</strong> methods aim to reduce the computational cost by only updating a small subset of the model's parameters, or by adding a small number of new parameters. Techniques like <code>LoRA (Low-Rank Adaptation)</code> are examples of PEFT, allowing for more efficient adaptation of large models.</li>
+                            </ul>
+                        </li>
+                        <li><strong><code>Instruction Tuning</code></strong>: This involves fine-tuning the LLM on a dataset composed of instructions and examples of desired outputs for those instructions. This helps the model become better at following user prompts and performing a wide variety of tasks based on textual commands.</li>
+                        <li><strong><code>Reinforcement Learning from Human Feedback (RLHF)</code></strong>: This is a multi-step process to better align LLMs with human preferences and make them more helpful and harmless.
+                            <ol>
+                                <li>A reward model is trained based on human preferences: humans rank different model outputs, and this data is used to train a model that predicts how good an output is.</li>
+                                <li>The LLM (policy) is then fine-tuned using reinforcement learning, where the reward model provides feedback to guide the LLM towards generating outputs that humans would prefer.</li>
+                            </ol>
+                        </li>
+                    </ul>
+
+                    <h3>Computational Resources</h3>
+                    <p>Training state-of-the-art LLMs requires significant computational resources, often involving hundreds or thousands of specialized processors like <code>GPUs (Graphics Processing Units)</code> or <code>TPUs (Tensor Processing Units)</code> running for weeks or months. This makes LLM training a costly endeavor, both financially and environmentally.</p>
+                ` 
+            },
+            { 
+                id: "capabilities", 
+                title: "LLM Capabilities", 
+                content: `
+                    <h2>What Can LLMs Do? Exploring Their Capabilities</h2>
+                    <p>LLMs have demonstrated a remarkable range of capabilities, making them versatile tools for various applications. Here are some key examples:</p>
+                    <ul>
+                        <li>
+                            <strong><code>Text Generation</code></strong>: LLMs excel at producing human-like text in various styles and formats.
+                            <em>Example: Generating blog posts, poems, marketing copy, or even fictional stories.</em>
+                        </li>
+                        <li>
+                            <strong><code>Summarization</code></strong>: They can condense long documents or articles into shorter summaries, extracting key information.
+                            <em>Example: Summarizing a lengthy research paper into a concise abstract.</em>
+                        </li>
+                        <li>
+                            <strong><code>Translation</code></strong>: LLMs can translate text between different languages with increasing accuracy.
+                            <em>Example: Translating a news article from French to English.</em>
+                        </li>
+                        <li>
+                            <strong><code>Question Answering</code></strong>: They can answer questions based on provided context (like a document) or draw upon their general knowledge learned during training.
+                            <em>Example: Answering factual questions like "What is the capital of Australia?" or extracting answers from a legal document.</em>
+                        </li>
+                        <li>
+                            <strong><code>Code Generation</code></strong>: LLMs can write code snippets in various programming languages based on natural language descriptions.
+                            <em>Example: Generating a Python function to calculate a Fibonacci sequence based on the request "Write a Python function for Fibonacci."</em>
+                        </li>
+                        <li>
+                            <strong><code>Classification and Categorization</code></strong>: They can categorize text into predefined classes.
+                            <em>Example: Performing sentiment analysis (positive, negative, neutral) on customer reviews, or tagging news articles by topic (sports, politics, technology).</em>
+                        </li>
+                        <li>
+                            <strong><code>Conversation and Dialogue</code></strong>: LLMs power sophisticated chatbots and virtual assistants that can engage in coherent and contextually relevant conversations.
+                            <em>Example: Customer service bots, personal assistants that can schedule meetings or answer queries.</em>
+                        </li>
+                        <li>
+                            <strong><code>Reasoning</code></strong>: While still an area of active research and development, some LLMs show emergent capabilities in performing simple reasoning tasks, like solving logic puzzles or basic math problems. However, their reasoning is not always reliable and can be brittle.
+                            <em>Example: "If John is taller than Mary, and Mary is taller than Sue, who is the tallest?" LLMs can often answer this correctly.</em>
+                        </li>
+                    </ul>
+                    <p>The versatility of LLMs stems from their deep understanding of language patterns and their ability to apply this understanding to new, unseen tasks.</p>
+                ` 
+            },
+            { 
+                id: "limitations", 
+                title: "Limitations of LLMs", 
+                content: `
+                    <h2>Understanding the Limitations of Large Language Models</h2>
+                    <p>Despite their impressive capabilities, LLMs have several significant limitations that users and developers must be aware of:</p>
+                    <ul>
+                        <li><strong><code>Hallucinations / Fabrication</code></strong>: LLMs can generate text that is plausible-sounding and grammatically correct but factually incorrect, nonsensical, or entirely made up. This is often referred to as "hallucination."</li>
+                        <li><strong><code>Bias</code></strong>: LLMs learn from the data they are trained on. If this data contains societal biases (e.g., related to gender, race, or culture), the model can inherit and perpetuate these biases in its outputs.</li>
+                        <li><strong><code>Lack of Real-World Grounding / Common Sense</code></strong>: LLMs understand language patterns but lack true real-world experience or genuine common sense. Their "understanding" is based on statistical relationships in text, not on embodied experience or a deep causal model of the world.</li>
+                        <li><strong><code>Knowledge Cutoff</code></strong>: An LLM's knowledge is frozen at the point its training data ends. It will not be aware of events or information that have occurred since its last training update unless specifically augmented with newer data or tools.</li>
+                        <li><strong><code>Sensitivity to Input Phrasing</code></strong>: Minor changes in the way a prompt is phrased can sometimes lead to vastly different outputs from the LLM. This makes prompt engineering crucial but also highlights the model's occasional brittleness.</li>
+                        <li><strong><code>Computational Cost and Energy Consumption</code></strong>: Training and running very large LLMs require substantial computational power and consume significant amounts of energy, raising environmental concerns.</li>
+                        <li><strong><code>Difficulty with Complex Reasoning or Multi-Step Tasks</code></strong>: While LLMs can perform some reasoning tasks, they often struggle with complex, multi-step reasoning, intricate logical deductions, or tasks requiring sustained planning.</li>
+                        <li><strong><code>Verbosity or Repetitiveness</code></strong>: LLMs can sometimes be overly verbose, providing longer answers than necessary, or they might get stuck in repetitive loops, generating similar phrases or sentences multiple times.</li>
+                    </ul>
+                    <div class="note-box">
+                        <p><strong>Critical Evaluation is Key:</strong></p>
+                        <p>It is crucial to approach LLM-generated content with a critical mindset. Always verify important information, be aware of potential biases, and do not assume that LLM outputs are inherently truthful or fair. Responsible use of LLMs involves understanding their limitations and implementing safeguards.</p>
+                    </div>
+                ` 
+            },
+            { 
+                id: "ethical-considerations", 
+                title: "Ethical Considerations & Responsible AI", 
+                content: `
+                    <h2>Ethical Considerations & Responsible AI in LLMs</h2>
+                    <p>The power of LLMs comes with significant ethical responsibilities. It's crucial to consider the societal impact and strive for responsible development and deployment.</p>
+
+                    <h3>Key Ethical Challenges</h3>
+                    <ul>
+                        <li><strong><code>Bias and Fairness</code></strong>: LLMs are trained on vast datasets which can contain societal biases related to race, gender, age, religion, and more. These biases can be learned by the model and reflected in its outputs, leading to unfair, discriminatory, or stereotypical responses. Mitigation strategies involve careful dataset curation, bias detection techniques, and algorithmic adjustments.</li>
+                        <li><strong><code>Misinformation and Disinformation</code></strong>: LLMs can generate highly convincing but false or misleading content (fake news, propaganda). Their ability to produce text at scale makes them potential tools for spreading disinformation, which can have serious societal consequences.</li>
+                        <li><strong><code>Job Displacement</code></strong>: The automation capabilities of LLMs may lead to job displacement in industries that rely heavily on content creation, customer service, and data analysis. This necessitates discussions about retraining, reskilling, and the future of work.</li>
+                        <li><strong><code>Environmental Impact</code></strong>: Training very large LLMs requires substantial computational resources, leading to significant energy consumption and a considerable carbon footprint. Research into more energy-efficient training methods and model architectures is ongoing.</li>
+                        <li><strong><code>Accountability and Transparency (Explainability)</code></strong>: Determining who is responsible when an LLM produces harmful or incorrect output can be challenging. Furthermore, the complex "black box" nature of many LLMs makes it difficult to understand exactly why they generate a particular response (lack of explainability), hindering debugging and trust.</li>
+                        <li><strong><code>Intellectual Property and Copyright</code></strong>: LLMs are trained on vast amounts of text and code, some of which may be copyrighted. Questions arise regarding the fair use of this data and the copyright status of content generated by LLMs.</li>
+                        <li><strong><code>Privacy Concerns</code></strong>: LLMs can inadvertently memorize and reveal sensitive information present in their training data. If users input personal or confidential data into an LLM, there are risks regarding how that data is stored, used, and protected.</li>
+                    </ul>
+
+                    <h3>Principles of Responsible AI Development</h3>
+                    <p>To address these challenges, the AI community emphasizes several principles for responsible AI development and deployment:</p>
+                    <ul>
+                        <li><strong>Fairness</strong>: Striving to ensure that AI systems do not perpetuate unjust biases and treat all individuals and groups equitably.</li>
+                        <li><strong>Transparency</strong>: Making the workings of AI systems understandable to the extent possible, including their data sources, design choices, and limitations.</li>
+                        <li><strong>Accountability</strong>: Establishing clear lines of responsibility for the outcomes of AI systems.</li>
+                        <li><strong>Security</strong>: Protecting AI systems from malicious attacks or misuse that could lead to harm.</li>
+                        <li><strong>Privacy</strong>: Ensuring that AI systems respect user privacy and handle personal data responsibly.</li>
+                        <li><strong>Human Oversight</strong>: Maintaining meaningful human control and intervention points in AI systems, especially for critical decisions.</li>
+                    </ul>
+                    <p>Developing and deploying LLMs responsibly requires a multi-faceted approach involving researchers, developers, policymakers, and users.</p>
+                ` 
+            },
+            { 
+                id: "prompt-engineering", 
+                title: "Prompt Engineering Basics", 
+                content: `
+                    <h2>Prompt Engineering Basics: Guiding LLMs to Better Outputs</h2>
+                    <p><code>Prompt engineering</code> is the art and science of crafting effective inputs (prompts) to guide Large Language Models (LLMs) towards generating desired outputs. The quality and nature of the prompt significantly influence the quality, relevance, and accuracy of the LLM's response.</p>
+
+                    <h3>Why is Prompt Engineering Important?</h3>
+                    <p>LLMs are powerful, but they are not mind-readers. A well-crafted prompt acts as a clear instruction set, helping the model understand the task, context, constraints, and desired output format. Without effective prompting, LLMs might produce generic, irrelevant, or even incorrect responses.</p>
+
+                    <h3>Core Principles of Prompt Engineering</h3>
+                    <ul>
+                        <li><strong><code>Clarity and Specificity</code></strong>: Prompts should be clear, unambiguous, and as specific as possible about the desired outcome. Avoid vague language.
+                            <em>Example (less effective): "Write about dogs."</em>
+                            <em>Example (more effective): "Write a 500-word blog post about the benefits of daily walks for golden retrievers, focusing on physical health and mental stimulation."</em></li>
+                        <li><strong><code>Providing Context</code></strong>: Including relevant background information or context in the prompt helps the LLM generate more informed and accurate responses.
+                            <em>Example: When asking for a summary of a text, provide the text itself.</em></li>
+                        <li><strong><code>Role Prompting</code></strong> (Assigning a Persona): Instructing the LLM to adopt a specific persona or role can significantly shape its tone, style, and expertise.
+                            <em>Example: "You are an expert historian specializing in ancient Rome. Explain the reasons for the fall of the Western Roman Empire."</em></li>
+                        <li><strong><code>Defining Output Format</code></strong>: Clearly specify the desired format for the output, such as a list, JSON, a table, a specific number of paragraphs, or a particular writing style.
+                            <em>Example: "Provide a summary of the key findings as a bulleted list."</em></li>
+                    </ul>
+
+                    <h3>Basic Prompting Techniques</h3>
+                    <ul>
+                        <li><strong><code>Zero-Shot Prompting</code></strong>: This involves directly instructing the LLM to perform a task without providing any prior examples. The LLM relies on its pre-trained knowledge to understand and execute the task.
+                            <em>Example: "Translate the following English sentence to French: 'Hello, how are you?'"</em></li>
+                        <li><strong><code>Few-Shot Prompting</code></strong>: This technique involves providing the LLM with a few examples (typically 1 to 5) of the task you want it to perform. These examples help the model understand the pattern and desired output format.
+                            <em>Example:
+                            "English: sea otter<br>French: loutre de mer<br><br>
+                            English: peppermint<br>French: menthe poivrée<br><br>
+                            English: cheese<br>French:" (The LLM is expected to complete "fromage")</em></li>
+                        <li><strong><code>Chain-of-Thought (CoT) Prompting</code></strong> (Brief Mention): For more complex reasoning tasks, CoT prompting encourages the LLM to generate a series of intermediate reasoning steps before arriving at a final answer. This often involves adding phrases like "Let's think step by step" to the prompt or providing few-shot examples that include the reasoning steps.
+                            <em>Example: "Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls. Each can has 3 tennis balls. How many tennis balls does he have now? A: Roger started with 5 balls. He bought 2 cans, and each can has 3 balls, so that's 2 * 3 = 6 more balls. In total, he has 5 + 6 = 11 balls. The answer is 11."</em></li>
+                    </ul>
+
+                    <div class="note-box">
+                        <p><strong>Want to Dive Deeper into Prompting?</strong></p>
+                        <p>For a more comprehensive guide to prompt engineering, including advanced techniques and practical examples, check out our <a href="PromptingPrimer.html" class="text-blue-600 hover:underline">Prompting Primer application</a>.</p>
+                    </div>
+                ` 
+            },
+            { 
+                id: "applications", 
+                title: "LLM Applications & Use Cases", 
+                content: `
+                    <h2>LLM Applications & Use Cases Across Industries</h2>
+                    <p>Large Language Models are being adopted across a multitude of fields due to their versatility in processing and generating human-like text. Here are some prominent applications:</p>
+                    <ul>
+                        <li><strong><code>Customer Service</code></strong>:
+                            <em>Examples: Powering intelligent chatbots and virtual assistants to answer customer queries 24/7, provide support, and route complex issues to human agents. Automating responses to frequently asked questions.</em>
+                        </li>
+                        <li><strong><code>Healthcare</code></strong>:
+                            <em>Examples: Assisting with medical documentation (e.g., summarizing doctor-patient conversations), aiding in medical research by analyzing vast amounts of literature, and potentially supporting diagnostic processes (though human oversight is critical).</em>
+                        </li>
+                        <li><strong><code>Education</code></strong>:
+                            <em>Examples: Offering personalized learning experiences, acting as AI tutors for students, generating educational content like quizzes or summaries, and assisting educators with administrative tasks.</em>
+                        </li>
+                        <li><strong><code>Content Creation and Marketing</code></strong>:
+                            <em>Examples: Generating drafts for articles, blog posts, scripts, marketing copy, email campaigns, and social media updates. Assisting with brainstorming and content ideation.</em>
+                        </li>
+                        <li><strong><code>Software Development</code></strong>:
+                            <em>Examples: Generating code snippets in various programming languages (e.g., GitHub Copilot), assisting with debugging by suggesting fixes, writing documentation for code, and explaining code functionality.</em>
+                        </li>
+                        <li><strong><code>Finance</code></strong>:
+                            <em>Examples: Assisting in fraud detection by analyzing transaction patterns, providing customer support through chatbots, summarizing financial reports, and potentially aiding in market analysis (with human validation).</em>
+                        </li>
+                        <li><strong><code>Legal</code></strong>:
+                            <em>Examples: Assisting in legal document review and summarization (e.g., e-discovery), supporting legal research by quickly finding relevant case law or statutes. However, use in legal advice requires extreme caution and human lawyer oversight.</em>
+                        </li>
+                        <li><strong><code>Scientific Research</code></strong>:
+                            <em>Examples: Helping researchers analyze and summarize large volumes of scientific papers, generate hypotheses based on existing literature, and assist in writing research grant proposals.</em>
+                        </li>
+                    </ul>
+                    <p>The application of LLMs is rapidly expanding as the technology matures and developers find new and innovative ways to leverage their capabilities. It's important to note that in many critical domains, LLMs are best used as tools to augment human expertise rather than replace it entirely.</p>
+                ` 
+            },
+            { 
+                id: "future-of-llms", 
+                title: "The Future of LLMs", 
+                content: `
+                    <h2>The Future of Large Language Models: What's Next?</h2>
+                    <p>The field of Large Language Models is evolving at an astonishing pace. While current models are already incredibly powerful, research and development continue to push the boundaries. Here are some key areas and potential advancements to watch for:</p>
+                    <ul>
+                        <li><strong><code>Improved Reasoning and Planning Capabilities</code></strong>: Enhancing LLMs' ability to perform complex reasoning, solve multi-step problems, and develop coherent plans. This involves moving beyond pattern recognition to more robust logical inference.</li>
+                        <li><strong><code>Multimodality</code></strong>: Future LLMs will increasingly handle and integrate information from multiple modalities beyond text, such as images, audio, and video. This will allow for richer interactions and a deeper understanding of the world. 
+                            <em>Example: An LLM that can analyze a video, describe its content, and answer questions about it.</em></li>
+                        <li><strong><code>Personalization and Customization</code></strong>: Development of LLMs that can be more easily and deeply tailored to individual users' needs, preferences, and specific domains or tasks. This could involve more efficient fine-tuning or new adaptation techniques.</li>
+                        <li><strong><code>Increased Efficiency and Reduced Computational Cost</code></strong>: Significant research is focused on making LLMs smaller, faster, and less computationally expensive to train and run. This will democratize access and reduce their environmental impact. Techniques like model quantization, pruning, and more efficient architectures are key.</li>
+                        <li><strong><code>Better Handling of Truthfulness and Factual Accuracy</code></strong>: Improving the reliability of LLMs and reducing their tendency to "hallucinate" or generate incorrect information. This includes developing better mechanisms for fact-checking and grounding models in reliable knowledge sources.</li>
+                        <li><strong><code>Integration with External Tools and APIs</code></strong>: Enabling LLMs to interact seamlessly with external tools, databases, and APIs to access real-time information, perform actions, and overcome their inherent knowledge cutoffs. Concepts like <code>Retrieval Augmented Generation (RAG)</code> and agent-like behaviors (where LLMs can use tools to achieve goals) are central to this.</li>
+                        <li><strong><code>Advances in Responsible AI and Ethical Safeguards</code></strong>: Continued development of techniques to identify and mitigate biases, ensure fairness, enhance transparency, and provide stronger safeguards against malicious use. This is crucial for building trust and ensuring LLMs are used beneficially.</li>
+                    </ul>
+                    <p>The pace of innovation in LLM technology is rapid and shows no signs of slowing down. We can expect LLMs to become even more integrated into various aspects of our lives, driving further transformation across industries and creating new possibilities we can only begin to imagine.</p>
+                ` 
+            },
+            { 
+                id: "glossary", 
+                title: "Glossary of LLM Terms", 
+                content: `
+                    <h2>Glossary of LLM Terms</h2>
+                    <p>A quick reference for common terms used in the context of Large Language Models.</p>
+                    <dl>
+                        <dt><code>LLM (Large Language Model)</code></dt>
+                        <dd>An AI model, typically a neural network with billions of parameters, trained on vast amounts of text data to understand, generate, and interact with human language.</dd>
+
+                        <dt><code>Transformer</code></dt>
+                        <dd>A neural network architecture that has become the standard for LLMs, known for its use of self-attention mechanisms to process sequences of data, like text.</dd>
+                        
+                        <dt><code>Token</code></dt>
+                        <dd>The basic unit of text processed by an LLM, which can be a word, subword, or character.</dd>
+
+                        <dt><code>Context Window</code></dt>
+                        <dd>The maximum amount of text (number of tokens) that an LLM can consider at one time when processing input or generating output.</dd>
+
+                        <dt><code>Parameter</code></dt>
+                        <dd>A value within the model that is learned during training. Parameters define the model's "knowledge" and how it responds to input.</dd>
+
+                        <dt><code>Pre-training</code></dt>
+                        <dd>The initial, resource-intensive training phase where an LLM learns general language patterns from a massive, diverse dataset.</dd>
+
+                        <dt><code>Fine-tuning</code></dt>
+                        <dd>The process of further training a pre-trained LLM on a smaller, task-specific dataset to adapt its capabilities for a particular application.</dd>
+
+                        <dt><code>Embedding</code></dt>
+                        <dd>A numerical vector representation of a token, word, or sentence that captures its semantic meaning and relationships with other text units.</dd>
+
+                        <dt><code>Self-Attention Mechanism</code></dt>
+                        <dd>A key component of the Transformer architecture that allows the model to weigh the importance of different tokens in an input sequence when processing each token.</dd>
+
+                        <dt><code>Encoder</code></dt>
+                        <dd>Part of the original Transformer architecture responsible for processing the input sequence and building a contextual representation of it.</dd>
+
+                        <dt><code>Decoder</code></dt>
+                        <dd>Part of the Transformer architecture that generates the output sequence, token by token, often based on the encoder's output and previously generated tokens. Many modern LLMs are "decoder-only."</dd>
+                        
+                        <dt><code>Hallucination</code></dt>
+                        <dd>The tendency of LLMs to generate text that is plausible-sounding but factually incorrect, nonsensical, or not based on the provided input data.</dd>
+
+                        <dt><code>RLHF (Reinforcement Learning from Human Feedback)</code></dt>
+                        <dd>A training technique used to align LLMs with human preferences by using human feedback to train a reward model, which then guides the LLM's behavior.</dd>
+
+                        <dt><code>Prompt Engineering</code></dt>
+                        <dd>The art and science of crafting effective input prompts to guide LLMs toward generating desired outputs.</dd>
+
+                        <dt><code>Zero-Shot Prompting</code></dt>
+                        <dd>Instructing an LLM to perform a task without providing any prior examples in the prompt.</dd>
+
+                        <dt><code>Few-Shot Prompting</code></dt>
+                        <dd>Providing an LLM with a small number of examples of the desired task within the prompt to guide its output.</dd>
+
+                        <dt><code>Chain-of-Thought (CoT) Prompting</code></dt>
+                        <dd>A prompting technique that encourages an LLM to generate a series of intermediate reasoning steps before arriving at a final answer, often improving performance on complex tasks.</dd>
+
+                        <dt><code>PEFT (Parameter-Efficient Fine-Tuning)</code></dt>
+                        <dd>A set of techniques that allows for fine-tuning large pre-trained models by updating only a small subset of their parameters, reducing computational costs.</dd>
+
+                        <dt><code>RAG (Retrieval Augmented Generation)</code></dt>
+                        <dd>An approach where an LLM's knowledge is augmented by retrieving relevant information from an external knowledge base before generating a response. This helps keep information current and reduces hallucinations.</dd>
+
+                        <dt><code>Neural Network</code></dt>
+                        <dd>A type of machine learning model inspired by the structure of the human brain, composed of interconnected nodes or "neurons" organized in layers.</dd>
+
+                        <dt><code>Deep Learning</code></dt>
+                        <dd>A subfield of machine learning that uses neural networks with many layers (deep neural networks) to learn complex patterns from large amounts of data.</dd>
+
+                        <dt><code>Natural Language Processing (NLP)</code></dt>
+                        <dd>A field of artificial intelligence focused on the interaction between computers and human language, including tasks like understanding, interpreting, and generating text.</dd>
+
+                        <dt><code>Generative AI</code></dt>
+                        <dd>A class of AI models, including LLMs, that can create new content, such as text, images, audio, or video, based on the patterns and information they have learned from training data.</dd>
+                        
+                        <dt><code>Temperature</code></dt>
+                        <dd>A parameter used during text generation that controls the randomness of the LLM's output. Higher temperatures (e.g., 0.8) result in more random and creative output, while lower temperatures (e.g., 0.2) make the output more deterministic and focused.</dd>
+                    </dl>
+                ` 
+            },
+            { 
+                id: "further-resources", 
+                title: "Further Resources & Learning", 
+                content: `
+                    <h2>Further Resources & Learning for LLMs</h2>
+                    <p>The world of Large Language Models is vast and constantly evolving. Here are some pointers to help you continue your learning journey:</p>
+                    <ul>
+                        <li><strong>Official Documentation from LLM Providers</strong>: Companies like OpenAI, Google AI, Anthropic, Cohere, AI21 Labs, and others provide extensive documentation, API references, and usage guides for their models. These are invaluable for practical application.</li>
+                        <li><strong>Dedicated Prompt Engineering Guides</strong>: Websites like "PromptingGuide.ai" (or similar resources you find) offer in-depth tutorials and examples on how to craft effective prompts for various tasks.</li>
+                        <li><strong>Research Papers on <code>arXiv.org</code></strong>: For the latest breakthroughs and technical details, arXiv is the go-to preprint server for research papers in AI, NLP, and machine learning. Many seminal LLM papers are published here first.</li>
+                        <li><strong>Online Communities & Forums</strong>: Platforms like Reddit (e.g., r/LargeLanguageModels, r/LocalLLaMA), Discord servers, and other specialized forums are great places to ask questions, share knowledge, and stay updated with community discussions.</li>
+                        <li><strong>Blogs and Articles from AI Experts and Research Labs</strong>: Many AI researchers, engineers, and research institutions maintain blogs where they share insights, explain complex topics, and announce new developments.</li>
+                        <li><strong>Online Courses</strong>: Platforms like Coursera, Udemy, edX, and specialized providers like DeepLearning.AI offer courses on AI, machine learning, NLP, and specifically on LLMs, often taught by leading experts.</li>
+                    </ul>
+                    <div class="note-box">
+                        <p><strong>Experiment, Experiment, Experiment!</strong></p>
+                        <p>While reading and studying are important, one of the best ways to truly understand LLMs is to experiment with them directly. Use available APIs, try out open-source models, build small projects, and critically analyze the outputs. Hands-on experience will solidify your understanding and spark new ideas.</p>
+                    </div>
+                ` 
+            }
+        ];
+
+        const sidebar = document.getElementById('sidebar');
+        const sidebarNav = document.getElementById('sidebarNav');
+        const contentArea = document.getElementById('contentArea');
+        const mainTitle = document.getElementById('mainTitle');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const menuToggle = document.getElementById('menuToggle');
+        const toastNotification = document.getElementById('toastNotification');
+
+        let currentSectionIndex = 0;
+
+        function renderSidebar() {
+            if (!sidebarNav) return;
+            sidebarNav.innerHTML = ''; // Clear existing links
+
+            llmStudyData.forEach((section, index) => {
+                const link = document.createElement('a');
+                link.href = `#${section.id}`;
+                link.textContent = section.title;
+                link.classList.add('sidebar-link');
+                if (index === currentSectionIndex) {
+                    link.classList.add('active');
+                }
+
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    currentSectionIndex = index;
+                    renderContent();
+                    renderSidebar(); // Re-render to update active link
+                    if (window.innerWidth < 768 && sidebar && !sidebar.classList.contains('collapsed')) {
+                        sidebar.classList.remove('open'); // Use 'open' for mobile control
+                        contentArea.classList.remove('sidebar-open-content');
+                    }
+                });
+                sidebarNav.appendChild(link);
+            });
+        }
+
+        function renderContent() {
+            if (!contentArea || !llmStudyData[currentSectionIndex]) return;
+
+            const section = llmStudyData[currentSectionIndex];
+            
+            // If content is empty, show a placeholder message.
+            // The mainTitle element will be used for section titles.
+            if (mainTitle) {
+                mainTitle.textContent = section.title;
+            }
+            
+            if (section.content.trim() === "") {
+                contentArea.innerHTML = `<h2 id="mainTitle">${section.title}</h2><p>Content for this section is coming soon!</p>`;
+            } else {
+                // Ensure the title is part of the content if not handled by a separate mainTitle element
+                // Or, if mainTitle is used, then contentArea should not repeat it.
+                // For now, assuming mainTitle handles the title display above the content.
+                contentArea.innerHTML = `<h2 id="mainTitle">${section.title}</h2>${section.content}`;
+            }
+            
+            // Add copy to clipboard functionality for code blocks
+            const codeBlocks = contentArea.querySelectorAll('pre');
+            codeBlocks.forEach(block => {
+                const existingButton = block.querySelector('.copy-code-button');
+                if (existingButton) block.removeChild(existingButton); // Remove if re-rendering
+
+                const button = document.createElement('button');
+                button.textContent = 'Copy Code';
+                button.classList.add('copy-code-button');
+                button.addEventListener('click', () => {
+                    const codeToCopy = block.querySelector('code');
+                    if (codeToCopy) {
+                        navigator.clipboard.writeText(codeToCopy.innerText)
+                            .then(() => showToast('Code copied to clipboard!', 'success'))
+                            .catch(err => {
+                                console.error('Failed to copy code: ', err);
+                                showToast('Failed to copy code.', 'error');
+                            });
+                    }
+                });
+                block.style.position = 'relative'; // Ensure button is positioned correctly
+                block.appendChild(button);
+            });
+
+            updateNavButtons();
+            contentArea.scrollTop = 0; // Scroll to top of content
+        }
+
+        function updateNavButtons() {
+            if (!prevButton || !nextButton) return;
+
+            prevButton.disabled = currentSectionIndex === 0;
+            prevButton.onclick = prevButton.disabled ? null : () => navigateSection(-1);
+
+            nextButton.disabled = currentSectionIndex === llmStudyData.length - 1;
+            nextButton.onclick = nextButton.disabled ? null : () => navigateSection(1);
+        }
+
+        function navigateSection(direction) {
+            const newIndex = currentSectionIndex + direction;
+            if (newIndex >= 0 && newIndex < llmStudyData.length) {
+                currentSectionIndex = newIndex;
+                renderContent();
+                renderSidebar();
+            }
+        }
+
+        function showToast(message, type = 'info', duration = 3000) {
+            if (!toastNotification) return;
+            toastNotification.textContent = message;
+            toastNotification.className = 'toast show'; // Reset classes and add 'show'
+            
+            if (type === 'success') {
+                toastNotification.classList.add('success');
+            } else if (type === 'error') {
+                // Add an error class if you have specific styling for errors
+                // For now, using default toast style for error or a specific one if defined
+                toastNotification.classList.add('bg-red-600'); // Example error style
+            }
+
+
+            setTimeout(() => {
+                toastNotification.classList.remove('show');
+            }, duration);
+        }
+
+        // Menu Toggle for mobile
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent click from bubbling to document
+                sidebar.classList.toggle('open'); // Use 'open' for mobile
+                contentArea.classList.toggle('sidebar-open-content');
+                // Instead of 'collapsed', we use 'open' to show/hide on mobile
+                // sidebar.classList.toggle('collapsed'); // This might conflict with desktop logic if not handled carefully
+            });
+        }
+
+        // Responsive sidebar: collapse on outside click (for mobile)
+        document.addEventListener('click', (event) => {
+            if (!sidebar || !menuToggle) return;
+            const isClickInsideSidebar = sidebar.contains(event.target);
+            const isClickOnMenuToggle = menuToggle.contains(event.target);
+
+            if (window.innerWidth < 768 && sidebar.classList.contains('open')) {
+                if (!isClickInsideSidebar && !isClickOnMenuToggle) {
+                    sidebar.classList.remove('open');
+                    contentArea.classList.remove('sidebar-open-content');
+                }
+            }
+        });
+        
+        // Adjust sidebar behavior on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                // Desktop view: remove mobile-specific classes, ensure sidebar is visible if not explicitly collapsed
+                sidebar.classList.remove('open'); // Remove 'open' used for mobile
+                contentArea.classList.remove('sidebar-open-content');
+                // sidebar.classList.remove('collapsed'); // Optional: decide if sidebar should be always open on desktop
+            } else {
+                // Mobile view: ensure sidebar is not in 'open' state unless toggled
+                 if (!sidebar.classList.contains('open')) {
+                    // sidebar.classList.add('collapsed'); // Collapse if not open
+                 }
+            }
+        });
+
+
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if elements exist before trying to use them
+            if (sidebarNav && contentArea && prevButton && nextButton) {
+                renderSidebar();
+                renderContent(); // Render initial content
+            } else {
+                console.error("One or more critical UI elements are missing from the DOM.");
+            }
+        });
+
+    </script>
+</body>
+</html>
