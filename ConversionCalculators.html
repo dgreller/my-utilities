@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Unit Converter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Tailwind gray-900 */
+            color: #d1d5db; /* Tailwind gray-300 */
+        }
+        .category-tile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            aspect-ratio: 1 / 1;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+            border-radius: 0.75rem; /* rounded-xl */
+            background-color: #1f2937; /* Tailwind gray-800 */
+            border: 1px solid #374151; /* Tailwind gray-700 */
+        }
+        .category-tile:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+            border-color: #0ea5e9; /* Tailwind sky-500 */
+        }
+        .conversion-list-item { /* For old style converters */
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            cursor: pointer;
+            border-radius: 0.5rem; /* rounded-lg */
+            background-color: #1f2937; /* Tailwind gray-800 */
+            border: 1px solid #374151; /* Tailwind gray-700 */
+        }
+        .conversion-list-item:hover {
+            background-color: #374151; /* Tailwind gray-700 */
+            border-color: #0ea5e9; /* Tailwind sky-500 */
+        }
+        .nav-button {
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .nav-button:hover {
+            transform: translateY(-1px);
+        }
+        .nav-button:active {
+            transform: translateY(0px);
+        }
+        .app-input { /* General input styling */
+            padding: 0.75rem 1rem;
+            border: 1px solid #4b5563; /* Tailwind gray-600 */
+            border-radius: 0.375rem; /* rounded-md */
+            background-color: #1f2937; /* Tailwind gray-800 */
+            color: #d1d5db; /* Tailwind gray-300 */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+        .app-input::placeholder {
+            color: #6b7280; /* Tailwind gray-500 */
+        }
+        .app-input:focus {
+            border-color: #0ea5e9; /* Tailwind sky-500 */
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+            outline: none;
+        }
+        .header-glow {
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.5), 0 0 16px rgba(56, 189, 248, 0.3);
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 0.3;
+            filter: invert(1);
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        /* Basic Calculator Styles */
+        .basic-calculator-display {
+            background-color: #030712; /* Tailwind gray-950 */
+            color: #e5e7eb; /* Tailwind gray-200 */
+            border: 1px solid #374151; /* Tailwind gray-700 */
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 0.75rem 1rem;
+            font-size: 2.25rem; /* text-4xl */
+            text-align: right;
+            width: 100%;
+            margin-bottom: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .basic-calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem; /* gap-3 */
+        }
+        .calc-button {
+            background-color: #374151; /* Tailwind gray-700 */
+            color: #e5e7eb; /* Tailwind gray-200 */
+            border: 1px solid #4b5563; /* Tailwind gray-600 */
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 1.25rem 0.5rem; /* py-5 px-2 */
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 500; /* font-medium */
+            transition: background-color 0.15s ease, transform 0.1s ease;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+        }
+        .calc-button:hover {
+            background-color: #4b5563; /* Tailwind gray-600 */
+            transform: translateY(-1px);
+        }
+        .calc-button:active {
+            background-color: #525f72;
+            transform: translateY(0px);
+        }
+        .calc-button.operator { background-color: #0e7490; }
+        .calc-button.operator:hover { background-color: #0891b2; }
+        .calc-button.equals { background-color: #059669; grid-column: span 2; }
+        .calc-button.equals:hover { background-color: #047857; }
+        .calc-button.clear { background-color: #be123c; }
+        .calc-button.clear:hover { background-color: #9f1239; }
+
+        /* Flexible Converter Styles (shared) */
+        .flexible-unit-row { 
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem; /* mb-3 */
+            gap: 0.75rem; /* gap-3 */
+        }
+        .flexible-unit-label { 
+            flex-basis: 40%; 
+            text-align: right;
+            font-size: 0.875rem; /* text-sm */
+            color: #9ca3af; /* Tailwind gray-400 */
+        }
+        .flexible-unit-input { 
+            flex-grow: 1;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-gray-950 shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-5">
+            <h1 class="text-4xl font-bold tracking-tight text-sky-400 header-glow text-center sm:text-left">Universal Tool Hub</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8">
+
+        <div id="categoriesView">
+            <h2 class="text-3xl font-semibold text-sky-300 mb-8 text-center sm:text-left">Tools & Converters</h2>
+            <div id="categoryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                </div>
+        </div>
+
+        <div id="conversionListView" class="hidden"> 
+            <button id="backToCategoriesBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <h2 id="conversionListTitle" class="text-3xl font-bold text-sky-300 mb-6 text-center sm:text-left"></h2>
+            <div id="conversionList" class="space-y-4">
+                </div>
+        </div>
+
+        <div id="unitConverterCalculatorView" class="hidden"> 
+            <button id="backToConversionListBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Conversions</button>
+            <h2 id="unitCalculatorTitle" class="text-3xl font-bold text-sky-300 mb-6"></h2>
+            <div class="bg-gray-800 p-6 rounded-lg shadow-xl border border-gray-700">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div>
+                        <label id="fromUnitLabel" for="fromValue" class="block text-lg font-medium text-sky-200 mb-2"></label>
+                        <input type="number" id="fromValue" class="app-input w-full text-xl" placeholder="Enter value">
+                    </div>
+                    <div>
+                        <label id="toUnitLabel" for="toValue" class="block text-lg font-medium text-sky-200 mb-2"></label>
+                        <input type="number" id="toValue" class="app-input w-full text-xl bg-gray-700 cursor-not-allowed" readonly placeholder="Result">
+                    </div>
+                </div>
+                <p id="conversionFormulaText" class="mt-4 text-sm text-gray-400"></p>
+                <p id="inputError" class="mt-3 text-red-400 text-sm hidden">Please enter a valid number.</p>
+            </div>
+        </div>
+
+        <div id="basicCalculatorView" class="hidden">
+            <button id="backToCategoriesFromCalcBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <h2 class="text-3xl font-bold text-sky-300 mb-6 text-center sm:text-left">Basic Calculator</h2>
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-xl border border-gray-700 max-w-sm mx-auto">
+                <input type="text" id="basicCalcDisplay" class="basic-calculator-display" value="0" readonly>
+                <div id="basicCalculatorButtons" class="basic-calculator-grid">
+                    </div>
+            </div>
+        </div>
+
+        <div id="flexibleCookingConverterView" class="hidden">
+            <button id="backToCategoriesFromCookingBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <h2 class="text-3xl font-bold text-sky-300 mb-6 text-center sm:text-left">Cooking Volume Converter</h2>
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-xl border border-gray-700 max-w-md mx-auto">
+                <div id="cookingUnitsContainer" class="space-y-3">
+                    </div>
+                <button id="clearCookingInputsBtn" class="nav-button mt-6 w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-2 px-4">Clear All</button>
+                <p id="cookingInputError" class="mt-3 text-red-400 text-sm hidden text-center">Please enter a valid number.</p>
+            </div>
+        </div>
+        
+        <div id="flexibleLengthConverterView" class="hidden">
+            <button id="backToCategoriesFromLengthBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <h2 class="text-3xl font-bold text-sky-300 mb-6 text-center sm:text-left">Length Converter</h2>
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-xl border border-gray-700 max-w-md mx-auto">
+                <div id="lengthUnitsContainer" class="space-y-3">
+                    </div>
+                <button id="clearLengthInputsBtn" class="nav-button mt-6 w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-2 px-4">Clear All</button>
+                <p id="lengthInputError" class="mt-3 text-red-400 text-sm hidden text-center">Please enter a valid number.</p>
+            </div>
+        </div>
+
+        <div id="flexibleGeneralVolumeConverterView" class="hidden">
+            <button id="backToCategoriesFromGeneralVolumeBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <h2 class="text-3xl font-bold text-sky-300 mb-6 text-center sm:text-left">General Volume Converter</h2>
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-xl border border-gray-700 max-w-md mx-auto">
+                <div id="generalVolumeUnitsContainer" class="space-y-3">
+                    </div>
+                <button id="clearGeneralVolumeInputsBtn" class="nav-button mt-6 w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-2 px-4">Clear All</button>
+                <p id="generalVolumeInputError" class="mt-3 text-red-400 text-sm hidden text-center">Please enter a valid number.</p>
+            </div>
+        </div>
+
+        <div id="flexibleTemperatureConverterView" class="hidden">
+            <button id="backToCategoriesFromTemperatureBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <h2 class="text-3xl font-bold text-sky-300 mb-6 text-center sm:text-left">Temperature Converter</h2>
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-xl border border-gray-700 max-w-md mx-auto">
+                <div id="temperatureUnitsContainer" class="space-y-3">
+                    </div>
+                <button id="clearTemperatureInputsBtn" class="nav-button mt-6 w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-2 px-4">Clear All</button>
+                <p id="temperatureInputError" class="mt-3 text-red-400 text-sm hidden text-center">Please enter a valid number.</p>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer class="text-center py-10 text-gray-500 text-sm mt-16 border-t border-gray-700">
+        <p>&copy; <span id="currentYear"></span> Universal Tool Hub. Your everyday utilities.</p>
+    </footer>
+
+    <script>
+        // --- Data for Converters and Tools ---
+        const toolCategories = [
+            {
+                name: "Temperature", // REMOVED (Flexible)
+                icon: "🌡️",
+                color: "bg-red-500",
+                type: "flexible_temperature_converter", 
+                baseUnit: "c", 
+                units: [
+                    { id: "c", name: "Celsius (°C)", toBase: (val) => val, fromBase: (baseVal) => baseVal, precision: 2 },
+                    { id: "f", name: "Fahrenheit (°F)", toBase: (val) => (val - 32) * 5/9, fromBase: (baseVal) => (baseVal * 9/5) + 32, precision: 2 },
+                ]
+            },
+            {
+                name: "Length", // REMOVED (Flexible)
+                icon: "📏",
+                color: "bg-blue-500",
+                type: "flexible_length_converter", 
+                baseUnit: "m", 
+                units: [
+                    { id: "mm", name: "Millimeter", toBase: (val) => val / 1000, fromBase: (baseVal) => baseVal * 1000, precision: 1 },
+                    { id: "cm", name: "Centimeter", toBase: (val) => val / 100, fromBase: (baseVal) => baseVal * 100, precision: 2 },
+                    { id: "m", name: "Meter", toBase: (val) => val, fromBase: (baseVal) => baseVal, precision: 4 },
+                    { id: "km", name: "Kilometer", toBase: (val) => val * 1000, fromBase: (baseVal) => baseVal / 1000, precision: 6 },
+                    { id: "in", name: "Inch", toBase: (val) => val * 0.0254, fromBase: (baseVal) => baseVal / 0.0254, precision: 4 },
+                    { id: "ft", name: "Foot", toBase: (val) => val * 0.3048, fromBase: (baseVal) => baseVal / 0.3048, precision: 4 },
+                    { id: "yd", name: "Yard", toBase: (val) => val * 0.9144, fromBase: (baseVal) => baseVal / 0.9144, precision: 4 },
+                    { id: "mi", name: "Mile", toBase: (val) => val * 1609.34, fromBase: (baseVal) => baseVal / 1609.34, precision: 6 },
+                ]
+            },
+            {
+                name: "Weight/Mass",
+                icon: "⚖️",
+                color: "bg-green-500",
+                type: "converter_category", 
+                converters: [ // This one still uses the old one-to-one style
+                    { title: "Kilograms to Pounds", fromUnit: "Kilograms (kg)", toUnit: "Pounds (lb)", convert: (kg) => kg * 2.20462, formulaText: "lb = kg × 2.20462" },
+                    { title: "Pounds to Kilograms", fromUnit: "Pounds (lb)", toUnit: "Kilograms (kg)", convert: (lb) => lb / 2.20462, formulaText: "kg = lb / 2.20462" },
+                ]
+            },
+            {
+                name: "General Volume", // REMOVED (Flexible)
+                icon: "🧊", 
+                color: "bg-purple-500",
+                type: "flexible_general_volume_converter", 
+                baseUnit: "l", 
+                units: [ 
+                    { id: "ml", name: "Milliliter", toBase: (val) => val / 1000, fromBase: (baseVal) => baseVal * 1000, precision: 1 },
+                    { id: "l", name: "Liter", toBase: (val) => val, fromBase: (baseVal) => baseVal, precision: 3 },
+                    { id: "cm3", name: "Cubic Centimeter (cm³)", toBase: (val) => val / 1000, fromBase: (baseVal) => baseVal * 1000, precision: 1 },
+                    { id: "m3", name: "Cubic Meter (m³)", toBase: (val) => val * 1000, fromBase: (baseVal) => baseVal / 1000, precision: 6 },
+                    { id: "usfloz", name: "Fluid Ounce (US)", toBase: (val) => val * 0.0295735, fromBase: (baseVal) => baseVal / 0.0295735, precision: 3 },
+                    { id: "uspt", name: "Pint (US)", toBase: (val) => val * 0.473176, fromBase: (baseVal) => baseVal / 0.473176, precision: 3 },
+                    { id: "usqt", name: "Quart (US)", toBase: (val) => val * 0.946353, fromBase: (baseVal) => baseVal / 0.946353, precision: 3 },
+                    { id: "usgal", name: "Gallon (US)", toBase: (val) => val * 3.78541, fromBase: (baseVal) => baseVal / 3.78541, precision: 3 },
+                    { id: "incubic", name: "Cubic Inch (in³)", toBase: (val) => val * 0.0163871, fromBase: (baseVal) => baseVal / 0.0163871, precision: 4 },
+                    { id: "ftcubic", name: "Cubic Foot (ft³)", toBase: (val) => val * 28.3168, fromBase: (baseVal) => baseVal / 28.3168, precision: 4 },
+                    { id: "ydcubic", name: "Cubic Yard (yd³)", toBase: (val) => val * 764.555, fromBase: (baseVal) => baseVal / 764.555, precision: 4 },
+                ]
+            },
+            {
+                name: "Cooking Volume", // REMOVED (Flexible)
+                icon: "🍳",
+                color: "bg-amber-500",
+                type: "flexible_cooking_converter",
+                baseUnit: "mL",
+                units: [
+                    { id: "tsp", name: "Teaspoon (US)", toBase: (val) => val * 4.92892, fromBase: (baseVal) => baseVal / 4.92892, precision: 3 },
+                    { id: "tbsp", name: "Tablespoon (US)", toBase: (val) => val * 14.7868, fromBase: (baseVal) => baseVal / 14.7868, precision: 3 },
+                    { id: "floz", name: "Fluid Ounce (US)", toBase: (val) => val * 29.5735, fromBase: (baseVal) => baseVal / 29.5735, precision: 3 },
+                    { id: "cup", name: "Cup (US)", toBase: (val) => val * 236.588, fromBase: (baseVal) => baseVal / 236.588, precision: 3 },
+                    { id: "pt", name: "Pint (US)", toBase: (val) => val * 473.176, fromBase: (baseVal) => baseVal / 473.176, precision: 3 },
+                    { id: "qt", name: "Quart (US)", toBase: (val) => val * 946.353, fromBase: (baseVal) => baseVal / 946.353, precision: 3 },
+                    { id: "gal", name: "Gallon (US)", toBase: (val) => val * 3785.41, fromBase: (baseVal) => baseVal / 3785.41, precision: 3 },
+                    { id: "ml", name: "Milliliter", toBase: (val) => val, fromBase: (baseVal) => baseVal, precision: 2 },
+                    { id: "l", name: "Liter", toBase: (val) => val * 1000, fromBase: (baseVal) => baseVal / 1000, precision: 3 },
+                ]
+            },
+            {
+                name: "Basic Calculator",
+                icon: "🧮",
+                color: "bg-cyan-500",
+                type: "basic_calculator"
+            }
+        ];
+
+        // --- DOM Elements ---
+        const categoriesViewEl = document.getElementById('categoriesView');
+        const categoryGridEl = document.getElementById('categoryGrid');
+
+        const conversionListViewEl = document.getElementById('conversionListView');
+        const backToCategoriesBtnEl = document.getElementById('backToCategoriesBtn');
+        const conversionListTitleEl = document.getElementById('conversionListTitle');
+        const conversionListInnerEl = document.getElementById('conversionList');
+
+        const unitConverterCalculatorViewEl = document.getElementById('unitConverterCalculatorView');
+        const backToConversionListBtnEl = document.getElementById('backToConversionListBtn');
+        const unitCalculatorTitleEl = document.getElementById('unitCalculatorTitle');
+        const fromUnitLabelEl = document.getElementById('fromUnitLabel');
+        let fromValueInputEl = document.getElementById('fromValue');
+        const toUnitLabelEl = document.getElementById('toUnitLabel');
+        const toValueInputEl = document.getElementById('toValue');
+        const conversionFormulaTextInnerEl = document.getElementById('conversionFormulaText');
+        const inputErrorInnerEl = document.getElementById('inputError');
+
+        const basicCalculatorViewEl = document.getElementById('basicCalculatorView');
+        const backToCategoriesFromCalcBtnEl = document.getElementById('backToCategoriesFromCalcBtn');
+        const basicCalcDisplayEl = document.getElementById('basicCalcDisplay');
+        const basicCalculatorButtonsEl = document.getElementById('basicCalculatorButtons');
+
+        const flexibleCookingConverterViewEl = document.getElementById('flexibleCookingConverterView');
+        const backToCategoriesFromCookingBtnEl = document.getElementById('backToCategoriesFromCookingBtn');
+        const cookingUnitsContainerEl = document.getElementById('cookingUnitsContainer');
+        let clearCookingInputsBtnEl = document.getElementById('clearCookingInputsBtn');
+        const cookingInputErrorEl = document.getElementById('cookingInputError');
+
+        const flexibleLengthConverterViewEl = document.getElementById('flexibleLengthConverterView');
+        const backToCategoriesFromLengthBtnEl = document.getElementById('backToCategoriesFromLengthBtn');
+        const lengthUnitsContainerEl = document.getElementById('lengthUnitsContainer');
+        let clearLengthInputsBtnEl = document.getElementById('clearLengthInputsBtn');
+        const lengthInputErrorEl = document.getElementById('lengthInputError');
+
+        const flexibleGeneralVolumeConverterViewEl = document.getElementById('flexibleGeneralVolumeConverterView');
+        const backToCategoriesFromGeneralVolumeBtnEl = document.getElementById('backToCategoriesFromGeneralVolumeBtn');
+        const generalVolumeUnitsContainerEl = document.getElementById('generalVolumeUnitsContainer');
+        let clearGeneralVolumeInputsBtnEl = document.getElementById('clearGeneralVolumeInputsBtn');
+        const generalVolumeInputErrorEl = document.getElementById('generalVolumeInputError');
+
+        const flexibleTemperatureConverterViewEl = document.getElementById('flexibleTemperatureConverterView');
+        const backToCategoriesFromTemperatureBtnEl = document.getElementById('backToCategoriesFromTemperatureBtn');
+        const temperatureUnitsContainerEl = document.getElementById('temperatureUnitsContainer');
+        let clearTemperatureInputsBtnEl = document.getElementById('clearTemperatureInputsBtn');
+        const temperatureInputErrorEl = document.getElementById('temperatureInputError');
+
+
+        // --- State Variables ---
+        let currentCategoryIndex = -1;
+        let currentCalcInput = '0';
+        let previousCalcInput = '';
+        let calcOperation = null;
+        let shouldResetDisplay = false;
+
+        // --- Display Functions ---
+        function displayCategoriesView() {
+            categoriesViewEl.classList.remove('hidden');
+            conversionListViewEl.classList.add('hidden');
+            unitConverterCalculatorViewEl.classList.add('hidden');
+            basicCalculatorViewEl.classList.add('hidden');
+            flexibleCookingConverterViewEl.classList.add('hidden');
+            flexibleLengthConverterViewEl.classList.add('hidden'); 
+            flexibleGeneralVolumeConverterViewEl.classList.add('hidden'); 
+            flexibleTemperatureConverterViewEl.classList.add('hidden'); 
+
+
+            categoryGridEl.innerHTML = '';
+            toolCategories.forEach((category, index) => {
+                const tile = document.createElement('div');
+                tile.className = `category-tile p-6 text-white shadow-lg hover:shadow-xl ${category.color || 'bg-gray-700'} transform hover:scale-105`;
+                tile.innerHTML = `
+                    <div class="text-5xl mb-4">${category.icon || '✨'}</div>
+                    <h3 class="text-xl font-semibold">${category.name}</h3>
+                `;
+                tile.addEventListener('click', () => {
+                    currentCategoryIndex = index; 
+                    if (category.type === "converter_category") {
+                        displayConversionListView(index);
+                    } else if (category.type === "basic_calculator") {
+                        displayBasicCalculatorView();
+                    } else if (category.type === "flexible_cooking_converter") {
+                        displayFlexibleCookingConverterView();
+                    } else if (category.type === "flexible_length_converter") { 
+                        displayFlexibleLengthConverterView();
+                    } else if (category.type === "flexible_general_volume_converter") { 
+                        displayFlexibleGeneralVolumeConverterView();
+                    } else if (category.type === "flexible_temperature_converter") { 
+                        displayFlexibleTemperatureConverterView();
+                    }
+                });
+                categoryGridEl.appendChild(tile);
+            });
+        }
+
+        function displayConversionListView(categoryIdx) {
+            const category = toolCategories[categoryIdx];
+            categoriesViewEl.classList.add('hidden');
+            conversionListViewEl.classList.remove('hidden');
+            unitConverterCalculatorViewEl.classList.add('hidden');
+            basicCalculatorViewEl.classList.add('hidden');
+            flexibleCookingConverterViewEl.classList.add('hidden');
+            flexibleLengthConverterViewEl.classList.add('hidden');
+            flexibleGeneralVolumeConverterViewEl.classList.add('hidden');
+            flexibleTemperatureConverterViewEl.classList.add('hidden');
+
+
+            conversionListTitleEl.textContent = category.name + " Conversions"; // Use original name for list view
+            conversionListInnerEl.innerHTML = '';
+            category.converters.forEach((converter, converterIdx) => {
+                const listItem = document.createElement('div');
+                listItem.className = 'conversion-list-item p-4 shadow hover:shadow-md';
+                listItem.innerHTML = `<h4 class="text-lg font-medium text-sky-300">${converter.title}</h4>`;
+                listItem.addEventListener('click', () => {
+                    displayUnitConverterCalculatorView(categoryIdx, converterIdx);
+                });
+                conversionListInnerEl.appendChild(listItem);
+            });
+        }
+
+        function displayUnitConverterCalculatorView(categoryIdx, converterIdx) {
+            const converter = toolCategories[categoryIdx].converters[converterIdx];
+            categoriesViewEl.classList.add('hidden');
+            conversionListViewEl.classList.add('hidden');
+            unitConverterCalculatorViewEl.classList.remove('hidden');
+            basicCalculatorViewEl.classList.add('hidden');
+            flexibleCookingConverterViewEl.classList.add('hidden');
+            flexibleLengthConverterViewEl.classList.add('hidden');
+            flexibleGeneralVolumeConverterViewEl.classList.add('hidden');
+            flexibleTemperatureConverterViewEl.classList.add('hidden');
+
+
+            unitCalculatorTitleEl.textContent = converter.title;
+            fromUnitLabelEl.textContent = `From: ${converter.fromUnit}`;
+            toUnitLabelEl.textContent = `To: ${converter.toUnit}`;
+            fromValueInputEl.value = '';
+            toValueInputEl.value = '';
+            fromValueInputEl.placeholder = `Enter ${converter.fromUnit.split(' ')[0]}`;
+            conversionFormulaTextInnerEl.textContent = converter.formulaText ? `Formula: ${converter.formulaText}` : '';
+            inputErrorInnerEl.classList.add('hidden');
+
+            const newFromValueInput = fromValueInputEl.cloneNode(true);
+            fromValueInputEl.parentNode.replaceChild(newFromValueInput, fromValueInputEl);
+            fromValueInputEl = newFromValueInput;
+
+            fromValueInputEl.addEventListener('input', () => {
+                const fromValue = parseFloat(fromValueInputEl.value);
+                if (isNaN(fromValue) && fromValueInputEl.value.trim() !== '' && fromValueInputEl.value.trim() !== '-') {
+                    toValueInputEl.value = '';
+                    inputErrorInnerEl.classList.remove('hidden'); return;
+                } else if (fromValueInputEl.value.trim() === '' || fromValueInputEl.value.trim() === '-') {
+                    toValueInputEl.value = ''; inputErrorInnerEl.classList.add('hidden'); return;
+                }
+                inputErrorInnerEl.classList.add('hidden');
+                const result = converter.convert(fromValue);
+                if (Number.isInteger(result)) {
+                    toValueInputEl.value = result;
+                } else {
+                    const absResult = Math.abs(result);
+                    if (absResult > 0.000001 && absResult < 1000000) {
+                        toValueInputEl.value = parseFloat(result.toFixed(absResult < 0.1 ? 5 : 4));
+                    } else if (absResult === 0) {
+                        toValueInputEl.value = 0;
+                    } else {
+                        toValueInputEl.value = result.toPrecision(6); 
+                    }
+                }
+            });
+        }
+
+        function setupFlexibleConverter(viewEl, containerEl, errorEl, clearBtnId, categoryType) {
+            categoriesViewEl.classList.add('hidden');
+            conversionListViewEl.classList.add('hidden');
+            unitConverterCalculatorViewEl.classList.add('hidden');
+            basicCalculatorViewEl.classList.add('hidden');
+            
+            if (viewEl !== flexibleCookingConverterViewEl) flexibleCookingConverterViewEl.classList.add('hidden');
+            if (viewEl !== flexibleLengthConverterViewEl) flexibleLengthConverterViewEl.classList.add('hidden');
+            if (viewEl !== flexibleGeneralVolumeConverterViewEl) flexibleGeneralVolumeConverterViewEl.classList.add('hidden');
+            if (viewEl !== flexibleTemperatureConverterViewEl) flexibleTemperatureConverterViewEl.classList.add('hidden');
+            
+            viewEl.classList.remove('hidden');
+
+            const categoryData = toolCategories.find(cat => cat.type === categoryType);
+            if (!categoryData) return;
+
+            // Update the title of the flexible converter view
+            const titleEl = viewEl.querySelector('h2'); // Assumes h2 is the title element
+            if (titleEl) {
+                titleEl.textContent = categoryData.name.replace(" (Flexible)", "") + " Converter";
+            }
+
+
+            containerEl.innerHTML = ''; 
+            errorEl.classList.add('hidden');
+
+            categoryData.units.forEach(unit => {
+                const row = document.createElement('div');
+                row.className = 'flexible-unit-row';
+
+                const label = document.createElement('label');
+                label.className = 'flexible-unit-label';
+                label.textContent = unit.name + ':';
+                label.htmlFor = `${categoryType}-input-${unit.id}`;
+
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.id = `${categoryType}-input-${unit.id}`;
+                input.className = 'app-input flexible-unit-input w-full';
+                input.placeholder = `Enter ${unit.name.split(' ')[0]}`;
+                input.dataset.unitId = unit.id;
+                input.dataset.categoryType = categoryType;
+
+                input.addEventListener('input', handleFlexibleInputChange);
+                
+                row.appendChild(label);
+                row.appendChild(input);
+                containerEl.appendChild(row);
+            });
+            
+            const currentClearBtnEl = document.getElementById(clearBtnId);
+            if (currentClearBtnEl) {
+                const newClearBtn = currentClearBtnEl.cloneNode(true);
+                currentClearBtnEl.parentNode.replaceChild(newClearBtn, currentClearBtnEl);
+                
+                newClearBtn.addEventListener('click', () => {
+                    categoryData.units.forEach(unit => {
+                        const input = document.getElementById(`${categoryType}-input-${unit.id}`);
+                        if (input) input.value = '';
+                    });
+                    errorEl.classList.add('hidden');
+                });
+
+                if (categoryType === "flexible_cooking_converter") clearCookingInputsBtnEl = newClearBtn;
+                else if (categoryType === "flexible_length_converter") clearLengthInputsBtnEl = newClearBtn;
+                else if (categoryType === "flexible_general_volume_converter") clearGeneralVolumeInputsBtnEl = newClearBtn;
+                else if (categoryType === "flexible_temperature_converter") clearTemperatureInputsBtnEl = newClearBtn;
+            }
+        }
+
+        function handleFlexibleInputChange(event) {
+            const sourceInput = event.target;
+            const sourceUnitId = sourceInput.dataset.unitId;
+            const categoryType = sourceInput.dataset.categoryType;
+            const sourceValueStr = sourceInput.value;
+            
+            let errorEl;
+            if (categoryType === "flexible_cooking_converter") errorEl = cookingInputErrorEl;
+            else if (categoryType === "flexible_length_converter") errorEl = lengthInputErrorEl;
+            else if (categoryType === "flexible_general_volume_converter") errorEl = generalVolumeInputErrorEl;
+            else if (categoryType === "flexible_temperature_converter") errorEl = temperatureInputErrorEl;
+            
+            if(errorEl) errorEl.classList.add('hidden');
+
+            const categoryData = toolCategories.find(cat => cat.type === categoryType);
+            if (!categoryData) return;
+
+            if (sourceValueStr.trim() === '' || sourceValueStr.trim() === '-') {
+                categoryData.units.forEach(unit => {
+                    if (unit.id !== sourceUnitId) {
+                        const targetInput = document.getElementById(`${categoryType}-input-${unit.id}`);
+                        if (targetInput) targetInput.value = '';
+                    }
+                });
+                return;
+            }
+
+            const sourceValue = parseFloat(sourceValueStr);
+            if (isNaN(sourceValue)) {
+                if(errorEl) errorEl.classList.remove('hidden'); 
+                return;
+            }
+
+            const sourceUnitData = categoryData.units.find(u => u.id === sourceUnitId);
+            if (!sourceUnitData) return;
+
+            const valueInBaseUnit = sourceUnitData.toBase(sourceValue);
+
+            categoryData.units.forEach(targetUnitData => {
+                if (targetUnitData.id === sourceUnitId) return; 
+
+                const targetInput = document.getElementById(`${categoryType}-input-${targetUnitData.id}`);
+                if (targetInput) {
+                    const valueInTargetUnit = targetUnitData.fromBase(valueInBaseUnit);
+                    if (Number.isInteger(valueInTargetUnit)) {
+                        targetInput.value = valueInTargetUnit;
+                    } else {
+                         targetInput.value = parseFloat(valueInTargetUnit.toFixed(targetUnitData.precision || 3));
+                    }
+                }
+            });
+        }
+
+        function displayFlexibleCookingConverterView() {
+            setupFlexibleConverter(
+                flexibleCookingConverterViewEl, 
+                cookingUnitsContainerEl, 
+                cookingInputErrorEl, 
+                'clearCookingInputsBtn', 
+                "flexible_cooking_converter"
+            );
+        }
+
+        function displayFlexibleLengthConverterView() { 
+            setupFlexibleConverter(
+                flexibleLengthConverterViewEl,
+                lengthUnitsContainerEl,
+                lengthInputErrorEl,
+                'clearLengthInputsBtn', 
+                "flexible_length_converter"
+            );
+        }
+
+        function displayFlexibleGeneralVolumeConverterView() { 
+            setupFlexibleConverter(
+                flexibleGeneralVolumeConverterViewEl,
+                generalVolumeUnitsContainerEl,
+                generalVolumeInputErrorEl,
+                'clearGeneralVolumeInputsBtn',
+                "flexible_general_volume_converter"
+            );
+        }
+        
+        function displayFlexibleTemperatureConverterView() { 
+            setupFlexibleConverter(
+                flexibleTemperatureConverterViewEl,
+                temperatureUnitsContainerEl,
+                temperatureInputErrorEl,
+                'clearTemperatureInputsBtn',
+                "flexible_temperature_converter"
+            );
+        }
+
+        function displayBasicCalculatorView() {
+            categoriesViewEl.classList.add('hidden');
+            conversionListViewEl.classList.add('hidden');
+            unitConverterCalculatorViewEl.classList.add('hidden');
+            basicCalculatorViewEl.classList.remove('hidden');
+            flexibleCookingConverterViewEl.classList.add('hidden');
+            flexibleLengthConverterViewEl.classList.add('hidden');
+            flexibleGeneralVolumeConverterViewEl.classList.add('hidden');
+            flexibleTemperatureConverterViewEl.classList.add('hidden');
+            initializeBasicCalculatorButtons(); 
+            resetBasicCalculator(); 
+            updateCalcDisplay();
+        }
+
+        function initializeBasicCalculatorButtons() {
+            if (basicCalculatorButtonsEl.children.length > 0) return; 
+            const buttons = [
+                { text: 'C', class: 'clear', action: 'clear' }, { text: '÷', class: 'operator', action: 'operator', value: '/' },
+                { text: '×', class: 'operator', action: 'operator', value: '*' }, { text: '−', class: 'operator', action: 'operator', value: '-' },
+                { text: '7', action: 'number', value: '7' }, { text: '8', action: 'number', value: '8' },
+                { text: '9', action: 'number', value: '9' }, { text: '+', class: 'operator row-span-2', action: 'operator', value: '+' },
+                { text: '4', action: 'number', value: '4' }, { text: '5', action: 'number', value: '5' },
+                { text: '6', action: 'number', value: '6' }, { text: '1', action: 'number', value: '1' },
+                { text: '2', action: 'number', value: '2' }, { text: '3', action: 'number', value: '3' },
+                { text: '=', class: 'equals col-span-2', action: 'equals' }, { text: '0', class: 'col-span-2', action: 'number', value: '0' },
+                { text: '.', action: 'decimal', value: '.' }
+            ];
+            basicCalculatorButtonsEl.innerHTML = '';
+            basicCalculatorButtonsEl.classList.add('grid-rows-[repeat(5,minmax(0,1fr))]');
+            buttons.forEach(btnConfig => {
+                const button = document.createElement('button');
+                button.textContent = btnConfig.text; button.classList.add('calc-button');
+                if (btnConfig.class) btnConfig.class.split(' ').forEach(cls => button.classList.add(cls));
+                if (btnConfig.text === '+') button.style.gridRow = 'span 2 / span 2';
+                else if (btnConfig.text === '0' || btnConfig.text === '=') button.style.gridColumn = 'span 2 / span 2';
+                button.addEventListener('click', () => {
+                    switch (btnConfig.action) {
+                        case 'number': appendNumberToCalc(btnConfig.value); break;
+                        case 'operator': chooseCalcOperation(btnConfig.value); break;
+                        case 'decimal': appendDecimalToCalc(); break;
+                        case 'equals': computeCalculation(); break;
+                        case 'clear': resetBasicCalculator(); break;
+                    }
+                    updateCalcDisplay();
+                });
+                basicCalculatorButtonsEl.appendChild(button);
+            });
+        }
+        function appendNumberToCalc(number) {
+            if (shouldResetDisplay) { currentCalcInput = ''; shouldResetDisplay = false; }
+            if (currentCalcInput === '0' && number !== '.') currentCalcInput = ''; 
+            if (currentCalcInput.length >= 16) return; 
+            currentCalcInput += number;
+        }
+        function appendDecimalToCalc() {
+            if (shouldResetDisplay) { currentCalcInput = '0'; shouldResetDisplay = false; }
+            if (currentCalcInput.includes('.')) return;
+            if (currentCalcInput === '') currentCalcInput = '0'; 
+            if (currentCalcInput.length >= 15) return; 
+            currentCalcInput += '.';
+        }
+        function chooseCalcOperation(op) {
+            if (currentCalcInput === '' && previousCalcInput === '') return; 
+            if (currentCalcInput === '' && previousCalcInput !== '' && calcOperation && !shouldResetDisplay) { calcOperation = op; return; }
+            if (previousCalcInput !== '' && !shouldResetDisplay) { computeCalculation(); }
+            if (currentCalcInput === "Error") { shouldResetDisplay = true; return; }
+            calcOperation = op; previousCalcInput = currentCalcInput; currentCalcInput = ''; shouldResetDisplay = false; 
+        }
+        function computeCalculation() {
+            let result; const prev = parseFloat(previousCalcInput); let current = parseFloat(currentCalcInput);
+            if (currentCalcInput === '' && calcOperation && previousCalcInput !== '') current = prev;
+            if (isNaN(prev) || isNaN(current)) {
+                if (!isNaN(prev) && calcOperation && isNaN(current)) currentCalcInput = formatCalcResult(prev); 
+                else if (!isNaN(current) && !calcOperation && previousCalcInput === '') currentCalcInput = formatCalcResult(current);
+                else return;
+                calcOperation = null; previousCalcInput = ''; shouldResetDisplay = true; return;
+            }
+            switch (calcOperation) {
+                case '+': result = prev + current; break; case '-': result = prev - current; break;
+                case '*': result = prev * current; break;
+                case '/': 
+                    if (current === 0) { currentCalcInput = "Error"; calcOperation = null; previousCalcInput = ''; shouldResetDisplay = true; return; }
+                    result = prev / current; break;
+                default: if(!isNaN(current)) result = current; else return;
+            }
+            currentCalcInput = formatCalcResult(result); calcOperation = null; previousCalcInput = ''; shouldResetDisplay = true; 
+        }
+        function formatCalcResult(number) {
+            if (String(number).length > 16) { 
+                 if (Math.abs(number) > 999999999999999 || (Math.abs(number) < 0.0000000000001 && number !== 0) ) return number.toExponential(9); 
+            } return String(parseFloat(Number(number).toPrecision(15))); 
+        }
+        function resetBasicCalculator() {
+            currentCalcInput = '0'; previousCalcInput = ''; calcOperation = null; shouldResetDisplay = false; updateCalcDisplay();
+        }
+        function updateCalcDisplay() {
+            if (calcOperation && currentCalcInput === '' && !shouldResetDisplay && previousCalcInput !== '') basicCalcDisplayEl.value = previousCalcInput;
+            else basicCalcDisplayEl.value = currentCalcInput === '' && !calcOperation && !previousCalcInput ? '0' : currentCalcInput;
+        }
+
+        // --- Event Listeners for Navigation ---
+        backToCategoriesBtnEl.addEventListener('click', displayCategoriesView);
+        backToConversionListBtnEl.addEventListener('click', () => {
+            if (currentCategoryIndex !== -1) {
+                const category = toolCategories[currentCategoryIndex];
+                if (category && category.type === "converter_category") displayConversionListView(currentCategoryIndex);
+                else displayCategoriesView();
+            } else displayCategoriesView();
+        });
+        backToCategoriesFromCalcBtnEl.addEventListener('click', displayCategoriesView);
+        backToCategoriesFromCookingBtnEl.addEventListener('click', displayCategoriesView);
+        backToCategoriesFromLengthBtnEl.addEventListener('click', displayCategoriesView); 
+        backToCategoriesFromGeneralVolumeBtnEl.addEventListener('click', displayCategoriesView); 
+        backToCategoriesFromTemperatureBtnEl.addEventListener('click', displayCategoriesView); 
+
+
+        // --- Footer Year ---
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // --- Initial Display ---
+        displayCategoriesView();
+        initializeBasicCalculatorButtons(); 
+    </script>
+</body>
+</html>
