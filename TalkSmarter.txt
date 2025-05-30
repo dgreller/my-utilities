@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Think Faster, Talk Smarter - Interactive Primer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .section-content, #content-nav-bar {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .section-content.active, #content-nav-bar.active {
+            display: block;
+        }
+        #section-selection-view.active {
+            display: grid; 
+             animation: fadeIn 0.5s ease-in-out;
+        }
+        #section-selection-view {
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-tile {
+            background-color: white;
+            padding: 1.5rem; /* p-6 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        .main-tile:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            transform: translateY(-4px);
+        }
+        .main-tile svg {
+            width: 3rem; /* w-12 */
+            height: 3rem; /* h-12 */
+            margin-bottom: 0.75rem; /* mb-3 */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .subsection-nav-button {
+            padding: 0.375rem 0.75rem; /* py-1.5 px-3 */
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 500; /* font-medium */
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            border: 1px solid transparent;
+        }
+        .subsection-nav-button.active {
+            background-color: #10B981; /* green-500 */
+            color: white;
+            border-color: #059669; /* green-600 */
+        }
+        .subsection-nav-button:not(.active) {
+            background-color: #E0E7FF; /* indigo-100 */
+            color: #3730A3; /* indigo-800 */
+            border-color: #C7D2FE; /* indigo-200 */
+        }
+        .subsection-nav-button:not(.active):hover {
+            background-color: #C7D2FE; /* indigo-200 */
+            color: #312E81; /* indigo-900 */
+        }
+
+
+        .interactive-box {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .feedback-message {
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+        .feedback-correct {
+            background-color: #D1FAE5; color: #065F46; border: 1px solid #A7F3D0;
+        }
+        .feedback-info {
+            background-color: #DBEAFE; color: #1E40AF; border: 1px solid #BFDBFE;
+        }
+        .btn {
+            padding: 0.5rem 1rem; border-radius: 0.375rem; font-weight: 500;
+            transition: background-color 0.2s ease; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn-primary { background-color: #3B82F6; color: white; }
+        .btn-primary:hover { background-color: #2563EB; }
+        .btn-secondary { background-color: #6B7280; color: white; }
+        .btn-secondary:hover { background-color: #4B5563; }
+        textarea {
+            width: 100%; padding: 0.75rem; border: 1px solid #D1D5DB;
+            border-radius: 0.375rem; margin-top: 0.25rem; min-height: 90px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+        }
+        label { font-weight: 500; color: #374151; }
+        .pro-tip {
+            background-color: #FEFCE8; border-left: 4px solid #FACC15;
+            padding: 0.75rem 1rem; margin: 1rem 0; font-size: 0.9rem; color: #713F12;
+        }
+        
+        #intro h3, #listening h3, #wsww h3, #practice h3 {
+            font-size: 1.25rem; font-weight: 600; color: #1D4ED8; /* blue-700 */
+            margin-top: 2rem; 
+            margin-bottom: 0.75rem; 
+            scroll-margin-top: 5rem; 
+        }
+         #intro h4, #listening h4, #wsww h4, #practice h4 {
+            font-size: 1.1rem; font-weight: 600; color: #1E40AF; /* blue-800 */
+            margin-top: 1rem; margin-bottom: 0.5rem;
+            scroll-margin-top: 5rem; 
+        }
+        #intro p, #intro li,
+        #listening p, #listening li,
+        #wsww p, #wsww li,
+        #practice p, #practice li {
+            margin-bottom: 0.75rem; line-height: 1.6; color: #374151;
+        }
+        #intro ul, #listening ul, #wsww ul, #practice ul {
+            list-style-type: disc; margin-left: 1.5rem;
+        }
+         #intro strong, #listening strong, #wsww strong, #practice strong {
+            color: #172554; /* blue-900 */
+         }
+        #content-nav-bar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(243, 244, 246, 0.9); 
+            backdrop-filter: blur(8px);
+            padding: 0.75rem; 
+            margin-bottom: 1.5rem; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            border-radius: 0 0 0.5rem 0.5rem; 
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex flex-col items-center">
+
+    <div class="w-full max-w-4xl bg-white shadow-xl rounded-xl overflow-hidden my-4 sm:my-8">
+        <header class="bg-blue-600 p-6 text-white rounded-t-xl">
+            <h1 class="text-3xl sm:text-4xl font-bold text-center">Think Faster, Talk Smarter: Interactive Primer</h1>
+            <p class="text-center text-blue-100 mt-2 text-sm sm:text-base">An enhanced guide to mastering spontaneous communication.</p>
+        </header>
+
+        <div id="section-selection-view" class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 active">
+            <div onclick="showSectionContent('intro')" class="main-tile">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-blue-500"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.355a12.06 12.06 0 00-4.5 0m4.5 2.355a12.059 12.059 0 01-4.5 0M9.75 8.25h4.5M9.75 12h4.5m-4.5 3.75h4.5M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6.75-10.5h.008v.008h-.008V9z" /></svg>
+                <h2 class="text-2xl font-semibold text-blue-700 mb-1">Introduction</h2>
+                <p class="text-gray-600 text-sm">The power and psychology of spontaneous speaking.</p>
+            </div>
+            <div onclick="showSectionContent('listening')" class="main-tile">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-green-500"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a.75.75 0 00.75-.75V6.108c0-.906.668-1.701 1.546-1.928a11.958 11.958 0 018.704 0c.878.227 1.546 1.022 1.546 1.928v11.942c0 .414-.336.75-.75.75H12zm0 0A23.929 23.929 0 001.546 4.18c-.878.227-1.546 1.022-1.546 1.928v11.942c0 .414.336.75.75.75h10.5z" /></svg>
+                <h2 class="text-2xl font-semibold text-green-700 mb-1">Active Listening</h2>
+                <p class="text-gray-600 text-sm">The art and science of audience connection.</p>
+            </div>
+            <div onclick="showSectionContent('wsww')" class="main-tile">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-indigo-500"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" /></svg>
+                <h2 class="text-2xl font-semibold text-indigo-700 mb-1">WSWW Framework</h2>
+                <p class="text-gray-600 text-sm">Your blueprint for structured, clear responses.</p>
+            </div>
+            <div onclick="showSectionContent('practice')" class="main-tile">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-red-500"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+                <h2 class="text-2xl font-semibold text-red-700 mb-1">Practice Zone</h2>
+                <p class="text-gray-600 text-sm">Hone your skills with interactive exercises.</p>
+            </div>
+        </div>
+
+        <nav id="content-nav-bar" class="bg-gray-100 p-3 mb-6 shadow-md rounded-md">
+            <div class="container mx-auto flex flex-wrap items-center gap-2" id="content-nav-buttons">
+                <button onclick="initTilesView()" class="btn btn-secondary text-sm py-1.5 px-3"> &larr; All Sections</button>
+                </div>
+        </nav>
+
+        <main class="p-6 sm:p-8">
+            <section id="intro" class="section-content">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">Welcome! Understanding the Power and Psychology of Spontaneous Speaking</h2>
+                <p>In a world that moves at lightning speed, the ability to think on your feet and communicate clearly in unplanned situations – what we call spontaneous speaking – isn't just a handy skill; it's a cornerstone of success in nearly every facet of modern life. From critical team meetings and unexpected client calls to networking events and even casual social interactions, your capacity to articulate thoughts coherently and confidently under pressure can profoundly shape your professional trajectory, your relationships, and your overall impact.</p>
+                <p>Many of us, however, find these impromptu moments daunting. The sudden spotlight can trigger a cascade of anxieties: the fear of drawing a blank, the dread of rambling incoherently, or the worry of not sounding as intelligent or prepared as we'd like. If this resonates with you, you're far from alone. These feelings are a common human experience. But here's the empowering truth, as underscored by communication experts like Matt Abrahams: <strong>spontaneous speaking is not an innate talent reserved for a select few. It is a learnable, refinable skill.</strong> With conscious effort, the right techniques, and dedicated practice, anyone can significantly improve their ability to think faster and talk smarter.</p>
+
+                <h3 id="intro-stakes-rewards">The Stakes and Rewards of Effective Impromptu Communication</h3>
+                <p>Consider the myriad situations where spontaneous speaking comes into play. A manager might ask for a quick update on a project you assumed wasn't on the agenda. A potential client might pose a challenging question during a presentation. You might be asked to introduce a colleague, offer a toast, or simply explain a complex idea in an elevator ride. In each instance, your response – or lack thereof – carries weight.</p>
+                <p>Ineffective spontaneous communication can lead to missed opportunities, misunderstandings that erode trust, or a perception of lacking confidence or competence. Conversely, mastering this skill yields substantial rewards:</p>
+                <ul>
+                    <li><strong>Increased Confidence:</strong> Feel more prepared, composed, and less anxious when the unexpected arises.</li>
+                    <li><strong>Improved Clarity & Conciseness:</strong> Deliver your message effectively, ensuring it's understood and remembered.</li>
+                    <li><strong>Enhanced Influence & Persuasion:</strong> Articulate your ideas compellingly, increasing your ability to persuade and lead.</li>
+                    <li><strong>Stronger Professional Relationships:</strong> Build rapport and trust through clear, empathetic, and responsive communication.</li>
+                    <li><strong>Career Advancement:</strong> Make a consistently positive impression, showcasing your knowledge, agility, and leadership potential.</li>
+                    <li><strong>Reduced Stress:</strong> Turn anxiety-provoking situations into opportunities to connect and contribute.</li>
+                </ul>
+
+                <h3 id="intro-anxious-mind">The Anxious Speaker's Mind: Unraveling Speaking Jitters</h3>
+                <p>To conquer speaking anxiety, it helps to understand its roots. Often, our brains react to a speaking situation, especially an impromptu one, as if it's a genuine threat.</p>
+                <h4 id="intro-ancient-brain">The Ancient Brain in a Modern Spotlight</h4>
+                <p>Our physiological responses to public speaking – the racing heart, sweaty palms, shaky voice – are often manifestations of the <strong>fight-flight-freeze response</strong>. This ancient survival mechanism, designed to protect us from physical dangers, can be triggered by the perceived social threat of judgment or failure. Your brain releases adrenaline and cortisol, preparing you for action, even though the "danger" is psychological rather than physical. Recognizing these symptoms as a normal biological reaction is the first step to managing them.</p>
+                <h4 id="intro-cognitive-culprits">Cognitive Culprits: The Thoughts That Sabotage Us</h4>
+                <p>Beyond physiology, our thoughts play a massive role in fueling anxiety. Psychologists call these unhelpful thought patterns "cognitive distortions":</p>
+                <ul>
+                    <li><strong>The Spotlight Effect:</strong> We tend to vastly overestimate how much others notice our nervousness or small mistakes. Research by Thomas Gilovich and colleagues has shown that what feels like a glaring error to us often goes completely unnoticed or is quickly forgotten by our audience.</li>
+                    <li><strong>Catastrophizing:</strong> Our minds jump to the worst-possible outcomes. "If I stumble over a word, everyone will think I'm incompetent," or "I'm going to forget everything and completely humiliate myself." These extreme predictions are rarely realistic.</li>
+                    <li><strong>Perfectionism:</strong> Striving for an impossible standard of flawlessness. The pressure to be perfect makes any minor imperfection feel like a catastrophe, heightening anxiety. Spontaneous speaking, by its nature, is rarely "perfect" – authenticity and connection often matter more.</li>
+                    <li><strong>Negative Self-Talk:</strong> That internal critic that whispers doubts and criticisms ("I'm terrible at this," "I always mess up," "People aren't interested in what I have to say"). This erodes confidence before we even begin.</li>
+                </ul>
+                <h4 id="intro-self-efficacy">Self-Efficacy and the Power of Belief</h4>
+                <p>Pioneered by psychologist Albert Bandura, <strong>self-efficacy</strong> refers to your belief in your own ability to succeed in specific situations. Past negative speaking experiences, or a lack of practice, can lower your self-efficacy for impromptu communication. Conversely, each successful experience, even a small one, can build it. This primer aims to create those positive experiences.</p>
+                <h4 id="intro-reframing-anxiety">Reframing Anxiety as Excitement</h4>
+                <p>Interestingly, the physiological symptoms of anxiety (e.g., increased heart rate, butterflies) are very similar to those of excitement. Research by Alison Wood Brooks at Harvard Business School suggests that cognitively reframing "I am anxious" to "I am excited" can actually improve performance in stressful situations like public speaking. It shifts your mindset from a "threat" state to a "challenge" or "opportunity" state.</p>
+
+                <h3 id="intro-listener-landscape">The Listener's Landscape: How Audiences Process Information</h3>
+                <p>Effective communication isn't just about what we say; it's about what our audience hears, understands, and retains. Understanding some basics of audience psychology is crucial.</p>
+                <h4 id="intro-attention-economy">Navigating the Attention Economy</h4>
+                <p>We live in an age of information overload. Your audience, like all of us, has a <strong>limited attention span</strong> and is constantly battling distractions. Their brains are working to manage <strong>cognitive load</strong> – the total amount of mental effort being used in the working memory. If your message is disorganized, overly complex, or delivered poorly, you increase their cognitive load, making it harder for them to process and retain your points.</p>
+                <h4 id="intro-brain-structure">The Brain's Affinity for Structure</h4>
+                <p>Our brains are wired to seek patterns and order. Clear, structured information is significantly easier to comprehend and remember. This is partly explained by <strong>Schema Theory</strong>, which posits that we organize knowledge into mental frameworks or "schemas." When you present information in a recognizable structure (like the ones we'll explore), you help your audience fit it into their existing schemas, reducing their cognitive effort and improving their understanding.</p>
+                <h4 id="intro-emotional-resonance">Emotional Resonance: Connecting Heart to Heart</h4>
+                <p>Humans are not purely logical beings. Emotion plays a vital role in communication and decision-making. <strong>Emotional contagion</strong> is a phenomenon where we can "catch" the emotions of others. If you speak with genuine enthusiasm and conviction, your audience is more likely to feel engaged. Authenticity, vulnerability (appropriately shared), and storytelling can activate <strong>mirror neurons</strong>, helping the audience empathize and connect with you and your message on a deeper level.</p>
+                <h4 id="intro-cognitive-biases">Cognitive Biases in the Audience</h4>
+                <p>Be aware of common cognitive biases that can influence how your message is received. These include:</p>
+                <ul>
+                    <li><strong>Primacy and Recency Effects:</strong> People tend to better remember the information presented at the beginning (primacy) and at the end (recency) of a message. This highlights the importance of strong openings and closings.</li>
+                    <li><strong>Confirmation Bias:</strong> We all have a tendency to favor information that confirms our pre-existing beliefs and values. When presenting new or challenging ideas, acknowledge this and frame your points in a way that resonates with or respectfully challenges existing views.</li>
+                    <li><strong>The Halo Effect:</strong> If a speaker appears confident, credible, and articulate, the audience is more likely to perceive their message as trustworthy and valuable, even before fully processing the content.</li>
+                </ul>
+                <h4 id="intro-wiifm">The Unspoken Question: "What's In It For Me?" (WIIFM)</h4>
+                <p>Ultimately, audiences are most engaged when they understand the relevance and benefit of your message to them. Whether you're informing, persuading, or entertaining, explicitly or implicitly addressing their WIIFM will significantly boost their attention and receptiveness.</p>
+
+                <h3 id="intro-frameworks-allies">Why Frameworks Are Your Cognitive Allies</h3>
+                <p>Given the pressures of speaking on the spot and the complexities of audience psychology, how can we improve? This is where communication frameworks come in. They are not rigid scripts but rather mental blueprints that help you structure your thoughts quickly and effectively.</p>
+                <h4 id="intro-speaker-load">Reducing the Speaker's Cognitive Load</h4>
+                <p>In a high-pressure impromptu moment, your brain is juggling multiple tasks: understanding the question or situation, retrieving relevant information, organizing thoughts, choosing words, and managing anxiety. Frameworks like "What? So What? Now What?" or PREP (Point, Reason, Example, Point) act as cognitive shortcuts. They offload some of the mental burden of how to structure your response, freeing up mental bandwidth to focus on the content of your message.</p>
+                <h4 id="intro-mental-scaffolding">Providing Mental Scaffolding</h4>
+                <p>Think of frameworks as mental scaffolding. They provide an instant, reliable structure around which you can build your response. This prevents rambling and ensures your points are delivered in a logical, easy-to-follow sequence. This internal organization translates directly to external clarity for your audience.</p>
+                <h4 id="intro-retrieval-organization">Enhancing Retrieval and Organization</h4>
+                <p>When a question is posed, a framework can guide your memory retrieval process. For instance, the "What? So What? Now What?" structure prompts you to first identify the core issue, then its implications, and finally a call to action or next step. This systematic approach helps you access and organize relevant information more efficiently.</p>
+                <h4 id="intro-predictability-comprehension">Predictability Breeds Comprehension (for the Audience)</h4>
+                <p>While your specific content will be spontaneous, a familiar underlying structure helps your audience follow along. They can anticipate the flow of your argument, making it easier for them to process your ideas and reducing their cognitive load. This perceived organization also enhances your credibility.</p>
+
+                <h3 id="intro-malleable-mind">The Malleable Mind: Speaking as an Acquired and Improvable Skill</h3>
+                <p>The most empowering message from modern neuroscience and psychology regarding communication is this: your abilities are not fixed. Your brain is remarkably adaptable.</p>
+                <h4 id="intro-neuroplasticity">Neuroplasticity: Rewiring Your Brain for Success</h4>
+                <p><strong>Neuroplasticity</strong> is the brain's incredible capacity to reorganize itself by forming new neural connections throughout life. Every time you learn and practice a new skill – whether it's playing an instrument, learning a language, or mastering spontaneous speaking – you are physically changing your brain. The pathways for that skill become stronger and more efficient with use.</p>
+                <h4 id="intro-deliberate-practice">The Role of Deliberate Practice</h4>
+                <p>Improvement doesn't come from just any practice; it comes from <strong>deliberate practice</strong>, a concept popularized by psychologist Anders Ericsson. This involves several key components:</p>
+                <ul>
+                    <li><strong>Focused Intention:</strong> Having clear goals for what you want to improve.</li>
+                    <li><strong>Stepping Out of Your Comfort Zone:</strong> Tackling challenges that stretch your current abilities.</li>
+                    <li><strong>Repetition and Refinement:</strong> Practicing consistently and making adjustments based on feedback or self-reflection.</li>
+                    <li><strong>Feedback:</strong> Seeking input on your performance to identify areas for growth.</li>
+                </ul>
+                <h4 id="intro-stages-learning">From Awkward to Automatic: The Stages of Learning</h4>
+                <p>Learning a new skill like spontaneous speaking often follows a path from conscious incompetence (you're aware of what you don't know and it feels awkward) to conscious competence (you can do it, but it requires active thought and effort), and eventually, with enough practice, to unconscious competence (it becomes more natural and intuitive).</p>
+
+                <h3 id="intro-primer-gym">This Primer: Your Interactive Gym for Spontaneous Speaking</h3>
+                <p>This interactive primer is designed to be your personal "gym" for developing these crucial spontaneous speaking skills. We aim to bridge the gap between understanding the psychological principles discussed above and putting them into practice in a supportive environment. The exercises you'll find here are crafted for deliberate practice. Specifically:</p>
+                <ul>
+                    <li>The <strong>Active Listening</strong> modules will help you better understand and connect with your audience by honing your ability to decipher underlying needs and intentions.</li>
+                    <li>The <strong>"What? So What? Now What?" Framework</strong> section will provide scenarios to practice structuring your thoughts quickly and delivering clear, impactful messages.</li>
+                    <li>The <strong>Practice Zone</strong> offers varied prompts and scenarios to build your mental agility and confidence in a low-stakes setting.</li>
+                </ul>
+                <p>By engaging with these concepts and exercises, you're not just learning techniques; you're actively rewiring your brain, building new communication habits, and boosting your self-efficacy. The journey to becoming a more confident and effective spontaneous speaker is one of incremental progress. Embrace the practice, learn from each experience, and you'll unlock a powerful tool for personal and professional growth. Let's begin!</p>
+            </section>
+
+            <section id="listening" class="section-content">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">Deep Dive: The Art and Science of Active Listening & Audience Connection</h2>
+                <p>Before a single word of your brilliant spontaneous response is uttered, a critical process must occur: <strong>listening</strong>. Not just passively hearing sounds, but engaging in <strong>active listening</strong> – a conscious, dynamic process of receiving, interpreting, and responding to messages. This is the bedrock upon which effective communication, especially in impromptu situations, is built. Understanding the psychology behind active listening and how to truly connect with your audience will transform your ability to respond with relevance and impact.</p>
+
+                <h3 id="listening-cognitive-components">Beyond Hearing: The Cognitive Components of Active Listening</h3>
+                <p>Active listening involves several cognitive and behavioral layers. These include:</p>
+                <ul>
+                    <li><strong>Attending:</strong> This is the initial act of focusing your physical and mental attention on the speaker. It involves orienting yourself towards them, making eye contact (culturally appropriate), and minimizing distractions – both external (like your phone) and internal (your own wandering thoughts).</li>
+                    <li><strong>Understanding (Decoding):</strong> This is the process of interpreting the meaning of the message. It involves not only understanding the literal words (semantic meaning) but also grasping the nuances of tone, body language, and context. This is where you decipher the speaker's intent and emotional state.</li>
+                    <li><strong>Remembering:</strong> Effective listening requires retaining key pieces of information. While you don't need to memorize everything verbatim, recalling main points, concerns, and questions is crucial for a relevant response. Techniques like mental summarization can aid memory.</li>
+                    <li><strong>Evaluating (Critically Assessing):</strong> This involves judging the message for its accuracy, relevance, and logic. However, it's important to suspend premature judgment while the speaker is still communicating to avoid filtering their message through your biases.</li>
+                    <li><strong>Responding:</strong> This is providing feedback to the speaker, which can be verbal (e.g., paraphrasing, asking clarifying questions) or nonverbal (e.g., nodding, facial expressions). This shows you're engaged and helps ensure mutual understanding.</li>
+                </ul>
+
+                <h3 id="listening-core-techniques">Core Active Listening Techniques: A Deeper Exploration</h3>
+                <h4 id="listening-focus">1. Focus Completely: Mastering Your "Attentional Spotlight"</h4>
+                <p>Our brains are constantly bombarded with stimuli. Focusing completely means intentionally directing your "attentional spotlight" onto the speaker. This is more than just polite; it's a cognitive necessity. Key aspects include:</p>
+                <ul>
+                    <li><strong>Silence Your Inner Monologue:</strong> One of the biggest barriers to listening is our tendency to formulate our response while the other person is still talking. Consciously pause this internal chatter. Tell yourself, "My only job right now is to understand." Your response will be far better if it's based on complete information.</li>
+                    <li><strong>Combat Distractions Proactively:</strong> If you're in a noisy environment, suggest moving. If you're expecting an urgent call, briefly explain and silence your phone. Acknowledging and managing potential distractions shows respect and allows you to focus.</li>
+                    <li><strong>The Psychology of Presence:</strong> When you are fully present, the speaker feels valued. This creates an environment of psychological safety, encouraging them to be more open and honest.</li>
+                </ul>
+                <em>Example: In a team meeting, a colleague is explaining a complex technical challenge. Instead of thinking about how this impacts your own tasks, you make eye contact, lean in slightly, and focus solely on their explanation, trying to visualize the problem they're describing.</em>
+
+                <h4 id="listening-nonverbal">2. Listen for More Than Words: Decoding the Unspoken Message</h4>
+                <p>Albert Mehrabian's research, though often oversimplified, highlighted that a significant portion of communication is nonverbal. While the exact percentages are debatable and context-dependent, the core message is valid: words are only part of the story. Pay attention to:</p>
+                <ul>
+                    <li><strong>Tone of Voice (Paralanguage):</strong> Is the speaker's voice hesitant, confident, sarcastic, anxious, enthusiastic? Changes in pitch, pace, and volume can reveal underlying emotions or emphasis. A flat tone might indicate disengagement, while a rapid pace could signal excitement or nervousness.</li>
+                    <li><strong>Body Language (Kinesics):</strong> Observe posture, gestures, facial expressions, and eye contact. Are they open and relaxed, or closed off and tense? Are their nonverbals congruent with their verbal message? For instance, someone saying "I'm fine" with slumped shoulders and no eye contact is likely conveying a different message.</li>
+                    <li><strong>The "Message Beneath the Message":</strong> Often, people don't explicitly state their deepest concerns or needs. Active listening involves inferring these underlying currents. Is a question about project timelines really a concern about workload? Is a comment about a competitor's product an expression of unmet needs?</li>
+                </ul>
+                <em>Example: A client says, "The new software interface is... interesting." Their hesitant tone and slightly furrowed brow, despite the neutral word "interesting," suggest they might have reservations or find it confusing. This prompts you to explore further rather than taking "interesting" at face value.</em>
+
+                <h4 id="listening-paraphrase">3. Paraphrase and Clarify: Ensuring Mutual Understanding</h4>
+                <p>This is a powerful tool for confirming comprehension and showing engagement. It's not about mindlessly "parroting" but about thoughtfully rephrasing. Effective methods include:</p>
+                <ul>
+                    <li><strong>Reflecting Content:</strong> "So, if I understand correctly, your main concern is that the proposed timeline doesn't account for potential QA delays?" This shows you've grasped the factual part of the message.</li>
+                    <li><strong>Reflecting Feelings (Empathic Paraphrasing):</strong> "It sounds like you're feeling quite frustrated by these constant changes." This acknowledges the emotional component and validates their feelings.</li>
+                    <li><strong>Asking Clarifying Questions:</strong> Don't assume. If something is unclear, ask. "Could you tell me a bit more about what you mean by 'streamlining the process'?" or "When you say 'it's not working,' what specific issues are you encountering?" This prevents misunderstandings that can derail your response.</li>
+                    <li><strong>The Benefit of Being Corrected:</strong> If your paraphrase is inaccurate, the speaker has an immediate opportunity to clarify. This is far better than proceeding with a flawed understanding.</li>
+                </ul>
+                <em>Example: After a colleague explains a new marketing strategy, you say, "Okay, so to recap, the core idea is to shift our focus from broad outreach to hyper-targeting micro-influencers in niche B2B sectors, primarily because our data shows a higher conversion rate there. Is that an accurate summary?"</em>
+
+                <h4 id="listening-empathize">4. Empathize: Stepping into Their Shoes to Build Connection</h4>
+                <p>Empathy is the ability to understand and share the feelings of another. In communication, it's about connecting with the speaker's perspective, even if you don't agree with it. This involves:</p>
+                <ul>
+                    <li><strong>Perspective-Taking:</strong> Actively try to see the situation from the other person's point of view. What are their goals, pressures, and concerns? How might their background or role influence their perspective?</li>
+                    <li><strong>Acknowledging Emotions:</strong> Verbally acknowledge their feelings. "I can see why that would be concerning," or "It sounds like a really challenging situation." This doesn't mean you agree with their assessment, only that you recognize their emotional state.</li>
+                    <li><strong>Building Trust and Rapport:</strong> Empathy fosters psychological safety and trust. When people feel understood and validated, they are more receptive to your ideas and more willing to collaborate.</li>
+                    <li><strong>Distinguish Empathy from Sympathy:</strong> Sympathy is feeling *for* someone; empathy is feeling *with* them (or at least deeply understanding their feeling). Empathy is generally more empowering in a professional context as it focuses on understanding rather than pity.</li>
+                </ul>
+                <em>Example: A team member expresses anxiety about an upcoming presentation. Instead of just saying "Don't worry," you might say, "Presenting to that group can definitely feel intimidating. I remember feeling nervous my first time too. What aspects are you most concerned about?"</em>
+
+                <h3 id="listening-barriers">Barriers to Effective Listening: The Internal and External Saboteurs</h3>
+                <p>Recognizing common listening barriers is the first step to overcoming them. Be mindful of:</p>
+                <ul>
+                    <li><strong>Internal Distractions:</strong> Your own thoughts, worries, hunger, fatigue, or preoccupation with what you want to say next.</li>
+                    <li><strong>External Distractions:</strong> Noise, interruptions, uncomfortable environment, visual stimuli.</li>
+                    <li><strong>Premature Evaluation/Judgment:</strong> Forming an opinion or rebuttal before the speaker has finished.</li>
+                    <li><strong>Emotional Triggers:</strong> Certain words, topics, or communication styles might evoke strong emotional responses in you, clouding your ability to listen objectively.</li>
+                    <li><strong>Information Overload:</strong> Trying to process too much complex information at once can lead to mental shutdown.</li>
+                    <li><strong>Speaker-Related Barriers:</strong> The speaker might be disorganized, speak too quickly/softly, or use excessive jargon. While you can't always control this, good listening skills can help you extract the core message.</li>
+                    <li><strong>Listener Biases:</strong> Confirmation bias (favoring info that confirms your beliefs), halo/horn effect (letting overall impression color your judgment of specific points), and others can distort your perception.</li>
+                </ul>
+
+                <h3 id="listening-audience-needs">Identifying Audience Needs and Goals: The "Why" Behind Their Words</h3>
+                <p>Every communication has a purpose. To respond effectively, especially spontaneously, you need to quickly assess what your audience is really seeking. Are they looking for any of the following?</p>
+                <ul>
+                    <li><strong>Information/Clarification:</strong> They have a knowledge gap. <em>(e.g., "How will this new software update impact my daily workflow?")</em> Your role: Provide clear, concise facts.</li>
+                    <li><strong>Reassurance/Validation:</strong> They feel uncertain or want their perspective acknowledged. <em>(e.g., "I'm concerned about these budget cuts; is my project safe?")</em> Your role: Acknowledge their concern, provide honest reassurance if possible, or explain the reality empathetically.</li>
+                    <li><strong>A Solution/Help:</strong> They face a problem or obstacle. <em>(e.g., "The printer is jammed again, and I have an urgent report to print!")</em> Your role: Offer practical assistance or guide them to a solution.</li>
+                    <li><strong>To Be Heard/Understood (Venting):</strong> They need to express frustration or emotion. <em>(e.g., A long complaint about a difficult client.)</em> Your role: Listen patiently, empathize, validate their feelings. Sometimes, just being heard is the primary need.</li>
+                    <li><strong>Connection/Rapport:</strong> They are engaging in social interaction or relationship-building. <em>(e.g., "How was your weekend?")</em> Your role: Reciprocate, share appropriately, build common ground.</li>
+                    <li><strong>To Persuade/Influence:</strong> They are trying to convince you of something. <em>(e.g., Pitching an idea.)</em> Your role: Listen critically but openly, ask probing questions.</li>
+                </ul>
+                <p>Often, multiple needs are present. A question about a project deadline (information) might also carry an underlying need for reassurance about workload. Your ability to discern these layers will make your response far more resonant.</p>
+
+                <div class="pro-tip">
+                    <strong>Pro Tip: Listen with Your Whole Body.</strong> Your nonverbal cues as a listener are powerful. Maintain appropriate eye contact, nod to show understanding, orient your body towards the speaker, and use facial expressions that mirror the tone of the conversation (e.g., look concerned if they're expressing worry). This signals active engagement and encourages the speaker.
+                </div>
+
+                <div class="interactive-box">
+                    <h3 id="listening-deconstructor-title">Interactive: Enhanced Question Deconstructor</h3>
+                    <p class="mb-3 text-sm text-gray-600">Read the scenario. Consider the spoken words, potential non-verbals (implied), and the context. What's the most likely *underlying* need or question the speaker is expressing? How might understanding this guide your response?</p>
+                    <div id="qd-scenario-container"></div>
+                    <div id="qd-options-container" class="space-y-2 mt-3"></div>
+                    <div id="qd-feedback" class="feedback-message mt-4" style="display: none;"></div>
+                    <button onclick="nextQDScenario()" class="btn btn-secondary mt-4">Next Scenario</button>
+                </div>
+            </section>
+
+            <section id="wsww" class="section-content">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-6">Mastering the "What? So What? Now What?" Framework: Your Blueprint for Clarity</h2>
+                <p>In the landscape of spontaneous communication, the "What? So What? Now What?" (WSWW) framework stands out as a beacon of clarity and structure. It's more than just a handy acronym; it's a cognitive tool that aligns with how our brains best process and retain information, making it invaluable for both the speaker and the listener. This framework empowers you to cut through the mental clutter of an impromptu moment, organize your thoughts logically, and deliver a message that is not only understood but also impactful and actionable.</p>
+
+                <h3 id="wsww-cognitive-science">The Cognitive Science Behind WSWW's Effectiveness</h3>
+                <p>Why is WSWW so powerful? Its strength lies in its alignment with fundamental principles of cognitive psychology. These principles include:</p>
+                <ul>
+                    <li><strong>Reduces Cognitive Load for the Speaker:</strong> When you're put on the spot, your working memory is under immense pressure. WSWW provides an instant mental "template," reducing the cognitive effort needed to structure your thoughts. Instead of fumbling for a starting point or a logical flow, you have a pre-defined path, freeing up mental resources to focus on the *content* of your message.</li>
+                    <li><strong>Enhances Clarity and Reduces Cognitive Load for the Listener:</strong> Audiences crave structure. A disorganized message forces listeners to work harder to connect the dots, increasing their cognitive load and reducing comprehension. WSWW presents information in a predictable, digestible sequence: problem/statement -> relevance/implication -> action/resolution. This makes it easier for the audience to follow, understand, and remember your points.</li>
+                    <li><strong>Leverages Primacy and Recency Effects:</strong> The "What?" (primacy) establishes the core message upfront, making it more likely to be remembered. The "Now What?" (recency) provides a clear takeaway or call to action, which also tends to stick.</li>
+                    <li><strong>Creates a Sense of Completeness and Purpose:</strong> The framework naturally guides the conversation towards a resolution or next step ("Now What?"), preventing your response from feeling open-ended or pointless. This satisfies the listener's inherent desire for closure and purpose in communication.</li>
+                    <li><strong>Facilitates Audience Engagement through Relevance:</strong> The "So What?" step is specifically designed to connect your core message to the audience's interests, concerns, or goals. This direct appeal to their WIIFM (What's In It For Me?) significantly boosts engagement and perceived value.</li>
+                </ul>
+
+                <h3 id="wsww-deconstructing">Deconstructing the WSWW Framework: A Deep Dive into Each Component</h3>
+                
+                <h4 id="wsww-what-component">1. WHAT? (The Core Message – The Anchor)</h4>
+                <p>This is the foundation of your response. It's where you clearly and concisely state the main point, fact, observation, issue, or answer to the direct question. To make it effective:</p>
+                <ul>
+                    <li><strong>Be Direct and Objective:</strong> Get straight to the point. Avoid lengthy preambles or beating around the bush. Present the information as factually and objectively as possible in this initial stage.</li>
+                    <li><strong>Clarity is King:</strong> Use simple, unambiguous language. Avoid jargon or technical terms unless you are certain your audience understands them. If you must use a specialized term, briefly define it.</li>
+                    <li><strong>Brevity and Focus:</strong> Deliver the "What?" in as few words as necessary. Think of it as a headline or the single most important piece of information you need to convey first.</li>
+                    <li><strong>Common Pitfalls for "What?":</strong>
+                        <ul>
+                            <li>Being too vague or abstract.</li>
+                            <li>Including too much background information or unnecessary detail upfront.</li>
+                            <li>Starting with your opinion or solution before stating the core fact/issue.</li>
+                            <li>Using overly complex language.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <em>Example (Answering "How's Project Alpha progressing?"): "Project Alpha is currently on schedule to meet its Q3 deadline." (Clear, direct, objective)</em>
+
+                <h4 id="wsww-sowhat-component">2. SO WHAT? (The Relevance & Impact – The Bridge)</h4>
+                <p>This is arguably the most crucial and often underdeveloped part of the framework. It explains why the "What?" matters – specifically to your audience. It builds a bridge between your information and their world. Consider these points:</p>
+                <ul>
+                    <li><strong>Audience-Centricity is Paramount:</strong> Always frame the "So What?" from the listener's perspective. How does the "What?" affect them, their goals, their team, their concerns, or their decisions?</li>
+                    <li><strong>Articulate the Implications and Consequences:</strong> What are the direct results or potential outcomes of the "What?" Are they positive, negative, or mixed? Be specific about the impact.</li>
+                    <li><strong>Connect to Values and Priorities:</strong> If possible, link the "So What?" to what your audience values or prioritizes (e.g., efficiency, cost savings, risk reduction, innovation, customer satisfaction).</li>
+                    <li><strong>Evoke Understanding or Emotion (Appropriately):</strong> This is where you can add context that helps the audience understand the significance on a deeper level. For example, if the "What" is a problem, the "So What" explains the pain point it causes.</li>
+                    <li><strong>Common Pitfalls for "So What?":</strong>
+                        <ul>
+                            <li>Stating the impact only from your own perspective (e.g., "So this means I have to work late").</li>
+                            <li>Being too generic or failing to make the relevance explicit for *this specific audience*.</li>
+                            <li>Understating or overstating the impact.</li>
+                            <li>Skipping this step entirely, assuming the relevance is obvious (it often isn't).</li>
+                        </ul>
+                    </li>
+                </ul>
+                <em>Example (Continuing from Project Alpha): "So what this means for the department is that we can confidently allocate resources for the Q4 product launch as planned, and it ensures we meet our commitment to the sales team for their upcoming campaign." (Connects to departmental planning and sales team needs)</em>
+
+                <h4 id="wsww-nowwhat-component">3. NOW WHAT? (The Path Forward – The Compass)</h4>
+                <p>This component provides direction and moves the conversation towards action or resolution. It answers the implicit question: "Okay, given that, what happens next?" Make it effective by ensuring it is:</p>
+                <ul>
+                    <li><strong>Propose a Clear Action, Recommendation, or Next Step:</strong> Be specific about what should happen. Is it a decision to be made, a task to be done, information to be gathered, a discussion to be had?</li>
+                    <li><strong>Assign Ownership (If Applicable and Appropriate):</strong> Clearly state who is responsible for the next step, even if it's you.</li>
+                    <li><strong>Be Forward-Looking and Constructive:</strong> Even if the "What?" was a problem, the "Now What?" should focus on solutions or progress.</li>
+                    <li><strong>Make it Feasible and Realistic:</strong> Propose actions that are achievable. If it's a larger issue, the "Now What?" might be to define the first step in addressing it.</li>
+                    <li><strong>Common Pitfalls for "Now What?":</strong>
+                        <ul>
+                            <li>Ending vaguely without a clear call to action or next step.</li>
+                            <li>Proposing an unrealistic or unachievable action.</li>
+                            <li>Making it unclear who is responsible for the next step.</li>
+                            <li>Introducing new, unrelated problems instead of focusing on the path forward for the current issue.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <em>Example (Concluding Project Alpha update): "Now what I'll do is send out the detailed milestone checklist by end of day so everyone has visibility, and I'll flag any potential resource needs for the final integration phase in next week's team meeting." (Clear actions, ownership, and forward momentum)</em>
+
+                <h3 id="wsww-in-action">WSWW in Action: Versatility Across Contexts</h3>
+                <p>The beauty of WSWW is its adaptability. It can be used effectively in various situations, such as:</p>
+                <ul>
+                    <li><strong>Answering Questions:</strong> "What is your question about? So what is the core of my answer and why it matters to you? Now what is the implication or what you can do with this information?"</li>
+                    <li><strong>Giving Updates:</strong> "What is the status? So what does this mean for the project/team/client? Now what are the next steps or needs?"</li>
+                    <li><strong>Making a Request:</strong> "What do I need? So what is the benefit or reason for this request (for you/the organization)? Now what is the specific action I'm asking you to take?"</li>
+                    <li><strong>Handling Objections:</strong> "What is your specific concern (acknowledging it)? So what is my perspective or a counterpoint, and why is it relevant to your concern? Now what is a way we can resolve this or move forward?"</li>
+                    <li><strong>Explaining an Idea:</strong> "What is the core concept? So what is its significance or benefit? Now what is how it can be applied or what you should consider next?"</li>
+                </ul>
+                
+                <div class="pro-tip">
+                    <strong>Pro Tip: The "Mental Pause" is Your Friend.</strong> Before launching into WSWW, take a brief mental pause (even just a second or two) after hearing a question or when an opportunity to speak arises. Use this moment to quickly sketch out your W-S-WW in your mind. This prevents blurting out the first thing that comes to mind and ensures a more structured response.
+                </div>
+
+                <div class="interactive-box">
+                    <h3 id="wsww-builder-title">Interactive: WSWW Framework Builder (Enhanced Scenarios)</h3>
+                    <p class="mb-3 text-sm text-gray-600">You'll be presented with a scenario. Practice formulating a response using each component of the WSWW framework. Focus on clarity, audience relevance, and actionable next steps. After submitting, you'll see a detailed example to compare.</p>
+                    <p id="wsww-scenario-container" class="mb-4"></p>
+                    <div>
+                        <label for="wsww-what" class="block text-sm font-medium text-gray-700">What? (The core fact/issue)</label>
+                        <textarea id="wsww-what" rows="3" placeholder="Clearly state the core fact or issue..."></textarea>
+                    </div>
+                    <div class="mt-3">
+                        <label for="wsww-sowhat" class="block text-sm font-medium text-gray-700">So What? (Its relevance/impact for your audience)</label>
+                        <textarea id="wsww-sowhat" rows="4" placeholder="Explain its relevance and impact on your audience..."></textarea>
+                    </div>
+                    <div class="mt-3">
+                        <label for="wsww-nowwhat" class="block text-sm font-medium text-gray-700">Now What? (The proposed next step/action)</label>
+                        <textarea id="wsww-nowwhat" rows="4" placeholder="Propose the next step or call to action..."></textarea>
+                    </div>
+                    <div class="flex gap-3 mt-4">
+                        <button onclick="getWSWWFeedback()" class="btn btn-primary">Get Feedback / See Example</button>
+                        <button onclick="loadNextWSWWScenario()" class="btn btn-secondary">New Scenario</button>
+                    </div>
+                    <div id="wsww-feedback" class="feedback-message mt-4" style="display: none;"></div>
+                </div>
+            </section>
+
+            <section id="practice" class="section-content">
+                <h2 class="text-2xl font-semibold text-blue-700 mb-4">Expanded Practice Zone</h2>
+                <p class="mb-4 leading-relaxed">Mastery comes from practice. The more you use these techniques in low-stakes situations, the more natural they'll become when the pressure is on. This zone offers more varied exercises to build your spontaneous speaking muscles.</p>
+
+                <div class="interactive-box mb-6">
+                    <h3 id="practice-topic-gen">Impromptu Topic Generator (More Variety!)</h3>
+                    <p class="mb-3 text-sm text-gray-600">Challenge yourself! Click for a random topic. Aim to speak for 1-2 minutes. Focus on structuring your thoughts (WSWW is great here!), minimizing fillers, and maintaining a confident delivery.</p>
+                    <button onclick="generateTopic()" class="btn btn-primary">Generate New Topic</button>
+                    <div id="topic-display" class="mt-4 p-4 bg-gray-100 rounded-md text-lg font-medium text-gray-800" style="display: none;">
+                    </div>
+                    <div class="mt-3 text-xs text-gray-500">
+                        <p><strong>Tip:</strong> Don't aim for perfection. Aim for clarity and structure. It's okay to pause and think!</p>
+                    </div>
+                </div>
+                
+                <div class="interactive-box">
+                    <h3 id="practice-scenario-responder">Advanced Scenario Responder (WSWW)</h3>
+                    <p class="mb-3 text-sm text-gray-600">Tackle these more nuanced scenarios. Formulate your response using the "What? So What? Now What?" structure. Focus on audience awareness and a clear call to action or resolution.</p>
+                    <button onclick="loadScenarioResponder()" class="btn btn-primary">Load New Scenario</button>
+                    <div id="sr-scenario-display" class="my-3 p-3 bg-gray-100 rounded-md text-gray-700" style="display:none;">
+                    </div>
+                    <div id="sr-input-area" style="display:none;">
+                        <div>
+                            <label for="sr-what" class="block text-sm font-medium text-gray-700">What?</label>
+                            <textarea id="sr-what" rows="3"></textarea>
+                        </div>
+                        <div class="mt-3">
+                            <label for="sr-sowhat" class="block text-sm font-medium text-gray-700">So What?</label>
+                            <textarea id="sr-sowhat" rows="4"></textarea>
+                        </div>
+                        <div class="mt-3">
+                            <label for="sr-nowwhat" class="block text-sm font-medium text-gray-700">Now What?</label>
+                            <textarea id="sr-nowwhat" rows="4"></textarea>
+                        </div>
+                        <button onclick="getSRFeedback()" class="btn btn-secondary mt-4">Submit & See Detailed Example</button>
+                    </div>
+                    <div id="sr-feedback" class="feedback-message mt-4" style="display: none;"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center p-6 bg-gray-800 text-gray-300 text-sm rounded-b-xl">
+            <p>&copy; <span id="currentYear"></span> Interactive Primer. Inspired by "Think Faster, Talk Smarter" by Matt Abrahams. Enhanced Version.</p>
+        </footer>
+    </div>
+
+    <script>
+        const mainTilesView = document.getElementById('section-selection-view');
+        const contentSections = document.querySelectorAll('.section-content');
+        const contentNavBar = document.getElementById('content-nav-bar');
+        const contentNavButtonsContainer = document.getElementById('content-nav-buttons');
+        let activeSubsectionNavButton = null;
+
+
+        function initTilesView() {
+            mainTilesView.classList.add('active');
+            contentSections.forEach(section => section.classList.remove('active'));
+            contentNavBar.classList.remove('active');
+            window.scrollTo(0, 0); 
+        }
+
+        function showSectionContent(sectionId) {
+            mainTilesView.classList.remove('active');
+            contentSections.forEach(section => {
+                section.classList.toggle('active', section.id === sectionId);
+            });
+            
+            populateSubsectionNav(sectionId);
+            contentNavBar.classList.add('active');
+            window.scrollTo(0, 0); 
+        }
+
+        function populateSubsectionNav(sectionId) {
+            contentNavButtonsContainer.innerHTML = '<button onclick="initTilesView()" class="btn btn-secondary text-sm py-1.5 px-3"> &larr; All Sections</button>'; 
+            activeSubsectionNavButton = null;
+
+            const targetSection = document.getElementById(sectionId);
+            if (!targetSection) return;
+
+            const subsections = targetSection.querySelectorAll('h3[id]');
+            subsections.forEach(sub => {
+                const button = document.createElement('button');
+                button.className = 'subsection-nav-button';
+                button.textContent = sub.textContent.replace(/:\s*.*/, '').replace(/\d+\.\s*/, '').trim(); 
+                button.onclick = () => {
+                    scrollToSubsection(sub.id, button);
+                };
+                contentNavButtonsContainer.appendChild(button);
+            });
+        }
+        
+        function scrollToSubsection(subsectionId, clickedButton) {
+            const element = document.getElementById(subsectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                if (activeSubsectionNavButton) {
+                    activeSubsectionNavButton.classList.remove('active');
+                }
+                if (clickedButton) {
+                    clickedButton.classList.add('active');
+                    activeSubsectionNavButton = clickedButton;
+                }
+            }
+        }
+
+        const qdScenarios = [
+            {
+                scenario: "A team member sighs heavily and says, 'Another last-minute change request from the client. This is going to mess up the whole sprint.'",
+                options: [
+                    { text: "They're just complaining about the client.", correct: false, feedback: "While there's frustration, focus on what they might need from you or the team." },
+                    { text: "They need help replanning the sprint and want to voice their concern about workload.", correct: true, feedback: "Yes! They're expressing stress and likely seeking validation and practical solutions for managing the new request." },
+                    { text: "They think the client is unreasonable.", correct: false, feedback: "This might be true, but it's not the most actionable interpretation for your response." },
+                    { text: "They want you to tell the client 'no'.", correct: false, feedback: "Possibly a desire, but their immediate statement is more about the impact on their work." }
+                ],
+                overallFeedback: "The core need is likely for support in managing the disruption and acknowledgement of the added pressure. Your response could involve validating their frustration, offering to help assess the impact, and discussing how to accommodate the change or communicate any issues."
+            },
+            {
+                scenario: "During a performance review, your manager says, 'Your technical skills are strong, but we need to see more leadership from you on projects.' They don't offer specific examples.",
+                options: [
+                    { text: "They think I'm not a good leader.", correct: false, feedback: "It's feedback for development, not necessarily a judgment of current inadequacy. Seek specifics." },
+                    { text: "They want me to ask for specific examples and understand what 'leadership' looks like in this context.", correct: true, feedback: "Exactly! This is an invitation to clarify expectations and get actionable feedback to grow." },
+                    { text: "They are subtly criticizing my project management.", correct: false, feedback: "While related, 'leadership' is broader. Don't assume criticism without clarification." },
+                    { text: "They are just saying something generic for the review.", correct: false, feedback: "Assume the feedback is genuine and seek to understand it better for your development." }
+                ],
+                overallFeedback: "The manager is signaling a development area. The underlying need is for you to understand what specific behaviors constitute 'leadership' in your role and to demonstrate them. Ask for examples: 'Can you give me an example of a situation where I could have shown more leadership?' or 'What specific leadership behaviors are you looking for?'"
+            },
+            {
+                scenario: "A potential customer, after a product demo, asks: 'So, how does your pricing compare to Competitor X? They seem to have a free tier.'",
+                options: [
+                    { text: "They only care about price and want the cheapest option.", correct: false, feedback: "Price is a factor, but it's often linked to value. Don't assume it's the *only* factor." },
+                    { text: "They are looking for justification of our price based on superior value or different features.", correct: true, feedback: "This is highly probable. They're inviting you to differentiate your offering and explain your value proposition beyond just price." },
+                    { text: "They are trying to trick me into badmouthing a competitor.", correct: false, feedback: "Unlikely. It's a standard due diligence question." },
+                    { text: "They haven't understood the demo properly.", correct: false, feedback: "While possible, address the pricing question directly first by highlighting value." }
+                ],
+                overallFeedback: "This is a value and differentiation question disguised as a price question. They need to understand why your product is worth its cost, especially in comparison. Focus on your unique benefits, the problems you solve better, and the overall ROI, rather than just a feature-by-feature or price-to-price comparison without context."
+            },
+             {
+                scenario: "A colleague quietly mentions to you, 'I'm a bit worried about the presentation next week. I'm not sure my section is strong enough.'",
+                options: [
+                    { text: "They want me to do their section for them.", correct: false, feedback: "This is unlikely and assumes the worst. They are likely looking for support, not for you to take over." },
+                    { text: "They are seeking reassurance and possibly some constructive feedback or an offer to help practice.", correct: true, feedback: "Yes! This is a bid for connection and support. They might be feeling insecure and would appreciate a second opinion or a listening ear." },
+                    { text: "They are just making small talk and don't really mean it.", correct: false, feedback: "Voicing a worry, even quietly, usually indicates genuine concern. Acknowledge it." },
+                    { text: "They are indirectly criticizing the overall presentation.", correct: false, feedback: "Their focus is on *their* section. Keep the interpretation specific to their stated concern." }
+                ],
+                overallFeedback: "The colleague is likely looking for emotional support and practical help. Offer to listen to their section, provide feedback, or help them brainstorm. A simple 'I'm happy to take a look or listen if you like' can go a long long way."
+            }
+        ];
+        let currentQDScenarioIndex = 0;
+        const qdScenarioContainer = document.getElementById('qd-scenario-container');
+        const qdOptionsContainer = document.getElementById('qd-options-container');
+        const qdFeedbackEl = document.getElementById('qd-feedback');
+
+        function loadQDScenario(index) {
+            const item = qdScenarios[index];
+            qdScenarioContainer.innerHTML = `<p class="font-medium text-gray-800">${item.scenario}</p>`;
+            qdOptionsContainer.innerHTML = ''; 
+            item.options.forEach(opt => {
+                const button = document.createElement('button');
+                button.className = 'block w-full text-left p-3 bg-white hover:bg-gray-50 border rounded-md text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300';
+                button.textContent = opt.text;
+                button.onclick = () => {
+                    qdFeedbackEl.innerHTML = `<strong>Feedback:</strong> ${opt.feedback}<br><strong>Overall Insight:</strong> ${item.overallFeedback}`;
+                    qdFeedbackEl.className = `feedback-message ${opt.correct ? 'feedback-correct' : 'feedback-info'}`;
+                    qdFeedbackEl.style.display = 'block';
+                };
+                qdOptionsContainer.appendChild(button);
+            });
+            qdFeedbackEl.style.display = 'none';
+        }
+
+        function nextQDScenario() {
+            currentQDScenarioIndex = (currentQDScenarioIndex + 1) % qdScenarios.length;
+            loadQDScenario(currentQDScenarioIndex);
+        }
+
+        const wswwWhatInput = document.getElementById('wsww-what');
+        const wswwSoWhatInput = document.getElementById('wsww-sowhat');
+        const wswwNowWhatInput = document.getElementById('wsww-nowwhat');
+        const wswwFeedbackEl = document.getElementById('wsww-feedback');
+        const wswwScenarioDisplay = document.getElementById('wsww-scenario-container');
+
+        const wswwScenarios = [
+            {
+                id: "project_delay",
+                scenario: "<strong>Scenario:</strong> Your key project is facing an unexpected 2-week delay due to a critical supplier issue. This will impact the client's planned product launch. You need to inform your manager immediately.",
+                example: {
+                    what: "The main processor shipment for Project Titan is delayed by two weeks due to a fire at our supplier's factory.",
+                    sowhat: "This means the project completion will be pushed back by at least two weeks, directly impacting the client's planned Q3 product launch. They'll likely incur marketing adjustment costs and miss their initial market window.",
+                    nowwhat: "I've already contacted our alternative supplier for an expedited order, though it comes at a 15% premium. I'm also drafting a communication plan for the client. I need your approval on the premium cost and guidance on how transparent we should be with the client about the supplier issue immediately."
+                }
+            },
+            {
+                id: "budget_overrun",
+                scenario: "<strong>Scenario:</strong> You've discovered that your department is projected to be 15% over budget for the quarter due to unforeseen software licensing costs. You need to present this to the finance director.",
+                example: {
+                    what: "Our department is currently projected to exceed the quarterly budget by approximately 15%, which amounts to $22,000. This is primarily due to unexpected increases in essential software licensing fees that were not factored into the original budget.",
+                    sowhat: "This overrun means we'll need to find cost savings in other areas or request additional funding to cover the shortfall. It could also impact our ability to invest in planned training initiatives for the team later this quarter if not addressed.",
+                    nowwhat: "I've identified three non-critical spending areas where we can potentially defer $10,000 in costs. I'd like to review these with you and discuss strategies to manage the remaining $12,000, possibly by reallocating funds from a contingency budget or phasing in the new licenses more slowly."
+                }
+            },
+            {
+                id: "customer_complaint",
+                scenario: "<strong>Scenario:</strong> A major client has emailed, very upset, claiming a recent software update has broken a key feature they rely on daily. You are the first point of contact.",
+                example: {
+                    what: "We've received an urgent email from Client ABC stating that yesterday's software update (v2.5) has apparently disabled the 'Automated Reporting' feature, which they use extensively.",
+                    sowhat: "This is a critical issue for them as it disrupts their daily operations and reporting capabilities. Their frustration is understandable, and it's crucial we address this immediately to maintain their trust and prevent further operational impact on their side.",
+                    nowwhat: "I'm currently trying to replicate the issue on our test servers. I will call them within the next 15 minutes to acknowledge their report, gather more specific details, and assure them we're prioritizing this. I'll also escalate this to the development team lead for immediate investigation. I'll update you as soon as I have more information from the client or dev team."
+                }
+            }
+        ];
+        let currentWSWWScenarioIndex = 0;
+
+        function loadWSWWScenario(index) {
+            const item = wswwScenarios[index];
+            wswwScenarioDisplay.innerHTML = item.scenario;
+            wswwWhatInput.value = '';
+            wswwSoWhatInput.value = '';
+            wswwNowWhatInput.value = '';
+            wswwFeedbackEl.style.display = 'none';
+        }
+        
+        function loadNextWSWWScenario() {
+            currentWSWWScenarioIndex = (currentWSWWScenarioIndex + 1) % wswwScenarios.length;
+            loadWSWWScenario(currentWSWWScenarioIndex);
+        }
+
+        function getWSWWFeedback() {
+            const currentScenario = wswwScenarios[currentWSWWScenarioIndex];
+            let feedbackText = `<strong>Example Response for:</strong><br><em>${currentScenario.scenario.replace("<strong>Scenario:</strong> ", "")}</em><br><br>`;
+            feedbackText += `<strong>What (Example):</strong> ${currentScenario.example.what}<br>`;
+            feedbackText += `<strong>So What (Example):</strong> ${currentScenario.example.sowhat}<br>`;
+            feedbackText += `<strong>Now What (Example):</strong> ${currentScenario.example.nowwhat}<br><br>`;
+
+            if (wswwWhatInput.value.trim() === '' && wswwSoWhatInput.value.trim() === '' && wswwNowWhatInput.value.trim() === '') {
+                feedbackText += "<strong>Your Turn:</strong> Try filling in the fields to practice structuring your response to this scenario. The example above shows one effective way.";
+            } else {
+                feedbackText += "<strong>Your Attempt:</strong><br>";
+                feedbackText += `<em>What:</em> ${wswwWhatInput.value || ' (Not provided)'}<br>`;
+                feedbackText += `<em>So What:</em> ${wswwSoWhatInput.value || ' (Not provided)'}<br>`;
+                feedbackText += `<em>Now What:</em> ${wswwNowWhatInput.value || ' (Not provided)'}<br><br>`;
+                feedbackText += "<strong>Reflection:</strong> Compare your response to the example. Does your 'What' clearly state the core issue? Is your 'So What' audience-focused and impactful? Does your 'Now What' propose clear, actionable next steps? Excellent effort in practicing this vital framework!";
+            }
+            
+            wswwFeedbackEl.innerHTML = feedbackText;
+            wswwFeedbackEl.className = 'feedback-message feedback-info';
+            wswwFeedbackEl.style.display = 'block';
+        }
+
+        const topics = [
+            "Describe a skill you're proud of developing and how you did it.",
+            "What's a common misconception about your hobby or interest?",
+            "Talk about a time you had to adapt to an unexpected change.",
+            "If you could have dinner with any historical figure, who would it be and why?",
+            "What does 'success' mean to you personally?", "Share a lesson you learned from a mistake.",
+            "Explain a complex project you worked on in simple terms.",
+            "What's one trend in your industry that excites or concerns you?",
+            "Describe the qualities of a great team leader.",
+            "How do you prioritize your tasks when everything seems urgent?",
+            "What's a challenge your industry is currently facing?",
+            "If colors had sounds, what would blue sound like?",
+            "Argue for or against the idea that technology makes us more connected.",
+            "What's more important: talent or hard work? Explain your reasoning.",
+            "Describe the perfect day from start to finish.",
+            "If you could invent one thing to solve a global problem, what would it be?"
+        ];
+        const topicDisplay = document.getElementById('topic-display');
+
+        function generateTopic() {
+            const randomIndex = Math.floor(Math.random() * topics.length);
+            topicDisplay.textContent = topics[randomIndex];
+            topicDisplay.style.display = 'block';
+        }
+        
+        const srScenarios = [
+            {
+                scenario: "You're in a meeting, and a senior executive asks you for an update on a project you're only peripherally involved with. You don't have all the details.",
+                example: {
+                    what: "I have some general awareness of Project X, specifically its goal to streamline our customer onboarding.",
+                    sowhat: "However, I'm not the lead on this, so I don't have the most current, detailed status at my fingertips. It's important you get accurate information for any decisions.",
+                    nowwhat: "The project lead is [Colleague's Name]. I can either try to get a quick update from them for you right after this meeting, or I can connect you with them directly so you can get the full picture. Which would you prefer?"
+                }
+            },
+            {
+                scenario: "A team member publicly criticizes an idea you just proposed, saying, 'That will never work, we tried something similar two years ago and it failed.'",
+                example: {
+                    what: "Thanks for that perspective, [Colleague's Name]. I understand there was a previous attempt with a similar idea that didn't succeed.",
+                    sowhat: "It's valuable to learn from past experiences so we don't repeat mistakes. My current proposal might differ in key aspects, or the context might have changed, making it viable now.",
+                    nowwhat: "Could you remind me of the specific challenges encountered back then? Perhaps we can discuss if my current idea addresses those points or if there are new factors, like [new technology/market change], that might lead to a different outcome this time."
+                }
+            },
+            {
+                scenario: "You're asked to give an impromptu 1-minute 'elevator pitch' for a new internal initiative to a group of skeptical department heads.",
+                example: {
+                    what: "We're proposing 'Innovate Hour,' a weekly dedicated hour for cross-departmental teams to brainstorm solutions to our current operational bottlenecks.",
+                    sowhat: "This matters because right now, we're seeing X% inefficiency in [specific area], and valuable ideas often stay siloed within departments. 'Innovate Hour' can unlock creative solutions, improve collaboration, and directly address these costly bottlenecks, potentially saving us [estimated benefit/time].",
+                    nowwhat: "We'd like to pilot this for one month with volunteers from three departments. We're seeking your support to encourage participation from your teams and to champion any viable solutions that emerge. Can we count on your departments to join the pilot?"
+                }
+            },
+            {
+                scenario: "A client is very happy with your work but casually asks if you can include an additional significant feature 'since you're already working on it' and implies it shouldn't cost extra.",
+                example: {
+                    what: "I'm thrilled to hear you're so pleased with the progress on [current project/feature]! Regarding the new feature for [describe new feature], that sounds like a valuable addition that could certainly enhance [benefit].",
+                    sowhat: "That said, this new feature involves [mention specific work, e.g., 'new design elements, backend logic, and dedicated testing'], which falls outside the scope of our current agreement. To do it properly and ensure it integrates seamlessly without impacting our current timeline would require additional resources.",
+                    nowwhat: "I'd be happy to scope out this new feature for you, including the estimated time and cost involved. We can then discuss it as a separate addendum or integrate it into a future phase. Would you like me to prepare that proposal for you?"
+                }
+            }
+        ];
+
+        let currentSRScenarioIndex = 0;
+        const srScenarioDisplay = document.getElementById('sr-scenario-display');
+        const srInputArea = document.getElementById('sr-input-area');
+        const srWhatInput = document.getElementById('sr-what');
+        const srSoWhatInput = document.getElementById('sr-sowhat');
+        const srNowWhatInput = document.getElementById('sr-nowwhat');
+        const srFeedbackEl = document.getElementById('sr-feedback');
+
+        function loadScenarioResponder() {
+            if (srScenarios.length === 0) { 
+                srScenarioDisplay.innerHTML = '<strong>Scenario:</strong> Scenarios loading...';
+                return;
+            }
+            currentSRScenarioIndex = Math.floor(Math.random() * srScenarios.length);
+            const item = srScenarios[currentSRScenarioIndex];
+            srScenarioDisplay.innerHTML = `<strong>Scenario:</strong> ${item.scenario}`;
+            srScenarioDisplay.style.display = 'block';
+            srInputArea.style.display = 'block';
+            srWhatInput.value = ''; srSoWhatInput.value = ''; srNowWhatInput.value = '';
+            srFeedbackEl.style.display = 'none';
+        }
+
+        function getSRFeedback() {
+            if (srScenarios.length === 0) return;
+            const item = srScenarios[currentSRScenarioIndex];
+            let feedbackText = `<strong>Detailed Example Response for:</strong><br><em>${item.scenario}</em><br><br>`;
+            feedbackText += `<strong>What (Example):</strong> ${item.example.what}<br>`;
+            feedbackText += `<strong>So What (Example):</strong> ${item.example.sowhat}<br>`;
+            feedbackText += `<strong>Now What (Example):</strong> ${item.example.nowwhat}<br><br>`;
+
+            if (srWhatInput.value.trim() === '' && srSoWhatInput.value.trim() === '' && srNowWhatInput.value.trim() === '') {
+                feedbackText += "<strong>Your Turn:</strong> Try structuring your response to this scenario using WSWW. The example provides a detailed approach.";
+            } else {
+                 feedbackText += "<strong>Your Attempt:</strong><br>";
+                feedbackText += `<em>What:</em> ${srWhatInput.value || ' (Not provided)'}<br>`;
+                feedbackText += `<em>So What:</em> ${srSoWhatInput.value || ' (Not provided)'}<br>`;
+                feedbackText += `<em>Now What:</em> ${srNowWhatInput.value || ' (Not provided)'}<br><br>`;
+                feedbackText += "<strong>Reflection:</strong> How does your response compare to the example? Did you clearly define the situation ('What')? Did you explain its relevance to the audience and the stakes ('So What')? Did you propose a clear and constructive path forward ('Now What')? Keep refining your approach!";
+            }
+            srFeedbackEl.innerHTML = feedbackText;
+            srFeedbackEl.className = 'feedback-message feedback-info';
+            srFeedbackEl.style.display = 'block';
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            contentSections.forEach(section => {
+                const h3s = section.querySelectorAll('h3');
+                h3s.forEach((h3, index) => {
+                    if (!h3.id) {
+                        let tentativeId = h3.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+                        h3.id = `${section.id}-subsection-${tentativeId || index}`;
+                    }
+                });
+            });
+            
+            initTilesView(); 
+            loadQDScenario(currentQDScenarioIndex); 
+            loadWSWWScenario(currentWSWWScenarioIndex); 
+            loadScenarioResponder(); 
+        });
+    </script>
+</body>
+</html>
