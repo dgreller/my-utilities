@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Editor with Preview - Expanded AI Skills</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #1a202c; /* Tailwind gray-900 */
+            color: #e2e8f0; /* Tailwind slate-200 */
+        }
+        /* Controls section removed */
+        .editor-area {
+            flex-grow: 1;
+            display: flex;
+            overflow: hidden; /* Important for flex children */
+            /* If controls were adding padding/border, adjust editor-area if needed */
+            /* For example, if controls had a border-bottom, editor-area might need a border-top or padding-top */
+            /* In this case, the controls div was separate, so no direct adjustment needed here for its removal */
+        }
+        #code-editor {
+            flex-basis: 50%;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #2d3748; /* Tailwind gray-800 */
+            color: #e2e8f0; /* Tailwind slate-200 */
+            border: none; /* Removed potential border from original controls */
+            border-right: 1px solid #4a5568; /* Add a separator line if desired */
+            resize: none;
+            outline: none;
+            overflow-y: auto; /* Ensure textarea itself can scroll */
+        }
+        #preview-area {
+            flex-basis: 50%;
+            border: none;
+            background-color: #ffffff; /* White background for preview content */
+            overflow-y: auto; /* Ensure iframe itself can scroll */
+        }
+        /* Visibility classes like .hidden-view and .full-view are no longer needed */
+    </style>
+</head>
+<body>
+
+    <div class="editor-area">
+        <textarea id="code-editor"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future-Proof Your Career: Thriving in the Age of AI</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            line-height: 1.7; /* Increased for better readability with more text */
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 25px; /* Increased padding */
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1); /* Slightly more pronounced shadow */
+            border-radius: 10px; /* Slightly more rounded corners */
+        }
+        header {
+            text-align: center;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 25px; /* Added margin below header */
+        }
+        header h1 {
+            color: #2c3e50;
+            margin-bottom: 0.5em;
+            font-size: 2.2em; /* Slightly larger */
+        }
+        header p {
+            font-size: 1.15em; /* Slightly larger */
+            color: #555;
+            max-width: 700px; /* Constrain intro paragraph width */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h2 {
+            color: #3498db;
+            margin-top: 2em; /* Increased top margin */
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 0.4em; /* Increased padding */
+            font-size: 1.6em; /* Slightly larger */
+        }
+        h3 { /* Added style for H3 if needed within sections */
+            color: #2980b9;
+            margin-top: 1.5em;
+            font-size: 1.3em;
+        }
+        .section {
+            margin-bottom: 2.5em; /* Increased bottom margin */
+        }
+        .section p, .section ul, .section li {
+            font-size: 1.05em; /* Slightly larger base text for sections */
+            margin-bottom: 1em; /* Consistent bottom margin for paragraphs */
+        }
+        .skill-accordion .skill-item {
+            background-color: #ecf0f1;
+            margin-bottom: 12px; /* Increased margin */
+            border-radius: 6px; /* Slightly more rounded */
+            border: 1px solid #bdc3c7;
+        }
+        .skill-accordion .skill-header {
+            padding: 18px; /* Increased padding */
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em; /* Slightly larger skill header */
+            color: #2c3e50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e0e6e8;
+            border-radius: 6px 6px 0 0;
+        }
+        .skill-accordion .skill-header:hover {
+            background-color: #d0d9dc;
+        }
+        .skill-accordion .skill-content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Smoother transition */
+            background-color: #f8f9f9;
+            border-top: 1px dashed #bdc3c7;
+            border-radius: 0 0 6px 6px;
+        }
+        .skill-accordion .skill-content p,
+        .skill-accordion .skill-content ul {
+            margin-top: 12px;
+            margin-bottom: 12px;
+            font-size: 1em; /* Reset font size for content within accordion */
+        }
+        .skill-accordion .skill-content.active {
+            max-height: 1200px; /* Increased max-height for more content */
+            padding: 18px;
+            transition: max-height 0.6s ease-in, padding 0.6s ease-in; /* Smoother transition */
+        }
+        .skill-accordion .arrow {
+            font-size: 1.2em;
+            transition: transform 0.3s ease-out;
+        }
+        .skill-accordion .skill-header.active .arrow {
+            transform: rotate(90deg);
+        }
+        ul {
+            list-style-type: disc; /* Changed from 'circle' for better visibility */
+            margin-left: 25px; /* Increased indent */
+            padding-left: 0; /* Remove default padding if margin-left is used */
+        }
+        li {
+            margin-bottom: 0.7em; /* Increased spacing between list items */
+        }
+        .highlight {
+            color: #2980b9;
+            font-weight: bold;
+        }
+        .emphasis { /* New class for emphasized text */
+            font-style: italic;
+            color: #546e7a; /* A softer, thoughtful color */
+        }
+        footer {
+            text-align: center;
+            margin-top: 2.5em;
+            padding: 1.5em;
+            font-size: 0.95em;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
+        @media (max-width: 768px) { /* Adjusted breakpoint */
+            header h1 { font-size: 2em; }
+            h2 { font-size: 1.4em; }
+            .skill-accordion .skill-header { font-size: 1em; }
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            header h1 { font-size: 1.8em; }
+            header p { font-size: 1em; }
+            h2 { font-size: 1.3em; }
+            .section p, .section ul, .section li { font-size: 0.95em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Future-Proof Your Career: Thriving in the Age of AI</h1>
+            <p>The rise of Artificial Intelligence presents a pivotal moment, evoking both excitement for innovation and apprehension about the future of work. Rather than succumbing to a "Pascal's Wager" of passively betting on job losses or gains, a more empowered, Stoic-inspired approach is to actively cultivate what is within our control: our skills, our adaptability, and our capacity for high-value contribution. This guide explores a proactive strategy centered on <span class="highlight">High-Agency Problem-Solving</span> and the development of timeless human skills, designed to ensure you not only navigate but flourish in an AI-influenced world.</p>
+        </header>
+
+        <main>
+            <section class="section">
+                <h2>The Core Strategy: Embrace High-Agency Problem-Solving</h2>
+                <p>In an era where AI can automate routine tasks and even some complex analyses, the premium on human agency—our capacity to act independently and make our own free choices—skyrockets. <span class="highlight">High-Agency Problem-Solving</span> is the active, self-directed pursuit of identifying, dissecting, and resolving complex, often ambiguous, high-value challenges. It's about moving beyond passively receiving tasks to proactively seeking out areas where human ingenuity, critical thinking, and initiative can create significant impact.</p>
+                <p>This isn't merely a skill; it's a <span class="emphasis">mindset rooted in an internal locus of control</span>. Individuals with high agency believe they can influence outcomes through their efforts and decisions, rather than being solely shaped by external circumstances. They ask "How can I contribute to solving this?" rather than "What tasks will be assigned to me?". In an AI-driven world, where the landscape can shift rapidly, this proactive, solution-oriented stance becomes a cornerstone of professional resilience and relevance. It means taking ownership of not just the execution of a solution, but of the entire lifecycle from identifying the unarticulated need to delivering and integrating a robust outcome.</p>
+                <p>Cultivating high agency involves:
+                    <ul>
+                        <li><strong>Intellectual Curiosity:</strong> Constantly questioning the status quo, seeking to understand underlying systems, and identifying inefficiencies or unmet needs that represent opportunities.</li>
+                        <li><strong>Calculated Risk-Taking:</strong> Being willing to step outside comfort zones to tackle unfamiliar problems, understanding that growth often lies in navigating uncertainty.</li>
+                        <li><strong>Initiative and Drive:</strong> Not waiting for permission or explicit instructions to explore potential solutions or improvements. It's about seeing a gap and stepping in to fill it.</li>
+                        <li><strong>Persistence and Resilience:</strong> Understanding that complex problems rarely yield to initial attempts. High agency involves iterating, learning from setbacks, and maintaining focus on the desired outcome.</li>
+                    </ul>
+                This proactive engagement is what distinguishes human contribution in areas where AI might assist but cannot fully replicate the nuanced understanding, ethical considerations, and creative leaps inherent in true problem-solving.
+                </p>
+            </section>
+
+            <section class="section">
+                <h2>The Five+ Essential Skills for an AI-Influenced World</h2>
+                <p>These meta-skills are not job-specific but are foundational capabilities that enhance your value across diverse contexts. They represent the core of adaptable human intelligence that complements, rather than competes with, AI.</p>
+                <div class="skill-accordion">
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>1. Problem Recognition & Definition</span>
+                            <span class="arrow">&#9654;</span>
+                        </div>
+                        <div class="skill-content">
+                            <p><strong>Deep Dive:</strong> Before a solution can be crafted, the problem must be accurately and comprehensively understood. This skill goes far beyond identifying surface-level symptoms. It involves a forensic ability to ask "why" repeatedly (like the "5 Whys" technique), to distinguish correlation from causation, and to frame the problem in a way that opens it up to viable solutions. Effective problem definition requires synthesizing diverse information, identifying stakeholders and their perspectives, and clearly articulating the core issue, its boundaries, and the desired state. In an AI world, humans excel at recognizing novel problems or reframing existing ones in contexts AI hasn't been trained on.</p>
+                            <p><strong>Actionable Development:</strong>
+                                <ul>
+                                    <li>Practice active listening and empathetic inquiry to understand different viewpoints on a problem.</li>
+                                    <li>Engage in root cause analysis exercises (e.g., fishbone diagrams, fault tree analysis).</li>
+                                    <li>Challenge assumptions: for any stated problem, ask "Is this the *real* problem, or a symptom of something deeper?"</li>
+                                    <li>Clearly write down problem statements, then critique and refine them for clarity, scope, and measurability.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>2. Solution Design & Creative Ideation</span>
+                            <span class="arrow">&#9654;</span>
+                        </div>
+                        <div class="skill-content">
+                            <p><strong>Deep Dive:</strong> Once a problem is well-defined, the next step is to conceptualize effective solutions. This skill blends creativity with pragmatism. It involves brainstorming a wide range of potential approaches (divergent thinking) and then systematically evaluating them against constraints like resources, time, and ethical considerations (convergent thinking). Solution design isn't just about having one good idea; it's about developing a robust process for generating multiple options, prototyping or modeling them, and selecting the most promising path forward. AI can assist in generating options or analyzing data, but the human element is crucial for true innovation, intuitive leaps, and designing solutions that are human-centered and contextually appropriate.</p>
+                            <p><strong>Actionable Development:</strong>
+                                <ul>
+                                    <li>Practice design thinking methodologies (empathize, define, ideate, prototype, test).</li>
+                                    <li>Engage in brainstorming sessions using techniques like SCAMPER or mind mapping.</li>
+                                    <li>Study elegant solutions to complex problems in various fields (engineering, art, social policy) to understand design principles.</li>
+                                    <li>Develop scenario planning skills: for each potential solution, map out best-case, worst-case, and most-likely outcomes.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>3. Resource Marshalling & Mobilization</span>
+                            <span class="arrow">&#9654;</span>
+                        </div>
+                        <div class="skill-content">
+                            <p><strong>Deep Dive:</strong> An elegant solution remains theoretical without the ability to gather and deploy the necessary resources. This skill encompasses identifying, acquiring, and managing a wide array of assets: financial capital, human talent, tools and technology, information, time, and even social capital (networks and relationships). Effective resource marshalling requires strong organizational skills, persuasive communication to gain buy-in and support, negotiation abilities, and strategic foresight to anticipate needs and bottlenecks. In a dynamic environment, it also means being adaptable and resourceful, finding creative ways to achieve goals when ideal resources are scarce.</p>
+                            <p><strong>Actionable Development:</strong>
+                                <ul>
+                                    <li>Practice project planning, including budgeting and timeline creation.</li>
+                                    <li>Develop your networking skills to build relationships that can provide support or expertise.</li>
+                                    <li>Hone your persuasion and negotiation skills through practice and by studying effective negotiators.</li>
+                                    <li>Learn to delegate effectively, trusting others while maintaining oversight.</li>
+                                    <li>Analyze past projects (successful or not) to identify how resource allocation impacted outcomes.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>4. Execution & Delivery Excellence</span>
+                            <span class="arrow">&#9654;</span>
+                        </div>
+                        <div class="skill-content">
+                            <p><strong>Deep Dive:</strong> Execution is where the rubber meets the road—transforming plans and designs into tangible results. This skill is about more than just hard work; it involves disciplined project management, meticulous attention to detail, proactive risk management, and the ability to maintain momentum and adapt to unforeseen challenges. Excellence in execution means delivering on promises, meeting quality standards, and ensuring that the final output truly addresses the problem it was designed to solve. It requires focus, resilience, and a commitment to seeing things through to completion, even when faced with obstacles or the "messy middle" of a project.</p>
+                            <p><strong>Actionable Development:</strong>
+                                <ul>
+                                    <li>Break down large tasks into smaller, manageable steps with clear deadlines.</li>
+                                    <li>Utilize project management tools and techniques (e.g., Gantt charts, Kanban boards, Agile methodologies).</li>
+                                    <li>Develop a habit of regular progress reviews and course corrections.</li>
+                                    <li>Practice "closing the loop" – ensuring all aspects of a task or project are fully completed and communicated.</li>
+                                    <li>Seek feedback on your execution process to identify areas for improvement in efficiency and effectiveness.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>5. Integration & Systems Thinking</span>
+                            <span class="arrow">&#9654;</span>
+                        </div>
+                        <div class="skill-content">
+                            <p><strong>Deep Dive:</strong> In an increasingly interconnected world, few problems or solutions exist in isolation. Integration is the ability to see and manage the connections between disparate parts, ensuring they work together harmoniously to form a cohesive whole. This requires systems thinking—understanding how different components of a system (be it a technical architecture, a business process, or a team dynamic) interact and influence one another. Effective integration involves anticipating interdependencies, managing interfaces, and ensuring that changes in one part of a system don't have unintended negative consequences elsewhere. It's about building robust, scalable, and maintainable solutions rather than isolated fixes.</p>
+                            <p><strong>Actionable Development:</strong>
+                                <ul>
+                                    <li>Study systems thinking principles and apply them to analyze complex situations.</li>
+                                    <li>When working on a project, actively map out its connections to other projects, systems, or stakeholders.</li>
+                                    <li>Practice synthesizing information from multiple sources to form a holistic understanding.</li>
+                                    <li>Develop clear communication protocols for teams or components that need to interact.</li>
+                                    <li>Look for opportunities to simplify complex systems by improving how their parts connect and communicate.</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span>6. Human Skills: The Irreplaceable Core of Value</span>
+                            <span class="arrow">&#9654;</span>
+                        </div>
+                        <div class="skill-content">
+                            <p>As AI handles more analytical and routine tasks, the uniquely human skills related to interpersonal interaction, emotional understanding, and nuanced judgment become even more critical differentiators. These are often called "soft skills," but their impact is hard and measurable.</p>
+                            <ul>
+                                <li><strong>Emotional Intelligence (EQ):</strong> This is the capacity to be aware of, control, and express one's emotions, and to handle interpersonal relationships judiciously and empathetically. High EQ involves self-awareness (understanding your own emotions and triggers), self-regulation (managing your responses), social awareness (perceiving others' emotions and organizational dynamics – empathy), and relationship management (inspiring, influencing, and developing others, managing conflict). In an AI world, EQ is vital for leadership, teamwork, client relations, and navigating complex human interactions that AI cannot.
+                                    <br/><em>Develop by: Practicing mindfulness, seeking feedback on your interpersonal style, actively listening to understand others' perspectives before responding, and studying non-verbal cues.</em></li>
+                                <li><strong>Discernment & Ethical Judgment:</strong> This involves the ability to make wise, well-reasoned decisions, especially in situations that are ambiguous, complex, or involve competing values. It's about applying experience, critical thinking, and ethical principles to navigate gray areas where data alone is insufficient. AI can provide data and predictions, but human discernment is needed to interpret these in context, consider long-term consequences, and make choices aligned with human values and societal good.
+                                    <br/><em>Develop by: Engaging in ethical dilemma discussions, studying philosophy and decision theory, seeking diverse perspectives before making significant choices, and reflecting on the outcomes of past decisions.</em></li>
+                                <li><strong>Advanced Communication & Persuasion:</strong> Beyond basic clarity, this means effectively conveying complex ideas, telling compelling stories, listening actively to understand unspoken needs, and inspiring action in others. It includes tailoring your message to different audiences, using empathy to connect, and building consensus. While AI can generate text, true persuasive communication that builds trust and motivates change remains a deeply human skill.
+                                    <br/><em>Develop by: Practicing public speaking, writing regularly and seeking critiques, learning storytelling techniques, and engaging in active listening exercises where you summarize what you've heard before responding.</em></li>
+                                <li><strong>Adaptability & Cognitive Flexibility:</strong> The pace of change is accelerating. Adaptability is the ability to adjust to new conditions, learn new skills quickly, and thrive in unfamiliar environments. Cognitive flexibility is the mental ability to switch between different concepts, or to think about multiple concepts simultaneously. This means unlearning old ways when necessary and embracing continuous learning as a default state.
+                                    <br/><em>Develop by: Deliberately exposing yourself to new experiences and ideas, practicing a growth mindset (viewing challenges as opportunities to learn), seeking out tasks that stretch your current abilities, and learning how to learn effectively.</em></li>
+                                <li><strong>Genuine Connection & Collaboration:</strong> Building authentic relationships, fostering trust, and collaborating effectively within diverse teams are crucial. This involves empathy, respect, and the ability to find common ground. As AI tools facilitate more distributed work, the ability to create genuine human connection, whether in person or remotely, becomes even more valuable for team cohesion, innovation, and shared purpose.
+                                    <br/><em>Develop by: Practicing empathy in interactions, being reliable and trustworthy, actively participating in team projects, offering help and support to colleagues, and developing skills in conflict resolution and facilitation.</em></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Why This Proactive, Skill-Focused Approach Is Crucial</h2>
+                <p>Adopting a strategy centered on high-agency problem-solving and the cultivation of these essential skills is not merely advisable; it's a fundamental requirement for sustained relevance and fulfillment in an AI-augmented future. Here’s a deeper look at why:</p>
+                <ul>
+                    <li><strong>Meta-Skills Offer Enduring Relevance:</strong> The specific technical tools and platforms in demand today may become obsolete tomorrow. However, the meta-skills outlined—critical thinking, creative problem-solving, effective communication, emotional intelligence, adaptability—are timeless. They are transferable across industries, roles, and technological paradigms. Investing in these is like building a robust intellectual and emotional toolkit that prepares you for jobs that don't even exist yet. They form the bedrock of a "learnability" quotient, enabling you to continuously acquire new specific knowledge as needed.</li>
+                    <li><strong>The Unwavering Value of In-Person Acuity & Authenticity:</strong> While remote and hybrid work models offer flexibility, the pendulum is swinging back towards recognizing the unique value of in-person interaction for certain critical functions. Complex collaborations, trust-building, nuanced mentorship, and the "reading of the room" often benefit from physical presence. Furthermore, as AI becomes adept at generating sophisticated digital outputs (like resumes or even initial communication), the ability to demonstrate genuine competence, character, and collaborative spirit in face-to-face settings (or high-fidelity virtual ones) becomes a powerful differentiator. Authenticity is hard to fake and harder for AI to replicate.</li>
+                    <li><strong>Signaling True Value Beyond the Polished Résumé:</strong> In an age where AI can help craft near-perfect résumés, cover letters, and even initial project proposals, traditional signals of competence are becoming less reliable. True value will increasingly be demonstrated through a portfolio of tangible achievements, evidence of end-to-end project ownership, and the ability to articulate the complex problem-solving processes undertaken. Employers will look for proof of your ability to navigate ambiguity, lead initiatives, and deliver real-world impact—qualities best showcased through actual work and the stories behind it, not just curated credentials.</li>
+                    <li><strong>Navigating the Transition to a "Wisdom Economy":</strong> We are arguably moving beyond a purely "knowledge economy," where access to information was a key differentiator. Information is now superabundant, and AI can process and retrieve it with incredible efficiency. The emerging frontier is a "wisdom economy," where the premium is on applying knowledge judiciously, ethically, and creatively. Wisdom involves discernment, foresight, contextual understanding, and the integration of experience with data—all areas where human judgment, refined by the skills discussed, remains paramount. It's about not just knowing *what*, but understanding *why* and *what if*.</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2>Conclusion: Chart Your Own Course with Agency and Wisdom</h2>
+                <p>The dialogue surrounding AI's future impact on employment is often framed in terms of uncertainty and potential disruption. While these are valid considerations, a more empowering perspective, resonant with Stoic thought, is to focus on what lies within our sphere of influence: our commitment to personal and professional growth. By consciously cultivating <span class="highlight">high-agency problem-solving capabilities</span> and deepening the essential human skills outlined, you are not merely preparing for an uncertain future; you are actively shaping your capacity to thrive within it.</p>
+                <p>This journey is one of continuous learning, unlearning, and relearning. It requires intellectual humility—the recognition that there is always more to understand—and a proactive stance towards acquiring new competencies. The goal is not to compete with AI on its terms (e.g., raw processing power or data recall) but to develop and leverage the uniquely human attributes that AI complements but cannot supersede: creativity, empathy, ethical judgment, complex communication, and the drive to solve novel problems in innovative ways.</p>
+                <p>Embrace this path of deliberate self-development. The most valuable asset you possess in the evolving landscape of work is not a static set of credentials, but a dynamic, adaptable, and well-cultivated mind—one capable of critical thought, creative solutions, and fostering genuine human connection. By investing in these enduring qualities, you build not just a career, but a resilient and fulfilling professional life, ready to contribute meaningfully, regardless of the technological tides.</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>Inspired by insights on navigating the future of work. Focus on building your agency, wisdom, and skills. Your capacity for growth is your greatest asset.</p>
+        </footer>
+    </div>
+
+    <script>
+        (function() {
+            if (window.frameElement) { 
+                 document.addEventListener('DOMContentLoaded', function () {
+                    const skillHeaders = document.querySelectorAll('.skill-accordion .skill-header');
+                    skillHeaders.forEach(header => {
+                        header.addEventListener('click', function () {
+                            const content = this.nextElementSibling;
+                            if (content) {
+                                const isActive = content.classList.contains('active');
+                                const arrow = this.querySelector('.arrow');
+                                // Close all other items for a traditional accordion feel
+                                if (!isActive) { // Only close others if we are opening a new one
+                                    skillHeaders.forEach(h => {
+                                        if (h !== this) {
+                                            h.nextElementSibling.classList.remove('active');
+                                            h.classList.remove('active');
+                                            const otherArrow = h.querySelector('.arrow');
+                                            if(otherArrow) otherArrow.style.transform = 'rotate(0deg)';
+                                        }
+                                    });
+                                }
+                                // Toggle current item
+                                if (isActive) {
+                                    content.classList.remove('active');
+                                    this.classList.remove('active');
+                                    if(arrow) arrow.style.transform = 'rotate(0deg)';
+                                } else {
+                                    content.classList.add('active');
+                                    this.classList.add('active');
+                                    if(arrow) arrow.style.transform = 'rotate(90deg)';
+                                }
+                            }
+                        });
+                    });
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
+</textarea>
+        <iframe id="preview-area" title="HTML Preview"></iframe>
+    </div>
+
+    <script>
+        // Get DOM elements
+        const codeEditor = document.getElementById('code-editor');
+        const previewArea = document.getElementById('preview-area');
+        // Button elements and their event listeners are removed
+
+        // Function to update the preview in the iframe
+        function updatePreview() {
+            previewArea.srcdoc = codeEditor.value;
+        }
+        
+        // Add an event listener to update preview automatically as user types (debounced)
+        let debounceTimeout;
+        codeEditor.addEventListener('input', () => {
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                // Preview is always visible in this version, so no need to check
+                updatePreview();
+            }, 500); // Update after 500ms of inactivity
+        });
+
+        // Initial setup: Render initial content from textarea
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePreview();
+            // No active button to set
+        });
+    </script>
+
+</body>
+</html>
