@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arizona NativeScape: Residential Horticulture Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        /* Details/Summary styling */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details > summary::marker {
+            display: none;
+        }
+        details > summary::after {
+            content: '+';
+            font-size: 1.5em;
+            line-height: 1;
+            margin-left: 0.5rem;
+            transition: transform 0.2s ease-in-out;
+        }
+        details[open] > summary::after {
+            transform: rotate(45deg);
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Modal styling */
+        .modal-active {
+            display: flex;
+        }
+        /* Styles for plant tiles (no image specific styles needed now) */
+        .plant-tile {
+            /* Add any general tile styling if needed */
+        }
+
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'az-sky': '#87CEEB',
+              'az-desert-sand': '#F4A460',
+              'az-cactus-green': '#556B2F',
+              'az-sunset-orange': '#FF7F50',
+              'az-terra-cotta': '#E2725B',
+              'az-purple-sage': '#7851A9',
+              'az-gold': '#FFD700',
+              'az-stone': '#778899',
+              'az-mesquite': '#654321',
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-az-desert-sand/20 text-gray-800 font-sans">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-az-cactus-green mb-4">Arizona Native<span class="text-az-sunset-orange">Scape</span></h1>
+            <p class="text-lg text-gray-700">Your Comprehensive Guide to Residential Native Horticulture</p>
+            <p class="mt-2 text-md text-gray-600">Discover the beauty and benefits of landscaping with plants native to Arizona's unique climate. This guide will help you select, plant, and care for a thriving, water-wise garden that reflects the soul of the Sonoran Desert and beyond.</p>
+        </header>
+
+        <nav id="tiles" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            <a href="#section-why-natives" class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-center text-white font-semibold bg-az-cactus-green">
+                <h2 class="text-2xl">Why Go Native?</h2><p class="text-sm font-normal mt-1">Benefits & Beauty</p>
+            </a>
+            <a href="#section-planning" class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-center text-white font-semibold bg-az-sunset-orange">
+                <h2 class="text-2xl">Planning Your Garden</h2><p class="text-sm font-normal mt-1">Design & Prep</p>
+            </a>
+            <a href="#section-trees" class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-center text-white font-semibold bg-az-mesquite">
+                <h2 class="text-2xl">Native Trees</h2><p class="text-sm font-normal mt-1">Shade & Structure</p>
+            </a>
+            <a href="#section-shrubs" class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-center text-white font-semibold bg-az-purple-sage">
+                <h2 class="text-2xl">Native Shrubs</h2><p class="text-sm font-normal mt-1">Color & Wildlife</p>
+            </a>
+            <a href="#section-cacti-succulents" class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-center text-white font-semibold bg-az-gold text-az-cactus-green">
+                <h2 class="text-2xl">Cacti & Succulents</h2><p class="text-sm font-normal mt-1">Sculptural Wonders</p>
+            </a>
+            <a href="#section-perennials-wildflowers" class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-center text-white font-semibold bg-az-terra-cotta">
+                <h2 class="text-2xl">Perennials & Wildflowers</h2><p class="text-sm font-normal mt-1">Seasonal Blooms</p>
+            </a>
+            <a href="#section-planting-establishment" class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-center text-white font-semibold bg-az-stone">
+                <h2 class="text-2xl">Planting Natives</h2><p class="text-sm font-normal mt-1">Getting Started</p>
+            </a>
+            <a href="#section-ongoing-care" class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-center text-white font-semibold bg-az-sky">
+                <h2 class="text-2xl">Ongoing Care</h2><p class="text-sm font-normal mt-1">Thriving Landscapes</p>
+            </a>
+            <a href="#section-resources" class="p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-center text-white font-semibold bg-gray-600">
+                <h2 class="text-2xl">More Resources</h2><p class="text-sm font-normal mt-1">Learn & Connect</p>
+            </a>
+        </nav>
+
+        <main>
+            <section id="section-why-natives" class="mb-12 p-6 bg-white rounded-lg shadow-md scroll-mt-20">
+                <h2 class="text-3xl font-semibold text-az-cactus-green mb-6">The Enduring Appeal of Arizona Native Plants</h2>
+                <p class="mb-6 text-gray-700">Choosing native plants for your Arizona residence is more than a landscaping trend; it's an embrace of the region's natural heritage and a smart approach to gardening in a desert environment...</p>
+                <details class="mb-4">
+                    <summary class="text-2xl font-medium text-gray-700 hover:text-az-cactus-green cursor-pointer py-3 border-b border-gray-300 flex justify-between items-center">Water Conservation Champions</summary>
+                    <div class="pt-4 pb-2 text-gray-700 leading-relaxed space-y-3">
+                        <p>Arizona's arid and semi-arid climate makes water a precious resource...</p>
+                        <p>The deep root systems of many native plants are key to their drought tolerance...</p>
+                    </div>
+                </details>
+                <details class="mb-4">
+                    <summary class="text-2xl font-medium text-gray-700 hover:text-az-cactus-green cursor-pointer py-3 border-b border-gray-300 flex justify-between items-center">Low Maintenance Landscapes</summary>
+                    <div class="pt-4 pb-2 text-gray-700 leading-relaxed space-y-3">
+                        <p>Because native plants are adapted to the local soil, climate, and rainfall patterns...</p>
+                        <p>While "low maintenance" doesn't mean "no maintenance,"...</p>
+                    </div>
+                </details>
+                <details class="mb-4">
+                    <summary class="text-2xl font-medium text-gray-700 hover:text-az-cactus-green cursor-pointer py-3 border-b border-gray-300 flex justify-between items-center">Habitat for Local Wildlife</summary>
+                    <div class="pt-4 pb-2 text-gray-700 leading-relaxed space-y-3">
+                        <p>Native plants play a crucial role in supporting local ecosystems...</p>
+                     </div>
+                </details>
+            </section>
+
+            <section id="section-planning" class="mb-12 p-6 bg-white rounded-lg shadow-md scroll-mt-20">
+                <h2 class="text-3xl font-semibold text-az-sunset-orange mb-6">Planning Your Native Garden</h2>
+                <p class="mb-4 text-gray-700">Successful native landscaping starts with thoughtful planning...</p>
+                 <details class="mb-4">
+                    <summary class="text-xl font-medium text-gray-700 hover:text-az-sunset-orange cursor-pointer py-2 border-b border-gray-300 flex justify-between items-center">Site Assessment</summary>
+                    <div class="pt-3 pb-1 text-gray-700 leading-relaxed space-y-2"><p>Observe your yard throughout the day...</p></div>
+                </details>
+                <details class="mb-4">
+                    <summary class="text-xl font-medium text-gray-700 hover:text-az-sunset-orange cursor-pointer py-2 border-b border-gray-300 flex justify-between items-center">Design Principles</summary>
+                    <div class="pt-3 pb-1 text-gray-700 leading-relaxed space-y-2"><p>Think about creating layers...</p></div>
+                </details>
+                <details class="mb-4">
+                    <summary class="text-xl font-medium text-gray-700 hover:text-az-sunset-orange cursor-pointer py-2 border-b border-gray-300 flex justify-between items-center">Soil Preparation</summary>
+                    <div class="pt-3 pb-1 text-gray-700 leading-relaxed space-y-2"><p>While many natives are adapted to poor soils...</p></div>
+                </details>
+            </section>
+
+            <section id="section-trees" class="mb-12 p-6 bg-white rounded-lg shadow-md scroll-mt-20">
+                <h2 class="text-3xl font-semibold text-az-mesquite mb-6">Majestic Native Trees</h2>
+                <p class="mb-4 text-gray-700">Arizona's native trees provide essential shade, structure, and habitat. They are the backbone of a desert-adapted landscape.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="plant-tile p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center text-center bg-stone-50" data-plant-id="palo-verde">
+                        <h3 class="text-xl font-semibold text-az-mesquite mb-1">Palo Verde</h3>
+                        <p class="text-sm text-gray-500 italic mb-2">Parkinsonia spp.</p>
+                        <p class="text-sm text-az-cactus-green hover:underline">View Details</p>
+                    </div>
+                    <div class="plant-tile p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center text-center bg-stone-50" data-plant-id="desert-ironwood">
+                        <h3 class="text-xl font-semibold text-az-mesquite mb-1">Desert Ironwood</h3>
+                        <p class="text-sm text-gray-500 italic mb-2">Olneya tesota</p>
+                        <p class="text-sm text-az-cactus-green hover:underline">View Details</p>
+                    </div>
+                    <div class="plant-tile p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center text-center bg-stone-50" data-plant-id="mesquite">
+                        <h3 class="text-xl font-semibold text-az-mesquite mb-1">Mesquite</h3>
+                        <p class="text-sm text-gray-500 italic mb-2">Prosopis spp.</p>
+                        <p class="text-sm text-az-cactus-green hover:underline">View Details</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-shrubs" class="mb-12 p-6 bg-white rounded-lg shadow-md scroll-mt-20">
+                <h2 class="text-3xl font-semibold text-az-purple-sage mb-6">Versatile Native Shrubs</h2>
+                <p class="mb-4 text-gray-700">Shrubs add color, texture, and attract pollinators. They are essential for a layered and lively garden.</p>
+                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="plant-tile p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center text-center bg-stone-50" data-plant-id="texas-sage">
+                        <h3 class="text-xl font-semibold text-az-purple-sage mb-1">Texas Sage</h3>
+                        <p class="text-sm text-gray-500 italic mb-2">Leucophyllum frutescens</p>
+                        <p class="text-sm text-az-cactus-green hover:underline">View Details</p>
+                    </div>
+                    <div class="plant-tile p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center text-center bg-stone-50" data-plant-id="desert-globemallow">
+                        <h3 class="text-xl font-semibold text-az-purple-sage mb-1">Desert Globemallow</h3>
+                        <p class="text-sm text-gray-500 italic mb-2">Sphaeralcea ambigua</p>
+                        <p class="text-sm text-az-cactus-green hover:underline">View Details</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-cacti-succulents" class="mb-12 p-6 bg-white rounded-lg shadow-md scroll-mt-20">
+                <h2 class="text-3xl font-semibold text-az-gold mb-6">Sculptural Cacti & Succulents</h2>
+                <p class="mb-4 text-gray-700">These iconic desert plants offer unique forms, textures, and stunning, albeit sometimes infrequent, blooms.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="plant-tile p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center text-center bg-stone-50" data-plant-id="saguaro-cactus">
+                        <h3 class="text-xl font-semibold text-az-gold mb-1">Saguaro Cactus</h3>
+                        <p class="text-sm text-gray-500 italic mb-2">Carnegiea gigantea</p>
+                        <p class="text-sm text-az-cactus-green hover:underline">View Details</p>
+                    </div>
+                    <div class="plant-tile p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center text-center bg-stone-50" data-plant-id="prickly-pear">
+                        <h3 class="text-xl font-semibold text-az-gold mb-1">Prickly Pear</h3>
+                        <p class="text-sm text-gray-500 italic mb-2">Opuntia spp.</p>
+                        <p class="text-sm text-az-cactus-green hover:underline">View Details</p>
+                    </div>
+                    <div class="plant-tile p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center text-center bg-stone-50" data-plant-id="agave">
+                        <h3 class="text-xl font-semibold text-az-gold mb-1">Agave</h3>
+                        <p class="text-sm text-gray-500 italic mb-2">Agave spp.</p>
+                        <p class="text-sm text-az-cactus-green hover:underline">View Details</p>
+                    </div>
+                </div>
+            </section>
+
+             <section id="section-perennials-wildflowers" class="mb-12 p-6 bg-white rounded-lg shadow-md scroll-mt-20">
+                <h2 class="text-3xl font-semibold text-az-terra-cotta mb-6">Seasonal Color: Perennials & Wildflowers</h2>
+                <p class="mb-4 text-gray-700">These plants bring bursts of color and attract pollinators throughout the year. Many reseed readily.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="plant-tile p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center text-center bg-stone-50" data-plant-id="desert-marigold">
+                        <h3 class="text-xl font-semibold text-az-terra-cotta mb-1">Desert Marigold</h3>
+                        <p class="text-sm text-gray-500 italic mb-2">Baileya multiradiata</p>
+                        <p class="text-sm text-az-cactus-green hover:underline">View Details</p>
+                    </div>
+                    <div class="plant-tile p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer flex flex-col items-center text-center bg-stone-50" data-plant-id="penstemon">
+                        <h3 class="text-xl font-semibold text-az-terra-cotta mb-1">Penstemon</h3>
+                        <p class="text-sm text-gray-500 italic mb-2">Penstemon spp.</p>
+                        <p class="text-sm text-az-cactus-green hover:underline">View Details</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-planting-establishment" class="mb-12 p-6 bg-white rounded-lg shadow-md scroll-mt-20">
+                <h2 class="text-3xl font-semibold text-az-stone mb-6">Planting and Establishing Your Natives</h2>
+                <p class="mb-4 text-gray-700">Proper planting techniques are key to helping your native plants establish and thrive.</p>
+                <details class="mb-4">
+                    <summary class="text-xl font-medium text-gray-700 hover:text-az-stone cursor-pointer py-2 border-b border-gray-300 flex justify-between items-center">Best Time to Plant</summary>
+                    <div class="pt-3 pb-1 text-gray-700 leading-relaxed space-y-2"><p>Fall (October-November) is generally the ideal planting season...</p></div>
+                </details>
+                <details class="mb-4">
+                    <summary class="text-xl font-medium text-gray-700 hover:text-az-stone cursor-pointer py-2 border-b border-gray-300 flex justify-between items-center">Planting Steps</summary>
+                    <div class="pt-3 pb-1 text-gray-700 leading-relaxed space-y-2"><p>Dig a hole twice as wide as the root ball...</p></div>
+                </details>
+                 <details class="mb-4">
+                    <summary class="text-xl font-medium text-gray-700 hover:text-az-stone cursor-pointer py-2 border-b border-gray-300 flex justify-between items-center">Watering New Plants</summary>
+                    <div class="pt-3 pb-1 text-gray-700 leading-relaxed space-y-2"><p>Newly planted natives will need regular watering to establish...</p></div>
+                </details>
+            </section>
+
+            <section id="section-ongoing-care" class="mb-12 p-6 bg-white rounded-lg shadow-md scroll-mt-20">
+                <h2 class="text-3xl font-semibold text-az-sky mb-6">Ongoing Care for a Thriving Landscape</h2>
+                <p class="mb-4 text-gray-700">Once established, native plants are relatively low-maintenance, but some care will keep them looking their best.</p>
+                <details class="mb-4">
+                    <summary class="text-xl font-medium text-gray-700 hover:text-az-sky cursor-pointer py-2 border-b border-gray-300 flex justify-between items-center">Watering Established Plants</summary>
+                    <div class="pt-3 pb-1 text-gray-700 leading-relaxed space-y-2"><p>Most established natives require little to no supplemental water...</p></div>
+                </details>
+                <details class="mb-4">
+                    <summary class="text-xl font-medium text-gray-700 hover:text-az-sky cursor-pointer py-2 border-b border-gray-300 flex justify-between items-center">Pruning</summary>
+                    <div class="pt-3 pb-1 text-gray-700 leading-relaxed space-y-2"><p>Prune to remove dead, damaged, or crossing branches...</p></div>
+                </details>
+                <details class="mb-4">
+                    <summary class="text-xl font-medium text-gray-700 hover:text-az-sky cursor-pointer py-2 border-b border-gray-300 flex justify-between items-center">Mulching</summary>
+                    <div class="pt-3 pb-1 text-gray-700 leading-relaxed space-y-2"><p>A layer of organic mulch...</p></div>
+                </details>
+            </section>
+
+            <section id="section-resources" class="mb-12 p-6 bg-white rounded-lg shadow-md scroll-mt-20">
+                <h2 class="text-3xl font-semibold text-gray-700 mb-6">Further Resources & Learning</h2>
+                <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                    <li><a href="#" class="text-az-cactus-green hover:underline">Arizona Native Plant Society</a></li>
+                    <li><a href="#" class="text-az-cactus-green hover:underline">Desert Botanical Garden (Phoenix)</a></li>
+                    <li><a href="#" class="text-az-cactus-green hover:underline">Tohono Chul (Tucson)</a></li>
+                    <li><a href="#" class="text-az-cactus-green hover:underline">Local Nurseries Specializing in Native Plants</a></li>
+                    <li><a href="#" class="text-az-cactus-green hover:underline">University of Arizona Cooperative Extension</a></li>
+                </ul>
+            </section>
+        </main>
+
+        <footer class="text-center mt-16 py-8 border-t border-gray-300">
+            <p class="text-gray-600">&copy; <span id="currentYear"></span> Arizona NativeScape. Cultivating beauty, naturally.</p>
+            <p class="text-sm text-gray-500 mt-1">Disclaimer: This guide provides general information. Always consult local experts.</p>
+        </footer>
+    </div>
+
+    <div id="plantModal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center p-4 z-[100] modal-active">
+        <div id="modalContent" class="bg-white p-6 rounded-lg shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto relative">
+            <button id="closeModalButton" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl leading-none font-semibold">&times;</button>
+            <div> <h3 id="modalPlantName" class="text-3xl font-bold text-az-cactus-green mb-1 text-center md:text-left">Plant Name</h3>
+                <p class="italic text-gray-600 mb-3 text-center md:text-left"><span id="modalPlantSpecies"></span></p>
+                <div class="space-y-1 text-sm mb-4">
+                    <p><strong class="text-gray-800">Mature Size:</strong> <span id="modalPlantSize" class="text-gray-600"></span></p>
+                    <p><strong class="text-gray-800">Water Needs:</strong> <span id="modalPlantWater" class="text-gray-600"></span></p>
+                    <p><strong class="text-gray-800">Sun Exposure:</strong> <span id="modalPlantSun" class="text-gray-600"></span></p>
+                    <p><strong class="text-gray-800">Bloom Time:</strong> <span id="modalPlantBloom" class="text-gray-600"></span></p>
+                    <p><strong class="text-gray-800">Attracts:</strong> <span id="modalPlantWildlife" class="text-gray-600"></span></p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-semibold text-gray-700 mt-4 mb-1">Description:</h4>
+                    <p id="modalPlantDescription" class="text-gray-600 leading-relaxed text-sm"></p>
+                    <h4 class="text-xl font-semibold text-gray-700 mt-4 mb-1">Notes:</h4>
+                    <p id="modalPlantNotes" class="text-gray-600 leading-relaxed text-sm"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Plant Data (No image properties)
+        const plantData = {
+            'palo-verde': {
+                name: 'Palo Verde',
+                species: 'Parkinsonia spp. (e.g., P. florida)',
+                description: 'Known for its iconic green bark (which photosynthesizes) and brilliant yellow spring flowers. Varieties include Blue Palo Verde (Parkinsonia florida), Foothill Palo Verde (Parkinsonia microphylla), and Palo Brea (Parkinsonia praecox). An excellent, fast-growing shade tree.',
+                matureSize: '15-30 ft tall, 15-30 ft wide, depending on species.',
+                waterNeeds: 'Low. Deep soak every 2-4 weeks during establishment (first 1-2 years), then monthly or less. Very drought tolerant once established.',
+                sunExposure: 'Full sun.',
+                bloomTime: 'Spring (typically March-May).',
+                wildlifeAttracted: 'Bees (excellent pollinator plant), birds (nesting and seeds).',
+                notes: 'Some species have thorns. Prune to shape and remove any low-hanging branches if desired. Minimal litter.'
+            },
+            'desert-ironwood': {
+                name: 'Desert Ironwood',
+                species: 'Olneya tesota',
+                description: 'A slow-growing but very long-lived evergreen tree with beautiful pea-like lavender flowers in late spring. Its dense wood is incredibly hard. Provides substantial shade and is a keystone species for desert wildlife.',
+                matureSize: '15-30 ft tall and wide, can occasionally reach 45 ft.',
+                waterNeeds: 'Very low. Water deeply but infrequently once established. Extremely drought tolerant.',
+                sunExposure: 'Full sun.',
+                bloomTime: 'Late spring to early summer (May-June).',
+                wildlifeAttracted: 'Bees, birds (nesting, cover, seeds), mammals (seeds are a food source for many desert animals). Acts as a nurse plant for saguaros and other cacti.',
+                notes: 'Wood is extremely dense and heavy. Protected in some areas due to its ecological importance and slow growth. Thorny.'
+            },
+            'mesquite': {
+                name: 'Mesquite',
+                species: 'Prosopis spp. (e.g., P. velutina)',
+                description: 'Varieties like Honey Mesquite (Prosopis glandulosa) and Velvet Mesquite (Prosopis velutina) are highly drought tolerant. They offer filtered shade, fragrant spring flowers, and edible seed pods (mesquite meal).',
+                matureSize: '15-40 ft tall and wide, variable by species and conditions.',
+                waterNeeds: 'Very low. Deep-rooted and exceptionally drought tolerant. Supplemental water can increase growth rate but is often unnecessary.',
+                sunExposure: 'Full sun.',
+                bloomTime: 'Spring to summer, fragrant yellowish-green catkin-like flowers.',
+                wildlifeAttracted: 'Bees, birds (cover, nesting, seeds), mammals (pods are a food source).',
+                notes: 'Can be thorny. Pods can create litter.'
+            },
+            'texas-sage': {
+                name: 'Texas Sage',
+                species: 'Leucophyllum frutescens',
+                description: 'Known for its silvery-gray foliage and profuse bursts of purple, pink, or white flowers, often triggered by changes in humidity or rainfall (hence the common name "Barometer Bush").',
+                matureSize: '3-8 ft tall and wide, depending on variety.',
+                waterNeeds: 'Low. Water deeply every 2-4 weeks in summer, less in cooler months. Overwatering can lead to root rot.',
+                sunExposure: 'Full sun for best flowering and form.',
+                bloomTime: 'Summer and fall, intermittently, often after rains.',
+                wildlifeAttracted: 'Bees, butterflies, hummingbirds (minor).',
+                notes: 'Extremely heat and drought tolerant. Requires good drainage.'
+            },
+            'desert-globemallow': {
+                name: 'Desert Globemallow',
+                species: 'Sphaeralcea ambigua',
+                description: 'A short-lived perennial or sub-shrub that features vibrant apricot-orange (most common) cup-shaped flowers over a very long season. Other flower colors include pink, lavender, and white.',
+                matureSize: '2-3 ft tall and wide.',
+                waterNeeds: 'Low. Water occasionally once established. Tolerates drought well.',
+                sunExposure: 'Full sun.',
+                bloomTime: 'Spring through fall, with heaviest blooms in spring.',
+                wildlifeAttracted: 'Native bees (especially specialist globemallow bees), butterflies. Larval host for some skipper butterflies.',
+                notes: 'Can reseed readily.'
+            },
+            'saguaro-cactus': {
+                name: 'Saguaro Cactus',
+                species: 'Carnegiea gigantea',
+                description: 'The quintessential symbol of the Sonoran Desert. A very slow-growing columnar cactus that develops arms with age (often after 50-75 years). Produces large white, waxy flowers at night, followed by edible red fruit.',
+                matureSize: 'Can reach 40-60 ft tall, with arms adding width. Growth is extremely slow.',
+                waterNeeds: 'Very low. Relies on natural rainfall. Avoid supplemental watering unless in extreme, prolonged drought and very young.',
+                sunExposure: 'Full sun. Young saguaros often benefit from the shade of a "nurse plant" like a Palo Verde.',
+                bloomTime: 'Late spring to early summer (May-June). Flowers open at night and close by mid-day.',
+                wildlifeAttracted: 'Bats and insects (pollinators of night-blooming flowers), birds (nesting cavities, fruit, eating insects from flowers), Gila Woodpeckers and Gilded Flickers excavate nests.',
+                notes: 'Protected by law in Arizona.'
+            },
+             'prickly-pear': {
+                name: 'Prickly Pear',
+                species: 'Opuntia spp. (e.g., O. engelmannii)',
+                description: 'A diverse group of cacti characterized by flat, paddle-like stems (cladodes). Many varieties with edible pads (nopales) and fruit (tunas). Showy flowers in shades of yellow, orange, red, or pink.',
+                matureSize: 'Highly variable by species, from 1 ft groundcovers to 15 ft tall shrub-like forms.',
+                waterNeeds: 'Low. Water sparingly, allowing soil to dry out completely between waterings. Very drought tolerant.',
+                sunExposure: 'Full sun for most species.',
+                bloomTime: 'Spring to early summer.',
+                wildlifeAttracted: 'Bees, birds (fruit, nesting), desert tortoise (eats pads and fruit).',
+                notes: 'Most species have glochids (tiny, barbed bristles) in addition to larger spines.'
+            },
+            'agave': {
+                name: 'Agave / Century Plant',
+                species: 'Agave spp. (e.g., A. deserti)',
+                description: 'Striking rosette-forming succulents with fleshy, often spiny-edged leaves. Many species varying dramatically in size, color, and form. Most are monocarpic, meaning they flower once (sending up a tall stalk), set seed, and then die, but often produce pups (offsets) around the base.',
+                matureSize: 'Varies widely, from 1 ft to over 10 ft in diameter, with flower stalks reaching 15-40 ft.',
+                waterNeeds: 'Low. Water deeply but infrequently, allowing soil to dry out. Good drainage is essential.',
+                sunExposure: 'Full sun to light shade, depending on the species. Some prefer afternoon shade in the hottest climates.',
+                bloomTime: 'Depends on species and age; can take many years (5-50+) to flower.',
+                wildlifeAttracted: 'Bats and hummingbirds are primary pollinators of the large flower stalks. Insects also visit.',
+                notes: 'Leaf tips are often very sharp. Plant away from foot traffic.'
+            },
+            'desert-marigold': {
+                name: 'Desert Marigold',
+                species: 'Baileya multiradiata',
+                description: 'A cheerful, short-lived perennial that produces bright yellow daisy-like flowers on long stalks above silvery-gray foliage. Blooms nearly year-round with supplemental water, or spring through fall naturally.',
+                matureSize: '1-1.5 ft tall, 1-2 ft wide.',
+                waterNeeds: 'Very low. Extremely drought tolerant. Overwatering can shorten its lifespan.',
+                sunExposure: 'Full sun.',
+                bloomTime: 'Most profusely in spring and fall, but can bloom year-round with favorable conditions.',
+                wildlifeAttracted: 'Bees, butterflies.',
+                notes: 'Reseeds readily.'
+            },
+            'penstemon': {
+                name: 'Penstemon / Beardtongue',
+                species: 'Penstemon spp. (e.g., P. eatonii)',
+                description: 'A large genus of perennials with many beautiful Arizona native species. They feature tubular flowers in vibrant shades of red, pink, purple, blue, and occasionally yellow or white, typically borne on upright spikes.',
+                matureSize: '1-4 ft tall, 1-2 ft wide, depending on species.',
+                waterNeeds: 'Low to moderate. Most prefer well-drained soil and occasional deep watering during dry periods, especially when blooming.',
+                sunExposure: 'Full sun to part shade. Many desert species thrive in full sun.',
+                bloomTime: 'Spring is the primary bloom season for most desert species.',
+                wildlifeAttracted: 'Hummingbirds (especially red-flowered varieties), native bees, butterflies.',
+                notes: 'Many species are relatively short-lived but may reseed.'
+            }
+        };
+
+        // Modal Elements
+        const plantModal = document.getElementById('plantModal');
+        const closeModalButton = document.getElementById('closeModalButton');
+        const modalPlantName = document.getElementById('modalPlantName');
+        const modalPlantSpecies = document.getElementById('modalPlantSpecies');
+        // const modalPlantImage = document.getElementById('modalPlantImage'); // Removed
+        const modalPlantDescription = document.getElementById('modalPlantDescription');
+        const modalPlantSize = document.getElementById('modalPlantSize');
+        const modalPlantWater = document.getElementById('modalPlantWater');
+        const modalPlantSun = document.getElementById('modalPlantSun');
+        const modalPlantBloom = document.getElementById('modalPlantBloom');
+        const modalPlantWildlife = document.getElementById('modalPlantWildlife');
+        const modalPlantNotes = document.getElementById('modalPlantNotes');
+
+        // Open Modal Function
+        function openModal(plantId) {
+            const plant = plantData[plantId];
+            if (plant) {
+                modalPlantName.textContent = plant.name;
+                modalPlantSpecies.textContent = plant.species;
+                // modalPlantImage.src = plant.imageModal; // Removed
+                // modalPlantImage.alt = plant.name; // Removed
+                modalPlantDescription.textContent = plant.description;
+                modalPlantSize.textContent = plant.matureSize;
+                modalPlantWater.textContent = plant.waterNeeds;
+                modalPlantSun.textContent = plant.sunExposure;
+                modalPlantBloom.textContent = plant.bloomTime;
+                modalPlantWildlife.textContent = plant.wildlifeAttracted;
+                modalPlantNotes.textContent = plant.notes;
+                plantModal.classList.remove('hidden');
+                plantModal.classList.add('flex'); 
+            }
+        }
+
+        // Close Modal Function
+        function closeModal() {
+            plantModal.classList.add('hidden');
+            plantModal.classList.remove('flex');
+        }
+
+        // Event Listeners for Plant Tiles
+        document.querySelectorAll('.plant-tile').forEach(tile => {
+            tile.addEventListener('click', () => {
+                const plantId = tile.dataset.plantId;
+                openModal(plantId);
+            });
+        });
+
+        // Event Listener for Close Button
+        closeModalButton.addEventListener('click', closeModal);
+
+        // Event Listener for Clicking Outside Modal Content
+        plantModal.addEventListener('click', (event) => {
+            if (event.target === plantModal) { 
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !plantModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // No longer need setTileImages function
+        // document.addEventListener('DOMContentLoaded', setTileImages); // Removed
+
+    </script>
+
+</body>
+</html>
