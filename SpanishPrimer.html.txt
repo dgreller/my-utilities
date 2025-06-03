@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish Verbs Primer with Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom transition for smooth open/close */
+        .content-area {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .content-area.open {
+            max-height: 4500px; 
+            transition: max-height 1.2s ease-in-out; 
+        }
+        .tile-header {
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        .examples ul, .subjunctive-rules ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+        .examples li, .subjunctive-rules li {
+            margin-bottom: 0.5rem;
+        }
+        .subjunctive-rules ul {
+            margin-left: 1rem; 
+            list-style-type: disc;
+        }
+         .subjunctive-rules h5 {
+            font-weight: 600;
+            margin-top: 0.75rem;
+            margin-bottom: 0.25rem;
+            color: #c026d3; 
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f0f4f8; 
+            color: #1a202c; 
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        .main-title {
+            color: #2c5282; 
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .tile {
+            margin-bottom: 1rem;
+            border-radius: 0.5rem; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        }
+        .tile-header h2 {
+            font-size: 1.75rem; 
+            font-weight: 600; 
+        }
+        .further-study {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .further-study h3 {
+            font-size: 1.5rem;
+            color: #2d3748; 
+            margin-bottom: 1rem;
+        }
+        .tile-header:focus, .tile-header:hover {
+            outline: 2px solid #2563eb; 
+            outline-offset: 2px;
+        }
+        .tile-header::after { /* This was for an arrow indicator, keeping for context if tiles need it */
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Quiz Section Styles */
+        .quiz-section {
+            background-color: #ffffff; /* White background for the quiz */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .quiz-section h3 {
+            font-size: 1.75rem;
+            color: #2c5282; /* Tailwind blue-800 */
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .quiz-controls label {
+            font-weight: 600;
+            margin-right: 0.5rem;
+            color: #4a5568; /* Tailwind gray-700 */
+        }
+        .quiz-controls select, .quiz-controls input[type="text"] {
+            padding: 0.5rem;
+            border: 1px solid #cbd5e0; /* Tailwind gray-400 */
+            border-radius: 0.25rem;
+            margin-right: 1rem;
+            min-width: 150px;
+        }
+        .quiz-controls input[type="text"] {
+            width: 200px; /* Fixed width for answer input */
+        }
+        .quiz-question-area {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            color: #2d3748; /* Tailwind gray-800 */
+        }
+        .quiz-question-area .verb-display {
+            font-weight: bold;
+            color: #dd6b20; /* Tailwind orange-600 */
+        }
+         .quiz-question-area .pronoun-display {
+            font-style: italic;
+            color: #2b6cb0; /* Tailwind blue-700 */
+        }
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+        }
+        .quiz-feedback.correct {
+            background-color: #c6f6d5; /* Tailwind green-200 */
+            color: #2f855a; /* Tailwind green-700 */
+            border: 1px solid #9ae6b4; /* Tailwind green-400 */
+        }
+        .quiz-feedback.incorrect {
+            background-color: #fed7d7; /* Tailwind red-200 */
+            color: #c53030; /* Tailwind red-700 */
+            border: 1px solid #feb2b2; /* Tailwind red-400 */
+        }
+        .quiz-button {
+            background-color: #4299e1; /* Tailwind blue-500 */
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+            margin-top: 0.5rem;
+            margin-right: 0.5rem;
+        }
+        .quiz-button:hover {
+            background-color: #2b6cb0; /* Tailwind blue-700 */
+        }
+        .quiz-button:disabled {
+            background-color: #a0aec0; /* Tailwind gray-500 */
+            cursor: not-allowed;
+        }
+        #nextQuestionBtn {
+            background-color: #48bb78; /* Tailwind green-500 */
+        }
+        #nextQuestionBtn:hover {
+            background-color: #38a169; /* Tailwind green-600 */
+        }
+
+    </style>
+</head>
+<body class="bg-gray-100">
+
+<div class="container mx-auto p-4">
+    <h1 class="main-title">Spanish Verbs Primer</h1>
+
+    <!-- Quiz Section -->
+    <div id="quizSection" class="quiz-section">
+        <h3>Verb Conjugation Practice</h3>
+        <div class="quiz-controls mb-4 flex flex-wrap items-center">
+            <label for="tenseSelector">Select Tense:</label>
+            <select id="tenseSelector" class="mr-4 mb-2 sm:mb-0">
+                <option value="">--Choose a Tense--</option>
+                <!-- Options will be populated by JavaScript -->
+            </select>
+        </div>
+
+        <div id="questionArea" class="quiz-question-area">
+            <p>Verb: <span id="verbToConjugate" class="verb-display">---</span></p>
+            <p>Subject: <span id="subjectPronoun" class="pronoun-display">---</span></p>
+        </div>
+
+        <div class="quiz-controls flex flex-wrap items-center">
+            <label for="userAnswer">Your Answer:</label>
+            <input type="text" id="userAnswer" placeholder="Type conjugation here" class="mb-2 sm:mb-0">
+            <button id="submitAnswerBtn" class="quiz-button" disabled>Submit Answer</button>
+        </div>
+        
+        <div id="feedbackArea" class="quiz-feedback my-4" style="display: none;"></div>
+        <button id="nextQuestionBtn" class="quiz-button" style="display: none;">Next Question</button>
+    </div>
+    <!-- End Quiz Section -->
+
+    <div id="appContainer">
+        <!-- Tile for Presente de Indicativo -->
+        <div class="tile bg-sky-600 text-white rounded-lg shadow-lg mb-6">
+            <div class="tile-header p-6 flex justify-between items-center" tabindex="0" role="button" aria-expanded="false" aria-controls="content-presente">
+                <h2 class="text-2xl font-semibold">Present Indicative</h2>
+                <span class="text-2xl transform transition-transform duration-300 ease-in-out arrow-indicator">+</span>
+            </div>
+            <div id="content-presente" class="content-area bg-white text-gray-800 p-6 border-t border-sky-700">
+                <p class="mb-4">The Present Indicative is used to describe actions happening at the current moment, habits, daily routines, universal truths, or scientific facts. It can also be used to talk about the near future when the intention is clear.</p>
+                
+                <h4 class="font-semibold mt-4 mb-2 text-lg text-sky-700">General Regular Endings:</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg mb-4">
+                        <thead class="bg-sky-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-sky-700">Pronoun</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-sky-700">-AR Verbs</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-sky-700">-ER Verbs</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-sky-700">-IR Verbs</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Yo</td><td class="py-3 px-4 border-b border-gray-200">-o</td><td class="py-3 px-4 border-b border-gray-200">-o</td><td class="py-3 px-4 border-b border-gray-200">-o</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Tú</td><td class="py-3 px-4 border-b border-gray-200">-as</td><td class="py-3 px-4 border-b border-gray-200">-es</td><td class="py-3 px-4 border-b border-gray-200">-es</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Él/Ella/Usted</td><td class="py-3 px-4 border-b border-gray-200">-a</td><td class="py-3 px-4 border-b border-gray-200">-e</td><td class="py-3 px-4 border-b border-gray-200">-e</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Nosotros/Nosotras</td><td class="py-3 px-4 border-b border-gray-200">-amos</td><td class="py-3 px-4 border-b border-gray-200">-emos</td><td class="py-3 px-4 border-b border-gray-200">-imos</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Ellos/Ellas/Ustedes</td><td class="py-3 px-4 border-b border-gray-200">-an</td><td class="py-3 px-4 border-b border-gray-200">-en</td><td class="py-3 px-4 border-b border-gray-200">-en</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 class="font-semibold mt-6 mb-2 text-lg text-sky-700">Example Conjugations:</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg">
+                        <thead class="bg-sky-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-sky-700">Pronoun</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-sky-700">Hablar (to speak)</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-sky-700">Comer (to eat)</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-sky-700">Vivir (to live)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Yo</td><td class="py-3 px-4 border-b border-gray-200">hablo</td><td class="py-3 px-4 border-b border-gray-200">como</td><td class="py-3 px-4 border-b border-gray-200">vivo</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Tú</td><td class="py-3 px-4 border-b border-gray-200">hablas</td><td class="py-3 px-4 border-b border-gray-200">comes</td><td class="py-3 px-4 border-b border-gray-200">vives</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Él/Ella/Usted</td><td class="py-3 px-4 border-b border-gray-200">habla</td><td class="py-3 px-4 border-b border-gray-200">come</td><td class="py-3 px-4 border-b border-gray-200">vive</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Nosotros/Nosotras</td><td class="py-3 px-4 border-b border-gray-200">hablamos</td><td class="py-3 px-4 border-b border-gray-200">comemos</td><td class="py-3 px-4 border-b border-gray-200">vivimos</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Ellos/Ellas/Ustedes</td><td class="py-3 px-4 border-b border-gray-200">hablan</td><td class="py-3 px-4 border-b border-gray-200">comen</td><td class="py-3 px-4 border-b border-gray-200">viven</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="examples mt-6">
+                    <h4 class="font-semibold mb-2 text-lg text-sky-700">Examples (Ejemplos):</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li><strong>Hablar:</strong> Yo <span class="font-bold text-sky-600">hablo</span> con mi hermana todos los días. (I speak with my sister every day.) ¿<span class="font-bold text-sky-600">Hablas</span> tú con tus padres a menudo? (Do you speak with your parents often?)</li>
+                        <li><strong>Comer:</strong> Nosotros <span class="font-bold text-sky-600">comemos</span> pizza los viernes. (We eat pizza on Fridays.) Él <span class="font-bold text-sky-600">come</span> muchas frutas. (He eats a lot of fruit.)</li>
+                        <li><strong>Vivir:</strong> Ellos <span class="font-bold text-sky-600">viven</span> en una casa grande. (They live in a big house.) Yo <span class="font-bold text-sky-600">vivo</span> cerca del parque. (I live near the park.)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tile for Pretérito Indefinido -->
+        <div class="tile bg-amber-600 text-white rounded-lg shadow-lg mb-6">
+            <div class="tile-header p-6 flex justify-between items-center" tabindex="0" role="button" aria-expanded="false" aria-controls="content-indefinido">
+                <h2 class="text-2xl font-semibold">Preterite Tense</h2>
+                <span class="text-2xl transform transition-transform duration-300 ease-in-out arrow-indicator">+</span>
+            </div>
+            <div id="content-indefinido" class="content-area bg-white text-gray-800 p-6 border-t border-amber-700">
+                <p class="mb-4">The Preterite Tense (sometimes called Simple Past or Pretérito Perfecto Simple) is used to express past actions that are considered completed or finished at a specific point in the past. It indicates a clear beginning and end of the action.</p>
+                
+                <h4 class="font-semibold mt-4 mb-2 text-lg text-amber-700">General Regular Endings:</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg mb-4">
+                        <thead class="bg-amber-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-amber-700">Pronoun</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-amber-700">-AR Verbs</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-amber-700">-ER Verbs</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-amber-700">-IR Verbs</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Yo</td><td class="py-3 px-4 border-b border-gray-200">-é</td><td class="py-3 px-4 border-b border-gray-200">-í</td><td class="py-3 px-4 border-b border-gray-200">-í</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Tú</td><td class="py-3 px-4 border-b border-gray-200">-aste</td><td class="py-3 px-4 border-b border-gray-200">-iste</td><td class="py-3 px-4 border-b border-gray-200">-iste</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Él/Ella/Usted</td><td class="py-3 px-4 border-b border-gray-200">-ó</td><td class="py-3 px-4 border-b border-gray-200">-ió</td><td class="py-3 px-4 border-b border-gray-200">-ió</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Nosotros/Nosotras</td><td class="py-3 px-4 border-b border-gray-200">-amos</td><td class="py-3 px-4 border-b border-gray-200">-imos</td><td class="py-3 px-4 border-b border-gray-200">-imos</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Ellos/Ellas/Ustedes</td><td class="py-3 px-4 border-b border-gray-200">-aron</td><td class="py-3 px-4 border-b border-gray-200">-ieron</td><td class="py-3 px-4 border-b border-gray-200">-ieron</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 class="font-semibold mt-6 mb-2 text-lg text-amber-700">Example Conjugations:</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg">
+                        <thead class="bg-amber-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-amber-700">Pronoun</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-amber-700">Hablar (to speak)</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-amber-700">Comer (to eat)</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-amber-700">Vivir (to live)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Yo</td><td class="py-3 px-4 border-b border-gray-200">hablé</td><td class="py-3 px-4 border-b border-gray-200">comí</td><td class="py-3 px-4 border-b border-gray-200">viví</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Tú</td><td class="py-3 px-4 border-b border-gray-200">hablaste</td><td class="py-3 px-4 border-b border-gray-200">comiste</td><td class="py-3 px-4 border-b border-gray-200">viviste</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Él/Ella/Usted</td><td class="py-3 px-4 border-b border-gray-200">habló</td><td class="py-3 px-4 border-b border-gray-200">comió</td><td class="py-3 px-4 border-b border-gray-200">vivió</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Nosotros/Nosotras</td><td class="py-3 px-4 border-b border-gray-200">hablamos</td><td class="py-3 px-4 border-b border-gray-200">comimos</td><td class="py-3 px-4 border-b border-gray-200">vivimos</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Ellos/Ellas/Ustedes</td><td class="py-3 px-4 border-b border-gray-200">hablaron</td><td class="py-3 px-4 border-b border-gray-200">comieron</td><td class="py-3 px-4 border-b border-gray-200">vivieron</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="examples mt-6">
+                    <h4 class="font-semibold mb-2 text-lg text-amber-700">Examples (Ejemplos):</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li><strong>Hablar:</strong> Ayer, yo <span class="font-bold text-amber-600">hablé</span> con el profesor. (Yesterday, I spoke with the professor.) Ellos <span class="font-bold text-amber-600">hablaron</span> durante horas. (They spoke for hours.)</li>
+                        <li><strong>Comer:</strong> Anoche, nosotros <span class="font-bold text-amber-600">comimos</span> en un restaurante nuevo. (Last night, we ate at a new restaurant.) Tú <span class="font-bold text-amber-600">comiste</span> toda la tarta. (You ate the whole cake.)</li>
+                        <li><strong>Vivir:</strong> Mi abuelo <span class="font-bold text-amber-600">vivió</span> en México por diez años. (My grandfather lived in Mexico for ten years.) Nosotros <span class="font-bold text-amber-600">vivimos</span> esa experiencia juntos. (We lived that experience together.)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tile for Pretérito Imperfecto -->
+        <div class="tile bg-emerald-600 text-white rounded-lg shadow-lg mb-6">
+            <div class="tile-header p-6 flex justify-between items-center" tabindex="0" role="button" aria-expanded="false" aria-controls="content-imperfecto">
+                <h2 class="text-2xl font-semibold">Imperfect Tense</h2>
+                <span class="text-2xl transform transition-transform duration-300 ease-in-out arrow-indicator">+</span>
+            </div>
+            <div id="content-imperfecto" class="content-area bg-white text-gray-800 p-6 border-t border-emerald-700">
+                <p class="mb-4">The Imperfect Tense (Pretérito Imperfecto) is used to describe past actions that do not have a defined end, habitual actions in the past, descriptions of people, things, or situations in the past, or to indicate age or time in the past. It sets the background or scene for other actions.</p>
+                
+                <h4 class="font-semibold mt-4 mb-2 text-lg text-emerald-700">General Regular Endings:</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg mb-4">
+                        <thead class="bg-emerald-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-emerald-700">Pronoun</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-emerald-700">-AR Verbs</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-emerald-700">-ER Verbs</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-emerald-700">-IR Verbs</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Yo</td><td class="py-3 px-4 border-b border-gray-200">-aba</td><td class="py-3 px-4 border-b border-gray-200">-ía</td><td class="py-3 px-4 border-b border-gray-200">-ía</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Tú</td><td class="py-3 px-4 border-b border-gray-200">-abas</td><td class="py-3 px-4 border-b border-gray-200">-ías</td><td class="py-3 px-4 border-b border-gray-200">-ías</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Él/Ella/Usted</td><td class="py-3 px-4 border-b border-gray-200">-aba</td><td class="py-3 px-4 border-b border-gray-200">-ía</td><td class="py-3 px-4 border-b border-gray-200">-ía</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Nosotros/Nosotras</td><td class="py-3 px-4 border-b border-gray-200">-ábamos</td><td class="py-3 px-4 border-b border-gray-200">-íamos</td><td class="py-3 px-4 border-b border-gray-200">-íamos</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Ellos/Ellas/Ustedes</td><td class="py-3 px-4 border-b border-gray-200">-aban</td><td class="py-3 px-4 border-b border-gray-200">-ían</td><td class="py-3 px-4 border-b border-gray-200">-ían</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 class="font-semibold mt-6 mb-2 text-lg text-emerald-700">Example Conjugations:</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg">
+                        <thead class="bg-emerald-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-emerald-700">Pronoun</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-emerald-700">Hablar (to speak)</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-emerald-700">Comer (to eat)</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-emerald-700">Vivir (to live)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Yo</td><td class="py-3 px-4 border-b border-gray-200">hablaba</td><td class="py-3 px-4 border-b border-gray-200">comía</td><td class="py-3 px-4 border-b border-gray-200">vivía</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Tú</td><td class="py-3 px-4 border-b border-gray-200">hablabas</td><td class="py-3 px-4 border-b border-gray-200">comías</td><td class="py-3 px-4 border-b border-gray-200">vivías</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Él/Ella/Usted</td><td class="py-3 px-4 border-b border-gray-200">hablaba</td><td class="py-3 px-4 border-b border-gray-200">comía</td><td class="py-3 px-4 border-b border-gray-200">vivía</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Nosotros/Nosotras</td><td class="py-3 px-4 border-b border-gray-200">hablábamos</td><td class="py-3 px-4 border-b border-gray-200">comíamos</td><td class="py-3 px-4 border-b border-gray-200">vivíamos</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Ellos/Ellas/Ustedes</td><td class="py-3 px-4 border-b border-gray-200">hablaban</td><td class="py-3 px-4 border-b border-gray-200">comían</td><td class="py-3 px-4 border-b border-gray-200">vivían</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="examples mt-6">
+                    <h4 class="font-semibold mb-2 text-lg text-emerald-700">Examples (Ejemplos):</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li><strong>Hablar:</strong> Cuando era niño, yo <span class="font-bold text-emerald-600">hablaba</span> mucho con mis amigos. (When I was a child, I used to talk a lot with my friends.) Mis padres <span class="font-bold text-emerald-600">hablaban</span> por teléfono mientras yo jugaba. (My parents were talking on the phone while I was playing.)</li>
+                        <li><strong>Comer:</strong> De pequeño, yo <span class="font-bold text-emerald-600">comía</span> helado todos los días. (As a child, I used to eat ice cream every day.) Siempre <span class="font-bold text-emerald-600">comíamos</span> juntos en familia. (We always used to eat together as a family.)</li>
+                        <li><strong>Vivir:</strong> Antes, nosotros <span class="font-bold text-emerald-600">vivíamos</span> en el campo. (Before, we used to live in the countryside.) Ella <span class="font-bold text-emerald-600">vivía</span> feliz en su antiguo barrio. (She was living happily in her old neighborhood.)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tile for Futuro Simple -->
+        <div class="tile bg-indigo-600 text-white rounded-lg shadow-lg mb-6">
+            <div class="tile-header p-6 flex justify-between items-center" tabindex="0" role="button" aria-expanded="false" aria-controls="content-futuro">
+                <h2 class="text-2xl font-semibold">Simple Future Tense</h2>
+                <span class="text-2xl transform transition-transform duration-300 ease-in-out arrow-indicator">+</span>
+            </div>
+            <div id="content-futuro" class="content-area bg-white text-gray-800 p-6 border-t border-indigo-700">
+                <p class="mb-4">The Simple Future Tense (Futuro Simple) is used to express actions that will happen in the future. It can also be used to make predictions, express probability or uncertainty about the present ("I wonder if he/she is home"), or to give formal commands.</p>
+                <p class="text-sm text-gray-600 mb-2">Note: The future endings are added to the complete infinitive of the verb for all (-AR, -ER, and -IR) verbs.</p>
+                
+                <h4 class="font-semibold mt-4 mb-2 text-lg text-indigo-700">General Regular Endings:</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg mb-4">
+                        <thead class="bg-indigo-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-indigo-700">Pronoun</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-indigo-700">Ending (for -AR, -ER, -IR)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Yo</td><td class="py-3 px-4 border-b border-gray-200">-é</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Tú</td><td class="py-3 px-4 border-b border-gray-200">-ás</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Él/Ella/Usted</td><td class="py-3 px-4 border-b border-gray-200">-á</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Nosotros/Nosotras</td><td class="py-3 px-4 border-b border-gray-200">-emos</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Ellos/Ellas/Ustedes</td><td class="py-3 px-4 border-b border-gray-200">-án</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <h4 class="font-semibold mt-6 mb-2 text-lg text-indigo-700">Example Conjugations:</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg">
+                        <thead class="bg-indigo-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-indigo-700">Pronoun</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-indigo-700">Hablar (to speak)</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-indigo-700">Comer (to eat)</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-indigo-700">Vivir (to live)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Yo</td><td class="py-3 px-4 border-b border-gray-200">hablaré</td><td class="py-3 px-4 border-b border-gray-200">comeré</td><td class="py-3 px-4 border-b border-gray-200">viviré</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Tú</td><td class="py-3 px-4 border-b border-gray-200">hablarás</td><td class="py-3 px-4 border-b border-gray-200">comerás</td><td class="py-3 px-4 border-b border-gray-200">vivirás</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Él/Ella/Usted</td><td class="py-3 px-4 border-b border-gray-200">hablará</td><td class="py-3 px-4 border-b border-gray-200">comerá</td><td class="py-3 px-4 border-b border-gray-200">vivirá</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Nosotros/Nosotras</td><td class="py-3 px-4 border-b border-gray-200">hablaremos</td><td class="py-3 px-4 border-b border-gray-200">comeremos</td><td class="py-3 px-4 border-b border-gray-200">viviremos</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Ellos/Ellas/Ustedes</td><td class="py-3 px-4 border-b border-gray-200">hablarán</td><td class="py-3 px-4 border-b border-gray-200">comerán</td><td class="py-3 px-4 border-b border-gray-200">vivirán</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="examples mt-6">
+                    <h4 class="font-semibold mb-2 text-lg text-indigo-700">Examples (Ejemplos):</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li><strong>Hablar:</strong> Mañana <span class="font-bold text-indigo-600">hablaré</span> con mi jefe sobre el proyecto. (Tomorrow I will speak with my boss about the project.) ¿<span class="font-bold text-indigo-600">Hablarás</span> con ella más tarde? (Will you speak with her later?)</li>
+                        <li><strong>Comer:</strong> El próximo fin de semana, <span class="font-bold text-indigo-600">comeremos</span> en casa de mis abuelos. (Next weekend, we will eat at my grandparents' house.) Supongo que él <span class="font-bold text-indigo-600">comerá</span> algo ligero. (I suppose he will eat something light.)</li>
+                        <li><strong>Vivir:</strong> En el futuro, la gente <span class="font-bold text-indigo-600">vivirá</span> en ciudades más ecológicas. (In the future, people will live in more ecological cities.) Nosotros <span class="font-bold text-indigo-600">viviremos</span> muchas aventuras. (We will live many adventures.)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tile for Presente de Subjuntivo -->
+        <div class="tile bg-rose-600 text-white rounded-lg shadow-lg mb-6">
+            <div class="tile-header p-6 flex justify-between items-center" tabindex="0" role="button" aria-expanded="false" aria-controls="content-subjuntivo">
+                <h2 class="text-2xl font-semibold">Present Subjunctive</h2>
+                <span class="text-2xl transform transition-transform duration-300 ease-in-out arrow-indicator">+</span>
+            </div>
+            <div id="content-subjuntivo" class="content-area bg-white text-gray-800 p-6 border-t border-rose-700">
+                <p class="mb-4">The Present Subjunctive (Presente de Subjuntivo) is a mood used to express subjectivity, uncertainty, or non-factual situations. Unlike the indicative mood, which states facts, the subjunctive presents actions or states from a personal perspective, often involving desires, doubts, emotions, recommendations, or hypothetical scenarios. It's crucial to understand its triggers, as its use depends heavily on the context provided by the main clause of a sentence or by specific expressions.</p>
+                
+                <div class="subjunctive-rules mt-4">
+                    <h4 class="font-semibold mb-3 text-xl text-rose-700">Key Triggers for the Present Subjunctive:</h4>
+                    
+                    <h5>1. Wishes, Desires, Commands, and Influence (WEIRDO - W)</h5>
+                    <p class="mb-2 text-sm text-gray-600">When the main clause expresses a wish, desire, command, suggestion, permission, prohibition, or any attempt to influence the action of another subject in the subordinate clause (introduced by "que").</p>
+                    <ul>
+                        <li><strong>Querer que:</strong> Yo quiero que tú <span class="font-bold text-rose-500">hables</span>. (I want you to speak.)</li>
+                        <li><strong>Desear que:</strong> Deseo que <span class="font-bold text-rose-500">tengas</span> un buen día. (I wish you have a good day.)</li>
+                        <li><strong>Pedir que:</strong> Te pido que me <span class="font-bold text-rose-500">ayudes</span>. (I ask you to help me.)</li>
+                        <li><strong>Sugerir que:</strong> Sugiero que <span class="font-bold text-rose-500">vayamos</span> al cine. (I suggest we go to the movies.)</li>
+                        <li><strong>Insistir en que:</strong> Insiste en que <span class="font-bold text-rose-500">lleguemos</span> temprano. (He insists that we arrive early.)</li>
+                        <li><strong>Prohibir que:</strong> Prohíben que se <span class="font-bold text-rose-500">fume</span> aquí. (They prohibit smoking here.)</li>
+                    </ul>
+
+                    <h5>2. Emotions and Feelings (WEIRDO - E)</h5>
+                    <p class="mb-2 text-sm text-gray-600">When the main clause expresses an emotional reaction to the action or state in the subordinate clause (introduced by "que").</p>
+                    <ul>
+                        <li><strong>Alegrarse de que:</strong> Me alegro de que <span class="font-bold text-rose-500">estés</span> aquí. (I'm happy that you are here.)</li>
+                        <li><strong>Sentir que:</strong> Siento que no <span class="font-bold text-rose-500">puedas</span> venir. (I'm sorry that you can't come.)</li>
+                        <li><strong>Temer que / Tener miedo de que:</strong> Temo que <span class="font-bold text-rose-500">llueva</span>. (I'm afraid it might rain.)</li>
+                        <li><strong>Sorprenderse de que:</strong> Me sorprende que <span class="font-bold text-rose-500">sepa</span> tanto. (It surprises me that he knows so much.)</li>
+                        <li><strong>Gustar que:</strong> Me gusta que <span class="font-bold text-rose-500">sonrías</span>. (I like that you smile.)</li>
+                    </ul>
+
+                    <h5>3. Impersonal Expressions (WEIRDO - I)</h5>
+                    <p class="mb-2 text-sm text-gray-600">When an impersonal expression in the main clause indicates subjectivity, necessity, possibility, or judgment about the action in the subordinate clause (introduced by "que"). If the impersonal expression states a fact or certainty (e.g., "es verdad que," "es cierto que"), the indicative is used instead.</p>
+                    <ul>
+                        <li><strong>Es importante que:</strong> Es importante que <span class="font-bold text-rose-500">estudies</span>. (It's important that you study.)</li>
+                        <li><strong>Es necesario que:</strong> Es necesario que <span class="font-bold text-rose-500">durmamos</span> bien. (It's necessary that we sleep well.)</li>
+                        <li><strong>Es posible que:</strong> Es posible que <span class="font-bold text-rose-500">venga</span> mañana. (It's possible that he/she comes tomorrow.)</li>
+                        <li><strong>Es una lástima que:</strong> Es una lástima que <span class="font-bold text-rose-500">pierdan</span> el juego. (It's a shame that they lose the game.)</li>
+                        <li><strong>Es mejor que:</strong> Es mejor que te <span class="font-bold text-rose-500">quedes</span> en casa. (It's better that you stay home.)</li>
+                    </ul>
+
+                    <h5>4. Recommendations and Requests (WEIRDO - R)</h5>
+                     <p class="mb-2 text-sm text-gray-600">Similar to influence, when the main clause makes a recommendation, suggestion, or formal request.</p>
+                    <ul>
+                        <li><strong>Recomendar que:</strong> Te recomiendo que <span class="font-bold text-rose-500">leas</span> este libro. (I recommend that you read this book.)</li>
+                        <li><strong>Aconsejar que:</strong> Me aconseja que <span class="font-bold text-rose-500">descanse</span>. (He/She advises me to rest.)</li>
+                        <li><strong>Sugerir que:</strong> (Already covered in 'Wishes')</li>
+                    </ul>
+
+                    <h5>5. Doubt, Denial, and Uncertainty (WEIRDO - D)</h5>
+                    <p class="mb-2 text-sm text-gray-600">When the main clause expresses doubt, denial, or uncertainty about the truth or reality of the action in the subordinate clause (introduced by "que"). If the main clause expresses certainty or belief (e.g., "creo que," "pienso que," "no dudo que"), the indicative is used.</p>
+                    <ul>
+                        <li><strong>Dudar que:</strong> Dudo que <span class="font-bold text-rose-500">llegue</span> a tiempo. (I doubt he/she will arrive on time.)</li>
+                        <li><strong>No creer que:</strong> No creo que <span class="font-bold text-rose-500">sea</span> verdad. (I don't believe it's true.)</li>
+                        <li><strong>Negar que:</strong> Niega que <span class="font-bold text-rose-500">tenga</span> el dinero. (He denies having the money.)</li>
+                        <li><strong>No estar seguro/a de que:</strong> No estoy seguro de que <span class="font-bold text-rose-500">podamos</span> ir. (I'm not sure we can go.)</li>
+                        <li><strong>Quizás / Tal vez (often with subjunctive):</strong> Quizás <span class="font-bold text-rose-500">venga</span>. (Maybe he/she will come.) - Subjunctive implies more doubt.</li>
+                    </ul>
+
+                    <h5>6. Ojalá (que) (WEIRDO - O)</h5>
+                    <p class="mb-2 text-sm text-gray-600">The expression "Ojalá (que)" always triggers the subjunctive and expresses a strong wish or hope.</p>
+                    <ul>
+                        <li><strong>Ojalá que:</strong> ¡Ojalá que <span class="font-bold text-rose-500">ganemos</span>! (Hopefully, we win! / I really hope we win!)</li>
+                        <li><strong>Ojalá:</strong> ¡Ojalá <span class="font-bold text-rose-500">haga</span> buen tiempo! (I hope the weather is good!)</li>
+                    </ul>
+                    
+                    <h5>7. Certain Conjunctions</h5>
+                    <p class="mb-2 text-sm text-gray-600">Some conjunctions require the subjunctive when the action in the subordinate clause is anticipated, hypothetical, uncertain, or dependent on a condition. If the action is habitual or a known fact, the indicative is often used with some of these conjunctions (like 'cuando').</p>
+                    <ul>
+                        <li><strong>Para que (so that, in order that):</strong> Estudio para que <span class="font-bold text-rose-500">pueda</span> pasar el examen. (I study so that I can pass the exam.)</li>
+                        <li><strong>A menos que (unless):</strong> No saldremos a menos que <span class="font-bold text-rose-500">deje</span> de llover. (We won't go out unless it stops raining.)</li>
+                        <li><strong>Con tal (de) que (provided that, as long as):</strong> Te presto el coche con tal de que lo <span class="font-bold text-rose-500">cuides</span>. (I'll lend you the car provided that you take care of it.)</li>
+                        <li><strong>Sin que (without):</strong> Entró sin que nadie lo <span class="font-bold text-rose-500">viera</span>. (He entered without anyone seeing him.) (Note: This example uses imperfect subjunctive, but the trigger is the same for present if context fits). For present: Hago la tarea sin que mis padres me lo <span class="font-bold text-rose-500">pidan</span>. (I do homework without my parents asking me to.)</li>
+                        <li><strong>Antes de que (before):</strong> Llámame antes de que <span class="font-bold text-rose-500">salgas</span>. (Call me before you leave.)</li>
+                        <li><strong>Cuando (when - referring to a future, uncompleted action):</strong> Cuando <span class="font-bold text-rose-500">llegues</span>, avísame. (When you arrive, let me know.) Compare with indicative: Cuando llego a casa, descanso. (When I arrive home [habitually], I rest.)</li>
+                        <li><strong>Aunque (although, even if - expressing a hypothetical or uncertain situation):</strong> Aunque <span class="font-bold text-rose-500">llueva</span>, iré. (Even if it rains, I will go.) Compare with indicative: Aunque llueve, voy. (Although it is raining [fact], I am going.)</li>
+                    </ul>
+                     <p class="mt-3 mb-4 text-sm text-gray-700"><strong>Key Condition: Change of Subject.</strong> For many of these triggers (especially wishes, emotions, impersonal expressions, doubt), the subjunctive is used when there is a change of subject between the main clause and the subordinate clause (connected by "que"). If the subject is the same, an infinitive is typically used instead of "que" + subjunctive. Ex: <span class="italic">Quiero <span class="font-bold">viajar</span></span> (I want to travel) vs. <span class="italic">Quiero que tú <span class="font-bold text-rose-500">viajes</span></span> (I want you to travel).</p>
+                </div>
+
+                <h4 class="font-semibold mt-8 mb-2 text-lg text-rose-700">General Regular Endings:</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg mb-4">
+                        <thead class="bg-rose-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-rose-700">Pronoun</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-rose-700">-AR Verbs</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-rose-700">-ER Verbs</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-rose-700">-IR Verbs</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Yo</td><td class="py-3 px-4 border-b border-gray-200">-e</td><td class="py-3 px-4 border-b border-gray-200">-a</td><td class="py-3 px-4 border-b border-gray-200">-a</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Tú</td><td class="py-3 px-4 border-b border-gray-200">-es</td><td class="py-3 px-4 border-b border-gray-200">-as</td><td class="py-3 px-4 border-b border-gray-200">-as</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Él/Ella/Usted</td><td class="py-3 px-4 border-b border-gray-200">-e</td><td class="py-3 px-4 border-b border-gray-200">-a</td><td class="py-3 px-4 border-b border-gray-200">-a</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Nosotros/Nosotras</td><td class="py-3 px-4 border-b border-gray-200">-emos</td><td class="py-3 px-4 border-b border-gray-200">-amos</td><td class="py-3 px-4 border-b border-gray-200">-amos</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Ellos/Ellas/Ustedes</td><td class="py-3 px-4 border-b border-gray-200">-en</td><td class="py-3 px-4 border-b border-gray-200">-an</td><td class="py-3 px-4 border-b border-gray-200">-an</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h4 class="font-semibold mt-6 mb-2 text-lg text-rose-700">Example Conjugations:</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg">
+                        <thead class="bg-rose-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-rose-700">Pronoun</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-rose-700">Hablar (to speak)</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-rose-700">Comer (to eat)</th>
+                                <th class="py-3 px-4 border-b border-gray-300 text-left text-sm font-semibold text-rose-700">Vivir (to live)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Yo</td><td class="py-3 px-4 border-b border-gray-200">hable</td><td class="py-3 px-4 border-b border-gray-200">coma</td><td class="py-3 px-4 border-b border-gray-200">viva</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Tú</td><td class="py-3 px-4 border-b border-gray-200">hables</td><td class="py-3 px-4 border-b border-gray-200">comas</td><td class="py-3 px-4 border-b border-gray-200">vivas</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Él/Ella/Usted</td><td class="py-3 px-4 border-b border-gray-200">hable</td><td class="py-3 px-4 border-b border-gray-200">coma</td><td class="py-3 px-4 border-b border-gray-200">viva</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Nosotros/Nosotras</td><td class="py-3 px-4 border-b border-gray-200">hablemos</td><td class="py-3 px-4 border-b border-gray-200">comamos</td><td class="py-3 px-4 border-b border-gray-200">vivamos</td></tr>
+                            <tr><td class="py-3 px-4 border-b border-gray-200">Ellos/Ellas/Ustedes</td><td class="py-3 px-4 border-b border-gray-200">hablen</td><td class="py-3 px-4 border-b border-gray-200">coman</td><td class="py-3 px-4 border-b border-gray-200">vivan</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="examples mt-6">
+                    <h4 class="font-semibold mb-2 text-lg text-rose-700">Examples (Ejemplos using some triggers):</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        <li><strong>Querer que (Wish):</strong> Quiero que tú <span class="font-bold text-rose-600">hables</span> más despacio. (I want you to speak more slowly.)</li>
+                        <li><strong>Es importante que (Impersonal Expression):</strong> Es importante que nosotros <span class="font-bold text-rose-600">comamos</span> bien. (It's important that we eat well.)</li>
+                        <li><strong>Dudar que (Doubt):</strong> Dudo que ellos <span class="font-bold text-rose-600">vivan</span> aquí. (I doubt that they live here.)</li>
+                        <li><strong>Ojalá que (Hope):</strong> Ojalá que <span class="font-bold text-rose-600">tengamos</span> suerte. (Hopefully, we have luck.)</li>
+                         <li><strong>Para que (Conjunction - purpose):</strong> Te doy el dinero para que <span class="font-bold text-rose-600">compres</span> el libro. (I give you the money so that you buy the book.)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Further Study Section -->
+        <div class="further-study bg-white p-6 rounded-lg shadow-lg">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Further Study & Practice Tips</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                <li><strong>Practice Regularly:</strong> Consistency is key. Try to use these verb tenses in short sentences every day.</li>
+                <li><strong>Master Subjunctive Triggers:</strong> Pay close attention to the expressions and conjunctions that require the subjunctive. Create your own example sentences.</li>
+                <li><strong>Listen Actively:</strong> Pay attention to how native speakers use these tenses in music, movies, podcasts, and conversations. Focus on Latin American Spanish content to get accustomed to the usage (as "vosotros" is primarily used in Spain).</li>
+                <li><strong>Read in Spanish:</strong> Start with simple texts or articles and notice how these tenses are applied in writing.</li>
+                <li><strong>Speak without Fear:</strong> Don't be afraid to make mistakes. The more you practice speaking, the more natural conjugations will become. Try finding a language exchange partner.</li>
+                <li><strong>Explore Irregular Verbs:</strong> Once you are comfortable with these regular verb patterns, the next step is to learn common irregular verbs, as they are very frequent in Spanish (e.g., ser, estar, ir, tener), especially in the subjunctive.</li>
+                <li><strong>Use Online Resources:</strong> There are many websites and apps that offer further grammar explanations, exercises, and verb drills.</li>
+            </ul>
+        </div>
+
+    </div> <!-- end appContainer -->
+</div> <!-- end container -->
+
+<script>
+    // Data for the quiz (conjugations)
+    const quizData = {
+        "Present Indicative": [
+            { verb: "hablar", meaning: "to speak", type: "AR", conjugations: { "Yo": "hablo", "Tú": "hablas", "Él/Ella/Usted": "habla", "Nosotros/Nosotras": "hablamos", "Ellos/Ellas/Ustedes": "hablan" } },
+            { verb: "comer", meaning: "to eat", type: "ER", conjugations: { "Yo": "como", "Tú": "comes", "Él/Ella/Usted": "come", "Nosotros/Nosotras": "comemos", "Ellos/Ellas/Ustedes": "comen" } },
+            { verb: "vivir", meaning: "to live", type: "IR", conjugations: { "Yo": "vivo", "Tú": "vives", "Él/Ella/Usted": "vive", "Nosotros/Nosotras": "vivimos", "Ellos/Ellas/Ustedes": "viven" } }
+        ],
+        "Preterite Tense": [
+            { verb: "hablar", meaning: "to speak", type: "AR", conjugations: { "Yo": "hablé", "Tú": "hablaste", "Él/Ella/Usted": "habló", "Nosotros/Nosotras": "hablamos", "Ellos/Ellas/Ustedes": "hablaron" } },
+            { verb: "comer", meaning: "to eat", type: "ER", conjugations: { "Yo": "comí", "Tú": "comiste", "Él/Ella/Usted": "comió", "Nosotros/Nosotras": "comimos", "Ellos/Ellas/Ustedes": "comieron" } },
+            { verb: "vivir", meaning: "to live", type: "IR", conjugations: { "Yo": "viví", "Tú": "viviste", "Él/Ella/Usted": "vivió", "Nosotros/Nosotras": "vivimos", "Ellos/Ellas/Ustedes": "vivieron" } }
+        ],
+        "Imperfect Tense": [
+            { verb: "hablar", meaning: "to speak", type: "AR", conjugations: { "Yo": "hablaba", "Tú": "hablabas", "Él/Ella/Usted": "hablaba", "Nosotros/Nosotras": "hablábamos", "Ellos/Ellas/Ustedes": "hablaban" } },
+            { verb: "comer", meaning: "to eat", type: "ER", conjugations: { "Yo": "comía", "Tú": "comías", "Él/Ella/Usted": "comía", "Nosotros/Nosotras": "comíamos", "Ellos/Ellas/Ustedes": "comían" } },
+            { verb: "vivir", meaning: "to live", type: "IR", conjugations: { "Yo": "vivía", "Tú": "vivías", "Él/Ella/Usted": "vivía", "Nosotros/Nosotras": "vivíamos", "Ellos/Ellas/Ustedes": "vivían" } }
+        ],
+        "Simple Future Tense": [ // Note: Future endings are added to the infinitive
+            { verb: "hablar", meaning: "to speak", type: "AR", conjugations: { "Yo": "hablaré", "Tú": "hablarás", "Él/Ella/Usted": "hablará", "Nosotros/Nosotras": "hablaremos", "Ellos/Ellas/Ustedes": "hablarán" } },
+            { verb: "comer", meaning: "to eat", type: "ER", conjugations: { "Yo": "comeré", "Tú": "comerás", "Él/Ella/Usted": "comerá", "Nosotros/Nosotras": "comeremos", "Ellos/Ellas/Ustedes": "comerán" } },
+            { verb: "vivir", meaning: "to live", type: "IR", conjugations: { "Yo": "viviré", "Tú": "vivirás", "Él/Ella/Usted": "vivirá", "Nosotros/Nosotras": "viviremos", "Ellos/Ellas/Ustedes": "vivirán" } }
+        ],
+        "Present Subjunctive": [
+            { verb: "hablar", meaning: "to speak", type: "AR", conjugations: { "Yo": "hable", "Tú": "hables", "Él/Ella/Usted": "hable", "Nosotros/Nosotras": "hablemos", "Ellos/Ellas/Ustedes": "hablen" } },
+            { verb: "comer", meaning: "to eat", type: "ER", conjugations: { "Yo": "coma", "Tú": "comas", "Él/Ella/Usted": "coma", "Nosotros/Nosotras": "comamos", "Ellos/Ellas/Ustedes": "coman" } },
+            { verb: "vivir", meaning: "to live", type: "IR", conjugations: { "Yo": "viva", "Tú": "vivas", "Él/Ella/Usted": "viva", "Nosotros/Nosotras": "vivamos", "Ellos/Ellas/Ustedes": "vivan" } }
+        ]
+    };
+
+    // Data for general rules (endings)
+    const generalRulesData = {
+        "Present Indicative": {
+            "AR": { "Yo": "-o", "Tú": "-as", "Él/Ella/Usted": "-a", "Nosotros/Nosotras": "-amos", "Ellos/Ellas/Ustedes": "-an" },
+            "ER": { "Yo": "-o", "Tú": "-es", "Él/Ella/Usted": "-e", "Nosotros/Nosotras": "-emos", "Ellos/Ellas/Ustedes": "-en" },
+            "IR": { "Yo": "-o", "Tú": "-es", "Él/Ella/Usted": "-e", "Nosotros/Nosotras": "-imos", "Ellos/Ellas/Ustedes": "-en" }
+        },
+        "Preterite Tense": {
+            "AR": { "Yo": "-é", "Tú": "-aste", "Él/Ella/Usted": "-ó", "Nosotros/Nosotras": "-amos", "Ellos/Ellas/Ustedes": "-aron" },
+            "ER": { "Yo": "-í", "Tú": "-iste", "Él/Ella/Usted": "-ió", "Nosotros/Nosotras": "-imos", "Ellos/Ellas/Ustedes": "-ieron" },
+            "IR": { "Yo": "-í", "Tú": "-iste", "Él/Ella/Usted": "-ió", "Nosotros/Nosotras": "-imos", "Ellos/Ellas/Ustedes": "-ieron" }
+        },
+        "Imperfect Tense": {
+            "AR": { "Yo": "-aba", "Tú": "-abas", "Él/Ella/Usted": "-aba", "Nosotros/Nosotras": "-ábamos", "Ellos/Ellas/Ustedes": "-aban" },
+            "ER": { "Yo": "-ía", "Tú": "-ías", "Él/Ella/Usted": "-ía", "Nosotros/Nosotras": "-íamos", "Ellos/Ellas/Ustedes": "-ían" },
+            "IR": { "Yo": "-ía", "Tú": "-ías", "Él/Ella/Usted": "-ía", "Nosotros/Nosotras": "-íamos", "Ellos/Ellas/Ustedes": "-ían" }
+        },
+        "Simple Future Tense": { // These are added to the infinitive
+            "AR": { "Yo": "-é", "Tú": "-ás", "Él/Ella/Usted": "-á", "Nosotros/Nosotras": "-emos", "Ellos/Ellas/Ustedes": "-án" },
+            "ER": { "Yo": "-é", "Tú": "-ás", "Él/Ella/Usted": "-á", "Nosotros/Nosotras": "-emos", "Ellos/Ellas/Ustedes": "-án" },
+            "IR": { "Yo": "-é", "Tú": "-ás", "Él/Ella/Usted": "-á", "Nosotros/Nosotras": "-emos", "Ellos/Ellas/Ustedes": "-án" }
+        },
+        "Present Subjunctive": {
+            "AR": { "Yo": "-e", "Tú": "-es", "Él/Ella/Usted": "-e", "Nosotros/Nosotras": "-emos", "Ellos/Ellas/Ustedes": "-en" },
+            "ER": { "Yo": "-a", "Tú": "-as", "Él/Ella/Usted": "-a", "Nosotros/Nosotras": "-amos", "Ellos/Ellas/Ustedes": "-an" },
+            "IR": { "Yo": "-a", "Tú": "-as", "Él/Ella/Usted": "-a", "Nosotros/Nosotras": "-amos", "Ellos/Ellas/Ustedes": "-an" }
+        }
+    };
+
+    const pronouns = ["Yo", "Tú", "Él/Ella/Usted", "Nosotros/Nosotras", "Ellos/Ellas/Ustedes"];
+
+    let currentSelectedTense = "";
+    let currentVerbData = null;
+    let currentPronoun = "";
+    let correctAnswer = "";
+
+    // DOM Elements for Quiz
+    const tenseSelector = document.getElementById('tenseSelector');
+    const verbToConjugateEl = document.getElementById('verbToConjugate');
+    const subjectPronounEl = document.getElementById('subjectPronoun');
+    const userAnswerEl = document.getElementById('userAnswer');
+    const submitAnswerBtn = document.getElementById('submitAnswerBtn');
+    const feedbackAreaEl = document.getElementById('feedbackArea');
+    const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+    const questionAreaEl = document.getElementById('questionArea');
+
+
+    function initializeQuiz() {
+        for (const tense in quizData) {
+            const option = document.createElement('option');
+            option.value = tense;
+            option.textContent = tense;
+            tenseSelector.appendChild(option);
+        }
+        tenseSelector.addEventListener('change', handleTenseSelection);
+        submitAnswerBtn.addEventListener('click', checkAnswer);
+        nextQuestionBtn.addEventListener('click', loadQuestion);
+        userAnswerEl.addEventListener('keypress', function(event) {
+            if (event.key === "Enter" && !submitAnswerBtn.disabled) {
+                checkAnswer();
+            }
+        });
+        questionAreaEl.style.display = 'none';
+        submitAnswerBtn.disabled = true;
+        userAnswerEl.disabled = true;
+    }
+
+    function handleTenseSelection(event) {
+        currentSelectedTense = event.target.value;
+        if (currentSelectedTense) {
+            questionAreaEl.style.display = 'block';
+            submitAnswerBtn.disabled = false;
+            userAnswerEl.disabled = false;
+            loadQuestion();
+        } else {
+            questionAreaEl.style.display = 'none';
+            verbToConjugateEl.textContent = '---';
+            subjectPronounEl.textContent = '---';
+            feedbackAreaEl.style.display = 'none';
+            nextQuestionBtn.style.display = 'none';
+            submitAnswerBtn.disabled = true;
+            userAnswerEl.disabled = true;
+            userAnswerEl.value = '';
+        }
+    }
+
+    function loadQuestion() {
+        if (!currentSelectedTense || !quizData[currentSelectedTense]) {
+            feedbackAreaEl.textContent = "Please select a tense to start.";
+            feedbackAreaEl.className = 'quiz-feedback incorrect';
+            feedbackAreaEl.style.display = 'block';
+            return;
+        }
+
+        const verbsForTense = quizData[currentSelectedTense];
+        currentVerbData = verbsForTense[Math.floor(Math.random() * verbsForTense.length)];
+        currentPronoun = pronouns[Math.floor(Math.random() * pronouns.length)];
+        correctAnswer = currentVerbData.conjugations[currentPronoun];
+
+        verbToConjugateEl.textContent = currentVerbData.verb;
+        subjectPronounEl.textContent = currentPronoun;
+
+        userAnswerEl.value = '';
+        userAnswerEl.disabled = false;
+        userAnswerEl.focus();
+        feedbackAreaEl.style.display = 'none';
+        submitAnswerBtn.disabled = false;
+        nextQuestionBtn.style.display = 'none';
+    }
+
+    function checkAnswer() {
+        if (!correctAnswer || !currentVerbData) { 
+            loadQuestion(); 
+            return;
+        }
+        const userAnswer = userAnswerEl.value.trim();
+        feedbackAreaEl.style.display = 'block';
+
+        if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+            feedbackAreaEl.textContent = "¡Correcto! 🎉";
+            feedbackAreaEl.className = 'quiz-feedback correct';
+        } else {
+            let feedbackMessage = `Incorrect. The correct answer for "${currentVerbData.verb}" (${currentPronoun}) is: <strong>${correctAnswer}</strong>.`;
+            
+            // Try to get the rule
+            const verbType = currentVerbData.type; // AR, ER, or IR
+            if (generalRulesData[currentSelectedTense] && generalRulesData[currentSelectedTense][verbType] && generalRulesData[currentSelectedTense][verbType][currentPronoun]) {
+                const ruleEnding = generalRulesData[currentSelectedTense][verbType][currentPronoun];
+                let ruleExplanation = `For <strong>${verbType}</strong> verbs in the <strong>${currentSelectedTense}</strong> with subject <strong>${currentPronoun}</strong>, the ending is <strong>${ruleEnding}</strong>.`;
+                if (currentSelectedTense === "Simple Future Tense") {
+                     ruleExplanation = `For <strong>${verbType}</strong> verbs in the <strong>${currentSelectedTense}</strong> with subject <strong>${currentPronoun}</strong>, you add the ending <strong>${ruleEnding}</strong> to the infinitive.`;
+                }
+                feedbackMessage += `<br>Rule: ${ruleExplanation}`;
+            }
+            feedbackAreaEl.innerHTML = feedbackMessage; // Use innerHTML to render the bold tags
+            feedbackAreaEl.className = 'quiz-feedback incorrect';
+        }
+        submitAnswerBtn.disabled = true;
+        userAnswerEl.disabled = true;
+        nextQuestionBtn.style.display = 'inline-block';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        initializeQuiz(); 
+
+        const tiles = document.querySelectorAll('.tile');
+        tiles.forEach(tile => {
+            const header = tile.querySelector('.tile-header');
+            const content = tile.querySelector('.content-area');
+            const arrowIndicator = header.querySelector('.arrow-indicator'); 
+
+            if (!content.id) {
+                content.id = 'content-' + Math.random().toString(36).substring(2, 9);
+            }
+            header.setAttribute('aria-controls', content.id);
+
+            header.addEventListener('click', () => {
+                const isOpen = content.classList.contains('open');
+                tiles.forEach(otherTile => {
+                    if (otherTile !== tile) {
+                        const otherContent = otherTile.querySelector('.content-area');
+                        const otherArrow = otherTile.querySelector('.arrow-indicator');
+                        otherContent.classList.remove('open');
+                        otherContent.style.maxHeight = '0px';
+                        otherTile.querySelector('.tile-header').setAttribute('aria-expanded', 'false');
+                        if (otherArrow) otherArrow.textContent = '+'; 
+                    }
+                });
+
+                if (isOpen) {
+                    content.classList.remove('open');
+                    content.style.maxHeight = '0px';
+                    header.setAttribute('aria-expanded', 'false');
+                    if (arrowIndicator) arrowIndicator.textContent = '+'; 
+                } else {
+                    content.classList.add('open');
+                    content.style.maxHeight = content.scrollHeight + 60 + 'px'; 
+                    header.setAttribute('aria-expanded', 'true');
+                    if (arrowIndicator) arrowIndicator.textContent = '−'; 
+                }
+            });
+
+            header.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault(); 
+                    header.click(); 
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
