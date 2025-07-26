@@ -149,8 +149,49 @@ select {
     font-size: 0.9rem;
 }
 
-@media (max-width: 600px) {
-    body { padding: 1rem 0.5rem; }
-    header h1 { font-size: 2rem; }
-    .controls { flex-direction: column; gap: 1.5rem; }
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .quote p {
+        font-size: 1.25rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .filters {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .quote-area {
+        padding: 1.5rem;
+    }
+
+    .quote p {
+        font-size: 1.1rem;
+    }
+
+    #random-quote-btn {
+        width: 100%;
+        padding: 1rem;
+    }
 }
