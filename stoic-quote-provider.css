@@ -1,11 +1,11 @@
 :root {
-    --bg-color: #1a1a1a;
-    --surface-color: #2c2c2c;
-    --primary-text-color: #f0f0f0;
-    --secondary-text-color: #a0a0a0;
+    --bg-color: #f0f0f0;
+    --surface-color: #ffffff;
+    --primary-text-color: #333333;
+    --secondary-text-color: #555555;
     --accent-color: #4a90e2;
     --accent-color-hover: #5aa1f2;
-    --border-color: #444;
+    --border-color: #dddddd;
 }
 
 * {
@@ -96,7 +96,7 @@ header p {
 }
 
 .virtues span, .tags span {
-    background-color: #353535;
+    background-color: #e0e0e0;
     padding: 0.25rem 0.75rem;
     border-radius: 15px;
     color: var(--secondary-text-color);
