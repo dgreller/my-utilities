@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stoic Quote Provider</title>
+    <link rel="stylesheet" href="stoic-quote-provider.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Stoic Quote Provider</h1>
+            <p>Your daily dose of wisdom, courage, and tranquility.</p>
+        </header>
+        <main>
+            <div class="quote-area">
+                <blockquote class="quote">
+                    <p id="quote-text"></p>
+                    <footer id="quote-author"></footer>
+                </blockquote>
+                <div class="details">
+                    <div class="virtues" id="quote-virtues"></div>
+                    <div class="tags" id="quote-tags"></div>
+                </div>
+                <div class="application">
+                    <h4>Application</h4>
+                    <p id="quote-application"></p>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="random-quote-btn">Get Random Quote</button>
+                <div class="filters">
+                    <select id="virtue-filter">
+                        <option value="all">All Virtues</option>
+                    </select>
+                    <select id="philosopher-filter">
+                        <option value="all">All Philosophers</option>
+                    </select>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="stoic-quote-provider.js"></script>
+</body>
+</html>
