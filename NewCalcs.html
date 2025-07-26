@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Calculators</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Tailwind gray-900 */
+            color: #d1d5db; /* Tailwind gray-300 */
+        }
+        .category-tile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            aspect-ratio: 1 / 1;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+            border-radius: 0.75rem; /* rounded-xl */
+            background-color: #1f2937; /* Tailwind gray-800 */
+            border: 1px solid #374151; /* Tailwind gray-700 */
+        }
+        .category-tile:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+            border-color: #0ea5e9; /* Tailwind sky-500 */
+        }
+        .conversion-list-item { /* For old style converters */
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            cursor: pointer;
+            border-radius: 0.5rem; /* rounded-lg */
+            background-color: #1f2937; /* Tailwind gray-800 */
+            border: 1px solid #374151; /* Tailwind gray-700 */
+        }
+        .conversion-list-item:hover {
+            background-color: #374151; /* Tailwind gray-700 */
+            border-color: #0ea5e9; /* Tailwind sky-500 */
+        }
+        .nav-button {
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .nav-button:hover {
+            transform: translateY(-1px);
+        }
+        .nav-button:active {
+            transform: translateY(0px);
+        }
+        .app-input { /* General input styling */
+            padding: 0.75rem 1rem;
+            border: 1px solid #4b5563; /* Tailwind gray-600 */
+            border-radius: 0.375rem; /* rounded-md */
+            background-color: #1f2937; /* Tailwind gray-800 */
+            color: #d1d5db; /* Tailwind gray-300 */
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+        .app-input::placeholder {
+            color: #6b7280; /* Tailwind gray-500 */
+        }
+        .app-input:focus {
+            border-color: #0ea5e9; /* Tailwind sky-500 */
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+            outline: none;
+        }
+        .header-glow {
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.5), 0 0 16px rgba(56, 189, 248, 0.3);
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 0.3;
+            filter: invert(1);
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        /* Basic Calculator Styles */
+        .basic-calculator-display {
+            background-color: #030712; /* Tailwind gray-950 */
+            color: #e5e7eb; /* Tailwind gray-200 */
+            border: 1px solid #374151; /* Tailwind gray-700 */
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 0.75rem 1rem;
+            font-size: 2.25rem; /* text-4xl */
+            text-align: right;
+            width: 100%;
+            margin-bottom: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .basic-calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem; /* gap-3 */
+        }
+        .calc-button {
+            background-color: #374151; /* Tailwind gray-700 */
+            color: #e5e7eb; /* Tailwind gray-200 */
+            border: 1px solid #4b5563; /* Tailwind gray-600 */
+            border-radius: 0.375rem; /* rounded-md */
+            padding: 1.25rem 0.5rem; /* py-5 px-2 */
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 500; /* font-medium */
+            transition: background-color 0.15s ease, transform 0.1s ease;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.3);
+        }
+        .calc-button:hover {
+            background-color: #4b5563; /* Tailwind gray-600 */
+            transform: translateY(-1px);
+        }
+        .calc-button:active {
+            background-color: #525f72;
+            transform: translateY(0px);
+        }
+        .calc-button.operator { background-color: #0e7490; }
+        .calc-button.operator:hover { background-color: #0891b2; }
+        .calc-button.equals { background-color: #059669; grid-column: span 2; }
+        .calc-button.equals:hover { background-color: #047857; }
+        .calc-button.clear { background-color: #be123c; }
+        .calc-button.clear:hover { background-color: #9f1239; }
+
+        /* Flexible Converter Styles (shared) */
+        .flexible-unit-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem; /* mb-3 */
+            gap: 0.75rem; /* gap-3 */
+        }
+        .flexible-unit-label {
+            flex-basis: 40%;
+            text-align: right;
+            font-size: 0.875rem; /* text-sm */
+            color: #9ca3af; /* Tailwind gray-400 */
+        }
+        .flexible-unit-input {
+            flex-grow: 1;
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-gray-950 shadow-xl sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-5">
+            <h1 class="text-4xl font-bold tracking-tight text-sky-400 header-glow text-center sm:text-left">New Calculators</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-8">
+
+        <div id="categoriesView">
+            <h2 class="text-3xl font-semibold text-sky-300 mb-8 text-center sm:text-left">Tools & Converters</h2>
+            <div id="categoryGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                </div>
+        </div>
+
+        <div id="flexibleElectricalConverterView" class="hidden">
+            <button id="backToCategoriesFromElectricalBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <h2 class="text-3xl font-bold text-sky-300 mb-6 text-center sm:text-left">Electrical Converter</h2>
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-xl border border-gray-700 max-w-md mx-auto">
+                <div id="electricalUnitsContainer" class="space-y-3">
+                    </div>
+                <button id="clearElectricalInputsBtn" class="nav-button mt-6 w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-2 px-4">Clear All</button>
+                <p id="electricalInputError" class="mt-3 text-red-400 text-sm hidden text-center">Please enter a valid number.</p>
+            </div>
+        </div>
+
+        <div id="flexibleMechanicalConverterView" class="hidden">
+            <button id="backToCategoriesFromMechanicalBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <h2 class="text-3xl font-bold text-sky-300 mb-6 text-center sm:text-left">Mechanical Converter</h2>
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-xl border border-gray-700 max-w-md mx-auto">
+                <div id="mechanicalUnitsContainer" class="space-y-3">
+                    </div>
+                <button id="clearMechanicalInputsBtn" class="nav-button mt-6 w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-2 px-4">Clear All</button>
+                <p id="mechanicalInputError" class="mt-3 text-red-400 text-sm hidden text-center">Please enter a valid number.</p>
+            </div>
+        </div>
+
+        <div id="flexiblePhysicsConverterView" class="hidden">
+            <button id="backToCategoriesFromPhysicsBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <h2 class="text-3xl font-bold text-sky-300 mb-6 text-center sm:text-left">Physics Converter</h2>
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-xl border border-gray-700 max-w-md mx-auto">
+                <div id="physicsUnitsContainer" class="space-y-3">
+                    </div>
+                <button id="clearPhysicsInputsBtn" class="nav-button mt-6 w-full bg-rose-600 hover:bg-rose-500 text-white font-semibold py-2 px-4">Clear All</button>
+                <p id="physicsInputError" class="mt-3 text-red-400 text-sm hidden text-center">Please enter a valid number.</p>
+            </div>
+        </div>
+
+        <div id="trigCalculatorView" class="hidden">
+            <button id="backToCategoriesFromTrigBtn" class="nav-button mb-6 bg-sky-600 hover:bg-sky-500 text-white font-semibold py-2 px-4">&larr; Back to Categories</button>
+            <h2 class="text-3xl font-bold text-sky-300 mb-6 text-center sm:text-left">Trigonometry Calculator</h2>
+            <div class="bg-gray-800 p-4 sm:p-6 rounded-lg shadow-xl border border-gray-700 max-w-sm mx-auto">
+                <input type="text" id="trigCalcDisplay" class="basic-calculator-display" value="0" readonly>
+                <div id="trigCalculatorButtons" class="basic-calculator-grid">
+                    </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="text-center py-10 text-gray-500 text-sm mt-16 border-t border-gray-700">
+        <p>&copy; <span id="currentYear"></span> Universal Tool Hub. Your everyday utilities.</p>
+    </footer>
+
+    <script>
+        // --- Data for Converters and Tools ---
+        const toolCategories = [
+            {
+                name: "Electrical",
+                icon: "⚡️",
+                color: "bg-yellow-500",
+                type: "flexible_electrical_converter",
+                baseUnit: "watt",
+                units: [
+                    { id: "volt", name: "Volt (V)", toBase: (val, inputs) => val * inputs.amp, fromBase: (baseVal, inputs) => baseVal / inputs.amp, precision: 4, related: ["amp", "ohm"] },
+                    { id: "amp", name: "Ampere (A)", toBase: (val, inputs) => inputs.volt * val, fromBase: (baseVal, inputs) => baseVal / inputs.volt, precision: 4, related: ["volt", "ohm"] },
+                    { id: "ohm", name: "Ohm (Ω)", toBase: (val, inputs) => Math.pow(inputs.amp, 2) * val, fromBase: (baseVal, inputs) => baseVal / Math.pow(inputs.amp, 2), precision: 4, related: ["volt", "amp"] },
+                    { id: "watt", name: "Watt (W)", toBase: (val) => val, fromBase: (baseVal) => baseVal, precision: 4, related: ["volt", "amp"] }
+                ]
+            },
+            {
+                name: "Mechanical",
+                icon: "⚙️",
+                color: "bg-gray-500",
+                type: "flexible_mechanical_converter",
+                baseUnit: "newton",
+                units: [
+                    { id: "newton", name: "Newton (N)", toBase: (val) => val, fromBase: (baseVal) => baseVal, precision: 4 },
+                    { id: "pound-force", name: "Pound-force (lbf)", toBase: (val) => val * 4.44822, fromBase: (baseVal) => baseVal / 4.44822, precision: 4 },
+                    { id: "pascal", name: "Pascal (Pa)", toBase: (val) => val, fromBase: (baseVal) => baseVal, precision: 4 },
+                    { id: "psi", name: "PSI", toBase: (val) => val * 6894.76, fromBase: (baseVal) => baseVal / 6894.76, precision: 4 },
+                    { id: "joule", name: "Joule (J)", toBase: (val) => val, fromBase: (baseVal) => baseVal, precision: 4 },
+                    { id: "btu", name: "BTU", toBase: (val) => val * 1055.06, fromBase: (baseVal) => baseVal / 1055.06, precision: 4 }
+                ]
+            },
+            {
+                name: "Physics",
+                icon: "🔬",
+                color: "bg-blue-500",
+                type: "flexible_physics_converter",
+                baseUnit: "m/s",
+                units: [
+                    { id: "mps", name: "Meter/second (m/s)", toBase: (val) => val, fromBase: (baseVal) => baseVal, precision: 4 },
+                    { id: "kph", name: "Kilometer/hour (kph)", toBase: (val) => val / 3.6, fromBase: (baseVal) => baseVal * 3.6, precision: 4 },
+                    { id: "mph", name: "Mile/hour (mph)", toBase: (val) => val / 2.237, fromBase: (baseVal) => baseVal * 2.237, precision: 4 },
+                    { id: "fps", name: "Feet/second (ft/s)", toBase: (val) => val / 3.281, fromBase: (baseVal) => baseVal * 3.281, precision: 4 },
+                    { id: "mps2", name: "Meter/second² (m/s²)", toBase: (val) => val, fromBase: (baseVal) => baseVal, precision: 4 },
+                    { id: "g", name: "G-force (g)", toBase: (val) => val * 9.80665, fromBase: (baseVal) => baseVal / 9.80665, precision: 4 }
+                ]
+            },
+            {
+                name: "Trigonometry",
+                icon: "📐",
+                color: "bg-green-500",
+                type: "trig_calculator"
+            }
+        ];
+
+        // --- DOM Elements ---
+        const categoriesViewEl = document.getElementById('categoriesView');
+        const categoryGridEl = document.getElementById('categoryGrid');
+        const flexibleElectricalConverterViewEl = document.getElementById('flexibleElectricalConverterView');
+        const backToCategoriesFromElectricalBtnEl = document.getElementById('backToCategoriesFromElectricalBtn');
+        const electricalUnitsContainerEl = document.getElementById('electricalUnitsContainer');
+        let clearElectricalInputsBtnEl = document.getElementById('clearElectricalInputsBtn');
+        const electricalInputErrorEl = document.getElementById('electricalInputError');
+
+        const flexibleMechanicalConverterViewEl = document.getElementById('flexibleMechanicalConverterView');
+        const backToCategoriesFromMechanicalBtnEl = document.getElementById('backToCategoriesFromMechanicalBtn');
+        const mechanicalUnitsContainerEl = document.getElementById('mechanicalUnitsContainer');
+        let clearMechanicalInputsBtnEl = document.getElementById('clearMechanicalInputsBtn');
+        const mechanicalInputErrorEl = document.getElementById('mechanicalInputError');
+
+        const flexiblePhysicsConverterViewEl = document.getElementById('flexiblePhysicsConverterView');
+        const backToCategoriesFromPhysicsBtnEl = document.getElementById('backToCategoriesFromPhysicsBtn');
+        const physicsUnitsContainerEl = document.getElementById('physicsUnitsContainer');
+        let clearPhysicsInputsBtnEl = document.getElementById('clearPhysicsInputsBtn');
+        const physicsInputErrorEl = document.getElementById('physicsInputError');
+
+        const trigCalculatorViewEl = document.getElementById('trigCalculatorView');
+        const backToCategoriesFromTrigBtnEl = document.getElementById('backToCategoriesFromTrigBtn');
+        const trigCalcDisplayEl = document.getElementById('trigCalcDisplay');
+        const trigCalculatorButtonsEl = document.getElementById('trigCalculatorButtons');
+
+        // --- State Variables ---
+        let currentCategoryIndex = -1;
+        let currentTrigInput = '0';
+        let trigOperation = null;
+        let shouldResetTrigDisplay = false;
+
+        // --- Display Functions ---
+        function displayCategoriesView() {
+            categoriesViewEl.classList.remove('hidden');
+            flexibleElectricalConverterViewEl.classList.add('hidden');
+            flexibleMechanicalConverterViewEl.classList.add('hidden');
+            flexiblePhysicsConverterViewEl.classList.add('hidden');
+            trigCalculatorViewEl.classList.add('hidden');
+
+            categoryGridEl.innerHTML = '';
+            toolCategories.forEach((category, index) => {
+                const tile = document.createElement('div');
+                tile.className = `category-tile p-6 text-white shadow-lg hover:shadow-xl ${category.color || 'bg-gray-700'} transform hover:scale-105`;
+                tile.innerHTML = `
+                    <div class="text-5xl mb-4">${category.icon || '✨'}</div>
+                    <h3 class="text-xl font-semibold">${category.name}</h3>
+                `;
+                tile.addEventListener('click', () => {
+                    currentCategoryIndex = index;
+                    if (category.type === "flexible_electrical_converter") {
+                        displayFlexibleElectricalConverterView();
+                    } else if (category.type === "flexible_mechanical_converter") {
+                        displayFlexibleMechanicalConverterView();
+                    } else if (category.type === "flexible_physics_converter") {
+                        displayFlexiblePhysicsConverterView();
+                    } else if (category.type === "trig_calculator") {
+                        displayTrigCalculatorView();
+                    }
+                });
+                categoryGridEl.appendChild(tile);
+            });
+        }
+
+        function setupFlexibleConverter(viewEl, containerEl, errorEl, clearBtnId, categoryType) {
+            categoriesViewEl.classList.add('hidden');
+
+            if (viewEl !== flexibleElectricalConverterViewEl) flexibleElectricalConverterViewEl.classList.add('hidden');
+            if (viewEl !== flexibleMechanicalConverterViewEl) flexibleMechanicalConverterViewEl.classList.add('hidden');
+            if (viewEl !== flexiblePhysicsConverterViewEl) flexiblePhysicsConverterViewEl.classList.add('hidden');
+
+            viewEl.classList.remove('hidden');
+
+            const categoryData = toolCategories.find(cat => cat.type === categoryType);
+            if (!categoryData) return;
+
+            const titleEl = viewEl.querySelector('h2');
+            if (titleEl) {
+                titleEl.textContent = categoryData.name + " Converter";
+            }
+
+            containerEl.innerHTML = '';
+            errorEl.classList.add('hidden');
+
+            categoryData.units.forEach(unit => {
+                const row = document.createElement('div');
+                row.className = 'flexible-unit-row';
+
+                const label = document.createElement('label');
+                label.className = 'flexible-unit-label';
+                label.textContent = unit.name + ':';
+                label.htmlFor = `${categoryType}-input-${unit.id}`;
+
+                const input = document.createElement('input');
+                input.type = 'number';
+                input.id = `${categoryType}-input-${unit.id}`;
+                input.className = 'app-input flexible-unit-input w-full';
+                input.placeholder = `Enter ${unit.name.split(' ')[0]}`;
+                input.dataset.unitId = unit.id;
+                input.dataset.categoryType = categoryType;
+
+                input.addEventListener('input', handleFlexibleInputChange);
+
+                row.appendChild(label);
+                row.appendChild(input);
+                containerEl.appendChild(row);
+            });
+
+            const currentClearBtnEl = document.getElementById(clearBtnId);
+            if (currentClearBtnEl) {
+                const newClearBtn = currentClearBtnEl.cloneNode(true);
+                currentClearBtnEl.parentNode.replaceChild(newClearBtn, currentClearBtnEl);
+
+                newClearBtn.addEventListener('click', () => {
+                    categoryData.units.forEach(unit => {
+                        const input = document.getElementById(`${categoryType}-input-${unit.id}`);
+                        if (input) input.value = '';
+                    });
+                    errorEl.classList.add('hidden');
+                });
+
+                if (categoryType === "flexible_electrical_converter") clearElectricalInputsBtnEl = newClearBtn;
+                else if (categoryType === "flexible_mechanical_converter") clearMechanicalInputsBtnEl = newClearBtn;
+                else if (categoryType === "flexible_physics_converter") clearPhysicsInputsBtnEl = newClearBtn;
+            }
+        }
+
+        function handleFlexibleInputChange(event) {
+            const sourceInput = event.target;
+            const sourceUnitId = sourceInput.dataset.unitId;
+            const categoryType = sourceInput.dataset.categoryType;
+            const sourceValueStr = sourceInput.value;
+
+            let errorEl;
+            if (categoryType === "flexible_electrical_converter") errorEl = electricalInputErrorEl;
+            else if (categoryType === "flexible_mechanical_converter") errorEl = mechanicalInputErrorEl;
+            else if (categoryType === "flexible_physics_converter") errorEl = physicsInputErrorEl;
+
+            if(errorEl) errorEl.classList.add('hidden');
+
+            const categoryData = toolCategories.find(cat => cat.type === categoryType);
+            if (!categoryData) return;
+
+            if (sourceValueStr.trim() === '' || sourceValueStr.trim() === '-') {
+                categoryData.units.forEach(unit => {
+                    if (unit.id !== sourceUnitId) {
+                        const targetInput = document.getElementById(`${categoryType}-input-${unit.id}`);
+                        if (targetInput) targetInput.value = '';
+                    }
+                });
+                return;
+            }
+
+            const sourceValue = parseFloat(sourceValueStr);
+            if (isNaN(sourceValue)) {
+                if(errorEl) errorEl.classList.remove('hidden');
+                return;
+            }
+
+            const sourceUnitData = categoryData.units.find(u => u.id === sourceUnitId);
+            if (!sourceUnitData) return;
+
+            const inputs = {};
+            categoryData.units.forEach(unit => {
+                const inputEl = document.getElementById(`${categoryType}-input-${unit.id}`);
+                if (inputEl) {
+                    inputs[unit.id] = parseFloat(inputEl.value) || 0;
+                }
+            });
+
+            const valueInBaseUnit = sourceUnitData.toBase(sourceValue, inputs);
+
+            categoryData.units.forEach(targetUnitData => {
+                if (targetUnitData.id === sourceUnitId) return;
+
+                const targetInput = document.getElementById(`${categoryType}-input-${targetUnitData.id}`);
+                if (targetInput) {
+                    const valueInTargetUnit = targetUnitData.fromBase(valueInBaseUnit, inputs);
+                    if (Number.isInteger(valueInTargetUnit)) {
+                        targetInput.value = valueInTargetUnit;
+                    } else {
+                         targetInput.value = parseFloat(valueInTargetUnit.toFixed(targetUnitData.precision || 3));
+                    }
+                }
+            });
+        }
+
+        function displayFlexibleElectricalConverterView() {
+            setupFlexibleConverter(
+                flexibleElectricalConverterViewEl,
+                electricalUnitsContainerEl,
+                electricalInputErrorEl,
+                'clearElectricalInputsBtn',
+                "flexible_electrical_converter"
+            );
+        }
+
+        function displayFlexibleMechanicalConverterView() {
+            setupFlexibleConverter(
+                flexibleMechanicalConverterViewEl,
+                mechanicalUnitsContainerEl,
+                mechanicalInputErrorEl,
+                'clearMechanicalInputsBtn',
+                "flexible_mechanical_converter"
+            );
+        }
+
+        function displayFlexiblePhysicsConverterView() {
+            setupFlexibleConverter(
+                flexiblePhysicsConverterViewEl,
+                physicsUnitsContainerEl,
+                physicsInputErrorEl,
+                'clearPhysicsInputsBtn',
+                "flexible_physics_converter"
+            );
+        }
+
+        function displayTrigCalculatorView() {
+            trigCalculatorViewEl.classList.remove('hidden');
+            categoriesViewEl.classList.add('hidden');
+            flexibleElectricalConverterViewEl.classList.add('hidden');
+            flexibleMechanicalConverterViewEl.classList.add('hidden');
+            flexiblePhysicsConverterViewEl.classList.add('hidden');
+            initializeTrigCalculatorButtons();
+            resetTrigCalculator();
+            updateTrigDisplay();
+        }
+
+        function initializeTrigCalculatorButtons() {
+            if (trigCalculatorButtonsEl.children.length > 0) return;
+            const buttons = [
+                { text: 'sin', action: 'trig', value: 'sin' }, { text: 'cos', action: 'trig', value: 'cos' },
+                { text: 'tan', action: 'trig', value: 'tan' }, { text: 'C', class: 'clear', action: 'clear' },
+                { text: 'asin', action: 'trig', value: 'asin' }, { text: 'acos', action: 'trig', value: 'acos' },
+                { text: 'atan', action: 'trig', value: 'atan' }, { text: 'π', action: 'number', value: '3.141592653589793' },
+                { text: '7', action: 'number', value: '7' }, { text: '8', action: 'number', value: '8' },
+                { text: '9', action: 'number', value: '9' }, { text: '(', action: 'paren', value: '(' },
+                { text: '4', action: 'number', value: '4' }, { text: '5', action: 'number', value: '5' },
+                { text: '6', action: 'number', value: '6' }, { text: ')', action: 'paren', value: ')' },
+                { text: '1', action: 'number', value: '1' }, { text: '2', action: 'number', value: '2' },
+                { text: '3', action: 'number', value: '3' }, { text: '=', class: 'equals', action: 'equals' },
+                { text: '0', class: 'col-span-2', action: 'number', value: '0' }, { text: '.', action: 'decimal', value: '.' }
+            ];
+            trigCalculatorButtonsEl.innerHTML = '';
+            trigCalculatorButtonsEl.classList.add('grid-rows-[repeat(5,minmax(0,1fr))]');
+            buttons.forEach(btnConfig => {
+                const button = document.createElement('button');
+                button.textContent = btnConfig.text; button.classList.add('calc-button');
+                if (btnConfig.class) btnConfig.class.split(' ').forEach(cls => button.classList.add(cls));
+                if (btnConfig.text === '0') button.style.gridColumn = 'span 2 / span 2';
+                button.addEventListener('click', () => {
+                    switch (btnConfig.action) {
+                        case 'number': appendNumberToTrig(btnConfig.value); break;
+                        case 'trig': chooseTrigOperation(btnConfig.value); break;
+                        case 'decimal': appendDecimalToTrig(); break;
+                        case 'equals': computeTrigCalculation(); break;
+                        case 'clear': resetTrigCalculator(); break;
+                    }
+                    updateTrigDisplay();
+                });
+                trigCalculatorButtonsEl.appendChild(button);
+            });
+        }
+
+        function appendNumberToTrig(number) {
+            if (shouldResetTrigDisplay) { currentTrigInput = ''; shouldResetTrigDisplay = false; }
+            if (currentTrigInput === '0' && number !== '.') currentTrigInput = '';
+            if (currentTrigInput.length >= 16) return;
+            currentTrigInput += number;
+        }
+
+        function appendDecimalToTrig() {
+            if (shouldResetTrigDisplay) { currentTrigInput = '0'; shouldResetTrigDisplay = false; }
+            if (currentTrigInput.includes('.')) return;
+            if (currentTrigInput === '') currentTrigInput = '0';
+            if (currentTrigInput.length >= 15) return;
+            currentTrigInput += '.';
+        }
+
+        function chooseTrigOperation(op) {
+            trigOperation = op;
+            computeTrigCalculation();
+        }
+
+        function computeTrigCalculation() {
+            let result;
+            const current = parseFloat(currentTrigInput);
+            if (isNaN(current)) {
+                return;
+            }
+            switch (trigOperation) {
+                case 'sin': result = Math.sin(current); break;
+                case 'cos': result = Math.cos(current); break;
+                case 'tan': result = Math.tan(current); break;
+                case 'asin': result = Math.asin(current); break;
+                case 'acos': result = Math.acos(current); break;
+                case 'atan': result = Math.atan(current); break;
+                default: result = current;
+            }
+            currentTrigInput = formatTrigResult(result);
+            trigOperation = null;
+            shouldResetTrigDisplay = true;
+        }
+
+        function formatTrigResult(number) {
+            if (String(number).length > 16) {
+                 if (Math.abs(number) > 999999999999999 || (Math.abs(number) < 0.0000000000001 && number !== 0) ) return number.toExponential(9);
+            } return String(parseFloat(Number(number).toPrecision(15)));
+        }
+
+        function resetTrigCalculator() {
+            currentTrigInput = '0';
+            trigOperation = null;
+            shouldResetTrigDisplay = false;
+            updateTrigDisplay();
+        }
+
+        function updateTrigDisplay() {
+            trigCalcDisplayEl.value = currentTrigInput === '' ? '0' : currentTrigInput;
+        }
+
+        // --- Event Listeners for Navigation ---
+        backToCategoriesFromElectricalBtnEl.addEventListener('click', displayCategoriesView);
+        backToCategoriesFromMechanicalBtnEl.addEventListener('click', displayCategoriesView);
+        backToCategoriesFromPhysicsBtnEl.addEventListener('click', displayCategoriesView);
+        backToCategoriesFromTrigBtnEl.addEventListener('click', displayCategoriesView);
+
+        // --- Footer Year ---
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // --- Initial Display ---
+        displayCategoriesView();
+
+    </script>
+</body>
+</html>
