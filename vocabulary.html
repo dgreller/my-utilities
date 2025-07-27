@@ -14,10 +14,13 @@
         </header>
         <main>
             <div id="word-of-the-day" class="word-card">
-                <h2>Word of the Day</h2>
+                <h2 id="daily-day"></h2>
                 <h3 id="daily-word"></h3>
                 <p id="daily-definition"></p>
-                <p id="daily-example"></p>
+                <div class="synonyms">
+                    <strong>Synonyms:</strong> <span id="daily-synonyms"></span>
+                </div>
+                <ul id="daily-examples" class="examples"></ul>
             </div>
             <div class="controls">
                 <button id="random-word-btn">Get Random Word</button>
@@ -26,7 +29,10 @@
                 <h2>Random Word</h2>
                 <h3 id="random-word-text"></h3>
                 <p id="random-definition"></p>
-                <p id="random-example"></p>
+                <div class="synonyms">
+                    <strong>Synonyms:</strong> <span id="random-synonyms"></span>
+                </div>
+                <ul id="random-examples" class="examples"></ul>
             </div>
         </main>
     </div>

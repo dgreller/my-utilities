@@ -1,104 +1,3662 @@
-{
-    "words": [
-        {
-            "word": "Ephemeral",
-            "definition": "Lasting for a very short time.",
-            "example": "The beauty of the cherry blossoms is ephemeral, lasting only for a week."
-        },
-        {
-            "word": "Ubiquitous",
-            "definition": "Present, appearing, or found everywhere.",
-            "example": "Smartphones have become ubiquitous in modern society."
-        },
-        {
-            "word": "Mellifluous",
-            "definition": "A sound that is sweet and musical; pleasant to hear.",
-            "example": "The singer's mellifluous voice captivated the audience."
-        },
-        {
-            "word": "Pulchritudinous",
-            "definition": "Having great physical beauty.",
-            "example": "The pulchritudinous landscape was breathtaking."
-        },
-        {
-            "word": "Serendipity",
-            "definition": "The occurrence and development of events by chance in a happy or beneficial way.",
-            "example": "Their meeting was pure serendipity, a chance encounter that led to a lifelong friendship."
-        },
-        {
-            "word": "Petrichor",
-            "definition": "A pleasant smell that frequently accompanies the first rain after a long period of warm, dry weather.",
-            "example": "The air was filled with the sweet scent of petrichor after the summer storm."
-        },
-        {
-            "word": "Limerence",
-            "definition": "The state of being infatuated or obsessed with another person, typically experienced involuntarily and characterized by a strong desire for reciprocation of one's feelings but not primarily for a sexual relationship.",
-            "example": "He was in a state of limerence, unable to think of anything but her."
-        },
-        {
-            "word": "Sonder",
-            "definition": "The realization that each random passerby is living a life as vivid and complex as your own.",
-            "example": "As he sat in the busy cafe, he was struck by a profound sense of sonder."
-        },
-        {
-            "word": "Defenestration",
-            "definition": "The action of throwing someone out of a window.",
-            "example": "The historical account described the dramatic defenestration of the unpopular official."
-        },
-        {
-            "word": "Ineffable",
-            "definition": "Too great or extreme to be expressed or described in words.",
-            "example": "The beauty of the sunset was ineffable."
-        },
-        {
-            "word": "Cacophony",
-            "definition": "A harsh, discordant mixture of sounds.",
-            "example": "The cacophony of the city traffic was overwhelming."
-        },
-        {
-            "word": "Ethereal",
-            "definition": "Extremely delicate and light in a way that seems too perfect for this world.",
-            "example": "The ethereal music seemed to float in the air."
-        },
-        {
-            "word": "Nefarious",
-            "definition": "Wicked or criminal.",
-            "example": "The nefarious villain plotted to take over the world."
-        },
-        {
-            "word": "Obfuscate",
-            "definition": "To deliberately make something unclear or difficult to understand.",
-            "example": "The politician tried to obfuscate the issue with a long, rambling speech."
-        },
-        {
-            "word": "Quixotic",
-            "definition": "Exceedingly idealistic; unrealistic and impractical.",
-            "example": "His quixotic quest to end world hunger was admirable but ultimately doomed to fail."
-        },
-        {
-            "word": "Rambunctious",
-            "definition": "Uncontrollably exuberant; boisterous.",
-            "example": "The rambunctious children were running and shouting in the playground."
-        },
-        {
-            "word": "Taciturn",
-            "definition": "Reserved or uncommunicative in speech; saying little.",
-            "example": "The taciturn old man rarely spoke, but when he did, his words were full of wisdom."
-        },
-        {
-            "word": "Verisimilitude",
-            "definition": "The appearance of being true or real.",
-            "example": "The movie was praised for its verisimilitude, accurately depicting life in the 19th century."
-        },
-        {
-            "word": "Zephyr",
-            "definition": "A soft gentle breeze.",
-            "example": "A gentle zephyr rustled the leaves in the trees."
-        },
-        {
-            "word": "Anachronism",
-            "definition": "A thing belonging or appropriate to a period other than that in which it exists, especially a thing that is conspicuously old-fashioned.",
-            "example": "The movie was full of anachronisms, like a knight wearing a digital watch."
-        }
+[
+  {
+    "day": "January 1",
+    "word": "Ephemeral",
+    "definition": "Lasting for a very short time.",
+    "synonyms": ["transient", "fleeting", "short-lived"],
+    "examples": [
+      "The beauty of the cherry blossoms is ephemeral.",
+      "His fame was ephemeral, lasting only a few months."
     ]
-}
+  },
+  {
+    "day": "January 2",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "January 3",
+    "word": "Mellifluous",
+    "definition": "Sweet or musical; pleasant to hear.",
+    "synonyms": ["harmonious", "euphonious", "dulcet"],
+    "examples": [
+      "Her mellifluous voice captivated the audience.",
+      "The mellifluous sound of the stream was calming."
+    ]
+  },
+  {
+    "day": "January 4",
+    "word": "Serendipity",
+    "definition": "The occurrence and development of events by chance in a happy or beneficial way.",
+    "synonyms": ["chance", "luck", "fortuity"],
+    "examples": [
+      "Meeting her was pure serendipity; we clicked instantly.",
+      "The discovery of penicillin was a moment of serendipity."
+    ]
+  },
+  {
+    "day": "January 5",
+    "word": "Luminous",
+    "definition": "Emitting or reflecting light; shining.",
+    "synonyms": ["radiant", "glowing", "bright"],
+    "examples": [
+      "The moon was luminous in the night sky.",
+      "Her luminous smile lit up the room."
+    ]
+  },
+  {
+    "day": "January 6",
+    "word": "Quixotic",
+    "definition": "Exceedingly idealistic; unrealistic and impractical.",
+    "synonyms": ["idealistic", "romantic", "visionary"],
+    "examples": [
+      "His quixotic quest to save the world seemed impossible.",
+      "She had a quixotic belief in the inherent goodness of people."
+    ]
+  },
+  {
+    "day": "January 7",
+    "word": "Cacophony",
+    "definition": "A harsh, discordant mixture of sounds.",
+    "synonyms": ["discord", "dissonance", "noise"],
+    "examples": [
+      "The city traffic created a cacophony of horns and engines.",
+      "A cacophony of voices erupted from the crowd."
+    ]
+  },
+  {
+    "day": "January 8",
+    "word": "Nefarious",
+    "definition": "Wicked or criminal.",
+    "synonyms": ["evil", "sinister", "villainous"],
+    "examples": [
+      "The nefarious plot was uncovered by the police.",
+      "He was known for his nefarious dealings."
+    ]
+  },
+  {
+    "day": "January 9",
+    "word": "Plethora",
+    "definition": "A large or excessive amount of something.",
+    "synonyms": ["abundance", "surplus", "excess"],
+    "examples": [
+      "There was a plethora of options at the buffet.",
+      "The internet offers a plethora of information."
+    ]
+  },
+  {
+    "day": "January 10",
+    "word": "Banal",
+    "definition": "So lacking in originality as to be obvious and boring.",
+    "synonyms": ["trite", "hackneyed", "unoriginal"],
+    "examples": [
+      "His speech was filled with banal clichés.",
+      "The movie's plot was disappointingly banal."
+    ]
+  },
+  {
+    "day": "January 11",
+    "word": "Esoteric",
+    "definition": "Intended for or likely to be understood by only a small number of people with a specialized knowledge or interest.",
+    "synonyms": ["abstruse", "arcane", "obscure"],
+    "examples": [
+      "The philosopher's theories were too esoteric for the general public.",
+      "He had an esoteric collection of ancient coins."
+    ]
+  },
+  {
+    "day": "January 12",
+    "word": "Capricious",
+    "definition": "Given to sudden and unaccountable changes of mood or behavior.",
+    "synonyms": ["fickle", "inconstant", "unpredictable"],
+    "examples": [
+      "Her capricious nature made it difficult to predict her reactions.",
+      "The weather in spring can be very capricious."
+    ]
+  },
+  {
+    "day": "January 13",
+    "word": "Equivocate",
+    "definition": "Use ambiguous language so as to conceal the truth or avoid committing oneself.",
+    "synonyms": ["prevaricate", "hedge", "dodge"],
+    "examples": [
+      "When asked about the scandal, the politician began to equivocate.",
+      "He equivocated when confronted with the evidence."
+    ]
+  },
+  {
+    "day": "January 14",
+    "word": "Fastidious",
+    "definition": "Very attentive to and concerned about accuracy and detail.",
+    "synonyms": ["meticulous", "scrupulous", "punctilious"],
+    "examples": [
+      "He was fastidious about his appearance.",
+      "The fastidious chef ensured every dish was perfect."
+    ]
+  },
+  {
+    "day": "January 15",
+    "word": "Gregarious",
+    "definition": "Fond of company; sociable.",
+    "synonyms": ["sociable", "outgoing", "extroverted"],
+    "examples": [
+      "She was a gregarious person who loved parties.",
+      "Birds are often gregarious creatures."
+    ]
+  },
+  {
+    "day": "January 16",
+    "word": "Harangue",
+    "definition": "A lengthy and aggressive speech.",
+    "synonyms": ["tirade", "rant", "diatribe"],
+    "examples": [
+      "The coach delivered a loud harangue to his team.",
+      "He subjected them to a ten-minute harangue."
+    ]
+  },
+  {
+    "day": "January 17",
+    "word": "Impecunious",
+    "definition": "Having little or no money.",
+    "synonyms": ["poor", "penniless", "indigent"],
+    "examples": [
+      "He was an impecunious student struggling to make ends meet.",
+      "The family was left impecunious after the financial crisis."
+    ]
+  },
+  {
+    "day": "January 18",
+    "word": "Jubilant",
+    "definition": "Feeling or expressing great happiness and triumph.",
+    "synonyms": ["exultant", "triumphant", "elated"],
+    "examples": [
+      "The fans were jubilant after their team won the championship.",
+      "She was jubilant about her promotion."
+    ]
+  },
+  {
+    "day": "January 19",
+    "word": "Knell",
+    "definition": "The sound of a bell, especially when rung solemnly for a death or funeral.",
+    "synonyms": ["chime", "toll", "peal"],
+    "examples": [
+      "The church bells knelled mournfully.",
+      "The announcement sounded the knell for their hopes."
+    ]
+  },
+  {
+    "day": "January 20",
+    "word": "Languid",
+    "definition": "Having a disinclination for physical exertion or effort; slow and relaxed.",
+    "synonyms": ["relaxed", "leisurely", "unhurried"],
+    "examples": [
+      "They spent a languid afternoon by the pool.",
+      "His languid movements suggested a lack of energy."
+    ]
+  },
+  {
+    "day": "January 21",
+    "word": "Malinger",
+    "definition": "Exaggerate or feign illness in order to escape duty or work.",
+    "synonyms": ["shirk", "feign", "pretend"],
+    "examples": [
+      "He was accused of malingering to avoid military service.",
+      "Some employees malinger to get out of difficult tasks."
+    ]
+  },
+  {
+    "day": "January 22",
+    "word": "Nadir",
+    "definition": "The lowest point in the fortunes of a person or organization.",
+    "synonyms": ["rock bottom", "low point", "depths"],
+    "examples": [
+      "His career reached its nadir after the scandal.",
+      "The company hit its nadir during the recession."
+    ]
+  },
+  {
+    "day": "January 23",
+    "word": "Obfuscate",
+    "definition": "Make obscure, unclear, or unintelligible.",
+    "synonyms": ["confuse", "muddle", "bewilder"],
+    "examples": [
+      "The politician tried to obfuscate the truth with vague statements.",
+      "His complex explanations only served to obfuscate the issue."
+    ]
+  },
+  {
+    "day": "January 24",
+    "word": "Pernicious",
+    "definition": "Having a harmful effect, especially in a gradual or subtle way.",
+    "synonyms": ["damaging", "destructive", "malignant"],
+    "examples": [
+      "The pernicious influence of social media on young minds.",
+      "Smoking has a pernicious effect on health."
+    ]
+  },
+  {
+    "day": "January 25",
+    "word": "Querulous",
+    "definition": "Complaining in a petulant or whining manner.",
+    "synonyms": ["peevish", "petulant", "grumpy"],
+    "examples": [
+      "He became querulous in his old age, complaining about everything.",
+      "The child's querulous voice annoyed his parents."
+    ]
+  },
+  {
+    "day": "January 26",
+    "word": "Recalcitrant",
+    "definition": "Having an obstinately uncooperative attitude toward authority or discipline.",
+    "synonyms": ["unruly", "disobedient", "defiant"],
+    "examples": [
+      "The recalcitrant student refused to follow the rules.",
+      "The donkey was recalcitrant and wouldn't move."
+    ]
+  },
+  {
+    "day": "January 27",
+    "word": "Sycophant",
+    "definition": "A person who acts obsequiously toward someone important in order to gain advantage.",
+    "synonyms": ["flatterer", "toady", "bootlicker"],
+    "examples": [
+      "The sycophant praised his boss excessively.",
+      "He was surrounded by sycophants who agreed with his every word."
+    ]
+  },
+  {
+    "day": "January 28",
+    "word": "Tirade",
+    "definition": "A long, angry speech of criticism or accusation.",
+    "synonyms": ["harangue", "rant", "diatribe"],
+    "examples": [
+      "The manager launched into a tirade about the team's poor performance.",
+      "She delivered a furious tirade against injustice."
+    ]
+  },
+  {
+    "day": "January 29",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "January 30",
+    "word": "Vacillate",
+    "definition": "Alternate or waver between different opinions or actions; be indecisive.",
+    "synonyms": ["waver", "hesitate", "fluctuate"],
+    "examples": [
+      "He vacillated between the two job offers.",
+      "She vacillated for a long time before making a decision."
+    ]
+  },
+  {
+    "day": "January 31",
+    "word": "Wary",
+    "definition": "Feeling or showing caution about possible dangers or problems.",
+    "synonyms": ["cautious", "circumspect", "suspicious"],
+    "examples": [
+      "He was wary of strangers.",
+      "Be wary of promises that sound too good to be true."
+    ]
+  },
+  {
+    "day": "February 1",
+    "word": "Xenophobia",
+    "definition": "Dislike of or prejudice against people from other countries.",
+    "synonyms": ["racism", "bigotry", "prejudice"],
+    "examples": [
+      "The rise of xenophobia is a concerning trend.",
+      "He condemned the xenophobia displayed by some groups."
+    ]
+  },
+  {
+    "day": "February 2",
+    "word": "Yield",
+    "definition": "Produce or provide (a natural, agricultural, or industrial product).",
+    "synonyms": ["produce", "bear", "generate"],
+    "examples": [
+      "The apple tree yielded a bountiful harvest.",
+      "The investment yielded a good return."
+    ]
+  },
+  {
+    "day": "February 3",
+    "word": "Zephyr",
+    "definition": "A soft, gentle breeze.",
+    "synonyms": ["breeze", "gust", "waft"],
+    "examples": [
+      "A gentle zephyr rustled the leaves.",
+      "The zephyr cooled their faces on the hot day."
+    ]
+  },
+  {
+    "day": "February 4",
+    "word": "Ameliorate",
+    "definition": "Make (something bad or unsatisfactory) better.",
+    "synonyms": ["improve", "enhance", "better"],
+    "examples": [
+      "Steps were taken to ameliorate the living conditions.",
+      "He tried to ameliorate the situation by apologizing."
+    ]
+  },
+  {
+    "day": "February 5",
+    "word": "Bifurcate",
+    "definition": "Divide into two branches or forks.",
+    "synonyms": ["fork", "split", "divide"],
+    "examples": [
+      "The road bifurcated into two paths.",
+      "The river bifurcates around the island."
+    ]
+  },
+  {
+    "day": "February 6",
+    "word": "Cajole",
+    "definition": "Persuade someone to do something by sustained coaxing or flattery.",
+    "synonyms": ["coax", "persuade", "wheedle"],
+    "examples": [
+      "He cajoled her into agreeing to the plan.",
+      "She tried to cajole her father into buying her a car."
+    ]
+  },
+  {
+    "day": "February 7",
+    "word": "Debilitate",
+    "definition": "Make (someone) weak and infirm.",
+    "synonyms": ["weaken", "enfeeble", "incapacitate"],
+    "examples": [
+      "The disease can debilitate the immune system.",
+      "Lack of sleep can debilitate your performance."
+    ]
+  },
+  {
+    "day": "February 8",
+    "word": "Ebullient",
+    "definition": "Cheerful and full of energy.",
+    "synonyms": ["exuberant", "buoyant", "joyful"],
+    "examples": [
+      "Her ebullient personality brightened the room.",
+      "He was ebullient after receiving the good news."
+    ]
+  },
+  {
+    "day": "February 9",
+    "word": "Furtive",
+    "definition": "Attempting to avoid notice or attention, typically because of guilt or a belief that discovery would lead to trouble; secretive.",
+    "synonyms": ["secretive", "surreptitious", "stealthy"],
+    "examples": [
+      "He cast a furtive glance at his watch.",
+      "They exchanged furtive whispers."
+    ]
+  },
+  {
+    "day": "February 10",
+    "word": "Garrulous",
+    "definition": "Excessively talkative, especially on trivial matters.",
+    "synonyms": ["talkative", "loquacious", "chatty"],
+    "examples": [
+      "The garrulous old man told endless stories.",
+      "She was a garrulous hostess, keeping the conversation flowing."
+    ]
+  },
+  {
+    "day": "February 11",
+    "word": "Hapless",
+    "definition": "Unfortunate.",
+    "synonyms": ["unlucky", "unfortunate", "jinxed"],
+    "examples": [
+      "The hapless victim was robbed of all his possessions.",
+      "He was a hapless fellow, always getting into trouble."
+    ]
+  },
+  {
+    "day": "February 12",
+    "word": "Ignominious",
+    "definition": "Deserving or causing public disgrace or shame.",
+    "synonyms": ["humiliating", "disgraceful", "shameful"],
+    "examples": [
+      "The team suffered an ignominious defeat.",
+      "He made an ignominious exit from the stage."
+    ]
+  },
+  {
+    "day": "February 13",
+    "word": "Juxtapose",
+    "definition": "Place or deal with close together for contrasting effect.",
+    "synonyms": ["contrast", "compare", "place side by side"],
+    "examples": [
+      "The artist juxtaposed bright colors with dark shades.",
+      "The film juxtaposes scenes of poverty with scenes of wealth."
+    ]
+  },
+  {
+    "day": "February 14",
+    "word": "Kudos",
+    "definition": "Praise and honor received for an achievement.",
+    "synonyms": ["praise", "glory", "acclaim"],
+    "examples": [
+      "Kudos to the team for their hard work.",
+      "She received kudos for her outstanding performance."
+    ]
+  },
+  {
+    "day": "February 15",
+    "word": "Lament",
+    "definition": "A passionate expression of grief or sorrow.",
+    "synonyms": ["mourn", "grieve", "wail"],
+    "examples": [
+      "She lamented the loss of her beloved pet.",
+      "The poem was a lament for lost youth."
+    ]
+  },
+  {
+    "day": "February 16",
+    "word": "Meticulous",
+    "definition": "Showing great attention to detail; very careful and precise.",
+    "synonyms": ["fastidious", "scrupulous", "thorough"],
+    "examples": [
+      "He was meticulous in his planning.",
+      "The artist's work was known for its meticulous detail."
+    ]
+  },
+  {
+    "day": "February 17",
+    "word": "Nostalgia",
+    "definition": "A sentimental longing or wistful affection for a period in the past.",
+    "synonyms": ["longing", "yearning", "sentimentality"],
+    "examples": [
+      "He felt a wave of nostalgia for his childhood.",
+      "The old photographs evoked a sense of nostalgia."
+    ]
+  },
+  {
+    "day": "February 18",
+    "word": "Obsequious",
+    "definition": "Obedient or attentive to an excessive or servile degree.",
+    "synonyms": ["servile", "fawning", "sycophantic"],
+    "examples": [
+      "The obsequious waiter bowed deeply.",
+      "She was surrounded by obsequious admirers."
+    ]
+  },
+  {
+    "day": "February 19",
+    "word": "Paucity",
+    "definition": "The presence of something only in small or insufficient quantities or amounts; scarcity.",
+    "synonyms": ["scarcity", "dearth", "shortage"],
+    "examples": [
+      "There was a paucity of evidence to support his claim.",
+      "The region suffered from a paucity of rainfall."
+    ]
+  },
+  {
+    "day": "February 20",
+    "word": "Quell",
+    "definition": "Put an end to (a rebellion or other disorder), typically by the use of force.",
+    "synonyms": ["suppress", "crush", "subdue"],
+    "examples": [
+      "The police were called to quell the riot.",
+      "He tried to quell his rising anger."
+    ]
+  },
+  {
+    "day": "February 21",
+    "word": "Rescind",
+    "definition": "Revoke, cancel, or repeal (a law, order, or agreement).",
+    "synonyms": ["revoke", "cancel", "repeal"],
+    "examples": [
+      "The company rescinded its job offer.",
+      "The government rescinded the unpopular law."
+    ]
+  },
+  {
+    "day": "February 22",
+    "word": "Sagacious",
+    "definition": "Having or showing keen mental discernment and good judgment; shrewd.",
+    "synonyms": ["wise", "shrewd", "astute"],
+    "examples": [
+      "The sagacious old man offered sound advice.",
+      "His sagacious decisions led to the company's success."
+    ]
+  },
+  {
+    "day": "February 23",
+    "word": "Tenuous",
+    "definition": "Very weak or slight.",
+    "synonyms": ["flimsy", "fragile", "dubious"],
+    "examples": [
+      "The connection between the two events was tenuous.",
+      "He had only a tenuous grasp of the subject."
+    ]
+  },
+  {
+    "day": "February 24",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "February 25",
+    "word": "Venerate",
+    "definition": "Regard with great respect; revere.",
+    "synonyms": ["revere", "adore", "worship"],
+    "examples": [
+      "The ancient Egyptians would venerate their pharaohs.",
+      "He was a venerated figure in the community."
+    ]
+  },
+  {
+    "day": "February 26",
+    "word": "Wistful",
+    "definition": "Having or showing a feeling of vague or regretful longing.",
+    "synonyms": ["nostalgic", "melancholy", "yearning"],
+    "examples": [
+      "She gave a wistful smile as she remembered her youth.",
+      "He had a wistful look in his eyes."
+    ]
+  },
+  {
+    "day": "February 27",
+    "word": "Xenodochial",
+    "definition": "Friendly to strangers.",
+    "synonyms": ["hospitable", "welcoming", "friendly"],
+    "examples": [
+      "The xenodochial villagers welcomed the travelers.",
+      "His xenodochial nature made him popular with tourists."
+    ]
+  },
+  {
+    "day": "February 28",
+    "word": "Yore",
+    "definition": "Of long ago or former times.",
+    "synonyms": ["past", "olden days", "antiquity"],
+    "examples": [
+      "In days of yore, knights roamed the land.",
+      "The tales of yore were passed down through generations."
+    ]
+  },
+  {
+    "day": "February 29",
+    "word": "Zealous",
+    "definition": "Having or showing great energy or enthusiasm in pursuit of a cause or objective.",
+    "synonyms": ["enthusiastic", "ardent", "fervent"],
+    "examples": [
+      "He was a zealous supporter of the charity.",
+      "Her zealous efforts led to the project's success."
+    ]
+  },
+  {
+    "day": "March 1",
+    "word": "Acumen",
+    "definition": "The ability to make good judgments and quick decisions, typically in a particular domain.",
+    "synonyms": ["shrewdness", "astuteness", "discernment"],
+    "examples": [
+      "Her business acumen led to her success.",
+      "He showed great political acumen."
+    ]
+  },
+  {
+    "day": "March 2",
+    "word": "Beguile",
+    "definition": "Charm or enchant (someone), sometimes in a deceptive way.",
+    "synonyms": ["charm", "enchant", "deceive"],
+    "examples": [
+      "He was beguiled by her beauty.",
+      "The con artist tried to beguile his victims."
+    ]
+  },
+  {
+    "day": "March 3",
+    "word": "Cacography",
+    "definition": "Bad handwriting or spelling.",
+    "synonyms": ["scribble", "scrawl", "poor penmanship"],
+    "examples": [
+      "His cacography made his notes illegible.",
+      "The letter was full of cacography."
+    ]
+  },
+  {
+    "day": "March 4",
+    "word": "Delineate",
+    "definition": "Describe or portray (something) precisely.",
+    "synonyms": ["describe", "portray", "outline"],
+    "examples": [
+      "The artist delineated the features of the landscape.",
+      "He delineated the responsibilities of each team member."
+    ]
+  },
+  {
+    "day": "March 5",
+    "word": "Effervescent",
+    "definition": "Bubbly, lively, and enthusiastic.",
+    "synonyms": ["bubbly", "lively", "vivacious"],
+    "examples": [
+      "Her effervescent personality made her popular.",
+      "The soda was effervescent."
+    ]
+  },
+  {
+    "day": "March 6",
+    "word": "Fatuous",
+    "definition": "Silly and pointless.",
+    "synonyms": ["silly", "foolish", "inane"],
+    "examples": [
+      "His fatuous remarks annoyed everyone.",
+      "The fatuous plan was doomed to fail."
+    ]
+  },
+  {
+    "day": "March 7",
+    "word": "Glib",
+    "definition": "Fluent and voluble but insincere and shallow.",
+    "synonyms": ["superficial", "slick", "facile"],
+    "examples": [
+      "He gave a glib answer to the difficult question.",
+      "Her glib excuses didn't convince anyone."
+    ]
+  },
+  {
+    "day": "March 8",
+    "word": "Halcyon",
+    "definition": "Denoting a period of time in the past that was idyllically happy and peaceful.",
+    "synonyms": ["idyllic", "peaceful", "golden"],
+    "examples": [
+      "He remembered the halcyon days of his youth.",
+      "The island was a halcyon retreat."
+    ]
+  },
+  {
+    "day": "March 9",
+    "word": "Idiosyncrasy",
+    "definition": "A peculiar habit or way of behaving of an individual.",
+    "synonyms": ["peculiarity", "quirk", "habit"],
+    "examples": [
+      "One of his idiosyncrasies was always wearing mismatched socks.",
+      "Her artistic idiosyncrasies made her unique."
+    ]
+  },
+  {
+    "day": "March 10",
+    "word": "Jettison",
+    "definition": "Throw or drop (something) from an aircraft or ship.",
+    "synonyms": ["discard", "dump", "abandon"],
+    "examples": [
+      "The crew had to jettison fuel to lighten the plane.",
+      "They jettisoned the old equipment."
+    ]
+  },
+  {
+    "day": "March 11",
+    "word": "Kismet",
+    "definition": "Destiny; fate.",
+    "synonyms": ["fate", "destiny", "fortune"],
+    "examples": [
+      "It was kismet that they met at that exact moment.",
+      "She believed their meeting was kismet."
+    ]
+  },
+  {
+    "day": "March 12",
+    "word": "Lissome",
+    "definition": "Thin, supple, and graceful.",
+    "synonyms": ["agile", "nimble", "graceful"],
+    "examples": [
+      "The lissome dancer moved elegantly.",
+      "She had a lissome figure."
+    ]
+  },
+  {
+    "day": "March 13",
+    "word": "Maelstrom",
+    "definition": "A powerful whirlpool in the sea or a river.",
+    "synonyms": ["whirlpool", "vortex", "turmoil"],
+    "examples": [
+      "The boat was caught in a maelstrom.",
+      "He was caught in a maelstrom of emotions."
+    ]
+  },
+  {
+    "day": "March 14",
+    "word": "Noxious",
+    "definition": "Harmful, poisonous, or very unpleasant.",
+    "synonyms": ["harmful", "poisonous", "toxic"],
+    "examples": [
+      "The factory emitted noxious fumes.",
+      "Noxious weeds spread rapidly."
+    ]
+  },
+  {
+    "day": "March 15",
+    "word": "Onerous",
+    "definition": "(Of a task, duty, or responsibility) involving an amount of effort and difficulty that is oppressively burdensome.",
+    "synonyms": ["burdensome", "arduous", "demanding"],
+    "examples": [
+      "The new regulations were onerous for small businesses.",
+      "He found the task onerous."
+    ]
+  },
+  {
+    "day": "March 16",
+    "word": "Pellucid",
+    "definition": "Translucently clear.",
+    "synonyms": ["transparent", "clear", "limpid"],
+    "examples": [
+      "The pellucid water of the mountain lake.",
+      "His writing style was pellucid and easy to understand."
+    ]
+  },
+  {
+    "day": "March 17",
+    "word": "Quiescent",
+    "definition": "In a state or period of inactivity or dormancy.",
+    "synonyms": ["inactive", "dormant", "latent"],
+    "examples": [
+      "The volcano has been quiescent for centuries.",
+      "The disease remained quiescent for years."
+    ]
+  },
+  {
+    "day": "March 18",
+    "word": "Redolent",
+    "definition": "Strongly reminiscent or suggestive of something.",
+    "synonyms": ["evocative", "reminiscent", "suggestive"],
+    "examples": [
+      "The air was redolent of pine trees.",
+      "The book was redolent of his childhood."
+    ]
+  },
+  {
+    "day": "March 19",
+    "word": "Sanguine",
+    "definition": "Optimistic or positive, especially in an apparently difficult situation.",
+    "synonyms": ["optimistic", "hopeful", "positive"],
+    "examples": [
+      "He was sanguine about the company's future.",
+      "She maintained a sanguine outlook despite the challenges."
+    ]
+  },
+  {
+    "day": "March 20",
+    "word": "Turgid",
+    "definition": "Swollen and distended or congested.",
+    "synonyms": ["swollen", "inflated", "bombastic"],
+    "examples": [
+      "The river was turgid after the heavy rains.",
+      "His turgid prose was difficult to read."
+    ]
+  },
+  {
+    "day": "March 21",
+    "word": "Unctuous",
+    "definition": "Excessively or ingratiatingly flattering; oily.",
+    "synonyms": ["smarmy", "oily", "sycophantic"],
+    "examples": [
+      "The unctuous salesman tried to flatter the customer.",
+      "His unctuous manner made her uncomfortable."
+    ]
+  },
+  {
+    "day": "March 22",
+    "word": "Voracious",
+    "definition": "Having a very eager approach to an activity.",
+    "synonyms": ["insatiable", "greedy", "avid"],
+    "examples": [
+      "He had a voracious appetite for books.",
+      "The tiger is a voracious predator."
+    ]
+  },
+  {
+    "day": "March 23",
+    "word": "Wane",
+    "definition": "(Of the moon) have a progressively smaller part of its visible surface illuminated, so that it appears to decrease in size.",
+    "synonyms": ["decline", "diminish", "fade"],
+    "examples": [
+      "The moon was waning.",
+      "His enthusiasm began to wane."
+    ]
+  },
+  {
+    "day": "March 24",
+    "word": "Xenial",
+    "definition": "Relating to the relationship between a host and a guest.",
+    "synonyms": ["hospitable", "welcoming", "friendly"],
+    "examples": [
+      "The xenial atmosphere of the village was inviting.",
+      "He showed xenial generosity to his visitors."
+    ]
+  },
+  {
+    "day": "March 25",
+    "word": "Yoke",
+    "definition": "A wooden crosspiece that is fastened over the necks of two animals and attached to the plow or cart that they are to pull.",
+    "synonyms": ["bond", "tie", "burden"],
+    "examples": [
+      "The oxen were yoked together.",
+      "They lived under the yoke of oppression."
+    ]
+  },
+  {
+    "day": "March 26",
+    "word": "Zenith",
+    "definition": "The time at which something is most powerful or successful.",
+    "synonyms": ["peak", "pinnacle", "apex"],
+    "examples": [
+      "His career reached its zenith in the 1990s.",
+      "The sun reached its zenith at noon."
+    ]
+  },
+  {
+    "day": "March 27",
+    "word": "Abstruse",
+    "definition": "Difficult to understand; obscure.",
+    "synonyms": ["esoteric", "arcane", "recondite"],
+    "examples": [
+      "The professor's lecture was too abstruse for most students.",
+      "He delved into abstruse philosophical concepts."
+    ]
+  },
+  {
+    "day": "March 28",
+    "word": "Bellicose",
+    "definition": "Demonstrating aggression and willingness to fight.",
+    "synonyms": ["aggressive", "warlike", "pugnacious"],
+    "examples": [
+      "His bellicose attitude often led to arguments.",
+      "The nation adopted a bellicose stance."
+    ]
+  },
+  {
+    "day": "March 29",
+    "word": "Clandestine",
+    "definition": "Kept secret or done secretively, especially because illicit.",
+    "synonyms": ["secret", "surreptitious", "covert"],
+    "examples": [
+      "They held a clandestine meeting.",
+      "The spy engaged in clandestine operations."
+    ]
+  },
+  {
+    "day": "March 30",
+    "word": "Deleterious",
+    "definition": "Causing harm or damage.",
+    "synonyms": ["harmful", "detrimental", "damaging"],
+    "examples": [
+      "The deleterious effects of pollution on the environment.",
+      "Lack of sleep has a deleterious impact on health."
+    ]
+  },
+  {
+    "day": "March 31",
+    "word": "Ephemeral",
+    "definition": "Lasting for a very short time.",
+    "synonyms": ["transient", "fleeting", "short-lived"],
+    "examples": [
+      "The beauty of the cherry blossoms is ephemeral.",
+      "His fame was ephemeral, lasting only a few months."
+    ]
+  },
+  {
+    "day": "April 1",
+    "word": "Fetter",
+    "definition": "A chain or manacle used to restrain a prisoner, typically placed around the ankles.",
+    "synonyms": ["shackle", "restrain", "hinder"],
+    "examples": [
+      "The prisoners were held in fetters.",
+      "He felt fettered by his responsibilities."
+    ]
+  },
+  {
+    "day": "April 2",
+    "word": "Gainsay",
+    "definition": "Deny or contradict (a fact or statement).",
+    "synonyms": ["deny", "contradict", "dispute"],
+    "examples": [
+      "No one could gainsay his claims.",
+      "It is difficult to gainsay the evidence."
+    ]
+  },
+  {
+    "day": "April 3",
+    "word": "Hegemony",
+    "definition": "Leadership or dominance, especially by one state or social group over others.",
+    "synonyms": ["dominance", "supremacy", "leadership"],
+    "examples": [
+      "The country sought regional hegemony.",
+      "Cultural hegemony can be subtle."
+    ]
+  },
+  {
+    "day": "April 4",
+    "word": "Imbroglio",
+    "definition": "An extremely confused, complicated, or embarrassing situation.",
+    "synonyms": ["predicament", "mess", "quandary"],
+    "examples": [
+      "The political imbroglio deepened.",
+      "He found himself in an embarrassing imbroglio."
+    ]
+  },
+  {
+    "day": "April 5",
+    "word": "Jocose",
+    "definition": "Playful or humorous.",
+    "synonyms": ["joking", "jesting", "humorous"],
+    "examples": [
+      "His jocose remarks lightened the mood.",
+      "She had a jocose personality."
+    ]
+  },
+  {
+    "day": "April 6",
+    "word": "Kowtow",
+    "definition": "Act in an excessively subservient manner.",
+    "synonyms": ["grovel", "fawn", "bow"],
+    "examples": [
+      "He refused to kowtow to the boss.",
+      "They had to kowtow to the foreign dignitaries."
+    ]
+  },
+  {
+    "day": "April 7",
+    "word": "Lachrymose",
+    "definition": "Tearful or given to weeping.",
+    "synonyms": ["tearful", "weepy", "sad"],
+    "examples": [
+      "She was in a lachrymose mood after the breakup.",
+      "The movie had a lachrymose ending."
+    ]
+  },
+  {
+    "day": "April 8",
+    "word": "Misanthrope",
+    "definition": "A person who dislikes humankind and avoids human society.",
+    "synonyms": ["cynic", "hermit", "recluse"],
+    "examples": [
+      "The old man was a misanthrope who lived alone.",
+      "He became a misanthrope after being betrayed."
+    ]
+  },
+  {
+    "day": "April 9",
+    "word": "Nugatory",
+    "definition": "Of no value or importance.",
+    "synonyms": ["trifling", "worthless", "insignificant"],
+    "examples": [
+      "His contributions were nugatory.",
+      "The evidence was nugatory to the case."
+    ]
+  },
+  {
+    "day": "April 10",
+    "word": "Obstreperous",
+    "definition": "Noisy and difficult to control.",
+    "synonyms": ["unruly", "disorderly", "boisterous"],
+    "examples": [
+      "The obstreperous children refused to go to bed.",
+      "The crowd became obstreperous."
+    ]
+  },
+  {
+    "day": "April 11",
+    "word": "Panacea",
+    "definition": "A solution or remedy for all difficulties or diseases.",
+    "synonyms": ["cure-all", "remedy", "solution"],
+    "examples": [
+      "There is no panacea for all economic problems.",
+      "He believed education was the panacea for poverty."
+    ]
+  },
+  {
+    "day": "April 12",
+    "word": "Quixotic",
+    "definition": "Exceedingly idealistic; unrealistic and impractical.",
+    "synonyms": ["idealistic", "romantic", "visionary"],
+    "examples": [
+      "His quixotic quest to save the world seemed impossible.",
+      "She had a quixotic belief in the inherent goodness of people."
+    ]
+  },
+  {
+    "day": "April 13",
+    "word": "Rancor",
+    "definition": "Bitterness or resentfulness, especially when long-standing.",
+    "synonyms": ["bitterness", "hatred", "animosity"],
+    "examples": [
+      "He spoke without rancor, despite his past grievances.",
+      "The old feud was filled with rancor."
+    ]
+  },
+  {
+    "day": "April 14",
+    "word": "Salubrious",
+    "definition": "Health-giving; healthy.",
+    "synonyms": ["healthy", "beneficial", "wholesome"],
+    "examples": [
+      "The salubrious climate of the mountains.",
+      "Eating fresh vegetables is salubrious."
+    ]
+  },
+  {
+    "day": "April 15",
+    "word": "Turgid",
+    "definition": "Swollen and distended or congested.",
+    "synonyms": ["swollen", "inflated", "bombastic"],
+    "examples": [
+      "The river was turgid after the heavy rains.",
+      "His turgid prose was difficult to read."
+    ]
+  },
+  {
+    "day": "April 16",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "April 17",
+    "word": "Vacuous",
+    "definition": "Having or showing a lack of thought or intelligence; mindless.",
+    "synonyms": ["empty", "blank", "mindless"],
+    "examples": [
+      "He gave a vacuous smile.",
+      "The conversation was vacuous and uninteresting."
+    ]
+  },
+  {
+    "day": "April 18",
+    "word": "Wry",
+    "definition": "Using or expressing dry, especially mocking, humor.",
+    "synonyms": ["sarcastic", "ironic", "mocking"],
+    "examples": [
+      "He gave a wry smile.",
+      "Her wry sense of humor was appreciated."
+    ]
+  },
+  {
+    "day": "April 19",
+    "word": "Xeriscape",
+    "definition": "A style of landscape design requiring little or no irrigation or other maintenance.",
+    "synonyms": ["drought-tolerant landscaping", "water-wise gardening"],
+    "examples": [
+      "Many desert homes feature xeriscape gardens.",
+      "Xeriscape is an environmentally friendly option."
+    ]
+  },
+  {
+    "day": "April 20",
+    "word": "Yelp",
+    "definition": "A short, sharp cry, especially of pain or alarm.",
+    "synonyms": ["cry", "squeal", "howl"],
+    "examples": [
+      "The dog gave a yelp of pain.",
+      "She let out a yelp of surprise."
+    ]
+  },
+  {
+    "day": "April 21",
+    "word": "Zealot",
+    "definition": "A person who is fanatical and uncompromising in pursuit of their religious, political, or other ideals.",
+    "synonyms": ["fanatic", "extremist", "bigot"],
+    "examples": [
+      "He was a religious zealot.",
+      "The political zealot refused to compromise."
+    ]
+  },
+  {
+    "day": "April 22",
+    "word": "Avarice",
+    "definition": "Extreme greed for wealth or material gain.",
+    "synonyms": ["greed", "covetousness", "cupidity"],
+    "examples": [
+      "His avarice led him to betray his friends.",
+      "The story warned against the dangers of avarice."
+    ]
+  },
+  {
+    "day": "April 23",
+    "word": "Bilk",
+    "definition": "Obtain or withhold money from (someone) by deceit or without justification; defraud.",
+    "synonyms": ["defraud", "cheat", "swindle"],
+    "examples": [
+      "He tried to bilk the insurance company.",
+      "The con artist bilked many people."
+    ]
+  },
+  {
+    "day": "April 24",
+    "word": "Celerity",
+    "definition": "Rapidity of motion or action.",
+    "synonyms": ["speed", "swiftness", "haste"],
+    "examples": [
+      "He responded with impressive celerity.",
+      "The celerity of his movements surprised everyone."
+    ]
+  },
+  {
+    "day": "April 25",
+    "word": "Diatribe",
+    "definition": "A forceful and bitter verbal attack against someone or something.",
+    "synonyms": ["tirade", "rant", "harangue"],
+    "examples": [
+      "The politician launched into a diatribe against his opponents.",
+      "He delivered a long diatribe about the state of the economy."
+    ]
+  },
+  {
+    "day": "April 26",
+    "word": "Eschew",
+    "definition": "Deliberately avoid using; abstain from.",
+    "synonyms": ["avoid", "shun", "abstain from"],
+    "examples": [
+      "He eschewed alcohol and tobacco.",
+      "They eschewed violence as a means of protest."
+    ]
+  },
+  {
+    "day": "April 27",
+    "word": "Fatuous",
+    "definition": "Silly and pointless.",
+    "synonyms": ["silly", "foolish", "inane"],
+    "examples": [
+      "His fatuous remarks annoyed everyone.",
+      "The fatuous plan was doomed to fail."
+    ]
+  },
+  {
+    "day": "April 28",
+    "word": "Germane",
+    "definition": "Relevant to a subject under consideration.",
+    "synonyms": ["relevant", "pertinent", "applicable"],
+    "examples": [
+      "His comments were germane to the discussion.",
+      "The evidence was not germane to the case."
+    ]
+  },
+  {
+    "day": "April 29",
+    "word": "Hapless",
+    "definition": "Unfortunate.",
+    "synonyms": ["unlucky", "unfortunate", "jinxed"],
+    "examples": [
+      "The hapless victim was robbed of all his possessions.",
+      "He was a hapless fellow, always getting into trouble."
+    ]
+  },
+  {
+    "day": "April 30",
+    "word": "Impecunious",
+    "definition": "Having little or no money.",
+    "synonyms": ["poor", "penniless", "indigent"],
+    "examples": [
+      "He was an impecunious student struggling to make ends meet.",
+      "The family was left impecunious after the financial crisis."
+    ]
+  },
+  {
+    "day": "May 1",
+    "word": "Jettison",
+    "definition": "Throw or drop (something) from an aircraft or ship.",
+    "synonyms": ["discard", "dump", "abandon"],
+    "examples": [
+      "The crew had to jettison fuel to lighten the plane.",
+      "They jettisoned the old equipment."
+    ]
+  },
+  {
+    "day": "May 2",
+    "word": "Knell",
+    "definition": "The sound of a bell, especially when rung solemnly for a death or funeral.",
+    "synonyms": ["chime", "toll", "peal"],
+    "examples": [
+      "The church bells knelled mournfully.",
+      "The announcement sounded the knell for their hopes."
+    ]
+  },
+  {
+    "day": "May 3",
+    "word": "Languid",
+    "definition": "Having a disinclination for physical exertion or effort; slow and relaxed.",
+    "synonyms": ["relaxed", "leisurely", "unhurried"],
+    "examples": [
+      "They spent a languid afternoon by the pool.",
+      "His languid movements suggested a lack of energy."
+    ]
+  },
+  {
+    "day": "May 4",
+    "word": "Malinger",
+    "definition": "Exaggerate or feign illness in order to escape duty or work.",
+    "synonyms": ["shirk", "feign", "pretend"],
+    "examples": [
+      "He was accused of malingering to avoid military service.",
+      "Some employees malinger to get out of difficult tasks."
+    ]
+  },
+  {
+    "day": "May 5",
+    "word": "Nadir",
+    "definition": "The lowest point in the fortunes of a person or organization.",
+    "synonyms": ["rock bottom", "low point", "depths"],
+    "examples": [
+      "His career reached its nadir after the scandal.",
+      "The company hit its nadir during the recession."
+    ]
+  },
+  {
+    "day": "May 6",
+    "word": "Obfuscate",
+    "definition": "Make obscure, unclear, or unintelligible.",
+    "synonyms": ["confuse", "muddle", "bewilder"],
+    "examples": [
+      "The politician tried to obfuscate the truth with vague statements.",
+      "His complex explanations only served to obfuscate the issue."
+    ]
+  },
+  {
+    "day": "May 7",
+    "word": "Pernicious",
+    "definition": "Having a harmful effect, especially in a gradual or subtle way.",
+    "synonyms": ["damaging", "destructive", "malignant"],
+    "examples": [
+      "The pernicious influence of social media on young minds.",
+      "Smoking has a pernicious effect on health."
+    ]
+  },
+  {
+    "day": "May 8",
+    "word": "Querulous",
+    "definition": "Complaining in a petulant or whining manner.",
+    "synonyms": ["peevish", "petulant", "grumpy"],
+    "examples": [
+      "He became querulous in his old age, complaining about everything.",
+      "The child's querulous voice annoyed his parents."
+    ]
+  },
+  {
+    "day": "May 9",
+    "word": "Recalcitrant",
+    "definition": "Having an obstinately uncooperative attitude toward authority or discipline.",
+    "synonyms": ["unruly", "disobedient", "defiant"],
+    "examples": [
+      "The recalcitrant student refused to follow the rules.",
+      "The donkey was recalcitrant and wouldn't move."
+    ]
+  },
+  {
+    "day": "May 10",
+    "word": "Sycophant",
+    "definition": "A person who acts obsequiously toward someone important in order to gain advantage.",
+    "synonyms": ["flatterer", "toady", "bootlicker"],
+    "examples": [
+      "The sycophant praised his boss excessively.",
+      "He was surrounded by sycophants who agreed with his every word."
+    ]
+  },
+  {
+    "day": "May 11",
+    "word": "Tirade",
+    "definition": "A long, angry speech of criticism or accusation.",
+    "synonyms": ["harangue", "rant", "diatribe"],
+    "examples": [
+      "The manager launched into a tirade about the team's poor performance.",
+      "She delivered a furious tirade against injustice."
+    ]
+  },
+  {
+    "day": "May 12",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "May 13",
+    "word": "Vacillate",
+    "definition": "Alternate or waver between different opinions or actions; be indecisive.",
+    "synonyms": ["waver", "hesitate", "fluctuate"],
+    "examples": [
+      "He vacillated between the two job offers.",
+      "She vacillated for a long time before making a decision."
+    ]
+  },
+  {
+    "day": "May 14",
+    "word": "Wary",
+    "definition": "Feeling or showing caution about possible dangers or problems.",
+    "synonyms": ["cautious", "circumspect", "suspicious"],
+    "examples": [
+      "He was wary of strangers.",
+      "Be wary of promises that sound too good to be true."
+    ]
+  },
+  {
+    "day": "May 15",
+    "word": "Xenophobia",
+    "definition": "Dislike of or prejudice against people from other countries.",
+    "synonyms": ["racism", "bigotry", "prejudice"],
+    "examples": [
+      "The rise of xenophobia is a concerning trend.",
+      "He condemned the xenophobia displayed by some groups."
+    ]
+  },
+  {
+    "day": "May 16",
+    "word": "Yield",
+    "definition": "Produce or provide (a natural, agricultural, or industrial product).",
+    "synonyms": ["produce", "bear", "generate"],
+    "examples": [
+      "The apple tree yielded a bountiful harvest.",
+      "The investment yielded a good return."
+    ]
+  },
+  {
+    "day": "May 17",
+    "word": "Zephyr",
+    "definition": "A soft, gentle breeze.",
+    "synonyms": ["breeze", "gust", "waft"],
+    "examples": [
+      "A gentle zephyr rustled the leaves.",
+      "The zephyr cooled their faces on the hot day."
+    ]
+  },
+  {
+    "day": "May 18",
+    "word": "Ameliorate",
+    "definition": "Make (something bad or unsatisfactory) better.",
+    "synonyms": ["improve", "enhance", "better"],
+    "examples": [
+      "Steps were taken to ameliorate the living conditions.",
+      "He tried to ameliorate the situation by apologizing."
+    ]
+  },
+  {
+    "day": "May 19",
+    "word": "Bifurcate",
+    "definition": "Divide into two branches or forks.",
+    "synonyms": ["fork", "split", "divide"],
+    "examples": [
+      "The road bifurcated into two paths.",
+      "The river bifurcates around the island."
+    ]
+  },
+  {
+    "day": "May 20",
+    "word": "Cajole",
+    "definition": "Persuade someone to do something by sustained coaxing or flattery.",
+    "synonyms": ["coax", "persuade", "wheedle"],
+    "examples": [
+      "He cajoled her into agreeing to the plan.",
+      "She tried to cajole her father into buying her a car."
+    ]
+  },
+  {
+    "day": "May 21",
+    "word": "Debilitate",
+    "definition": "Make (someone) weak and infirm.",
+    "synonyms": ["weaken", "enfeeble", "incapacitate"],
+    "examples": [
+      "The disease can debilitate the immune system.",
+      "Lack of sleep can debilitate your performance."
+    ]
+  },
+  {
+    "day": "May 22",
+    "word": "Ebullient",
+    "definition": "Cheerful and full of energy.",
+    "synonyms": ["exuberant", "buoyant", "joyful"],
+    "examples": [
+      "Her ebullient personality brightened the room.",
+      "He was ebullient after receiving the good news."
+    ]
+  },
+  {
+    "day": "May 23",
+    "word": "Furtive",
+    "definition": "Attempting to avoid notice or attention, typically because of guilt or a belief that discovery would lead to trouble; secretive.",
+    "synonyms": ["secretive", "surreptitious", "stealthy"],
+    "examples": [
+      "He cast a furtive glance at his watch.",
+      "They exchanged furtive whispers."
+    ]
+  },
+  {
+    "day": "May 24",
+    "word": "Garrulous",
+    "definition": "Excessively talkative, especially on trivial matters.",
+    "synonyms": ["talkative", "loquacious", "chatty"],
+    "examples": [
+      "The garrulous old man told endless stories.",
+      "She was a garrulous hostess, keeping the conversation flowing."
+    ]
+  },
+  {
+    "day": "May 25",
+    "word": "Hapless",
+    "definition": "Unfortunate.",
+    "synonyms": ["unlucky", "unfortunate", "jinxed"],
+    "examples": [
+      "The hapless victim was robbed of all his possessions.",
+      "He was a hapless fellow, always getting into trouble."
+    ]
+  },
+  {
+    "day": "May 26",
+    "word": "Ignominious",
+    "definition": "Deserving or causing public disgrace or shame.",
+    "synonyms": ["humiliating", "disgraceful", "shameful"],
+    "examples": [
+      "The team suffered an ignominious defeat.",
+      "He made an ignominious exit from the stage."
+    ]
+  },
+  {
+    "day": "May 27",
+    "word": "Juxtapose",
+    "definition": "Place or deal with close together for contrasting effect.",
+    "synonyms": ["contrast", "compare", "place side by side"],
+    "examples": [
+      "The artist juxtaposed bright colors with dark shades.",
+      "The film juxtaposes scenes of poverty with scenes of wealth."
+    ]
+  },
+  {
+    "day": "May 28",
+    "word": "Kudos",
+    "definition": "Praise and honor received for an achievement.",
+    "synonyms": ["praise", "glory", "acclaim"],
+    "examples": [
+      "Kudos to the team for their hard work.",
+      "She received kudos for her outstanding performance."
+    ]
+  },
+  {
+    "day": "May 29",
+    "word": "Lament",
+    "definition": "A passionate expression of grief or sorrow.",
+    "synonyms": ["mourn", "grieve", "wail"],
+    "examples": [
+      "She lamented the loss of her beloved pet.",
+      "The poem was a lament for lost youth."
+    ]
+  },
+  {
+    "day": "May 30",
+    "word": "Meticulous",
+    "definition": "Showing great attention to detail; very careful and precise.",
+    "synonyms": ["fastidious", "scrupulous", "thorough"],
+    "examples": [
+      "He was meticulous in his planning.",
+      "The artist's work was known for its meticulous detail."
+    ]
+  },
+  {
+    "day": "May 31",
+    "word": "Nostalgia",
+    "definition": "A sentimental longing or wistful affection for a period in the past.",
+    "synonyms": ["longing", "yearning", "sentimentality"],
+    "examples": [
+      "He felt a wave of nostalgia for his childhood.",
+      "The old photographs evoked a sense of nostalgia."
+    ]
+  },
+  {
+    "day": "June 1",
+    "word": "Obsequious",
+    "definition": "Obedient or attentive to an excessive or servile degree.",
+    "synonyms": ["servile", "fawning", "sycophantic"],
+    "examples": [
+      "The obsequious waiter bowed deeply.",
+      "She was surrounded by obsequious admirers."
+    ]
+  },
+  {
+    "day": "June 2",
+    "word": "Paucity",
+    "definition": "The presence of something only in small or insufficient quantities or amounts; scarcity.",
+    "synonyms": ["scarcity", "dearth", "shortage"],
+    "examples": [
+      "There was a paucity of evidence to support his claim.",
+      "The region suffered from a paucity of rainfall."
+    ]
+  },
+  {
+    "day": "June 3",
+    "word": "Quell",
+    "definition": "Put an end to (a rebellion or other disorder), typically by the use of force.",
+    "synonyms": ["suppress", "crush", "subdue"],
+    "examples": [
+      "The police were called to quell the riot.",
+      "He tried to quell his rising anger."
+    ]
+  },
+  {
+    "day": "June 4",
+    "word": "Rescind",
+    "definition": "Revoke, cancel, or repeal (a law, order, or agreement).",
+    "synonyms": ["revoke", "cancel", "repeal"],
+    "examples": [
+      "The company rescinded its job offer.",
+      "The government rescinded the unpopular law."
+    ]
+  },
+  {
+    "day": "June 5",
+    "word": "Sagacious",
+    "definition": "Having or showing keen mental discernment and good judgment; shrewd.",
+    "synonyms": ["wise", "shrewd", "astute"],
+    "examples": [
+      "The sagacious old man offered sound advice.",
+      "His sagacious decisions led to the company's success."
+    ]
+  },
+  {
+    "day": "June 6",
+    "word": "Tenuous",
+    "definition": "Very weak or slight.",
+    "synonyms": ["flimsy", "fragile", "dubious"],
+    "examples": [
+      "The connection between the two events was tenuous.",
+      "He had only a tenuous grasp of the subject."
+    ]
+  },
+  {
+    "day": "June 7",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "June 8",
+    "word": "Venerate",
+    "definition": "Regard with great respect; revere.",
+    "synonyms": ["revere", "adore", "worship"],
+    "examples": [
+      "The ancient Egyptians would venerate their pharaohs.",
+      "He was a venerated figure in the community."
+    ]
+  },
+  {
+    "day": "June 9",
+    "word": "Wistful",
+    "definition": "Having or showing a feeling of vague or regretful longing.",
+    "synonyms": ["nostalgic", "melancholy", "yearning"],
+    "examples": [
+      "She gave a wistful smile as she remembered her youth.",
+      "He had a wistful look in his eyes."
+    ]
+  },
+  {
+    "day": "June 10",
+    "word": "Xenodochial",
+    "definition": "Friendly to strangers.",
+    "synonyms": ["hospitable", "welcoming", "friendly"],
+    "examples": [
+      "The xenodochial villagers welcomed the travelers.",
+      "His xenodochial nature made him popular with tourists."
+    ]
+  },
+  {
+    "day": "June 11",
+    "word": "Yore",
+    "definition": "Of long ago or former times.",
+    "synonyms": ["past", "olden days", "antiquity"],
+    "examples": [
+      "In days of yore, knights roamed the land.",
+      "The tales of yore were passed down through generations."
+    ]
+  },
+  {
+    "day": "June 12",
+    "word": "Zealous",
+    "definition": "Having or showing great energy or enthusiasm in pursuit of a cause or objective.",
+    "synonyms": ["enthusiastic", "ardent", "fervent"],
+    "examples": [
+      "He was a zealous supporter of the charity.",
+      "Her zealous efforts led to the project's success."
+    ]
+  },
+  {
+    "day": "June 13",
+    "word": "Acumen",
+    "definition": "The ability to make good judgments and quick decisions, typically in a particular domain.",
+    "synonyms": ["shrewdness", "astuteness", "discernment"],
+    "examples": [
+      "Her business acumen led to her success.",
+      "He showed great political acumen."
+    ]
+  },
+  {
+    "day": "June 14",
+    "word": "Beguile",
+    "definition": "Charm or enchant (someone), sometimes in a deceptive way.",
+    "synonyms": ["charm", "enchant", "deceive"],
+    "examples": [
+      "He was beguiled by her beauty.",
+      "The con artist tried to beguile his victims."
+    ]
+  },
+  {
+    "day": "June 15",
+    "word": "Cacography",
+    "definition": "Bad handwriting or spelling.",
+    "synonyms": ["scribble", "scrawl", "poor penmanship"],
+    "examples": [
+      "His cacography made his notes illegible.",
+      "The letter was full of cacography."
+    ]
+  },
+  {
+    "day": "June 16",
+    "word": "Delineate",
+    "definition": "Describe or portray (something) precisely.",
+    "synonyms": ["describe", "portray", "outline"],
+    "examples": [
+      "The artist delineated the features of the landscape.",
+      "He delineated the responsibilities of each team member."
+    ]
+  },
+  {
+    "day": "June 17",
+    "word": "Effervescent",
+    "definition": "Bubbly, lively, and enthusiastic.",
+    "synonyms": ["bubbly", "lively", "vivacious"],
+    "examples": [
+      "Her effervescent personality made her popular.",
+      "The soda was effervescent."
+    ]
+  },
+  {
+    "day": "June 18",
+    "word": "Fatuous",
+    "definition": "Silly and pointless.",
+    "synonyms": ["silly", "foolish", "inane"],
+    "examples": [
+      "His fatuous remarks annoyed everyone.",
+      "The fatuous plan was doomed to fail."
+    ]
+  },
+  {
+    "day": "June 19",
+    "word": "Glib",
+    "definition": "Fluent and voluble but insincere and shallow.",
+    "synonyms": ["superficial", "slick", "facile"],
+    "examples": [
+      "He gave a glib answer to the difficult question.",
+      "Her glib excuses didn't convince anyone."
+    ]
+  },
+  {
+    "day": "June 20",
+    "word": "Halcyon",
+    "definition": "Denoting a period of time in the past that was idyllically happy and peaceful.",
+    "synonyms": ["idyllic", "peaceful", "golden"],
+    "examples": [
+      "He remembered the halcyon days of his youth.",
+      "The island was a halcyon retreat."
+    ]
+  },
+  {
+    "day": "June 21",
+    "word": "Idiosyncrasy",
+    "definition": "A peculiar habit or way of behaving of an individual.",
+    "synonyms": ["peculiarity", "quirk", "habit"],
+    "examples": [
+      "One of his idiosyncrasies was always wearing mismatched socks.",
+      "Her artistic idiosyncrasies made her unique."
+    ]
+  },
+  {
+    "day": "June 22",
+    "word": "Jettison",
+    "definition": "Throw or drop (something) from an aircraft or ship.",
+    "synonyms": ["discard", "dump", "abandon"],
+    "examples": [
+      "The crew had to jettison fuel to lighten the plane.",
+      "They jettisoned the old equipment."
+    ]
+  },
+  {
+    "day": "June 23",
+    "word": "Kismet",
+    "definition": "Destiny; fate.",
+    "synonyms": ["fate", "destiny", "fortune"],
+    "examples": [
+      "It was kismet that they met at that exact moment.",
+      "She believed their meeting was kismet."
+    ]
+  },
+  {
+    "day": "June 24",
+    "word": "Lissome",
+    "definition": "Thin, supple, and graceful.",
+    "synonyms": ["agile", "nimble", "graceful"],
+    "examples": [
+      "The lissome dancer moved elegantly.",
+      "She had a lissome figure."
+    ]
+  },
+  {
+    "day": "June 25",
+    "word": "Maelstrom",
+    "definition": "A powerful whirlpool in the sea or a river.",
+    "synonyms": ["whirlpool", "vortex", "turmoil"],
+    "examples": [
+      "The boat was caught in a maelstrom.",
+      "He was caught in a maelstrom of emotions."
+    ]
+  },
+  {
+    "day": "June 26",
+    "word": "Noxious",
+    "definition": "Harmful, poisonous, or very unpleasant.",
+    "synonyms": ["harmful", "poisonous", "toxic"],
+    "examples": [
+      "The factory emitted noxious fumes.",
+      "Noxious weeds spread rapidly."
+    ]
+  },
+  {
+    "day": "June 27",
+    "word": "Onerous",
+    "definition": "(Of a task, duty, or responsibility) involving an amount of effort and difficulty that is oppressively burdensome.",
+    "synonyms": ["burdensome", "arduous", "demanding"],
+    "examples": [
+      "The new regulations were onerous for small businesses.",
+      "He found the task onerous."
+    ]
+  },
+  {
+    "day": "June 28",
+    "word": "Pellucid",
+    "definition": "Translucently clear.",
+    "synonyms": ["transparent", "clear", "limpid"],
+    "examples": [
+      "The pellucid water of the mountain lake.",
+      "His writing style was pellucid and easy to understand."
+    ]
+  },
+  {
+    "day": "June 29",
+    "word": "Quiescent",
+    "definition": "In a state or period of inactivity or dormancy.",
+    "synonyms": ["inactive", "dormant", "latent"],
+    "examples": [
+      "The volcano has been quiescent for centuries.",
+      "The disease remained quiescent for years."
+    ]
+  },
+  {
+    "day": "June 30",
+    "word": "Redolent",
+    "definition": "Strongly reminiscent or suggestive of something.",
+    "synonyms": ["evocative", "reminiscent", "suggestive"],
+    "examples": [
+      "The air was redolent of pine trees.",
+      "The book was redolent of his childhood."
+    ]
+  },
+  {
+    "day": "July 1",
+    "word": "Sanguine",
+    "definition": "Optimistic or positive, especially in an apparently difficult situation.",
+    "synonyms": ["optimistic", "hopeful", "positive"],
+    "examples": [
+      "He was sanguine about the company's future.",
+      "She maintained a sanguine outlook despite the challenges."
+    ]
+  },
+  {
+    "day": "July 2",
+    "word": "Turgid",
+    "definition": "Swollen and distended or congested.",
+    "synonyms": ["swollen", "inflated", "bombastic"],
+    "examples": [
+      "The river was turgid after the heavy rains.",
+      "His turgid prose was difficult to read."
+    ]
+  },
+  {
+    "day": "July 3",
+    "word": "Unctuous",
+    "definition": "Excessively or ingratiatingly flattering; oily.",
+    "synonyms": ["smarmy", "oily", "sycophantic"],
+    "examples": [
+      "The unctuous salesman tried to flatter the customer.",
+      "His unctuous manner made her uncomfortable."
+    ]
+  },
+  {
+    "day": "July 4",
+    "word": "Voracious",
+    "definition": "Having a very eager approach to an activity.",
+    "synonyms": ["insatiable", "greedy", "avid"],
+    "examples": [
+      "He had a voracious appetite for books.",
+      "The tiger is a voracious predator."
+    ]
+  },
+  {
+    "day": "July 5",
+    "word": "Wane",
+    "definition": "(Of the moon) have a progressively smaller part of its visible surface illuminated, so that it appears to decrease in size.",
+    "synonyms": ["decline", "diminish", "fade"],
+    "examples": [
+      "The moon was waning.",
+      "His enthusiasm began to wane."
+    ]
+  },
+  {
+    "day": "July 6",
+    "word": "Xenial",
+    "definition": "Relating to the relationship between a host and a guest.",
+    "synonyms": ["hospitable", "welcoming", "friendly"],
+    "examples": [
+      "The xenial atmosphere of the village was inviting.",
+      "He showed xenial generosity to his visitors."
+    ]
+  },
+  {
+    "day": "July 7",
+    "word": "Yoke",
+    "definition": "A wooden crosspiece that is fastened over the necks of two animals and attached to the plow or cart that they are to pull.",
+    "synonyms": ["bond", "tie", "burden"],
+    "examples": [
+      "The oxen were yoked together.",
+      "They lived under the yoke of oppression."
+    ]
+  },
+  {
+    "day": "July 8",
+    "word": "Zenith",
+    "definition": "The time at which something is most powerful or successful.",
+    "synonyms": ["peak", "pinnacle", "apex"],
+    "examples": [
+      "His career reached its zenith in the 1990s.",
+      "The sun reached its zenith at noon."
+    ]
+  },
+  {
+    "day": "July 9",
+    "word": "Abstruse",
+    "definition": "Difficult to understand; obscure.",
+    "synonyms": ["esoteric", "arcane", "recondite"],
+    "examples": [
+      "The professor's lecture was too abstruse for most students.",
+      "He delved into abstruse philosophical concepts."
+    ]
+  },
+  {
+    "day": "July 10",
+    "word": "Bellicose",
+    "definition": "Demonstrating aggression and willingness to fight.",
+    "synonyms": ["aggressive", "warlike", "pugnacious"],
+    "examples": [
+      "His bellicose attitude often led to arguments.",
+      "The nation adopted a bellicose stance."
+    ]
+  },
+  {
+    "day": "July 11",
+    "word": "Clandestine",
+    "definition": "Kept secret or done secretively, especially because illicit.",
+    "synonyms": ["secret", "surreptitious", "covert"],
+    "examples": [
+      "They held a clandestine meeting.",
+      "The spy engaged in clandestine operations."
+    ]
+  },
+  {
+    "day": "July 12",
+    "word": "Deleterious",
+    "definition": "Causing harm or damage.",
+    "synonyms": ["harmful", "detrimental", "damaging"],
+    "examples": [
+      "The deleterious effects of pollution on the environment.",
+      "Lack of sleep has a deleterious impact on health."
+    ]
+  },
+  {
+    "day": "July 13",
+    "word": "Ephemeral",
+    "definition": "Lasting for a very short time.",
+    "synonyms": ["transient", "fleeting", "short-lived"],
+    "examples": [
+      "The beauty of the cherry blossoms is ephemeral.",
+      "His fame was ephemeral, lasting only a few months."
+    ]
+  },
+  {
+    "day": "July 14",
+    "word": "Fetter",
+    "definition": "A chain or manacle used to restrain a prisoner, typically placed around the ankles.",
+    "synonyms": ["shackle", "restrain", "hinder"],
+    "examples": [
+      "The prisoners were held in fetters.",
+      "He felt fettered by his responsibilities."
+    ]
+  },
+  {
+    "day": "July 15",
+    "word": "Gainsay",
+    "definition": "Deny or contradict (a fact or statement).",
+    "synonyms": ["deny", "contradict", "dispute"],
+    "examples": [
+      "No one could gainsay his claims.",
+      "It is difficult to gainsay the evidence."
+    ]
+  },
+  {
+    "day": "July 16",
+    "word": "Hegemony",
+    "definition": "Leadership or dominance, especially by one state or social group over others.",
+    "synonyms": ["dominance", "supremacy", "leadership"],
+    "examples": [
+      "The country sought regional hegemony.",
+      "Cultural hegemony can be subtle."
+    ]
+  },
+  {
+    "day": "July 17",
+    "word": "Imbroglio",
+    "definition": "An extremely confused, complicated, or embarrassing situation.",
+    "synonyms": ["predicament", "mess", "quandary"],
+    "examples": [
+      "The political imbroglio deepened.",
+      "He found himself in an embarrassing imbroglio."
+    ]
+  },
+  {
+    "day": "July 18",
+    "word": "Jocose",
+    "definition": "Playful or humorous.",
+    "synonyms": ["joking", "jesting", "humorous"],
+    "examples": [
+      "His jocose remarks lightened the mood.",
+      "She had a jocose personality."
+    ]
+  },
+  {
+    "day": "July 19",
+    "word": "Kowtow",
+    "definition": "Act in an excessively subservient manner.",
+    "synonyms": ["grovel", "fawn", "bow"],
+    "examples": [
+      "He refused to kowtow to the boss.",
+      "They had to kowtow to the foreign dignitaries."
+    ]
+  },
+  {
+    "day": "July 20",
+    "word": "Lachrymose",
+    "definition": "Tearful or given to weeping.",
+    "synonyms": ["tearful", "weepy", "sad"],
+    "examples": [
+      "She was in a lachrymose mood after the breakup.",
+      "The movie had a lachrymose ending."
+    ]
+  },
+  {
+    "day": "July 21",
+    "word": "Misanthrope",
+    "definition": "A person who dislikes humankind and avoids human society.",
+    "synonyms": ["cynic", "hermit", "recluse"],
+    "examples": [
+      "The old man was a misanthrope who lived alone.",
+      "He became a misanthrope after being betrayed."
+    ]
+  },
+  {
+    "day": "July 22",
+    "word": "Nugatory",
+    "definition": "Of no value or importance.",
+    "synonyms": ["trifling", "worthless", "insignificant"],
+    "examples": [
+      "His contributions were nugatory.",
+      "The evidence was nugatory to the case."
+    ]
+  },
+  {
+    "day": "July 23",
+    "word": "Obstreperous",
+    "definition": "Noisy and difficult to control.",
+    "synonyms": ["unruly", "disorderly", "boisterous"],
+    "examples": [
+      "The obstreperous children refused to go to bed.",
+      "The crowd became obstreperous."
+    ]
+  },
+  {
+    "day": "July 24",
+    "word": "Panacea",
+    "definition": "A solution or remedy for all difficulties or diseases.",
+    "synonyms": ["cure-all", "remedy", "solution"],
+    "examples": [
+      "There is no panacea for all economic problems.",
+      "He believed education was the panacea for poverty."
+    ]
+  },
+  {
+    "day": "July 25",
+    "word": "Quixotic",
+    "definition": "Exceedingly idealistic; unrealistic and impractical.",
+    "synonyms": ["idealistic", "romantic", "visionary"],
+    "examples": [
+      "His quixotic quest to save the world seemed impossible.",
+      "She had a quixotic belief in the inherent goodness of people."
+    ]
+  },
+  {
+    "day": "July 26",
+    "word": "Rancor",
+    "definition": "Bitterness or resentfulness, especially when long-standing.",
+    "synonyms": ["bitterness", "hatred", "animosity"],
+    "examples": [
+      "He spoke without rancor, despite his past grievances.",
+      "The old feud was filled with rancor."
+    ]
+  },
+  {
+    "day": "July 27",
+    "word": "Salubrious",
+    "definition": "Health-giving; healthy.",
+    "synonyms": ["healthy", "beneficial", "wholesome"],
+    "examples": [
+      "The salubrious climate of the mountains.",
+      "Eating fresh vegetables is salubrious."
+    ]
+  },
+  {
+    "day": "July 28",
+    "word": "Turgid",
+    "definition": "Swollen and distended or congested.",
+    "synonyms": ["swollen", "inflated", "bombastic"],
+    "examples": [
+      "The river was turgid after the heavy rains.",
+      "His turgid prose was difficult to read."
+    ]
+  },
+  {
+    "day": "July 29",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "July 30",
+    "word": "Vacuous",
+    "definition": "Having or showing a lack of thought or intelligence; mindless.",
+    "synonyms": ["empty", "blank", "mindless"],
+    "examples": [
+      "He gave a vacuous smile.",
+      "The conversation was vacuous and uninteresting."
+    ]
+  },
+  {
+    "day": "July 31",
+    "word": "Wry",
+    "definition": "Using or expressing dry, especially mocking, humor.",
+    "synonyms": ["sarcastic", "ironic", "mocking"],
+    "examples": [
+      "He gave a wry smile.",
+      "Her wry sense of humor was appreciated."
+    ]
+  },
+  {
+    "day": "August 1",
+    "word": "Xeriscape",
+    "definition": "A style of landscape design requiring little or no irrigation or other maintenance.",
+    "synonyms": ["drought-tolerant landscaping", "water-wise gardening"],
+    "examples": [
+      "Many desert homes feature xeriscape gardens.",
+      "Xeriscape is an environmentally friendly option."
+    ]
+  },
+  {
+    "day": "August 2",
+    "word": "Yelp",
+    "definition": "A short, sharp cry, especially of pain or alarm.",
+    "synonyms": ["cry", "squeal", "howl"],
+    "examples": [
+      "The dog gave a yelp of pain.",
+      "She let out a yelp of surprise."
+    ]
+  },
+  {
+    "day": "August 3",
+    "word": "Zealot",
+    "definition": "A person who is fanatical and uncompromising in pursuit of their religious, political, or other ideals.",
+    "synonyms": ["fanatic", "extremist", "bigot"],
+    "examples": [
+      "He was a religious zealot.",
+      "The political zealot refused to compromise."
+    ]
+  },
+  {
+    "day": "August 4",
+    "word": "Avarice",
+    "definition": "Extreme greed for wealth or material gain.",
+    "synonyms": ["greed", "covetousness", "cupidity"],
+    "examples": [
+      "His avarice led him to betray his friends.",
+      "The story warned against the dangers of avarice."
+    ]
+  },
+  {
+    "day": "August 5",
+    "word": "Bilk",
+    "definition": "Obtain or withhold money from (someone) by deceit or without justification; defraud.",
+    "synonyms": ["defraud", "cheat", "swindle"],
+    "examples": [
+      "He tried to bilk the insurance company.",
+      "The con artist bilked many people."
+    ]
+  },
+  {
+    "day": "August 6",
+    "word": "Celerity",
+    "definition": "Rapidity of motion or action.",
+    "synonyms": ["speed", "swiftness", "haste"],
+    "examples": [
+      "He responded with impressive celerity.",
+      "The celerity of his movements surprised everyone."
+    ]
+  },
+  {
+    "day": "August 7",
+    "word": "Diatribe",
+    "definition": "A forceful and bitter verbal attack against someone or something.",
+    "synonyms": ["tirade", "rant", "harangue"],
+    "examples": [
+      "The politician launched into a diatribe against his opponents.",
+      "He delivered a long diatribe about the state of the economy."
+    ]
+  },
+  {
+    "day": "August 8",
+    "word": "Eschew",
+    "definition": "Deliberately avoid using; abstain from.",
+    "synonyms": ["avoid", "shun", "abstain from"],
+    "examples": [
+      "He eschewed alcohol and tobacco.",
+      "They eschewed violence as a means of protest."
+    ]
+  },
+  {
+    "day": "August 9",
+    "word": "Fatuous",
+    "definition": "Silly and pointless.",
+    "synonyms": ["silly", "foolish", "inane"],
+    "examples": [
+      "His fatuous remarks annoyed everyone.",
+      "The fatuous plan was doomed to fail."
+    ]
+  },
+  {
+    "day": "August 10",
+    "word": "Germane",
+    "definition": "Relevant to a subject under consideration.",
+    "synonyms": ["relevant", "pertinent", "applicable"],
+    "examples": [
+      "His comments were germane to the discussion.",
+      "The evidence was not germane to the case."
+    ]
+  },
+  {
+    "day": "August 11",
+    "word": "Hapless",
+    "definition": "Unfortunate.",
+    "synonyms": ["unlucky", "unfortunate", "jinxed"],
+    "examples": [
+      "The hapless victim was robbed of all his possessions.",
+      "He was a hapless fellow, always getting into trouble."
+    ]
+  },
+  {
+    "day": "August 12",
+    "word": "Impecunious",
+    "definition": "Having little or no money.",
+    "synonyms": ["poor", "penniless", "indigent"],
+    "examples": [
+      "He was an impecunious student struggling to make ends meet.",
+      "The family was left impecunious after the financial crisis."
+    ]
+  },
+  {
+    "day": "August 13",
+    "word": "Jettison",
+    "definition": "Throw or drop (something) from an aircraft or ship.",
+    "synonyms": ["discard", "dump", "abandon"],
+    "examples": [
+      "The crew had to jettison fuel to lighten the plane.",
+      "They jettisoned the old equipment."
+    ]
+  },
+  {
+    "day": "August 14",
+    "word": "Knell",
+    "definition": "The sound of a bell, especially when rung solemnly for a death or funeral.",
+    "synonyms": ["chime", "toll", "peal"],
+    "examples": [
+      "The church bells knelled mournfully.",
+      "The announcement sounded the knell for their hopes."
+    ]
+  },
+  {
+    "day": "August 15",
+    "word": "Languid",
+    "definition": "Having a disinclination for physical exertion or effort; slow and relaxed.",
+    "synonyms": ["relaxed", "leisurely", "unhurried"],
+    "examples": [
+      "They spent a languid afternoon by the pool.",
+      "His languid movements suggested a lack of energy."
+    ]
+  },
+  {
+    "day": "August 16",
+    "word": "Malinger",
+    "definition": "Exaggerate or feign illness in order to escape duty or work.",
+    "synonyms": ["shirk", "feign", "pretend"],
+    "examples": [
+      "He was accused of malingering to avoid military service.",
+      "Some employees malinger to get out of difficult tasks."
+    ]
+  },
+  {
+    "day": "August 17",
+    "word": "Nadir",
+    "definition": "The lowest point in the fortunes of a person or organization.",
+    "synonyms": ["rock bottom", "low point", "depths"],
+    "examples": [
+      "His career reached its nadir after the scandal.",
+      "The company hit its nadir during the recession."
+    ]
+  },
+  {
+    "day": "August 18",
+    "word": "Obfuscate",
+    "definition": "Make obscure, unclear, or unintelligible.",
+    "synonyms": ["confuse", "muddle", "bewilder"],
+    "examples": [
+      "The politician tried to obfuscate the truth with vague statements.",
+      "His complex explanations only served to obfuscate the issue."
+    ]
+  },
+  {
+    "day": "August 19",
+    "word": "Pernicious",
+    "definition": "Having a harmful effect, especially in a gradual or subtle way.",
+    "synonyms": ["damaging", "destructive", "malignant"],
+    "examples": [
+      "The pernicious influence of social media on young minds.",
+      "Smoking has a pernicious effect on health."
+    ]
+  },
+  {
+    "day": "August 20",
+    "word": "Querulous",
+    "definition": "Complaining in a petulant or whining manner.",
+    "synonyms": ["peevish", "petulant", "grumpy"],
+    "examples": [
+      "He became querulous in his old age, complaining about everything.",
+      "The child's querulous voice annoyed his parents."
+    ]
+  },
+  {
+    "day": "August 21",
+    "word": "Recalcitrant",
+    "definition": "Having an obstinately uncooperative attitude toward authority or discipline.",
+    "synonyms": ["unruly", "disobedient", "defiant"],
+    "examples": [
+      "The recalcitrant student refused to follow the rules.",
+      "The donkey was recalcitrant and wouldn't move."
+    ]
+  },
+  {
+    "day": "August 22",
+    "word": "Sycophant",
+    "definition": "A person who acts obsequiously toward someone important in order to gain advantage.",
+    "synonyms": ["flatterer", "toady", "bootlicker"],
+    "examples": [
+      "The sycophant praised his boss excessively.",
+      "He was surrounded by sycophants who agreed with his every word."
+    ]
+  },
+  {
+    "day": "August 23",
+    "word": "Tirade",
+    "definition": "A long, angry speech of criticism or accusation.",
+    "synonyms": ["harangue", "rant", "diatribe"],
+    "examples": [
+      "The manager launched into a tirade about the team's poor performance.",
+      "She delivered a furious tirade against injustice."
+    ]
+  },
+  {
+    "day": "August 24",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "August 25",
+    "word": "Vacillate",
+    "definition": "Alternate or waver between different opinions or actions; be indecisive.",
+    "synonyms": ["waver", "hesitate", "fluctuate"],
+    "examples": [
+      "He vacillated between the two job offers.",
+      "She vacillated for a long time before making a decision."
+    ]
+  },
+  {
+    "day": "August 26",
+    "word": "Wary",
+    "definition": "Feeling or showing caution about possible dangers or problems.",
+    "synonyms": ["cautious", "circumspect", "suspicious"],
+    "examples": [
+      "He was wary of strangers.",
+      "Be wary of promises that sound too good to be true."
+    ]
+  },
+  {
+    "day": "August 27",
+    "word": "Xenophobia",
+    "definition": "Dislike of or prejudice against people from other countries.",
+    "synonyms": ["racism", "bigotry", "prejudice"],
+    "examples": [
+      "The rise of xenophobia is a concerning trend.",
+      "He condemned the xenophobia displayed by some groups."
+    ]
+  },
+  {
+    "day": "August 28",
+    "word": "Yield",
+    "definition": "Produce or provide (a natural, agricultural, or industrial product).",
+    "synonyms": ["produce", "bear", "generate"],
+    "examples": [
+      "The apple tree yielded a bountiful harvest.",
+      "The investment yielded a good return."
+    ]
+  },
+  {
+    "day": "August 29",
+    "word": "Zephyr",
+    "definition": "A soft, gentle breeze.",
+    "synonyms": ["breeze", "gust", "waft"],
+    "examples": [
+      "A gentle zephyr rustled the leaves.",
+      "The zephyr cooled their faces on the hot day."
+    ]
+  },
+  {
+    "day": "August 30",
+    "word": "Ameliorate",
+    "definition": "Make (something bad or unsatisfactory) better.",
+    "synonyms": ["improve", "enhance", "better"],
+    "examples": [
+      "Steps were taken to ameliorate the living conditions.",
+      "He tried to ameliorate the situation by apologizing."
+    ]
+  },
+  {
+    "day": "August 31",
+    "word": "Bifurcate",
+    "definition": "Divide into two branches or forks.",
+    "synonyms": ["fork", "split", "divide"],
+    "examples": [
+      "The road bifurcated into two paths.",
+      "The river bifurcates around the island."
+    ]
+  },
+  {
+    "day": "September 1",
+    "word": "Cajole",
+    "definition": "Persuade someone to do something by sustained coaxing or flattery.",
+    "synonyms": ["coax", "persuade", "wheedle"],
+    "examples": [
+      "He cajoled her into agreeing to the plan.",
+      "She tried to cajole her father into buying her a car."
+    ]
+  },
+  {
+    "day": "September 2",
+    "word": "Debilitate",
+    "definition": "Make (someone) weak and infirm.",
+    "synonyms": ["weaken", "enfeeble", "incapacitate"],
+    "examples": [
+      "The disease can debilitate the immune system.",
+      "Lack of sleep can debilitate your performance."
+    ]
+  },
+  {
+    "day": "September 3",
+    "word": "Ebullient",
+    "definition": "Cheerful and full of energy.",
+    "synonyms": ["exuberant", "buoyant", "joyful"],
+    "examples": [
+      "Her ebullient personality brightened the room.",
+      "He was ebullient after receiving the good news."
+    ]
+  },
+  {
+    "day": "September 4",
+    "word": "Furtive",
+    "definition": "Attempting to avoid notice or attention, typically because of guilt or a belief that discovery would lead to trouble; secretive.",
+    "synonyms": ["secretive", "surreptitious", "stealthy"],
+    "examples": [
+      "He cast a furtive glance at his watch.",
+      "They exchanged furtive whispers."
+    ]
+  },
+  {
+    "day": "September 5",
+    "word": "Garrulous",
+    "definition": "Excessively talkative, especially on trivial matters.",
+    "synonyms": ["talkative", "loquacious", "chatty"],
+    "examples": [
+      "The garrulous old man told endless stories.",
+      "She was a garrulous hostess, keeping the conversation flowing."
+    ]
+  },
+  {
+    "day": "September 6",
+    "word": "Hapless",
+    "definition": "Unfortunate.",
+    "synonyms": ["unlucky", "unfortunate", "jinxed"],
+    "examples": [
+      "The hapless victim was robbed of all his possessions.",
+      "He was a hapless fellow, always getting into trouble."
+    ]
+  },
+  {
+    "day": "September 7",
+    "word": "Ignominious",
+    "definition": "Deserving or causing public disgrace or shame.",
+    "synonyms": ["humiliating", "disgraceful", "shameful"],
+    "examples": [
+      "The team suffered an ignominious defeat.",
+      "He made an ignominious exit from the stage."
+    ]
+  },
+  {
+    "day": "September 8",
+    "word": "Juxtapose",
+    "definition": "Place or deal with close together for contrasting effect.",
+    "synonyms": ["contrast", "compare", "place side by side"],
+    "examples": [
+      "The artist juxtaposed bright colors with dark shades.",
+      "The film juxtaposes scenes of poverty with scenes of wealth."
+    ]
+  },
+  {
+    "day": "September 9",
+    "word": "Kudos",
+    "definition": "Praise and honor received for an achievement.",
+    "synonyms": ["praise", "glory", "acclaim"],
+    "examples": [
+      "Kudos to the team for their hard work.",
+      "She received kudos for her outstanding performance."
+    ]
+  },
+  {
+    "day": "September 10",
+    "word": "Lament",
+    "definition": "A passionate expression of grief or sorrow.",
+    "synonyms": ["mourn", "grieve", "wail"],
+    "examples": [
+      "She lamented the loss of her beloved pet.",
+      "The poem was a lament for lost youth."
+    ]
+  },
+  {
+    "day": "September 11",
+    "word": "Meticulous",
+    "definition": "Showing great attention to detail; very careful and precise.",
+    "synonyms": ["fastidious", "scrupulous", "thorough"],
+    "examples": [
+      "He was meticulous in his planning.",
+      "The artist's work was known for its meticulous detail."
+    ]
+  },
+  {
+    "day": "September 12",
+    "word": "Nostalgia",
+    "definition": "A sentimental longing or wistful affection for a period in the past.",
+    "synonyms": ["longing", "yearning", "sentimentality"],
+    "examples": [
+      "He felt a wave of nostalgia for his childhood.",
+      "The old photographs evoked a sense of nostalgia."
+    ]
+  },
+  {
+    "day": "September 13",
+    "word": "Obsequious",
+    "definition": "Obedient or attentive to an excessive or servile degree.",
+    "synonyms": ["servile", "fawning", "sycophantic"],
+    "examples": [
+      "The obsequious waiter bowed deeply.",
+      "She was surrounded by obsequious admirers."
+    ]
+  },
+  {
+    "day": "September 14",
+    "word": "Paucity",
+    "definition": "The presence of something only in small or insufficient quantities or amounts; scarcity.",
+    "synonyms": ["scarcity", "dearth", "shortage"],
+    "examples": [
+      "There was a paucity of evidence to support his claim.",
+      "The region suffered from a paucity of rainfall."
+    ]
+  },
+  {
+    "day": "September 15",
+    "word": "Quell",
+    "definition": "Put an end to (a rebellion or other disorder), typically by the use of force.",
+    "synonyms": ["suppress", "crush", "subdue"],
+    "examples": [
+      "The police were called to quell the riot.",
+      "He tried to quell his rising anger."
+    ]
+  },
+  {
+    "day": "September 16",
+    "word": "Rescind",
+    "definition": "Revoke, cancel, or repeal (a law, order, or agreement).",
+    "synonyms": ["revoke", "cancel", "repeal"],
+    "examples": [
+      "The company rescinded its job offer.",
+      "The government rescinded the unpopular law."
+    ]
+  },
+  {
+    "day": "September 17",
+    "word": "Sagacious",
+    "definition": "Having or showing keen mental discernment and good judgment; shrewd.",
+    "synonyms": ["wise", "shrewd", "astute"],
+    "examples": [
+      "The sagacious old man offered sound advice.",
+      "His sagacious decisions led to the company's success."
+    ]
+  },
+  {
+    "day": "September 18",
+    "word": "Tenuous",
+    "definition": "Very weak or slight.",
+    "synonyms": ["flimsy", "fragile", "dubious"],
+    "examples": [
+      "The connection between the two events was tenuous.",
+      "He had only a tenuous grasp of the subject."
+    ]
+  },
+  {
+    "day": "September 19",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "September 20",
+    "word": "Venerate",
+    "definition": "Regard with great respect; revere.",
+    "synonyms": ["revere", "adore", "worship"],
+    "examples": [
+      "The ancient Egyptians would venerate their pharaohs.",
+      "He was a venerated figure in the community."
+    ]
+  },
+  {
+    "day": "September 21",
+    "word": "Wistful",
+    "definition": "Having or showing a feeling of vague or regretful longing.",
+    "synonyms": ["nostalgic", "melancholy", "yearning"],
+    "examples": [
+      "She gave a wistful smile as she remembered her youth.",
+      "He had a wistful look in his eyes."
+    ]
+  },
+  {
+    "day": "September 22",
+    "word": "Xenodochial",
+    "definition": "Friendly to strangers.",
+    "synonyms": ["hospitable", "welcoming", "friendly"],
+    "examples": [
+      "The xenodochial villagers welcomed the travelers.",
+      "His xenodochial nature made him popular with tourists."
+    ]
+  },
+  {
+    "day": "September 23",
+    "word": "Yore",
+    "definition": "Of long ago or former times.",
+    "synonyms": ["past", "olden days", "antiquity"],
+    "examples": [
+      "In days of yore, knights roamed the land.",
+      "The tales of yore were passed down through generations."
+    ]
+  },
+  {
+    "day": "September 24",
+    "word": "Zealous",
+    "definition": "Having or showing great energy or enthusiasm in pursuit of a cause or objective.",
+    "synonyms": ["enthusiastic", "ardent", "fervent"],
+    "examples": [
+      "He was a zealous supporter of the charity.",
+      "Her zealous efforts led to the project's success."
+    ]
+  },
+  {
+    "day": "September 25",
+    "word": "Acumen",
+    "definition": "The ability to make good judgments and quick decisions, typically in a particular domain.",
+    "synonyms": ["shrewdness", "astuteness", "discernment"],
+    "examples": [
+      "Her business acumen led to her success.",
+      "He showed great political acumen."
+    ]
+  },
+  {
+    "day": "September 26",
+    "word": "Beguile",
+    "definition": "Charm or enchant (someone), sometimes in a deceptive way.",
+    "synonyms": ["charm", "enchant", "deceive"],
+    "examples": [
+      "He was beguiled by her beauty.",
+      "The con artist tried to beguile his victims."
+    ]
+  },
+  {
+    "day": "September 27",
+    "word": "Cacography",
+    "definition": "Bad handwriting or spelling.",
+    "synonyms": ["scribble", "scrawl", "poor penmanship"],
+    "examples": [
+      "His cacography made his notes illegible.",
+      "The letter was full of cacography."
+    ]
+  },
+  {
+    "day": "September 28",
+    "word": "Delineate",
+    "definition": "Describe or portray (something) precisely.",
+    "synonyms": ["describe", "portray", "outline"],
+    "examples": [
+      "The artist delineated the features of the landscape.",
+      "He delineated the responsibilities of each team member."
+    ]
+  },
+  {
+    "day": "September 29",
+    "word": "Effervescent",
+    "definition": "Bubbly, lively, and enthusiastic.",
+    "synonyms": ["bubbly", "lively", "vivacious"],
+    "examples": [
+      "Her effervescent personality made her popular.",
+      "The soda was effervescent."
+    ]
+  },
+  {
+    "day": "September 30",
+    "word": "Fatuous",
+    "definition": "Silly and pointless.",
+    "synonyms": ["silly", "foolish", "inane"],
+    "examples": [
+      "His fatuous remarks annoyed everyone.",
+      "The fatuous plan was doomed to fail."
+    ]
+  },
+  {
+    "day": "October 1",
+    "word": "Glib",
+    "definition": "Fluent and voluble but insincere and shallow.",
+    "synonyms": ["superficial", "slick", "facile"],
+    "examples": [
+      "He gave a glib answer to the difficult question.",
+      "Her glib excuses didn't convince anyone."
+    ]
+  },
+  {
+    "day": "October 2",
+    "word": "Halcyon",
+    "definition": "Denoting a period of time in the past that was idyllically happy and peaceful.",
+    "synonyms": ["idyllic", "peaceful", "golden"],
+    "examples": [
+      "He remembered the halcyon days of his youth.",
+      "The island was a halcyon retreat."
+    ]
+  },
+  {
+    "day": "October 3",
+    "word": "Idiosyncrasy",
+    "definition": "A peculiar habit or way of behaving of an individual.",
+    "synonyms": ["peculiarity", "quirk", "habit"],
+    "examples": [
+      "One of his idiosyncrasies was always wearing mismatched socks.",
+      "Her artistic idiosyncrasies made her unique."
+    ]
+  },
+  {
+    "day": "October 4",
+    "word": "Jettison",
+    "definition": "Throw or drop (something) from an aircraft or ship.",
+    "synonyms": ["discard", "dump", "abandon"],
+    "examples": [
+      "The crew had to jettison fuel to lighten the plane.",
+      "They jettisoned the old equipment."
+    ]
+  },
+  {
+    "day": "October 5",
+    "word": "Kismet",
+    "definition": "Destiny; fate.",
+    "synonyms": ["fate", "destiny", "fortune"],
+    "examples": [
+      "It was kismet that they met at that exact moment.",
+      "She believed their meeting was kismet."
+    ]
+  },
+  {
+    "day": "October 6",
+    "word": "Lissome",
+    "definition": "Thin, supple, and graceful.",
+    "synonyms": ["agile", "nimble", "graceful"],
+    "examples": [
+      "The lissome dancer moved elegantly.",
+      "She had a lissome figure."
+    ]
+  },
+  {
+    "day": "October 7",
+    "word": "Maelstrom",
+    "definition": "A powerful whirlpool in the sea or a river.",
+    "synonyms": ["whirlpool", "vortex", "turmoil"],
+    "examples": [
+      "The boat was caught in a maelstrom.",
+      "He was caught in a maelstrom of emotions."
+    ]
+  },
+  {
+    "day": "October 8",
+    "word": "Noxious",
+    "definition": "Harmful, poisonous, or very unpleasant.",
+    "synonyms": ["harmful", "poisonous", "toxic"],
+    "examples": [
+      "The factory emitted noxious fumes.",
+      "Noxious weeds spread rapidly."
+    ]
+  },
+  {
+    "day": "October 9",
+    "word": "Onerous",
+    "definition": "(Of a task, duty, or responsibility) involving an amount of effort and difficulty that is oppressively burdensome.",
+    "synonyms": ["burdensome", "arduous", "demanding"],
+    "examples": [
+      "The new regulations were onerous for small businesses.",
+      "He found the task onerous."
+    ]
+  },
+  {
+    "day": "October 10",
+    "word": "Pellucid",
+    "definition": "Translucently clear.",
+    "synonyms": ["transparent", "clear", "limpid"],
+    "examples": [
+      "The pellucid water of the mountain lake.",
+      "His writing style was pellucid and easy to understand."
+    ]
+  },
+  {
+    "day": "October 11",
+    "word": "Quiescent",
+    "definition": "In a state or period of inactivity or dormancy.",
+    "synonyms": ["inactive", "dormant", "latent"],
+    "examples": [
+      "The volcano has been quiescent for centuries.",
+      "The disease remained quiescent for years."
+    ]
+  },
+  {
+    "day": "October 12",
+    "word": "Redolent",
+    "definition": "Strongly reminiscent or suggestive of something.",
+    "synonyms": ["evocative", "reminiscent", "suggestive"],
+    "examples": [
+      "The air was redolent of pine trees.",
+      "The book was redolent of his childhood."
+    ]
+  },
+  {
+    "day": "October 13",
+    "word": "Sanguine",
+    "definition": "Optimistic or positive, especially in an apparently difficult situation.",
+    "synonyms": ["optimistic", "hopeful", "positive"],
+    "examples": [
+      "He was sanguine about the company's future.",
+      "She maintained a sanguine outlook despite the challenges."
+    ]
+  },
+  {
+    "day": "October 14",
+    "word": "Turgid",
+    "definition": "Swollen and distended or congested.",
+    "synonyms": ["swollen", "inflated", "bombastic"],
+    "examples": [
+      "The river was turgid after the heavy rains.",
+      "His turgid prose was difficult to read."
+    ]
+  },
+  {
+    "day": "October 15",
+    "word": "Unctuous",
+    "definition": "Excessively or ingratiatingly flattering; oily.",
+    "synonyms": ["smarmy", "oily", "sycophantic"],
+    "examples": [
+      "The unctuous salesman tried to flatter the customer.",
+      "His unctuous manner made her uncomfortable."
+    ]
+  },
+  {
+    "day": "October 16",
+    "word": "Voracious",
+    "definition": "Having a very eager approach to an activity.",
+    "synonyms": ["insatiable", "greedy", "avid"],
+    "examples": [
+      "He had a voracious appetite for books.",
+      "The tiger is a voracious predator."
+    ]
+  },
+  {
+    "day": "October 17",
+    "word": "Wane",
+    "definition": "(Of the moon) have a progressively smaller part of its visible surface illuminated, so that it appears to decrease in size.",
+    "synonyms": ["decline", "diminish", "fade"],
+    "examples": [
+      "The moon was waning.",
+      "His enthusiasm began to wane."
+    ]
+  },
+  {
+    "day": "October 18",
+    "word": "Xenial",
+    "definition": "Relating to the relationship between a host and a guest.",
+    "synonyms": ["hospitable", "welcoming", "friendly"],
+    "examples": [
+      "The xenial atmosphere of the village was inviting.",
+      "He showed xenial generosity to his visitors."
+    ]
+  },
+  {
+    "day": "October 19",
+    "word": "Yoke",
+    "definition": "A wooden crosspiece that is fastened over the necks of two animals and attached to the plow or cart that they are to pull.",
+    "synonyms": ["bond", "tie", "burden"],
+    "examples": [
+      "The oxen were yoked together.",
+      "They lived under the yoke of oppression."
+    ]
+  },
+  {
+    "day": "October 20",
+    "word": "Zenith",
+    "definition": "The time at which something is most powerful or successful.",
+    "synonyms": ["peak", "pinnacle", "apex"],
+    "examples": [
+      "His career reached its zenith in the 1990s.",
+      "The sun reached its zenith at noon."
+    ]
+  },
+  {
+    "day": "October 21",
+    "word": "Abstruse",
+    "definition": "Difficult to understand; obscure.",
+    "synonyms": ["esoteric", "arcane", "recondite"],
+    "examples": [
+      "The professor's lecture was too abstruse for most students.",
+      "He delved into abstruse philosophical concepts."
+    ]
+  },
+  {
+    "day": "October 22",
+    "word": "Bellicose",
+    "definition": "Demonstrating aggression and willingness to fight.",
+    "synonyms": ["aggressive", "warlike", "pugnacious"],
+    "examples": [
+      "His bellicose attitude often led to arguments.",
+      "The nation adopted a bellicose stance."
+    ]
+  },
+  {
+    "day": "October 23",
+    "word": "Clandestine",
+    "definition": "Kept secret or done secretively, especially because illicit.",
+    "synonyms": ["secret", "surreptitious", "covert"],
+    "examples": [
+      "They held a clandestine meeting.",
+      "The spy engaged in clandestine operations."
+    ]
+  },
+  {
+    "day": "October 24",
+    "word": "Deleterious",
+    "definition": "Causing harm or damage.",
+    "synonyms": ["harmful", "detrimental", "damaging"],
+    "examples": [
+      "The deleterious effects of pollution on the environment.",
+      "Lack of sleep has a deleterious impact on health."
+    ]
+  },
+  {
+    "day": "October 25",
+    "word": "Ephemeral",
+    "definition": "Lasting for a very short time.",
+    "synonyms": ["transient", "fleeting", "short-lived"],
+    "examples": [
+      "The beauty of the cherry blossoms is ephemeral.",
+      "His fame was ephemeral, lasting only a few months."
+    ]
+  },
+  {
+    "day": "October 26",
+    "word": "Fetter",
+    "definition": "A chain or manacle used to restrain a prisoner, typically placed around the ankles.",
+    "synonyms": ["shackle", "restrain", "hinder"],
+    "examples": [
+      "The prisoners were held in fetters.",
+      "He felt fettered by his responsibilities."
+    ]
+  },
+  {
+    "day": "October 27",
+    "word": "Gainsay",
+    "definition": "Deny or contradict (a fact or statement).",
+    "synonyms": ["deny", "contradict", "dispute"],
+    "examples": [
+      "No one could gainsay his claims.",
+      "It is difficult to gainsay the evidence."
+    ]
+  },
+  {
+    "day": "October 28",
+    "word": "Hegemony",
+    "definition": "Leadership or dominance, especially by one state or social group over others.",
+    "synonyms": ["dominance", "supremacy", "leadership"],
+    "examples": [
+      "The country sought regional hegemony.",
+      "Cultural hegemony can be subtle."
+    ]
+  },
+  {
+    "day": "October 29",
+    "word": "Imbroglio",
+    "definition": "An extremely confused, complicated, or embarrassing situation.",
+    "synonyms": ["predicament", "mess", "quandary"],
+    "examples": [
+      "The political imbroglio deepened.",
+      "He found himself in an embarrassing imbroglio."
+    ]
+  },
+  {
+    "day": "October 30",
+    "word": "Jocose",
+    "definition": "Playful or humorous.",
+    "synonyms": ["joking", "jesting", "humorous"],
+    "examples": [
+      "His jocose remarks lightened the mood.",
+      "She had a jocose personality."
+    ]
+  },
+  {
+    "day": "October 31",
+    "word": "Kowtow",
+    "definition": "Act in an excessively subservient manner.",
+    "synonyms": ["grovel", "fawn", "bow"],
+    "examples": [
+      "He refused to kowtow to the boss.",
+      "They had to kowtow to the foreign dignitaries."
+    ]
+  },
+  {
+    "day": "November 1",
+    "word": "Lachrymose",
+    "definition": "Tearful or given to weeping.",
+    "synonyms": ["tearful", "weepy", "sad"],
+    "examples": [
+      "She was in a lachrymose mood after the breakup.",
+      "The movie had a lachrymose ending."
+    ]
+  },
+  {
+    "day": "November 2",
+    "word": "Misanthrope",
+    "definition": "A person who dislikes humankind and avoids human society.",
+    "synonyms": ["cynic", "hermit", "recluse"],
+    "examples": [
+      "The old man was a misanthrope who lived alone.",
+      "He became a misanthrope after being betrayed."
+    ]
+  },
+  {
+    "day": "November 3",
+    "word": "Nugatory",
+    "definition": "Of no value or importance.",
+    "synonyms": ["trifling", "worthless", "insignificant"],
+    "examples": [
+      "His contributions were nugatory.",
+      "The evidence was nugatory to the case."
+    ]
+  },
+  {
+    "day": "November 4",
+    "word": "Obstreperous",
+    "definition": "Noisy and difficult to control.",
+    "synonyms": ["unruly", "disorderly", "boisterous"],
+    "examples": [
+      "The obstreperous children refused to go to bed.",
+      "The crowd became obstreperous."
+    ]
+  },
+  {
+    "day": "November 5",
+    "word": "Panacea",
+    "definition": "A solution or remedy for all difficulties or diseases.",
+    "synonyms": ["cure-all", "remedy", "solution"],
+    "examples": [
+      "There is no panacea for all economic problems.",
+      "He believed education was the panacea for poverty."
+    ]
+  },
+  {
+    "day": "November 6",
+    "word": "Quixotic",
+    "definition": "Exceedingly idealistic; unrealistic and impractical.",
+    "synonyms": ["idealistic", "romantic", "visionary"],
+    "examples": [
+      "His quixotic quest to save the world seemed impossible.",
+      "She had a quixotic belief in the inherent goodness of people."
+    ]
+  },
+  {
+    "day": "November 7",
+    "word": "Rancor",
+    "definition": "Bitterness or resentfulness, especially when long-standing.",
+    "synonyms": ["bitterness", "hatred", "animosity"],
+    "examples": [
+      "He spoke without rancor, despite his past grievances.",
+      "The old feud was filled with rancor."
+    ]
+  },
+  {
+    "day": "November 8",
+    "word": "Salubrious",
+    "definition": "Health-giving; healthy.",
+    "synonyms": ["healthy", "beneficial", "wholesome"],
+    "examples": [
+      "The salubrious climate of the mountains.",
+      "Eating fresh vegetables is salubrious."
+    ]
+  },
+  {
+    "day": "November 9",
+    "word": "Turgid",
+    "definition": "Swollen and distended or congested.",
+    "synonyms": ["swollen", "inflated", "bombastic"],
+    "examples": [
+      "The river was turgid after the heavy rains.",
+      "His turgid prose was difficult to read."
+    ]
+  },
+  {
+    "day": "November 10",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "November 11",
+    "word": "Vacuous",
+    "definition": "Having or showing a lack of thought or intelligence; mindless.",
+    "synonyms": ["empty", "blank", "mindless"],
+    "examples": [
+      "He gave a vacuous smile.",
+      "The conversation was vacuous and uninteresting."
+    ]
+  },
+  {
+    "day": "November 12",
+    "word": "Wry",
+    "definition": "Using or expressing dry, especially mocking, humor.",
+    "synonyms": ["sarcastic", "ironic", "mocking"],
+    "examples": [
+      "He gave a wry smile.",
+      "Her wry sense of humor was appreciated."
+    ]
+  },
+  {
+    "day": "November 13",
+    "word": "Xeriscape",
+    "definition": "A style of landscape design requiring little or no irrigation or other maintenance.",
+    "synonyms": ["drought-tolerant landscaping", "water-wise gardening"],
+    "examples": [
+      "Many desert homes feature xeriscape gardens.",
+      "Xeriscape is an environmentally friendly option."
+    ]
+  },
+  {
+    "day": "November 14",
+    "word": "Yelp",
+    "definition": "A short, sharp cry, especially of pain or alarm.",
+    "synonyms": ["cry", "squeal", "howl"],
+    "examples": [
+      "The dog gave a yelp of pain.",
+      "She let out a yelp of surprise."
+    ]
+  },
+  {
+    "day": "November 15",
+    "word": "Zealot",
+    "definition": "A person who is fanatical and uncompromising in pursuit of their religious, political, or other ideals.",
+    "synonyms": ["fanatic", "extremist", "bigot"],
+    "examples": [
+      "He was a religious zealot.",
+      "The political zealot refused to compromise."
+    ]
+  },
+  {
+    "day": "November 16",
+    "word": "Avarice",
+    "definition": "Extreme greed for wealth or material gain.",
+    "synonyms": ["greed", "covetousness", "cupidity"],
+    "examples": [
+      "His avarice led him to betray his friends.",
+      "The story warned against the dangers of avarice."
+    ]
+  },
+  {
+    "day": "November 17",
+    "word": "Bilk",
+    "definition": "Obtain or withhold money from (someone) by deceit or without justification; defraud.",
+    "synonyms": ["defraud", "cheat", "swindle"],
+    "examples": [
+      "He tried to bilk the insurance company.",
+      "The con artist bilked many people."
+    ]
+  },
+  {
+    "day": "November 18",
+    "word": "Celerity",
+    "definition": "Rapidity of motion or action.",
+    "synonyms": ["speed", "swiftness", "haste"],
+    "examples": [
+      "He responded with impressive celerity.",
+      "The celerity of his movements surprised everyone."
+    ]
+  },
+  {
+    "day": "November 19",
+    "word": "Diatribe",
+    "definition": "A forceful and bitter verbal attack against someone or something.",
+    "synonyms": ["tirade", "rant", "harangue"],
+    "examples": [
+      "The politician launched into a diatribe against his opponents.",
+      "He delivered a long diatribe about the state of the economy."
+    ]
+  },
+  {
+    "day": "November 20",
+    "word": "Eschew",
+    "definition": "Deliberately avoid using; abstain from.",
+    "synonyms": ["avoid", "shun", "abstain from"],
+    "examples": [
+      "He eschewed alcohol and tobacco.",
+      "They eschewed violence as a means of protest."
+    ]
+  },
+  {
+    "day": "November 21",
+    "word": "Fatuous",
+    "definition": "Silly and pointless.",
+    "synonyms": ["silly", "foolish", "inane"],
+    "examples": [
+      "His fatuous remarks annoyed everyone.",
+      "The fatuous plan was doomed to fail."
+    ]
+  },
+  {
+    "day": "November 22",
+    "word": "Germane",
+    "definition": "Relevant to a subject under consideration.",
+    "synonyms": ["relevant", "pertinent", "applicable"],
+    "examples": [
+      "His comments were germane to the discussion.",
+      "The evidence was not germane to the case."
+    ]
+  },
+  {
+    "day": "November 23",
+    "word": "Hapless",
+    "definition": "Unfortunate.",
+    "synonyms": ["unlucky", "unfortunate", "jinxed"],
+    "examples": [
+      "The hapless victim was robbed of all his possessions.",
+      "He was a hapless fellow, always getting into trouble."
+    ]
+  },
+  {
+    "day": "November 24",
+    "word": "Impecunious",
+    "definition": "Having little or no money.",
+    "synonyms": ["poor", "penniless", "indigent"],
+    "examples": [
+      "He was an impecunious student struggling to make ends meet.",
+      "The family was left impecunious after the financial crisis."
+    ]
+  },
+  {
+    "day": "November 25",
+    "word": "Jettison",
+    "definition": "Throw or drop (something) from an aircraft or ship.",
+    "synonyms": ["discard", "dump", "abandon"],
+    "examples": [
+      "The crew had to jettison fuel to lighten the plane.",
+      "They jettisoned the old equipment."
+    ]
+  },
+  {
+    "day": "November 26",
+    "word": "Knell",
+    "definition": "The sound of a bell, especially when rung solemnly for a death or funeral.",
+    "synonyms": ["chime", "toll", "peal"],
+    "examples": [
+      "The church bells knelled mournfully.",
+      "The announcement sounded the knell for their hopes."
+    ]
+  },
+  {
+    "day": "November 27",
+    "word": "Languid",
+    "definition": "Having a disinclination for physical exertion or effort; slow and relaxed.",
+    "synonyms": ["relaxed", "leisurely", "unhurried"],
+    "examples": [
+      "They spent a languid afternoon by the pool.",
+      "His languid movements suggested a lack of energy."
+    ]
+  },
+  {
+    "day": "November 28",
+    "word": "Malinger",
+    "definition": "Exaggerate or feign illness in order to escape duty or work.",
+    "synonyms": ["shirk", "feign", "pretend"],
+    "examples": [
+      "He was accused of malingering to avoid military service.",
+      "Some employees malinger to get out of difficult tasks."
+    ]
+  },
+  {
+    "day": "November 29",
+    "word": "Nadir",
+    "definition": "The lowest point in the fortunes of a person or organization.",
+    "synonyms": ["rock bottom", "low point", "depths"],
+    "examples": [
+      "His career reached its nadir after the scandal.",
+      "The company hit its nadir during the recession."
+    ]
+  },
+  {
+    "day": "November 30",
+    "word": "Obfuscate",
+    "definition": "Make obscure, unclear, or unintelligible.",
+    "synonyms": ["confuse", "muddle", "bewilder"],
+    "examples": [
+      "The politician tried to obfuscate the truth with vague statements.",
+      "His complex explanations only served to obfuscate the issue."
+    ]
+  },
+  {
+    "day": "December 1",
+    "word": "Pernicious",
+    "definition": "Having a harmful effect, especially in a gradual or subtle way.",
+    "synonyms": ["damaging", "destructive", "malignant"],
+    "examples": [
+      "The pernicious influence of social media on young minds.",
+      "Smoking has a pernicious effect on health."
+    ]
+  },
+  {
+    "day": "December 2",
+    "word": "Querulous",
+    "definition": "Complaining in a petulant or whining manner.",
+    "synonyms": ["peevish", "petulant", "grumpy"],
+    "examples": [
+      "He became querulous in his old age, complaining about everything.",
+      "The child's querulous voice annoyed his parents."
+    ]
+  },
+  {
+    "day": "December 3",
+    "word": "Recalcitrant",
+    "definition": "Having an obstinately uncooperative attitude toward authority or discipline.",
+    "synonyms": ["unruly", "disobedient", "defiant"],
+    "examples": [
+      "The recalcitrant student refused to follow the rules.",
+      "The donkey was recalcitrant and wouldn't move."
+    ]
+  },
+  {
+    "day": "December 4",
+    "word": "Sycophant",
+    "definition": "A person who acts obsequiously toward someone important in order to gain advantage.",
+    "synonyms": ["flatterer", "toady", "bootlicker"],
+    "examples": [
+      "The sycophant praised his boss excessively.",
+      "He was surrounded by sycophants who agreed with his every word."
+    ]
+  },
+  {
+    "day": "December 5",
+    "word": "Tirade",
+    "definition": "A long, angry speech of criticism or accusation.",
+    "synonyms": ["harangue", "rant", "diatribe"],
+    "examples": [
+      "The manager launched into a tirade about the team's poor performance.",
+      "She delivered a furious tirade against injustice."
+    ]
+  },
+  {
+    "day": "December 6",
+    "word": "Ubiquitous",
+    "definition": "Present, appearing, or found everywhere.",
+    "synonyms": ["omnipresent", "pervasive", "universal"],
+    "examples": [
+      "In the modern world, smartphones have become ubiquitous.",
+      "Coffee shops are ubiquitous in urban areas."
+    ]
+  },
+  {
+    "day": "December 7",
+    "word": "Vacillate",
+    "definition": "Alternate or waver between different opinions or actions; be indecisive.",
+    "synonyms": ["waver", "hesitate", "fluctuate"],
+    "examples": [
+      "He vacillated between the two job offers.",
+      "She vacillated for a long time before making a decision."
+    ]
+  },
+  {
+    "day": "December 8",
+    "word": "Wary",
+    "definition": "Feeling or showing caution about possible dangers or problems.",
+    "synonyms": ["cautious", "circumspect", "suspicious"],
+    "examples": [
+      "He was wary of strangers.",
+      "Be wary of promises that sound too good to be true."
+    ]
+  },
+  {
+    "day": "December 9",
+    "word": "Xenophobia",
+    "definition": "Dislike of or prejudice against people from other countries.",
+    "synonyms": ["racism", "bigotry", "prejudice"],
+    "examples": [
+      "The rise of xenophobia is a concerning trend.",
+      "He condemned the xenophobia displayed by some groups."
+    ]
+  },
+  {
+    "day": "December 10",
+    "word": "Yield",
+    "definition": "Produce or provide (a natural, agricultural, or industrial product).",
+    "synonyms": ["produce", "bear", "generate"],
+    "examples": [
+      "The apple tree yielded a bountiful harvest.",
+      "The investment yielded a good return."
+    ]
+  },
+  {
+    "day": "December 11",
+    "word": "Zephyr",
+    "definition": "A soft, gentle breeze.",
+    "synonyms": ["breeze", "gust", "waft"],
+    "examples": [
+      "A gentle zephyr rustled the leaves.",
+      "The zephyr cooled their faces on the hot day."
+    ]
+  },
+  {
+    "day": "December 12",
+    "word": "Ameliorate",
+    "definition": "Make (something bad or unsatisfactory) better.",
+    "synonyms": ["improve", "enhance", "better"],
+    "examples": [
+      "Steps were taken to ameliorate the living conditions.",
+      "He tried to ameliorate the situation by apologizing."
+    ]
+  },
+  {
+    "day": "December 13",
+    "word": "Bifurcate",
+    "definition": "Divide into two branches or forks.",
+    "synonyms": ["fork", "split", "divide"],
+    "examples": [
+      "The road bifurcated into two paths.",
+      "The river bifurcates around the island."
+    ]
+  },
+  {
+    "day": "December 14",
+    "word": "Cajole",
+    "definition": "Persuade someone to do something by sustained coaxing or flattery.",
+    "synonyms": ["coax", "persuade", "wheedle"],
+    "examples": [
+      "He cajoled her into agreeing to the plan.",
+      "She tried to cajole her father into buying her a car."
+    ]
+  },
+  {
+    "day": "December 15",
+    "word": "Debilitate",
+    "definition": "Make (someone) weak and infirm.",
+    "synonyms": ["weaken", "enfeeble", "incapacitate"],
+    "examples": [
+      "The disease can debilitate the immune system.",
+      "Lack of sleep can debilitate your performance."
+    ]
+  },
+  {
+    "day": "December 16",
+    "word": "Ebullient",
+    "definition": "Cheerful and full of energy.",
+    "synonyms": ["exuberant", "buoyant", "joyful"],
+    "examples": [
+      "Her ebullient personality brightened the room.",
+      "He was ebullient after receiving the good news."
+    ]
+  },
+  {
+    "day": "December 17",
+    "word": "Furtive",
+    "definition": "Attempting to avoid notice or attention, typically because of guilt or a belief that discovery would lead to trouble; secretive.",
+    "synonyms": ["secretive", "surreptitious", "stealthy"],
+    "examples": [
+      "He cast a furtive glance at his watch.",
+      "They exchanged furtive whispers."
+    ]
+  },
+  {
+    "day": "December 18",
+    "word": "Garrulous",
+    "definition": "Excessively talkative, especially on trivial matters.",
+    "synonyms": ["talkative", "loquacious", "chatty"],
+    "examples": [
+      "The garrulous old man told endless stories.",
+      "She was a garrulous hostess, keeping the conversation flowing."
+    ]
+  },
+  {
+    "day": "December 19",
+    "word": "Hapless",
+    "definition": "Unfortunate.",
+    "synonyms": ["unlucky", "unfortunate", "jinxed"],
+    "examples": [
+      "The hapless victim was robbed of all his possessions.",
+      "He was a hapless fellow, always getting into trouble."
+    ]
+  },
+  {
+    "day": "December 20",
+    "word": "Ignominious",
+    "definition": "Deserving or causing public disgrace or shame.",
+    "synonyms": ["humiliating", "disgraceful", "shameful"],
+    "examples": [
+      "The team suffered an ignominious defeat.",
+      "He made an ignominious exit from the stage."
+    ]
+  },
+  {
+    "day": "December 21",
+    "word": "Juxtapose",
+    "definition": "Place or deal with close together for contrasting effect.",
+    "synonyms": ["contrast", "compare", "place side by side"],
+    "examples": [
+      "The artist juxtaposed bright colors with dark shades.",
+      "The film juxtaposes scenes of poverty with scenes of wealth."
+    ]
+  },
+  {
+    "day": "December 22",
+    "word": "Kudos",
+    "definition": "Praise and honor received for an achievement.",
+    "synonyms": ["praise", "glory", "acclaim"],
+    "examples": [
+      "Kudos to the team for their hard work.",
+      "She received kudos for her outstanding performance."
+    ]
+  },
+  {
+    "day": "December 23",
+    "word": "Lament",
+    "definition": "A passionate expression of grief or sorrow.",
+    "synonyms": ["mourn", "grieve", "wail"],
+    "examples": [
+      "She lamented the loss of her beloved pet.",
+      "The poem was a lament for lost youth."
+    ]
+  },
+  {
+    "day": "December 24",
+    "word": "Meticulous",
+    "definition": "Showing great attention to detail; very careful and precise.",
+    "synonyms": ["fastidious", "scrupulous", "thorough"],
+    "examples": [
+      "He was meticulous in his planning.",
+      "The artist's work was known for its meticulous detail."
+    ]
+  },
+  {
+    "day": "December 25",
+    "word": "Nostalgia",
+    "definition": "A sentimental longing or wistful affection for a period in the past.",
+    "synonyms": ["longing", "yearning", "sentimentality"],
+    "examples": [
+      "He felt a wave of nostalgia for his childhood.",
+      "The old photographs evoked a sense of nostalgia."
+    ]
+  },
+  {
+    "day": "December 26",
+    "word": "Obsequious",
+    "definition": "Obedient or attentive to an excessive or servile degree.",
+    "synonyms": ["servile", "fawning", "sycophantic"],
+    "examples": [
+      "The obsequious waiter bowed deeply.",
+      "She was surrounded by obsequious admirers."
+    ]
+  },
+  {
+    "day": "December 27",
+    "word": "Paucity",
+    "definition": "The presence of something only in small or insufficient quantities or amounts; scarcity.",
+    "synonyms": ["scarcity", "dearth", "shortage"],
+    "examples": [
+      "There was a paucity of evidence to support his claim.",
+      "The region suffered from a paucity of rainfall."
+    ]
+  },
+  {
+    "day": "December 28",
+    "word": "Quell",
+    "definition": "Put an end to (a rebellion or other disorder), typically by the use of force.",
+    "synonyms": ["suppress", "crush", "subdue"],
+    "examples": [
+      "The police were called to quell the riot.",
+      "He tried to quell his rising anger."
+    ]
+  },
+  {
+    "day": "December 29",
+    "word": "Rescind",
+    "definition": "Revoke, cancel, or repeal (a law, order, or agreement).",
+    "synonyms": ["revoke", "cancel", "repeal"],
+    "examples": [
+      "The company rescinded its job offer.",
+      "The government rescinded the unpopular law."
+    ]
+  },
+  {
+    "day": "December 30",
+    "word": "Sagacious",
+    "definition": "Having or showing keen mental discernment and good judgment; shrewd.",
+    "synonyms": ["wise", "shrewd", "astute"],
+    "examples": [
+      "The sagacious old man offered sound advice.",
+      "His sagacious decisions led to the company's success."
+    ]
+  },
+  {
+    "day": "December 31",
+    "word": "Tenuous",
+    "definition": "Very weak or slight.",
+    "synonyms": ["flimsy", "fragile", "dubious"],
+    "examples": [
+      "The connection between the two events was tenuous.",
+      "He had only a tenuous grasp of the subject."
+    ]
+  }
+]

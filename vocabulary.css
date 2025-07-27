@@ -65,6 +65,37 @@ header p {
     margin-top: 1rem;
 }
 
+.synonyms {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.examples {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.examples li {
+    font-style: italic;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.examples li:before {
+    content: '“';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+    line-height: 1;
+    color: #3498db;
+}
+
 .controls {
     margin-bottom: 1.5rem;
 }
