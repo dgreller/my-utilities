@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary Builder</title>
+    <link rel="stylesheet" href="vocabulary.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Vocabulary Builder</h1>
+            <p>Your daily word, plus a random one if you're curious.</p>
+        </header>
+        <main>
+            <div id="word-of-the-day" class="word-card">
+                <h2>Word of the Day</h2>
+                <h3 id="daily-word"></h3>
+                <p id="daily-definition"></p>
+                <p id="daily-example"></p>
+            </div>
+            <div class="controls">
+                <button id="random-word-btn">Get Random Word</button>
+            </div>
+            <div id="random-word" class="word-card" style="display: none;">
+                <h2>Random Word</h2>
+                <h3 id="random-word-text"></h3>
+                <p id="random-definition"></p>
+                <p id="random-example"></p>
+            </div>
+        </main>
+    </div>
+    <script src="vocabulary.js"></script>
+</body>
+</html>
