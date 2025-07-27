@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Timer</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
+        }
+        #app {
+            text-align: center;
+        }
+        #timer {
+            font-size: 72px;
+            margin-bottom: 20px;
+        }
+        #startButton {
+            font-size: 24px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="timer">00:00</div>
+        <button id="startButton">Start</button>
+    </div>
+    <audio id="tickSound" src="http://soundbible.com/grab.php?id=1044&type=mp3" preload="auto"></audio>
+    <script>
+        const timerDisplay = document.getElementById('timer');
+        const startButton = document.getElementById('startButton');
+        const tickSound = document.getElementById('tickSound');
+
+        let timerInterval;
+        let seconds = 0;
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            timerDisplay.textContent =
+                `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        startButton.addEventListener('click', () => {
+            if (startButton.textContent === 'Start') {
+                startButton.textContent = 'Pause';
+                timerInterval = setInterval(() => {
+                    seconds++;
+                    updateTimerDisplay();
+                    tickSound.currentTime = 0;
+                    tickSound.play();
+                }, 1000);
+            } else {
+                startButton.textContent = 'Start';
+                clearInterval(timerInterval);
+            }
+        });
+    </script>
+</body>
+</html>
