@@ -1,54 +1,55 @@
 (async () => {
-    const SQL = await initSqlJs({
-        locateFile: file => `https://sql.js.org/dist/${file}`
-    });
+    try {
+        const SQL = await initSqlJs({
+            locateFile: file => `sql-wasm.wasm`
+        });
 
-    const db = new SQL.Database();
+        const db = new SQL.Database();
 
-    db.run(`
-        CREATE TABLE quotes (
-            id INTEGER PRIMARY KEY,
-            quote TEXT,
-            author TEXT,
-            application TEXT
-        );
-    `);
+        db.run(`
+            CREATE TABLE quotes (
+                id INTEGER PRIMARY KEY,
+                quote TEXT,
+                author TEXT,
+                application TEXT
+            );
+        `);
 
-    db.run(`
-        CREATE TABLE virtues (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT UNIQUE
-        );
-    `);
+        db.run(`
+            CREATE TABLE virtues (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT UNIQUE
+            );
+        `);
 
-    db.run(`
-        CREATE TABLE tags (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT UNIQUE
-        );
-    `);
+        db.run(`
+            CREATE TABLE tags (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT UNIQUE
+            );
+        `);
 
-    db.run(`
-        CREATE TABLE quote_virtues (
-            quote_id INTEGER,
-            virtue_id INTEGER,
-            FOREIGN KEY (quote_id) REFERENCES quotes(id),
-            FOREIGN KEY (virtue_id) REFERENCES virtues(id),
-            PRIMARY KEY (quote_id, virtue_id)
-        );
-    `);
+        db.run(`
+            CREATE TABLE quote_virtues (
+                quote_id INTEGER,
+                virtue_id INTEGER,
+                FOREIGN KEY (quote_id) REFERENCES quotes(id),
+                FOREIGN KEY (virtue_id) REFERENCES virtues(id),
+                PRIMARY KEY (quote_id, virtue_id)
+            );
+        `);
 
-    db.run(`
-        CREATE TABLE quote_tags (
-            quote_id INTEGER,
-            tag_id INTEGER,
-            FOREIGN KEY (quote_id) REFERENCES quotes(id),
-            FOREIGN KEY (tag_id) REFERENCES tags(id),
-            PRIMARY KEY (quote_id, tag_id)
-        );
-    `);
+        db.run(`
+            CREATE TABLE quote_tags (
+                quote_id INTEGER,
+                tag_id INTEGER,
+                FOREIGN KEY (quote_id) REFERENCES quotes(id),
+                FOREIGN KEY (tag_id) REFERENCES tags(id),
+                PRIMARY KEY (quote_id, tag_id)
+            );
+        `);
 
-    const quotes = [
+        const quotes = [
   {
     "id": 1,
     "quote": "You have power over your mind - not outside events. Realize this, and you will find strength.",
@@ -851,36 +852,44 @@
   }
 ]
 
-    function insertVirtue(name) {
-        db.run('INSERT OR IGNORE INTO virtues (name) VALUES (?)', [name]);
-        const result = db.exec('SELECT id FROM virtues WHERE name = ?', [name]);
-        return result[0].values[0][0];
-    }
+        function insertVirtue(name) {
+            db.run('INSERT OR IGNORE INTO virtues (name) VALUES (?)', [name]);
+            const result = db.exec('SELECT id FROM virtues WHERE name = ?', [name]);
+            return result[0].values[0][0];
+        }
 
-    function insertTag(name) {
-        db.run('INSERT OR IGNORE INTO tags (name) VALUES (?)', [name]);
-        const result = db.exec('SELECT id FROM tags WHERE name = ?', [name]);
-        return result[0].values[0][0];
-    }
+        function insertTag(name) {
+            db.run('INSERT OR IGNORE INTO tags (name) VALUES (?)', [name]);
+            const result = db.exec('SELECT id FROM tags WHERE name = ?', [name]);
+            return result[0].values[0][0];
+        }
 
-    quotes.forEach(quote => {
-        db.run('INSERT INTO quotes (id, quote, author, application) VALUES (?, ?, ?, ?)', [
-            quote.id,
-            quote.quote,
-            quote.author,
-            quote.application
-        ]);
+        quotes.forEach(quote => {
+            db.run('INSERT INTO quotes (id, quote, author, application) VALUES (?, ?, ?, ?)', [
+                quote.id,
+                quote.quote,
+                quote.author,
+                quote.application
+            ]);
 
-        quote.virtues.forEach(virtueName => {
-            const virtueId = insertVirtue(virtueName);
-            db.run('INSERT INTO quote_virtues (quote_id, virtue_id) VALUES (?, ?)', [quote.id, virtueId]);
+            quote.virtues.forEach(virtueName => {
+                const virtueId = insertVirtue(virtueName);
+                db.run('INSERT INTO quote_virtues (quote_id, virtue_id) VALUES (?, ?)', [quote.id, virtueId]);
+            });
+
+            quote.tags.forEach(tagName => {
+                const tagId = insertTag(tagName);
+                db.run('INSERT INTO quote_tags (quote_id, tag_id) VALUES (?, ?)', [quote.id, tagId]);
+            });
         });
 
-        quote.tags.forEach(tagName => {
-            const tagId = insertTag(tagName);
-            db.run('INSERT INTO quote_tags (quote_id, tag_id) VALUES (?, ?)', [quote.id, tagId]);
-        });
-    });
+        window.db = db;
 
-    window.db = db;
+        // Signal that the database is ready
+        const event = new CustomEvent('db-ready');
+        document.dispatchEvent(event);
+
+    } catch (error) {
+        console.error("Database initialization failed:", error);
+    }
 })();
