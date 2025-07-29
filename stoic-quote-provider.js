@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('db-ready', function () {
     const quoteText = document.getElementById('quote-text');
     const quoteAuthor = document.getElementById('quote-author');
     const quoteVirtues = document.getElementById('quote-virtues');
@@ -11,7 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentQuotes = [];
 
     function getUniqueValues(key) {
-        const query = `SELECT DISTINCT T.name FROM ${key} T JOIN quote_${key} QT ON T.id = QT.virtue_id ORDER BY T.name`;
+        let query;
+        if (key === 'philosophers') {
+            query = `SELECT DISTINCT author FROM quotes ORDER BY author`;
+        } else {
+            query = `SELECT DISTINCT T.name FROM ${key} T JOIN quote_${key} QT ON T.id = QT.virtue_id ORDER BY T.name`;
+        }
         const results = window.db.exec(query);
         if (results.length > 0) {
             return results[0].values.map(row => row[0]);
