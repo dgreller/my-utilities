@@ -101,8 +101,8 @@ function drawInvaders() {
 
 function collisionDetection() {
     // Bullet and invader collision
-    for (let i = 0; i < bullets.length; i++) {
-        for (let j = 0; j < invaders.length; j++) {
+    for (let i = bullets.length - 1; i >= 0; i--) {
+        for (let j = invaders.length - 1; j >= 0; j--) {
             const bullet = bullets[i];
             const invader = invaders[j];
             if (
@@ -112,10 +112,9 @@ function collisionDetection() {
                 bullet.y + bullet.height > invader.y
             ) {
                 bullets.splice(i, 1);
-                i--;
                 invaders.splice(j, 1);
-                j--;
                 score += 10;
+                break; // Exit the inner loop since the bullet is gone
             }
         }
     }
