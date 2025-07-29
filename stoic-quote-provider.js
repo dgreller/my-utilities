@@ -15,7 +15,7 @@ document.addEventListener('db-ready', function () {
         if (key === 'philosophers') {
             query = `SELECT DISTINCT author FROM quotes ORDER BY author`;
         } else {
-            query = `SELECT DISTINCT T.name FROM ${key} T JOIN quote_${key} QT ON T.id = QT.virtue_id ORDER BY T.name`;
+            query = `SELECT DISTINCT name FROM ${key} ORDER BY name`;
         }
         const results = window.db.exec(query);
         if (results.length > 0) {
@@ -164,22 +164,26 @@ document.addEventListener('db-ready', function () {
     philosopherFilter.addEventListener('change', filterQuotes);
 
     // Initial setup
-    const initialQuery = `
-        SELECT
-            Q.id,
-            Q.quote,
-            Q.author,
-            Q.application,
-            GROUP_CONCAT(DISTINCT V.name) AS virtues,
-            GROUP_CONCAT(DISTINCT T.name) AS tags
-        FROM quotes Q
-        LEFT JOIN quote_virtues QV ON Q.id = QV.quote_id
-        LEFT JOIN virtues V ON QV.virtue_id = V.id
-        LEFT JOIN quote_tags QT ON Q.id = QT.quote_id
-        LEFT JOIN tags T ON QT.tag_id = T.id
-        GROUP BY Q.id
-    `;
-    currentQuotes = getQuotesFromDB(initialQuery);
-    populateFilters();
-    displayQuote(getRandomQuote());
+    function initializeApp() {
+        const initialQuery = `
+            SELECT
+                Q.id,
+                Q.quote,
+                Q.author,
+                Q.application,
+                GROUP_CONCAT(DISTINCT V.name) AS virtues,
+                GROUP_CONCAT(DISTINCT T.name) AS tags
+            FROM quotes Q
+            LEFT JOIN quote_virtues QV ON Q.id = QV.quote_id
+            LEFT JOIN virtues V ON QV.virtue_id = V.id
+            LEFT JOIN quote_tags QT ON Q.id = QT.quote_id
+            LEFT JOIN tags T ON QT.tag_id = T.id
+            GROUP BY Q.id
+        `;
+        currentQuotes = getQuotesFromDB(initialQuery);
+        populateFilters();
+        displayQuote(getRandomQuote());
+    }
+
+    initializeApp();
 });
