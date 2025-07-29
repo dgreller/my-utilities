@@ -86,15 +86,20 @@ function drawBullets() {
 
 function drawInvaders() {
     ctx.fillStyle = 'purple';
+    let edgeReached = false;
     for (let i = 0; i < invaders.length; i++) {
         const invader = invaders[i];
         ctx.fillRect(invader.x, invader.y, invader.width, invader.height);
         invader.x += invaderSpeed * invader.direction;
         if (invader.x + invader.width > canvas.width || invader.x < 0) {
-            for (let j = 0; j < invaders.length; j++) {
-                invaders[j].direction *= -1;
-                invaders[j].y += invaderHeight;
-            }
+            edgeReached = true;
+        }
+    }
+
+    if (edgeReached) {
+        for (let i = 0; i < invaders.length; i++) {
+            invaders[i].direction *= -1;
+            invaders[i].y += invaderHeight;
         }
     }
 }
