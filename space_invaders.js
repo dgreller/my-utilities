@@ -22,6 +22,11 @@ const invaderCols = 10;
 let score = 0;
 let gameOver = false;
 
+let invaderBullets = [];
+const invaderBulletWidth = 5;
+const invaderBulletHeight = 15;
+const invaderBulletSpeed = 5;
+
 // Event listeners
 document.addEventListener('keydown', keyDownHandler);
 document.addEventListener('keyup', keyUpHandler);
@@ -40,6 +45,31 @@ function keyDownHandler(e) {
             y: canvas.height - shipHeight,
             width: bulletWidth,
             height: bulletHeight
+        });
+    }
+}
+
+function drawInvaderBullets() {
+    ctx.fillStyle = 'yellow';
+    for (let i = 0; i < invaderBullets.length; i++) {
+        const bullet = invaderBullets[i];
+        ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+        bullet.y += invaderBulletSpeed;
+        if (bullet.y > canvas.height) {
+            invaderBullets.splice(i, 1);
+            i--;
+        }
+    }
+}
+
+function invaderShoot() {
+    if (Math.random() < 0.01 && invaders.length > 0) {
+        const randomInvader = invaders[Math.floor(Math.random() * invaders.length)];
+        invaderBullets.push({
+            x: randomInvader.x + invaderWidth / 2 - invaderBulletWidth / 2,
+            y: randomInvader.y + invaderHeight,
+            width: invaderBulletWidth,
+            height: invaderBulletHeight
         });
     }
 }
@@ -136,6 +166,19 @@ function collisionDetection() {
             gameOver = true;
         }
     }
+
+    // Invader bullet and ship collision
+    for (let i = 0; i < invaderBullets.length; i++) {
+        const bullet = invaderBullets[i];
+        if (
+            shipX < bullet.x + bullet.width &&
+            shipX + shipWidth > bullet.x &&
+            canvas.height - shipHeight < bullet.y + bullet.height &&
+            canvas.height - shipHeight + shipHeight > bullet.y
+        ) {
+            gameOver = true;
+        }
+    }
 }
 
 function drawScore() {
@@ -145,6 +188,13 @@ function drawScore() {
 }
 
 function draw() {
+    if (invaders.length === 0) {
+        ctx.font = '48px Arial';
+        ctx.fillStyle = 'green';
+        ctx.fillText('YOU WIN!', canvas.width / 2 - 150, canvas.height / 2);
+        return;
+    }
+
     if (gameOver) {
         ctx.font = '48px Arial';
         ctx.fillStyle = 'red';
@@ -155,6 +205,8 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawShip();
     drawBullets();
+    drawInvaderBullets();
+    invaderShoot();
     drawInvaders();
     drawScore();
     collisionDetection();
