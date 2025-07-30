@@ -1,4 +1,4 @@
-Got it. Here's the revised instruction block for your README.vibe.md that includes both the About panel requirement and the rule to update hub.html when a new app is added:
+
 
 * * *
 
