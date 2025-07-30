@@ -1,0 +1,24 @@
+{
+    "biases": [
+        {
+            "name": "Confirmation Bias",
+            "description": "The tendency to search for, interpret, favor, and recall information in a way that confirms or supports one's prior beliefs or values."
+        },
+        {
+            "name": "Anchoring Bias",
+            "description": "A cognitive bias whereby an individual's decisions are influenced by a particular reference point or 'anchor'."
+        },
+        {
+            "name": "Availability Heuristic",
+            "description": "A mental shortcut that relies on immediate examples that come to a given person's mind when evaluating a specific topic, concept, method or decision."
+        },
+        {
+            "name": "Dunning-Kruger Effect",
+            "description": "A cognitive bias whereby people with low ability at a task overestimate their ability."
+        },
+        {
+            "name": "Fundamental Attribution Error",
+            "description": "The tendency to attribute other people's behavior to internal factors (like personality or disposition) while attributing our own behavior to external, situational factors."
+        }
+    ]
+}
