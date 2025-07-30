@@ -10,11 +10,33 @@
 
     <header>
         <h1>Cognitive Bias Explorer</h1>
+        <p>An interactive tool to learn about cognitive biases and improve critical thinking.</p>
     </header>
 
-    <main id="app-container">
-        <!-- Biases will be loaded here -->
+    <main>
+        <div class="filter-container">
+            <label for="tag-filter">Filter by tag:</label>
+            <select id="tag-filter">
+                <option value="all">All</option>
+            </select>
+        </div>
+
+        <div id="bias-grid" class="bias-grid">
+            <!-- Bias cards will be loaded here -->
+        </div>
     </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title"></h2>
+            <h3>Description</h3>
+            <p id="modal-long-description"></p>
+            <h3>Example</h3>
+            <p id="modal-example"></p>
+            <a id="modal-link" href="#" target="_blank">Read more on Wikipedia</a>
+        </div>
+    </div>
 
     <footer>
         <a href="hub.html">Back to Hub</a>

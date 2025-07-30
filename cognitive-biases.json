@@ -1,24 +1,802 @@
-{
-    "biases": [
-        {
-            "name": "Confirmation Bias",
-            "description": "The tendency to search for, interpret, favor, and recall information in a way that confirms or supports one's prior beliefs or values."
-        },
-        {
-            "name": "Anchoring Bias",
-            "description": "A cognitive bias whereby an individual's decisions are influenced by a particular reference point or 'anchor'."
-        },
-        {
-            "name": "Availability Heuristic",
-            "description": "A mental shortcut that relies on immediate examples that come to a given person's mind when evaluating a specific topic, concept, method or decision."
-        },
-        {
-            "name": "Dunning-Kruger Effect",
-            "description": "A cognitive bias whereby people with low ability at a task overestimate their ability."
-        },
-        {
-            "name": "Fundamental Attribution Error",
-            "description": "The tendency to attribute other people's behavior to internal factors (like personality or disposition) while attributing our own behavior to external, situational factors."
-        }
-    ]
-}
+[
+  {
+    "name": "Anchoring",
+    "short_description": "Relying too heavily on the first piece of information (the “anchor”).",
+    "long_description": "When making estimates or decisions, people unconsciously use an initial value as a reference point and insufficiently adjust from it. This skews judgments even when the anchor is arbitrary or irrelevant.",
+    "example_application": "In salary negotiations, the first number mentioned strongly influences the final offer.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Anchoring",
+    "tags": ["judgment", "estimation", "decision-making", "negotiation"]
+  },
+  {
+    "name": "Availability Heuristic",
+    "short_description": "Judging frequency or likelihood by how easily examples come to mind.",
+    "long_description": "Events that are vivid, recent, or widely reported feel more common than they are. This shortcut can mislead when memory salience does not match actual base rates.",
+    "example_application": "After seeing news about airplane crashes, a person overestimates flight risk.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Availability_heuristic",
+    "tags": ["judgment", "risk", "memory", "probability"]
+  },
+  {
+    "name": "Representativeness Heuristic",
+    "short_description": "Assessing probability by similarity to a prototype rather than base rates.",
+    "long_description": "People judge the likelihood of an event by how much it resembles an existing stereotype, often ignoring statistical information like base rates and sample size.",
+    "example_application": "Assuming a quiet, bookish person is more likely a librarian than a salesperson despite base rates.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Representativeness_heuristic",
+    "tags": ["judgment", "probability", "stereotypes", "decision-making"]
+  },
+  {
+    "name": "Confirmation Bias",
+    "short_description": "Seeking and favoring information that confirms existing beliefs.",
+    "long_description": "People preferentially notice, interpret, and remember evidence that supports their prior views while dismissing or discounting contradictory information. This fuels belief persistence.",
+    "example_application": "An investor reads only bullish analyst reports to justify holding a stock.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Confirmation_bias",
+    "tags": ["reasoning", "information-processing", "belief", "research"]
+  },
+  {
+    "name": "Overconfidence Effect",
+    "short_description": "Overestimating the accuracy of one’s knowledge or predictions.",
+    "long_description": "Subjective confidence in judgments typically exceeds objective accuracy, especially in difficult tasks. This leads to narrow intervals, excessive risk-taking, and planning errors.",
+    "example_application": "Executives set aggressive revenue targets with insufficient contingency because they are sure of success.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Overconfidence_effect",
+    "tags": ["metacognition", "forecasting", "risk", "management"]
+  },
+  {
+    "name": "Hindsight Bias",
+    "short_description": "Seeing past events as having been predictable after they occur.",
+    "long_description": "Outcomes feel obvious in retrospect, causing memory distortions and the belief that one “knew it all along.” This hampers learning from surprises.",
+    "example_application": "After a market crash, people claim they saw the signs and should have sold earlier.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hindsight_bias",
+    "tags": ["memory", "learning", "decision-making"]
+  },
+  {
+    "name": "Survivorship Bias",
+    "short_description": "Focusing on successful cases while overlooking those that failed.",
+    "long_description": "By sampling only the 'survivors,' people draw overly optimistic conclusions and miss the silent evidence of those that did not make it.",
+    "example_application": "Studying only profitable startups to learn success factors and ignoring the many that folded.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Survivorship_bias",
+    "tags": ["sampling", "research", "business", "statistics"]
+  },
+  {
+    "name": "Framing Effect",
+    "short_description": "Choices change depending on how options are presented.",
+    "long_description": "Logically equivalent information can lead to different decisions when framed as gains or losses, or with different wording. Preferences are constructed, not fixed.",
+    "example_application": "Patients prefer a surgery with a “90% survival rate” over one with a “10% mortality rate.”",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Framing_effect_(psychology)",
+    "tags": ["decision-making", "communication", "behavioral-economics"]
+  },
+  {
+    "name": "Loss Aversion",
+    "short_description": "Losses loom larger than gains of equal size.",
+    "long_description": "People experience the pain of loss more intensely than the pleasure of equivalent gains, leading to risk-averse choices in gains and risk-seeking in losses.",
+    "example_application": "Investors hold losing stocks too long to avoid realizing a loss.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Loss_aversion",
+    "tags": ["behavioral-economics", "risk", "investment", "prospect-theory"]
+  },
+  {
+    "name": "Endowment Effect",
+    "short_description": "Valuing owned items more than identical non-owned items.",
+    "long_description": "Ownership increases perceived value, often due to loss aversion and identity. People demand more to give up an item than they would pay to acquire it.",
+    "example_application": "Homeowners overprice their houses relative to market offers.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Endowment_effect",
+    "tags": ["valuation", "behavioral-economics", "marketing"]
+  },
+  {
+    "name": "Status Quo Bias",
+    "short_description": "Preferring current states over change, even when better options exist.",
+    "long_description": "People overweight the disadvantages of switching relative to the advantages, leading to inertia and default retention.",
+    "example_application": "Employees stick with a legacy tool despite a more efficient alternative.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Status_quo_bias",
+    "tags": ["change-management", "decision-making", "defaults"]
+  },
+  {
+    "name": "Sunk Cost Fallacy",
+    "short_description": "Continuing an endeavor due to prior investments rather than future value.",
+    "long_description": "Past, unrecoverable costs irrationally influence current decisions, causing escalation of commitment even when prospects are poor.",
+    "example_application": "A firm keeps funding a failing project because it has already spent millions.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Sunk_cost",
+    "tags": ["project-management", "economics", "decision-making"]
+  },
+  {
+    "name": "Optimism Bias",
+    "short_description": "Overestimating the likelihood of positive outcomes for oneself.",
+    "long_description": "People believe they are less likely to experience negative events and more likely to achieve success than peers, affecting risk and planning.",
+    "example_application": "Teams underestimate timelines and budgets when scoping new initiatives.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Optimism_bias",
+    "tags": ["forecasting", "risk", "planning", "self"]
+  },
+  {
+    "name": "Pessimism Bias",
+    "short_description": "Overestimating the probability of negative outcomes.",
+    "long_description": "In some contexts, especially under stress or depression, individuals expect worse-than-justified results, dampening initiative and investment.",
+    "example_application": "A manager avoids a promising innovation fearing exaggerated downside risks.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Negativity_bias#Pessimism_bias",
+    "tags": ["risk", "affect", "forecasting"]
+  },
+  {
+    "name": "Negativity Bias",
+    "short_description": "Giving more weight to negative information than positive.",
+    "long_description": "Negative events are processed more intensely, remembered more, and influence decisions more than positive events of similar magnitude.",
+    "example_application": "One harsh review outweighs many favorable ones in a product decision.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Negativity_bias",
+    "tags": ["affect", "memory", "decision-making"]
+  },
+  {
+    "name": "Present Bias (Hyperbolic Discounting)",
+    "short_description": "Overvaluing immediate rewards relative to future rewards.",
+    "long_description": "People discount future outcomes steeply and inconsistently, leading to preference reversals and procrastination or impulsive choices.",
+    "example_application": "Choosing a smaller payoff today over a larger payoff next month.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hyperbolic_discounting",
+    "tags": ["time", "self-control", "behavioral-economics"]
+  },
+  {
+    "name": "Projection Bias",
+    "short_description": "Assuming future preferences will match current ones.",
+    "long_description": "People project present tastes, emotions, or states onto the future, underestimating how preferences change with context or time.",
+    "example_application": "Grocery shopping while hungry leads to buying more food than needed later.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Projection_bias",
+    "tags": ["forecasting", "self", "time", "consumption"]
+  },
+  {
+    "name": "Self-Serving Bias",
+    "short_description": "Attributing successes to oneself and failures to external factors.",
+    "long_description": "People protect self-esteem by claiming disproportionate credit for positive outcomes and deflecting blame for negative outcomes.",
+    "example_application": "A salesperson credits skill for big wins but blames the economy for missed quotas.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Self-serving_bias",
+    "tags": ["attribution", "social", "self"]
+  },
+  {
+    "name": "Fundamental Attribution Error",
+    "short_description": "Overemphasizing dispositions and underestimating situational factors in others’ behavior.",
+    "long_description": "Observers attribute others’ actions to character traits while overlooking external constraints; the asymmetry often flips when judging oneself.",
+    "example_application": "Assuming a colleague missed a deadline due to laziness rather than workload.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Fundamental_attribution_error",
+    "tags": ["attribution", "social", "perception"]
+  },
+  {
+    "name": "Actor–Observer Bias",
+    "short_description": "Attributing one’s own actions to situations and others’ actions to dispositions.",
+    "long_description": "A self-other asymmetry in causal explanations: we cite context for ourselves but character for others, shaping judgments and conflict.",
+    "example_application": "I was curt because I was rushed; you were curt because you’re rude.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Actor%E2%80%93observer_asymmetry",
+    "tags": ["attribution", "social", "conflict"]
+  },
+  {
+    "name": "False Consensus Effect",
+    "short_description": "Overestimating how much others share one’s beliefs and behaviors.",
+    "long_description": "People treat their own views as common and normative, distorting predictions about markets, voters, or customers.",
+    "example_application": "Designers assume users prefer the interface style they personally like.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/False_consensus_effect",
+    "tags": ["social", "prediction", "product"]
+  },
+  {
+    "name": "False Uniqueness Effect",
+    "short_description": "Underestimating how common one’s desirable traits or behaviors are.",
+    "long_description": "People see their positive qualities or ethical choices as rarer than they are, supporting a favorable self-image.",
+    "example_application": "Believing your healthy diet is uncommon compared to peers.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/False_uniqueness_bias",
+    "tags": ["self", "social", "perception"]
+  },
+  {
+    "name": "Halo Effect",
+    "short_description": "A positive impression in one area biases judgments in others.",
+    "long_description": "Attractive or successful attributes spill over, leading to inflated ratings of unrelated qualities like competence or morality.",
+    "example_application": "A charismatic leader is assumed to be a great strategist without evidence.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Halo_effect",
+    "tags": ["social-perception", "evaluation", "hiring"]
+  },
+  {
+    "name": "Horn Effect",
+    "short_description": "A negative impression in one area biases judgments in others.",
+    "long_description": "One salient flaw or dislike triggers unduly harsh evaluations of unrelated qualities, mirroring the halo effect but negative.",
+    "example_application": "After one poor presentation, a capable analyst is deemed broadly incompetent.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Horn_effect",
+    "tags": ["social-perception", "evaluation", "hiring"]
+  },
+  {
+    "name": "In-Group Bias",
+    "short_description": "Favoring members of one’s own group over outsiders.",
+    "long_description": "People allocate resources, trust, and positive judgments preferentially to in-group members, even on arbitrary group assignments.",
+    "example_application": "Departments fund their own projects over equally valuable cross-functional ones.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/In-group_favoritism",
+    "tags": ["social", "group-dynamics", "resource-allocation"]
+  },
+  {
+    "name": "Out-Group Homogeneity Bias",
+    "short_description": "Perceiving out-group members as more similar to each other than they are.",
+    "long_description": "People assume outsiders share the same traits or beliefs, while seeing more diversity within their own group.",
+    "example_application": "Marketing stereotypes competitor customers as a single, uniform persona.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Out-group_homogeneity",
+    "tags": ["social", "stereotypes", "group-dynamics"]
+  },
+  {
+    "name": "Groupthink",
+    "short_description": "A drive for consensus suppresses dissent and critical evaluation.",
+    "long_description": "Tightly cohesive groups under pressure prioritize harmony, ignore warnings, and fail to consider alternatives, risking poor decisions.",
+    "example_application": "A project steering committee approves an under-vetted launch to appear unified.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Groupthink",
+    "tags": ["group-dynamics", "governance", "decision-making"]
+  },
+  {
+    "name": "Authority Bias",
+    "short_description": "Overvaluing the opinions or directives of authority figures.",
+    "long_description": "People give disproportionate weight to experts or leaders, sometimes obeying even flawed recommendations without adequate scrutiny.",
+    "example_application": "Staff adopt a tool solely because an executive endorsed it.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Authority_bias",
+    "tags": ["social-influence", "compliance", "decision-making"]
+  },
+  {
+    "name": "Bandwagon Effect",
+    "short_description": "Adopting beliefs or behaviors because many others do.",
+    "long_description": "Popularity signals correctness or value, driving herding and rapid diffusion regardless of underlying merit.",
+    "example_application": "Investors pile into a hot sector mainly because it's trending.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bandwagon_effect",
+    "tags": ["social-influence", "markets", "adoption"]
+  },
+  {
+    "name": "Belief Bias",
+    "short_description": "Judging arguments by believability of conclusions, not logic.",
+    "long_description": "People accept invalid arguments with plausible conclusions and reject valid ones with implausible conclusions, conflating truth with validity.",
+    "example_application": "A manager dismisses sound analysis because the result feels counterintuitive.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Belief_bias",
+    "tags": ["reasoning", "logic", "critical-thinking"]
+  },
+  {
+    "name": "Base Rate Neglect",
+    "short_description": "Ignoring general prevalence when evaluating specific cases.",
+    "long_description": "People underuse base-rate statistics and overweight case details, impairing probabilistic judgments and diagnostics.",
+    "example_application": "Overestimating a rare disease after a positive test without considering false positives.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Base_rate_fallacy",
+    "tags": ["probability", "diagnostics", "statistics"]
+  },
+  {
+    "name": "Conjunction Fallacy",
+    "short_description": "Judging a combined event more likely than a single constituent event.",
+    "long_description": "Representativeness makes detailed scenarios feel more probable, violating probability rules (e.g., the Linda problem).",
+    "example_application": "Believing a candidate is more likely an engineer and a volunteer than simply an engineer.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Conjunction_fallacy",
+    "tags": ["probability", "judgment", "reasoning"]
+  },
+  {
+    "name": "Gambler’s Fallacy",
+    "short_description": "Belief that past random events influence future independent events.",
+    "long_description": "People expect reversals after streaks in random processes, misreading independence as self-correcting.",
+    "example_application": "Assuming a roulette wheel is 'due' for black after a run of reds.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Gambler%27s_fallacy",
+    "tags": ["probability", "randomness", "risk"]
+  },
+  {
+    "name": "Hot-Hand Fallacy",
+    "short_description": "Belief that success breeds immediate future success in random sequences.",
+    "long_description": "People perceive streaks as momentum even where outcomes are independent, often in sports or trading.",
+    "example_application": "A trader increases position size after a winning streak, assuming it will continue.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Hot-hand_fallacy",
+    "tags": ["probability", "sports", "markets"]
+  },
+  {
+    "name": "Regression to the Mean Neglect",
+    "short_description": "Failing to anticipate that extreme results tend to move toward average.",
+    "long_description": "After unusual highs or lows, subsequent outcomes typically moderate, but people attribute the change to causality rather than statistics.",
+    "example_application": "Assuming coaching caused performance to drop after an exceptionally good game.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Regression_toward_the_mean",
+    "tags": ["statistics", "performance", "judgment"]
+  },
+  {
+    "name": "Illusory Correlation",
+    "short_description": "Perceiving a relationship where none exists or overestimating its strength.",
+    "long_description": "Rare or vivid events co-occur and feel linked, leading to spurious associations and stereotypes.",
+    "example_application": "Linking a market indicator to returns based on selective episodes.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Illusory_correlation",
+    "tags": ["perception", "statistics", "stereotypes"]
+  },
+  {
+    "name": "Dunning–Kruger Effect",
+    "short_description": "Low-ability individuals overestimate their competence.",
+    "long_description": "Limited skill impairs metacognition, making it hard to recognize one’s own deficits; experts may also underestimate relative advantage.",
+    "example_application": "A novice coder believes their script is production-ready despite flaws.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect",
+    "tags": ["metacognition", "expertise", "learning"]
+  },
+  {
+    "name": "Bias Blind Spot",
+    "short_description": "Seeing biases in others more than in oneself.",
+    "long_description": "People believe they are less biased than peers, undermining debiasing efforts and feedback acceptance.",
+    "example_application": "A leader mandates training for team biases but resists their own coaching.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Bias_blind_spot",
+    "tags": ["metacognition", "self", "learning"]
+  },
+  {
+    "name": "Planning Fallacy",
+    "short_description": "Underestimating time, costs, and risks while overestimating benefits.",
+    "long_description": "People focus on best-case scenarios and neglect base rates and uncertainties, producing optimistic plans that slip.",
+    "example_application": "IT projects routinely exceed timelines despite prior history.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Planning_fallacy",
+    "tags": ["planning", "project-management", "forecasting"]
+  },
+  {
+    "name": "Curse of Knowledge",
+    "short_description": "Experts struggle to imagine what novices don’t know.",
+    "long_description": "Once people know something, it’s hard to recall what it was like not to know it, leading to overcomplex explanations and poor teaching.",
+    "example_application": "Engineers write jargon-heavy docs that confuse new users.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Curse_of_knowledge",
+    "tags": ["communication", "expertise", "education"]
+  },
+  {
+    "name": "Information Bias",
+    "short_description": "Seeking information that does not affect action.",
+    "long_description": "People collect data for its own sake, believing more information is always better, even when it is irrelevant to the decision.",
+    "example_application": "Ordering extra tests that won’t change a medical treatment plan.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Information_bias_(epidemiology)",
+    "tags": ["decision-making", "research", "efficiency"]
+  },
+  {
+    "name": "Ambiguity Effect",
+    "short_description": "Avoiding options with unknown probabilities.",
+    "long_description": "People prefer known risks over unknown risks, even when expected values may be higher for the ambiguous option.",
+    "example_application": "Choosing a familiar vendor with clear SLAs over an innovative newcomer with uncertain performance.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ambiguity_effect",
+    "tags": ["risk", "uncertainty", "decision-making"]
+  },
+  {
+    "name": "IKEA Effect",
+    "short_description": "Overvaluing things one helped create or assemble.",
+    "long_description": "Effort invested increases attachment and perceived value, independent of objective quality.",
+    "example_application": "Teams overrate an internally built tool versus a superior off-the-shelf product.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/IKEA_effect",
+    "tags": ["valuation", "effort", "product"]
+  },
+  {
+    "name": "Backfire Effect (Continued Influence)",
+    "short_description": "Corrections can entrench misbeliefs under some conditions.",
+    "long_description": "When identity or worldviews are threatened, people may double down on false beliefs even after debunking, though effects vary by context.",
+    "example_application": "Myth-busting a rumor makes some audiences believe it more strongly.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Backfire_effect",
+    "tags": ["belief", "communication", "misinformation"]
+  },
+  {
+    "name": "Reactance",
+    "short_description": "Resisting persuasion when freedom feels threatened.",
+    "long_description": "Strong directives can provoke a motivational pushback, leading people to do the opposite of what is urged.",
+    "example_application": "Users ignore security prompts they perceive as controlling.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Reactance_(psychology)",
+    "tags": ["motivation", "persuasion", "behavior-change"]
+  },
+  {
+    "name": "Choice-Supportive Bias",
+    "short_description": "Remembering one’s choices as better than they were.",
+    "long_description": "After choosing, people selectively recall positives of the selected option and negatives of the rejected ones to reduce dissonance.",
+    "example_application": "A buyer glosses over a product’s flaws because they picked it.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Choice-supportive_bias",
+    "tags": ["memory", "dissonance", "post-purchase"]
+  },
+  {
+    "name": "Clustering Illusion",
+    "short_description": "Seeing patterns in random data.",
+    "long_description": "People detect clusters and streaks where none exist, inferring causality from noise.",
+    "example_application": "Finding 'signals' in random short-term stock movements.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Clustering_illusion",
+    "tags": ["randomness", "pattern-recognition", "markets"]
+  },
+  {
+    "name": "Availability Cascade",
+    "short_description": "Beliefs gain plausibility through frequent public repetition.",
+    "long_description": "A self-reinforcing cycle where media coverage and social discussion make a claim feel increasingly true regardless of evidence.",
+    "example_application": "A dubious health trend becomes 'common knowledge' after repeated coverage.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Availability_cascade",
+    "tags": ["social", "communication", "misinformation"]
+  },
+  {
+    "name": "Neglect of Probability",
+    "short_description": "Disregarding probabilities when making decisions under uncertainty.",
+    "long_description": "People focus on outcomes and narratives rather than likelihoods, causing mispricing of rare risks and overreaction to vivid scenarios.",
+    "example_application": "Overinsuring against extremely rare events while underinsuring common ones.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Neglect_of_probability",
+    "tags": ["risk", "decision-making", "insurance"]
+  },
+  {
+    "name": "Zero-Risk Bias",
+    "short_description": "Preferring to eliminate a small risk entirely over larger net risk reductions.",
+    "long_description": "People value certainty disproportionately, even when reallocating resources could reduce overall risk more effectively.",
+    "example_application": "Spending heavily to remove a minor hazard instead of mitigating a major one.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Zero-risk_bias",
+    "tags": ["risk", "resource-allocation", "policy"]
+  },
+  {
+    "name": "Outcome Bias",
+    "short_description": "Judging a decision by its outcome rather than process quality.",
+    "long_description": "Good outcomes can excuse flawed decisions; bad outcomes can condemn sound decisions taken under uncertainty.",
+    "example_application": "Blaming a portfolio manager for a prudent but unlucky trade.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Outcome_bias",
+    "tags": ["evaluation", "risk", "governance"]
+  },
+  {
+    "name": "Omission Bias",
+    "short_description": "Judging harmful inactions as less bad than harmful actions.",
+    "long_description": "People see harm caused by omission as more acceptable than equivalent harm caused by commission, shaping ethics and policy.",
+    "example_application": "Preferring not to vaccinate to avoid 'doing harm' despite higher overall risk.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Omission_bias",
+    "tags": ["ethics", "risk", "policy"]
+  },
+  {
+    "name": "Action Bias (Commission Bias)",
+    "short_description": "A tendency to prefer action over inaction, especially after failure.",
+    "long_description": "Under pressure, people act to regain control or show responsiveness even when waiting would be wiser.",
+    "example_application": "A goalkeeper dives on penalties even when staying centered has higher save rates.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Action_bias",
+    "tags": ["behavior", "risk", "performance"]
+  },
+  {
+    "name": "Default Effect",
+    "short_description": "A strong tendency to stick with pre-set options.",
+    "long_description": "Defaults exploit inertia and implied endorsement, dramatically influencing participation and choices.",
+    "example_application": "Opt-out retirement savings plans boost enrollment versus opt-in.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Default_effect",
+    "tags": ["choice-architecture", "policy", "behavioral-design"]
+  },
+  {
+    "name": "Decoy Effect (Asymmetric Dominance)",
+    "short_description": "An inferior 'decoy' option shifts preference toward a target option.",
+    "long_description": "Adding a clearly dominated choice makes the target appear more attractive by comparison, altering trade-offs.",
+    "example_application": "Introducing a worse mid-tier plan increases selection of the premium plan.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Decoy_effect",
+    "tags": ["marketing", "pricing", "choice-architecture"]
+  },
+  {
+    "name": "Compromise Effect",
+    "short_description": "Middle options are preferred over extremes.",
+    "long_description": "When choices are arranged on a continuum, the intermediate option appears safer and more reasonable.",
+    "example_application": "Customers choose the mid-priced product when a cheaper and a premium version are also offered.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Compromise_effect",
+    "tags": ["marketing", "pricing", "choice-architecture"]
+  },
+  {
+    "name": "Contrast Effect",
+    "short_description": "Perceptions are influenced by comparison to recently observed items.",
+    "long_description": "An object can seem better or worse depending on the context set by preceding stimuli.",
+    "example_application": "A moderately priced item looks cheap after viewing very expensive items.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Contrast_effect",
+    "tags": ["perception", "marketing", "evaluation"]
+  },
+  {
+    "name": "Focusing Effect",
+    "short_description": "Overweighting one salient attribute in judgment.",
+    "long_description": "People fixate on a prominent feature and neglect other relevant information, distorting evaluations.",
+    "example_application": "Overvaluing camera megapixels while ignoring lens and sensor quality.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Focusing_effect",
+    "tags": ["attention", "evaluation", "decision-making"]
+  },
+  {
+    "name": "Rhyme-as-Reason Effect",
+    "short_description": "Rhyming statements feel more truthful.",
+    "long_description": "Processing fluency from rhyme increases perceived accuracy, regardless of actual evidence.",
+    "example_application": "Slogans that rhyme are judged more believable than non-rhyming equivalents.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Rhyme-as-reason_effect",
+    "tags": ["communication", "fluency", "persuasion"]
+  },
+  {
+    "name": "Peak–End Rule",
+    "short_description": "Memories of experiences are shaped by the peak and the end.",
+    "long_description": "People judge an episode largely by its most intense moment and how it ended, not the duration or sum of moments.",
+    "example_application": "A service that ends with a delightful finish leaves a stronger positive memory.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Peak%E2%80%93end_rule",
+    "tags": ["memory", "experience-design", "customer-success"]
+  },
+  {
+    "name": "Duration Neglect",
+    "short_description": "Ignoring how long an experience lasts when evaluating it.",
+    "long_description": "Evaluations depend on moments, not minutes; duration plays a minor role compared to intensity and ending.",
+    "example_application": "Patients rate procedures by peak pain and end, not total time in discomfort.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Duration_neglect",
+    "tags": ["memory", "experience", "healthcare"]
+  },
+  {
+    "name": "Empathy Gap (Hot–Cold)",
+    "short_description": "Misjudging behavior across emotional states.",
+    "long_description": "In a cool state, people underestimate how much emotions will change choices; in a hot state, they mispredict cool preferences.",
+    "example_application": "Underestimating impulse purchases made when stressed or excited.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Empathy_gap",
+    "tags": ["affect", "self-control", "forecasting"]
+  },
+  {
+    "name": "Naïve Realism",
+    "short_description": "Believing one sees the world objectively while others are biased.",
+    "long_description": "People assume their perceptions are the truth and disagreement reflects others’ ignorance or bias.",
+    "example_application": "Political opponents are seen as irrational rather than differently informed.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Na%C3%AFve_realism_(psychology)",
+    "tags": ["social", "perception", "conflict"]
+  },
+  {
+    "name": "Naïve Cynicism",
+    "short_description": "Expecting others to be more self-interested than they are.",
+    "long_description": "Assuming ulterior motives leads to distrust and miscoordination, even when cooperation would be beneficial.",
+    "example_application": "Negotiators dismiss fair offers, suspecting hidden tricks.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Na%C3%AFve_cynicism",
+    "tags": ["social", "trust", "negotiation"]
+  },
+  {
+    "name": "Just-World Hypothesis",
+    "short_description": "Assuming people get what they deserve and deserve what they get.",
+    "long_description": "A belief in moral balance leads to victim-blaming and rationalizing inequality.",
+    "example_application": "Attributing poverty to laziness rather than structural factors.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Just-world_hypothesis",
+    "tags": ["social", "morality", "attribution"]
+  },
+  {
+    "name": "Defensive Attribution",
+    "short_description": "Blaming victims less when one can imagine being in their position.",
+    "long_description": "To protect self-image, observers adjust blame based on perceived similarity and control over events.",
+    "example_application": "Colleagues minimize blame for an accident that could have happened to them.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Defensive_attribution_hypothesis",
+    "tags": ["attribution", "self", "morality"]
+  },
+  {
+    "name": "Belief Perseverance",
+    "short_description": "Clinging to beliefs even after disconfirming evidence.",
+    "long_description": "Initial beliefs anchor interpretations; corrections often fail to fully update mental models.",
+    "example_application": "Continuing to trust a debunked investment thesis.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Belief_perseverance",
+    "tags": ["belief", "updating", "reasoning"]
+  },
+  {
+    "name": "Semmelweis Reflex",
+    "short_description": "Rejecting new evidence that contradicts established norms.",
+    "long_description": "Groups or experts may dismiss novel findings because they challenge accepted practices or status.",
+    "example_application": "Early handwashing recommendations were resisted despite data.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Semmelweis_reflex",
+    "tags": ["innovation", "status-quo", "science"]
+  },
+  {
+    "name": "Ostrich Effect",
+    "short_description": "Avoiding negative information by ignoring it.",
+    "long_description": "People prefer not to check on threats or losses, reducing anxiety in the short term but increasing risk.",
+    "example_application": "Investors avoid looking at falling portfolio statements.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ostrich_effect",
+    "tags": ["risk", "avoidance", "finance"]
+  },
+  {
+    "name": "Normalcy Bias",
+    "short_description": "Underestimating the possibility and impact of disasters.",
+    "long_description": "People assume things will continue normally and fail to plan for rare but severe events.",
+    "example_application": "Organizations lack contingency plans for systemic outages.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Normalcy_bias",
+    "tags": ["risk", "resilience", "preparedness"]
+  },
+  {
+    "name": "Attentional Bias",
+    "short_description": "Focusing on certain stimuli while ignoring others.",
+    "long_description": "Salient or emotionally charged cues capture attention, shaping perception and memory.",
+    "example_application": "Traders fixate on headline news and miss slow-moving fundamentals.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Attentional_bias",
+    "tags": ["attention", "perception", "memory"]
+  },
+  {
+    "name": "Processing Fluency (Cognitive Fluency)",
+    "short_description": "Easier-to-process information feels truer and preferable.",
+    "long_description": "High fluency boosts liking, trust, and perceived risk reductions, independent of content validity.",
+    "example_application": "Clear fonts and simple language raise compliance with instructions.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Processing_fluency",
+    "tags": ["fluency", "communication", "perception"]
+  },
+  {
+    "name": "Illusory Truth Effect",
+    "short_description": "Repeated statements are judged as more true.",
+    "long_description": "Familiarity increases perceived accuracy due to processing fluency, even when claims are false.",
+    "example_application": "Advertising slogans feel credible after repeated exposure.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Illusory_truth_effect",
+    "tags": ["memory", "misinformation", "communication"]
+  },
+  {
+    "name": "Mere Exposure Effect",
+    "short_description": "Familiarity breeds liking.",
+    "long_description": "Repeated exposure to a stimulus increases preference, even without conscious recognition.",
+    "example_application": "Users prefer UI patterns they have seen before.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Mere-exposure_effect",
+    "tags": ["preference", "marketing", "design"]
+  },
+  {
+    "name": "Primacy Effect",
+    "short_description": "Earlier items are remembered or weighted more.",
+    "long_description": "Initial information anchors interpretations and memory, shaping subsequent processing.",
+    "example_application": "First impressions in interviews strongly color later evaluations.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Serial-position_effect#Primacy_effect",
+    "tags": ["memory", "ordering", "evaluation"]
+  },
+  {
+    "name": "Recency Effect",
+    "short_description": "Later items are remembered or weighted more.",
+    "long_description": "Most recent information is more accessible and can dominate judgments.",
+    "example_application": "Recent performance influences annual reviews disproportionately.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Serial-position_effect#Recency_effect",
+    "tags": ["memory", "ordering", "evaluation"]
+  },
+  {
+    "name": "Serial Position Effect",
+    "short_description": "Memory is strongest for first and last items in a sequence.",
+    "long_description": "Lists are recalled with primacy and recency advantages, affecting learning and presentations.",
+    "example_application": "Placing key points at the beginning and end of a talk increases retention.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Serial-position_effect",
+    "tags": ["memory", "communication", "learning"]
+  },
+  {
+    "name": "Scarcity Effect",
+    "short_description": "Scarce items seem more valuable.",
+    "long_description": "Limited availability signals desirability and triggers loss aversion and urgency.",
+    "example_application": "Limited-time offers increase conversion rates.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Scarcity_(economics)#In_marketing",
+    "tags": ["marketing", "valuation", "behavioral-economics"]
+  },
+  {
+    "name": "Price–Quality Heuristic",
+    "short_description": "Assuming higher price implies higher quality.",
+    "long_description": "Price acts as a quality cue when information is incomplete, leading to overpayment for branding or signaling.",
+    "example_application": "Choosing a pricier wine believing it must be better.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Price%E2%80%93quality_relationship",
+    "tags": ["marketing", "signal", "consumer-behavior"]
+  },
+  {
+    "name": "Effort Heuristic",
+    "short_description": "Assuming more effort means higher value.",
+    "long_description": "People infer quality from the amount of visible labor or craftsmanship, even when outcomes are similar.",
+    "example_application": "Valuing handmade items more than identical machine-made ones.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Effort_heuristic",
+    "tags": ["valuation", "perception", "consumer"]
+  },
+  {
+    "name": "Identifiable Victim Effect",
+    "short_description": "A single identifiable case elicits more sympathy than statistics.",
+    "long_description": "Concrete stories trigger empathy and action more than abstract numbers, shaping donations and policy.",
+    "example_application": "Charities raise more funds highlighting one named child than many unnamed victims.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Identifiable_victim_effect",
+    "tags": ["emotion", "policy", "communication"]
+  },
+  {
+    "name": "Scope Insensitivity",
+    "short_description": "Willingness to pay changes little with large changes in scope.",
+    "long_description": "People respond to the idea of helping more than the scale of help, leading to poor resource allocation.",
+    "example_application": "Donating similar amounts to save 2,000 or 200,000 birds.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Scope_neglect",
+    "tags": ["valuation", "policy", "allocation"]
+  },
+  {
+    "name": "Ratio Bias",
+    "short_description": "Preferring larger absolute numbers despite worse probabilities.",
+    "long_description": "People choose options with more favorable-looking numbers (e.g., 9/100) over better odds with smaller numerators (e.g., 1/10).",
+    "example_application": "Selecting a lottery with more winning tickets but lower chance overall.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Ratio_bias",
+    "tags": ["numeracy", "probability", "perception"]
+  },
+  {
+    "name": "Mental Accounting",
+    "short_description": "Treating money differently depending on arbitrary categories.",
+    "long_description": "People create separate 'accounts' in their minds, violating fungibility and distorting spending and investment.",
+    "example_application": "Splurging with a tax refund while carrying high-interest debt.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Mental_accounting",
+    "tags": ["finance", "behavioral-economics", "consumption"]
+  },
+  {
+    "name": "Money Illusion",
+    "short_description": "Focusing on nominal rather than real values.",
+    "long_description": "People neglect inflation and purchasing power, misinterpreting raises, prices, and returns.",
+    "example_application": "Feeling richer after a 2% raise when inflation is 3%.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Money_illusion",
+    "tags": ["finance", "inflation", "economics"]
+  },
+  {
+    "name": "House Money Effect",
+    "short_description": "Taking greater risks with prior gains.",
+    "long_description": "People mentally segregate winnings from principal and become more risk-seeking after gains.",
+    "example_application": "A trader increases risk after recent profits, treating them as expendable.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/House_money_effect",
+    "tags": ["finance", "risk", "mental-accounting"]
+  },
+  {
+    "name": "Disposition Effect",
+    "short_description": "Selling winners too early and holding losers too long.",
+    "long_description": "Investors realize gains quickly to 'lock in' profits and delay realizing losses to avoid pain, reducing performance.",
+    "example_application": "Portfolio turnover shows profit-taking on winners and stubborn losses.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Disposition_effect",
+    "tags": ["finance", "loss-aversion", "investment"]
+  },
+  {
+    "name": "Salience Bias",
+    "short_description": "Overweighting prominent or emotionally striking information.",
+    "long_description": "Highly noticeable features dominate attention and decisions, crowding out less vivid but relevant data.",
+    "example_application": "Prioritizing flashy features over reliability in product roadmaps.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Salience_bias",
+    "tags": ["attention", "design", "decision-making"]
+  },
+  {
+    "name": "Conservatism Bias (Bayesian)",
+    "short_description": "Insufficiently updating beliefs when given new evidence.",
+    "long_description": "People underreact to fresh data, clinging to prior beliefs longer than rational updating would suggest.",
+    "example_application": "Analysts adjust forecasts slowly despite clear trend changes.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Conservatism_(Bayesian)",
+    "tags": ["updating", "forecasting", "reasoning"]
+  },
+  {
+    "name": "Focalism",
+    "short_description": "Overemphasizing one aspect of an event in predictions.",
+    "long_description": "People focus on the focal event and neglect other happenings that will also affect outcomes and happiness.",
+    "example_application": "Overestimating how a promotion will determine long-term life satisfaction.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Focalism",
+    "tags": ["forecasting", "affect", "judgment"]
+  },
+  {
+    "name": "Impact Bias (Affective Forecasting Error)",
+    "short_description": "Overestimating the intensity and duration of emotional reactions.",
+    "long_description": "People expect future emotions to be stronger and longer-lasting than they are because of focalism and immune neglect.",
+    "example_application": "Assuming a failed exam will make one miserable for months.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Affective_forecasting",
+    "tags": ["affect", "forecasting", "well-being"]
+  },
+  {
+    "name": "Declinism",
+    "short_description": "Believing society is in decline compared to the past.",
+    "long_description": "People remember the past more positively and see current trends as worsening, regardless of mixed metrics.",
+    "example_application": "Assuming work ethic or civility has broadly deteriorated despite evidence to the contrary.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Declinism",
+    "tags": ["memory", "society", "perception"]
+  },
+  {
+    "name": "Risk Compensation (Peltzman Effect)",
+    "short_description": "People adjust behavior to maintain a target level of risk.",
+    "long_description": "Safety measures can lead to riskier behavior that partially offsets intended benefits, though magnitudes vary by context.",
+    "example_application": "Drivers with better safety features may drive more aggressively.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Risk_compensation",
+    "tags": ["risk", "behavior", "safety"]
+  },
+  {
+    "name": "Not Invented Here",
+    "short_description": "Undervaluing ideas, products, or knowledge from outside one’s group.",
+    "long_description": "Identity and pride bias evaluations toward in-house solutions, hindering adoption of superior external options.",
+    "example_application": "A team rebuilds capabilities that already exist as robust services.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Not_invented_here",
+    "tags": ["innovation", "group-identity", "strategy"]
+  },
+  {
+    "name": "System Justification",
+    "short_description": "Defending and rationalizing the status quo.",
+    "long_description": "People are motivated to see existing social, economic, or organizational arrangements as fair and legitimate, resisting change.",
+    "example_application": "Employees explain away inequities as 'just how the industry works.'",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/System_justification",
+    "tags": ["social", "ideology", "change-management"]
+  },
+  {
+    "name": "Reactive Devaluation",
+    "short_description": "Devaluing proposals because they come from an adversary.",
+    "long_description": "Attribution of self-serving motives reduces perceived merit of the offer independent of content.",
+    "example_application": "A union rejects a reasonable management proposal mainly due to its source.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Reactive_devaluation",
+    "tags": ["negotiation", "conflict", "attribution"]
+  },
+  {
+    "name": "Pro-Innovation Bias",
+    "short_description": "Overvaluing an innovation while undervaluing its limitations.",
+    "long_description": "Advocates assume new technologies are inherently beneficial and overlook adoption barriers and unintended consequences.",
+    "example_application": "Rolling out a tool firm-wide without piloting or change management.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Pro-innovation_bias",
+    "tags": ["innovation", "technology", "adoption"]
+  },
+  {
+    "name": "Name-Letter Effect",
+    "short_description": "Preferring letters that appear in one’s own name.",
+    "long_description": "Implicit egotism draws people toward self-related cues, subtly influencing choices and evaluations.",
+    "example_application": "Choosing brands or usernames that share initials with one’s name.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Name-letter_effect",
+    "tags": ["self", "preference", "implicit-bias"]
+  },
+  {
+    "name": "Implicit Egotism",
+    "short_description": "Attraction to things that resemble the self.",
+    "long_description": "People show unconscious preferences for places, careers, or partners that reflect their own names or traits.",
+    "example_application": "Disproportionate number of people named Dennis becoming dentists (debated but illustrative).",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Implicit_egotism",
+    "tags": ["self", "preference", "social"]
+  },
+  {
+    "name": "Spotlight Effect",
+    "short_description": "Overestimating how much others notice one’s appearance or actions.",
+    "long_description": "People believe they are the center of others’ attention more than they are, increasing self-consciousness.",
+    "example_application": "Assuming everyone noticed a minor presentation mistake.",
+    "wikipedia_url": "https://en.wikipedia.org/wiki/Spotlight_effect",
+    "tags": ["social-perception", "self", "anxiety"]
+  }
+]
