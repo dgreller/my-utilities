@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Enhancements</title>
+    <style>
+        :root {
+            --bg-color: #1a1a1a;
+            --surface-color: #2c2c2c;
+            --primary-text-color: #f0f0f0;
+            --secondary-text-color: #a0a0a0;
+            --accent-color: #4a90e2;
+            --accent-color-hover: #5aa1f2;
+            --border-color: #444;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--primary-text-color);
+        }
+        header p {
+            font-size: 1.1rem;
+            color: var(--secondary-text-color);
+            max-width: 650px;
+            margin: auto;
+        }
+        .accordion-item {
+            background-color: var(--surface-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            cursor: pointer;
+            background-color: var(--surface-color);
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: #353535;
+        }
+        .accordion-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        .accordion-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .accordion-icon {
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease;
+            padding: 0 1.5rem;
+        }
+        .accordion-content-inner {
+            padding-bottom: 1.5rem;
+        }
+        .accordion-content p, .accordion-content ul {
+            margin-bottom: 1rem;
+            color: var(--secondary-text-color);
+        }
+        .accordion-content strong {
+            color: var(--primary-text-color);
+            font-weight: 600;
+        }
+        .accordion-content h4 {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .accordion-content ul {
+            list-style-position: inside;
+            padding-left: 0.5rem;
+        }
+        .accordion-content li {
+            margin-bottom: 0.5rem;
+        }
+        @media (max-width: 600px) {
+            body { padding: 1rem 0.5rem; }
+            header h1 { font-size: 2rem; }
+            .accordion-header h2, .accordion-header h3 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Future Enhancements</h1>
+            <p>A collection of ideas for new productivity and learning apps.</p>
+        </header>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Personal Automation Engine</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A personal automation tool that learns your habits and suggests ways to automate them. It would use a simple, natural language interface to create rules and workflows.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Habit Tracking:</strong> Tracks your daily routines and identifies repetitive tasks.</li>
+                        <li><strong>Suggestion Engine:</strong> Suggests automations based on your tracked habits.</li>
+                        <li><strong>Natural Language Interface:</strong> Create automations by typing commands like "If I get an email from my boss, add it to my to-do list."</li>
+                        <li><strong>Integration with Other Apps:</strong> Connects with your calendar, email, to-do list, and other apps to create seamless workflows.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolutionary Learning Simulator</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A learning app that uses evolutionary principles to help you master new subjects. You would start with a basic set of "genes" (concepts) and then "evolve" your knowledge by answering questions and completing challenges.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Gene-Based Learning:</strong> Each subject is broken down into a set of "genes" (core concepts).</li>
+                        <li><strong>Evolutionary Algorithm:</strong> The app uses an evolutionary algorithm to adapt the learning path based on your performance.</li>
+                        <li><strong>Gamified Challenges:</strong> "Mutations" and "crossovers" introduce new concepts and challenge your understanding.</li>
+                        <li><strong>Spaced Repetition:</strong> Reinforces learning over time to ensure long-term retention.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Game Theory Decision-Maker</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that helps you make better decisions by applying game theory principles. You would input a scenario, and the app would provide a strategic analysis and suggest the optimal course of action.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Scenario Modeling:</strong> Input the players, actions, and payoffs for any decision.</li>
+                        <li><strong>Game Theory Analysis:</strong> The app analyzes the scenario using concepts like Nash equilibrium, dominant strategies, and prisoner's dilemma.</li>
+                        <li><strong>Optimal Strategy Suggestions:</strong> Provides recommendations for the best course of action based on the analysis.</li>
+                        <li><strong>Educational Content:</strong> Includes tutorials and examples to help you learn the principles of game theory.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Probabilistic Thinking Trainer</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that trains you to think in terms of probabilities and statistics. It would present you with real-world scenarios and ask you to estimate the likelihood of different outcomes.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Real-World Scenarios:</strong> Presents you with a variety of scenarios, from medical diagnoses to financial investments.</li>
+                        <li><strong>Probability Estimation:</strong> Asks you to estimate the probability of different outcomes and provides feedback on your accuracy.</li>
+                        <li><strong>Bayesian Reasoning Exercises:</strong> Helps you practice updating your beliefs in light of new evidence.</li>
+                        <li><strong>Statistical Concepts Library:</strong> Provides a reference guide to key statistical concepts like standard deviation, p-values, and confidence intervals.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolutionary Psychology Habit Former</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A habit-forming app that leverages principles of evolutionary psychology to help you build better habits. It would focus on aligning your habits with your innate human drives.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Drive-Based Habit Creation:</strong> Helps you identify your core evolutionary drives (e.g., status, affiliation, curiosity) and build habits that align with them.</li>
+                        <li><strong>Social Proof and Accountability:</strong> Incorporates social features to leverage our innate desire for social connection and approval.</li>
+                        <li><strong>Reward and Recognition System:</strong> Uses a system of rewards and recognition to tap into our innate desire for status and achievement.</li>
+                        <li><strong>Storytelling and Narrative:</strong> Frames your habit-building journey as a compelling story to engage your emotions and keep you motivated.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Personal Automation for Learning</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that automates the process of learning new things. You would tell it what you want to learn, and it would create a personalized learning plan, curate resources, and schedule study sessions.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Personalized Learning Plans:</strong> Creates a customized learning plan based on your goals, prior knowledge, and learning style.</li>
+                        <li><strong>Resource Curation:</strong> Finds and organizes the best articles, videos, and other resources for you to study.</li>
+                        <li><strong>Automated Scheduling:</strong> Schedules study sessions in your calendar and sends you reminders.</li>
+                        <li><strong>Progress Tracking and Assessment:</strong> Tracks your progress and provides quizzes and other assessments to test your knowledge.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolution of Ideas Tracker</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that visualizes the evolution of ideas over time. You would be able to see how ideas have changed and spread, and how they are connected to each other.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Idea Timeline:</strong> Visualizes the history of an idea, from its origins to the present day.</li>
+                        <li><strong>Idea Genealogy:</strong> Shows how ideas are related to each other, like a family tree.</li>
+                        <li><strong>Idea Memetics:</strong> Tracks the spread of ideas through culture and society.</li>
+                        <li><strong>Idea Contribution:</strong> Allows you to contribute your own ideas and see how they connect to the existing network.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Game Theory for Negotiation</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A negotiation training app that uses game theory to help you become a better negotiator. You would practice negotiating with AI opponents in a variety of scenarios.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Negotiation Simulations:</strong> Practice negotiating with AI opponents in realistic scenarios.</li>
+                        <li><strong>Game Theory Feedback:</strong> Get feedback on your negotiation strategy based on game theory principles.</li>
+                        <li><strong>Negotiation Tactics Library:</strong> Learn about different negotiation tactics and when to use them.</li>
+                        <li><strong>Personalized Coaching:</strong> Get personalized coaching and advice on how to improve your negotiation skills.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Statistics for Storytelling</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that helps you use statistics to tell more compelling stories. You would input your data, and the app would generate visualizations and narratives to help you communicate your findings effectively.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Data Visualization:</strong> Creates beautiful and informative visualizations of your data.</li>
+                        <li><strong>Narrative Generation:</strong> Generates a compelling narrative to accompany your data visualizations.</li>
+                        <li><strong>Storytelling Templates:</strong> Provides a variety of templates for different types of data stories.</li>
+                        <li><strong>Audience Analysis:</strong> Helps you tailor your story to your specific audience.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolutionary Psychology of Motivation</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A motivation app that uses evolutionary psychology to help you understand and increase your motivation. It would help you identify your core motivators and design your life to be more fulfilling.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Motivation Assessment:</strong> Helps you identify your core motivators based on evolutionary psychology.</li>
+                        <li><strong>Motivation Plan:</strong> Creates a personalized plan to help you increase your motivation.</li>
+                        <li><strong>Daily Motivation Boosters:</strong> Provides daily tips and exercises to help you stay motivated.</li>
+                        <li><strong>Motivation Library:</strong> A collection of articles, videos, and other resources on the science of motivation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Personal Automation for Health and Fitness</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that automates your health and fitness tracking. It would connect with your fitness tracker, smart scale, and other devices to automatically log your activity, sleep, and other health data.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Automated Data Logging:</strong> Automatically logs your activity, sleep, and other health data from your connected devices.</li>
+                        <li><strong>Personalized Health Insights:</strong> Provides personalized insights and recommendations based on your data.</li>
+                        <li><strong>Goal Tracking and Motivation:</strong> Helps you set and track your health and fitness goals.</li>
+                        <li><strong>Integration with Other Apps:</strong> Connects with your calendar, to-do list, and other apps to help you stay on track.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolutionary Game Theory Simulator</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A simulator that allows you to explore the principles of evolutionary game theory. You would be able to create your own populations of agents and see how they evolve over time.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Agent Creation:</strong> Create your own agents with different strategies and behaviors.</li>
+                        <li><strong>Population Simulation:</strong> Simulate the evolution of your agent populations over time.</li>
+                        <li><strong>Data Visualization:</strong> Visualize the results of your simulations with charts and graphs.</li>
+                        <li><strong>Scenario Library:</strong> A collection of classic evolutionary game theory scenarios, such as the hawk-dove game and the prisoner's dilemma.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Bayesian Inference for Everyday Life</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that helps you apply Bayesian inference to your everyday life. You would be able to use it to make better decisions, update your beliefs, and understand the world around you.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Bayesian Calculator:</strong> A simple calculator for performing Bayesian inference.</li>
+                        <li><strong>Belief Tracker:</strong> A tool for tracking your beliefs and updating them in light of new evidence.</li>
+                        <li><strong>Real-World Examples:</strong> A collection of real-world examples of Bayesian inference in action.</li>
+                        <li><strong>Educational Content:</strong> Tutorials and articles on the principles of Bayesian inference.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolutionary Psychology of Relationships</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A relationship app that uses evolutionary psychology to help you understand and improve your relationships. It would help you understand your own and your partner's mating strategies, and provide advice on how to navigate common relationship challenges.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Mating Strategy Assessment:</strong> Helps you understand your own and your partner's mating strategies.</li>
+                        <li><strong>Relationship Advice:</strong> Provides advice on how to navigate common relationship challenges, such as jealousy, conflict, and infidelity.</li>
+                        <li><strong>Compatibility Analysis:</strong> Helps you understand your compatibility with your partner based on evolutionary psychology.</li>
+                        <li><strong>Relationship Library:</strong> A collection of articles, videos, and other resources on the science of relationships.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Personal Automation for Finance</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that automates your personal finances. It would connect with your bank accounts, credit cards, and other financial accounts to automatically track your spending, create a budget, and help you save money.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Automated Transaction Tracking:</strong> Automatically tracks your spending from your connected accounts.</li>
+                        <li><strong>Personalized Budgeting:</strong> Creates a personalized budget based on your income and spending habits.</li>
+                        <li><strong>Savings Goals:</strong> Helps you set and track your savings goals.</li>
+                        <li><strong>Investment Recommendations:</strong> Provides personalized investment recommendations based on your risk tolerance and financial goals.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolution of Cooperation Simulator</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A simulator that allows you to explore the evolution of cooperation. You would be able to create your own populations of agents and see how cooperation can emerge and be sustained over time.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Agent Creation:</strong> Create your own agents with different strategies for cooperation and defection.</li>
+                        <li><strong>Population Simulation:</strong> Simulate the evolution of your agent populations over time.</li>
+                        <li><strong>Data Visualization:</strong> Visualize the results of your simulations with charts and graphs.</li>
+                        <li><strong>Scenario Library:</strong> A collection of classic scenarios for studying the evolution of cooperation, such as the iterated prisoner's dilemma.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Statistical Fallacies Detector</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that helps you detect statistical fallacies in news articles, advertisements, and other media. You would be able to input a piece of text, and the app would identify any potential statistical fallacies.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Text Analysis:</strong> Analyzes a piece of text for potential statistical fallacies.</li>
+                        <li><strong>Fallacy Library:</strong> A library of common statistical fallacies, with examples and explanations.</li>
+                        <li><strong>Educational Content:</strong> Tutorials and articles on how to spot and avoid statistical fallacies.</li>
+                        <li><strong>Community Forum:</strong> A forum where you can discuss and share examples of statistical fallacies.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolutionary Psychology of Happiness</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A happiness app that uses evolutionary psychology to help you understand and increase your happiness. It would help you identify your core happiness drivers and design your life to be more fulfilling.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Happiness Assessment:</strong> Helps you identify your core happiness drivers based on evolutionary psychology.</li>
+                        <li><strong>Happiness Plan:</strong> Creates a personalized plan to help you increase your happiness.</li>
+                        <li><strong>Daily Happiness Boosters:</strong> Provides daily tips and exercises to help you stay happy.</li>
+                        <li><strong>Happiness Library:</strong> A collection of articles, videos, and other resources on the science of happiness.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Personal Automation for Productivity</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that automates your productivity workflows. It would connect with your to-do list, calendar, and other productivity apps to help you get more done in less time.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Workflow Automation:</strong> Automates your repetitive productivity tasks, such as creating new projects, adding tasks, and scheduling meetings.</li>
+                        <li><strong>Personalized Productivity Insights:</strong> Provides personalized insights and recommendations based on your productivity data.</li>
+                        <li><strong>Goal Tracking and Motivation:</strong> Helps you set and track your productivity goals.</li>
+                        <li><strong>Integration with Other Apps:</strong> Connects with your favorite productivity apps to create a seamless workflow.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolution of Language Simulator</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A simulator that allows you to explore the evolution of language. You would be able to create your own populations of agents and see how language can emerge and evolve over time.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Agent Creation:</strong> Create your own agents with different abilities to produce and understand language.</li>
+                        <li><strong>Population Simulation:</strong> Simulate the evolution of your agent populations over time.</li>
+                        <li><strong>Data Visualization:</strong> Visualize the results of your simulations with charts and graphs.</li>
+                        <li><strong>Scenario Library:</strong> A collection of classic scenarios for studying the evolution of language.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Game Theory for Social Interactions</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that helps you understand and navigate social interactions using game theory. You would be able to input a social scenario, and the app would provide a strategic analysis and suggest the optimal course of action.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Scenario Modeling:</strong> Input the players, actions, and payoffs for any social interaction.</li>
+                        <li><strong>Game Theory Analysis:</strong> The app analyzes the scenario using concepts like Nash equilibrium, dominant strategies, and signaling games.</li>
+                        <li><strong>Optimal Strategy Suggestions:</strong> Provides recommendations for the best course of action based on the analysis.</li>
+                        <li><strong>Educational Content:</strong> Includes tutorials and examples to help you learn the principles of game theory.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Probability Puzzles and Paradoxes</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that challenges you with a collection of probability puzzles and paradoxes. You would be able to test your intuition and learn about the surprising and counterintuitive nature of probability.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Puzzle Library:</strong> A collection of classic probability puzzles and paradoxes, such as the Monty Hall problem and the birthday problem.</li>
+                        <li><strong>Interactive Simulations:</strong> Interactive simulations to help you understand the solutions to the puzzles.</li>
+                        <li><strong>Educational Content:</strong> Explanations of the mathematical concepts behind the puzzles.</li>
+                        <li><strong>Community Forum:</strong> A forum where you can discuss and share your own probability puzzles.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolutionary Psychology of Morality</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that helps you understand the evolutionary roots of morality. It would explore how our moral intuitions and emotions have been shaped by natural selection.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Moral Dilemmas:</strong> Presents you with a variety of moral dilemmas and asks you to make a judgment.</li>
+                        <li><strong>Evolutionary Analysis:</strong> Provides an evolutionary analysis of your moral intuitions.</li>
+                        <li><strong>Cross-Cultural Morality:</strong> Explores the similarities and differences in morality across cultures.</li>
+                        <li><strong>Moral Philosophy Library:</strong> A collection of articles, videos, and other resources on the science and philosophy of morality.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Personal Automation for Creativity</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that automates your creative workflows. It would connect with your favorite creative apps to help you generate new ideas, organize your thoughts, and bring your creative projects to life.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Idea Generation:</strong> Helps you generate new ideas using a variety of creative techniques.</li>
+                        <li><strong>Mind Mapping and Outlining:</strong> Helps you organize your thoughts and structure your creative projects.</li>
+                        <li><strong>Creative Prompts and Exercises:</strong> Provides daily prompts and exercises to help you stay creative.</li>
+                        <li><strong>Integration with Other Apps:</strong> Connects with your favorite creative apps to create a seamless workflow.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolution of Technology Simulator</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A simulator that allows you to explore the evolution of technology. You would be able to see how technologies have evolved over time and how they have shaped human society.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Technology Timeline:</strong> Visualizes the history of technology, from the Stone Age to the present day.</li>
+                        <li><strong>Technology Tree:</strong> Shows how technologies are related to each other, like a family tree.</li>
+                        <li><strong>Technology Impact Simulator:</strong> Simulates the impact of new technologies on society.</li>
+                        <li><strong>Future Technology Scenarios:</strong> Explores different scenarios for the future of technology.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Game Theory for Business Strategy</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that helps you apply game theory to your business strategy. You would be able to model your competitive landscape and make better strategic decisions.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Competitive Landscape Modeling:</strong> Model your competitors, their strategies, and their payoffs.</li>
+                        <li><strong>Game Theory Analysis:</strong> The app analyzes your competitive landscape using concepts like Nash equilibrium, dominant strategies, and credible threats.</li>
+                        <li><strong>Optimal Strategy Suggestions:</strong> Provides recommendations for the best course of action based on the analysis.</li>
+                        <li><strong>Educational Content:</strong> Includes tutorials and case studies to help you learn the principles of game theory.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Statistics for A/B Testing</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that helps you design and analyze A/B tests. You would be able to use it to test different versions of your website, app, or marketing campaigns and make data-driven decisions.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>A/B Test Calculator:</strong> A simple calculator for determining the sample size and statistical significance of your A/B tests.</li>
+                        <li><strong>A/B Test Design:</strong> Helps you design your A/B tests to get the most accurate results.</li>
+                        <li><strong>A/B Test Analysis:</strong> Analyzes the results of your A/B tests and provides a clear and concise summary of the findings.</li>
+                        <li><strong>Educational Content:</strong> Tutorials and articles on the principles of A/B testing.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Evolutionary Psychology of Leadership</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> A leadership app that uses evolutionary psychology to help you become a more effective leader. It would help you understand the evolutionary roots of leadership and followership, and provide advice on how to motivate and inspire your team.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Leadership Style Assessment:</strong> Helps you understand your own leadership style based on evolutionary psychology.</li>
+                        <li><strong>Leadership Advice:</strong> Provides advice on how to motivate and inspire your team, build trust, and make better decisions.</li>
+                        <li><strong>Followership Analysis:</strong> Helps you understand the needs and motivations of your followers.</li>
+                        <li><strong>Leadership Library:</strong> A collection of articles, videos, and other resources on the science of leadership.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <h3>Personal Automation for Social Media</h3>
+                <span class="accordion-icon">+</span>
+            </div>
+            <div class="accordion-content">
+                <div class="accordion-content-inner">
+                    <p><strong>Concept:</strong> An app that automates your social media presence. It would connect with your favorite social media apps to help you schedule posts, track your engagement, and grow your audience.</p>
+                    <h4>Features:</h4>
+                    <ul>
+                        <li><strong>Post Scheduling:</strong> Schedule your social media posts in advance.</li>
+                        <li><strong>Engagement Tracking:</strong> Track your likes, comments, and shares.</li>
+                        <li><strong>Audience Growth:</strong> Helps you grow your audience by identifying and engaging with your target audience.</li>
+                        <li><strong>Integration with Other Apps:</strong> Connects with your favorite social media apps to create a seamless workflow.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            const closeAllItems = (exceptThisOne) => {
+                accordionItems.forEach(item => {
+                    if (item !== exceptThisOne) {
+                        item.classList.remove('active');
+                        const content = item.querySelector('.accordion-content');
+                        content.style.maxHeight = '0px';
+                    }
+                });
+            };
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                header.addEventListener('click', function () {
+                    const content = item.querySelector('.accordion-content');
+                    const isActive = item.classList.contains('active');
+                    closeAllItems(item);
+                    item.classList.toggle('active');
+                    if (!isActive) {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        content.style.maxHeight = '0px';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
