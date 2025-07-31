@@ -75,4 +75,6 @@ Additional Notes:
 - Keep the entries sorted alphabetically by display name for easier navigation.
 * * *
 
+Always have a Return to Hub button on the home page of an app
+
 Would you like a YAML or JSON version of this spec for use in other automation tools or LLM context windows?
