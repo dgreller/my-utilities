@@ -61,7 +61,6 @@
 </head>
 <body>
   <h1>A–Z Mental Lists</h1>
-  <button onclick="filterHardLetters(true)" style="margin-bottom: 10px; padding: 10px; font-size: 1em; background-color: #ddd; border: none; cursor: pointer;">🔤 Hard Letters Mode</button>
 <div class="tiles">
     <div class="tile" style="background-color:#dcedc8" onclick="showList('animals')">🐾 Animals</div>
     <div class="tile" style="background-color:#fff3e0" onclick="showList('njcities')">🏘️ NJ Cities</div>
@@ -392,32 +391,44 @@
       document.querySelector('.tiles').style.display = 'grid';
       document.querySelectorAll('.list').forEach(el => el.style.display = 'none');
     }
-  
-  let hardLettersMode = false;
 
-  function filterHardLetters(enabled) {
-    hardLettersMode = enabled;
-    document.querySelectorAll('.list.active table tr').forEach((row, index) => {
-      if (index === 0) return;
-      const letter = row.children[0].textContent.trim();
-      const hardLetters = ['I','K','Q','U','W','X','Y','Z'];
-      row.style.display = hardLetters.includes(letter) || !enabled ? '' : 'none';
+    document.querySelectorAll('.list').forEach(list => {
+        const toggleButton = document.createElement('button');
+        toggleButton.textContent = '🔤 Toggle Hard Letters';
+        toggleButton.style.marginBottom = '10px';
+        toggleButton.style.padding = '8px';
+        toggleButton.style.fontSize = '1em';
+        toggleButton.style.backgroundColor = '#ddd';
+        toggleButton.style.border = 'none';
+        toggleButton.style.cursor = 'pointer';
+
+        let isHardMode = false; // State is local to each button/list
+
+        toggleButton.onclick = () => {
+            isHardMode = !isHardMode;
+            toggleButton.style.backgroundColor = isHardMode ? '#a9a9a9' : '#ddd';
+
+            const rows = list.querySelectorAll('table tr');
+            rows.forEach((row, index) => {
+                if (index === 0) return; // Skip header row
+
+                const letter = row.children[0].textContent.trim();
+                const hardLetters = ['I', 'K', 'Q', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+                if (isHardMode) {
+                    if (hardLetters.includes(letter)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                } else {
+                    row.style.display = ''; // Show all rows when not in hard mode
+                }
+            });
+        };
+
+        list.insertBefore(toggleButton, list.querySelector('table'));
     });
-  }
-
-  document.querySelectorAll('.list').forEach(list => {
-    const toggle = document.createElement('button');
-    toggle.textContent = '🔤 Hard Letters Mode';
-    toggle.style.marginBottom = '10px';
-    toggle.style.padding = '8px';
-    toggle.style.fontSize = '1em';
-    toggle.style.backgroundColor = '#ddd';
-    toggle.style.border = 'none';
-    toggle.style.cursor = 'pointer';
-    toggle.onclick = () => filterHardLetters(true);
-    list.insertBefore(toggle, list.querySelector('table'));
-  });
-
-</script>
+  </script>
 </body>
 </html>
