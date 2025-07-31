@@ -186,4 +186,23 @@ document.addEventListener('db-ready', function () {
     }
 
     initializeApp();
+
+    // About panel logic
+    const aboutBtn = document.getElementById('about-btn');
+    const aboutPanel = document.getElementById('about-panel');
+    const closeAboutBtn = document.querySelector('.close-about-btn');
+
+    aboutBtn.addEventListener('click', () => {
+        aboutPanel.style.display = 'block';
+    });
+
+    closeAboutBtn.addEventListener('click', () => {
+        aboutPanel.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target == aboutPanel) {
+            aboutPanel.style.display = 'none';
+        }
+    });
 });
