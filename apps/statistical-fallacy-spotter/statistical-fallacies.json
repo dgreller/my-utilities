@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Cherry Picking",
+    "short_description": "Selectively choosing data that supports a claim while ignoring contradictory data.",
+    "long_description": "Cherry picking, also known as suppressing evidence or the fallacy of incomplete evidence, is the act of pointing to individual cases or data that seem to confirm a particular position, while ignoring a significant portion of related cases or data that may contradict that position. It is a form of selection bias. For example, a company might highlight a few successful projects while ignoring the many that failed.",
+    "example_application": "A study on the safety of a new drug only reports the positive outcomes and omits the side effects.",
+    "tags": ["selection-bias", "data-analysis", "research"]
+  },
+  {
+    "name": "Survivorship Bias",
+    "short_description": "Focusing on successful cases while overlooking those that failed.",
+    "long_description": "Survivorship bias is a logical error of concentrating on the people or things that 'survived' some process and inadvertently overlooking those that did not because of their lack of visibility. This can lead to false conclusions in several different ways. For example, in finance, looking only at the performance of existing companies and not those that have gone bankrupt will lead to an overestimation of the average performance of companies.",
+    "example_application": "Studying only successful entrepreneurs to learn about the keys to success, ignoring the vast majority of entrepreneurs who failed.",
+    "tags": ["selection-bias", "business", "statistics"]
+  },
+  {
+    "name": "Simpson's Paradox",
+    "short_description": "A trend that appears in different groups of data disappears or reverses when the groups are combined.",
+    "long_description": "Simpson's paradox is a phenomenon in probability and statistics, in which a trend appears in several different groups of data but disappears or reverses when these groups are combined. This result is often encountered in social-science and medical-science statistics and is particularly confounding when frequency data is unduly given causal interpretations. For example, a drug might appear to be effective for both men and women when analyzed separately, but when the data is combined, it may appear to be ineffective or even harmful.",
+    "example_application": "A university has a higher admission rate for men than women, but for each department, the admission rate is higher for women.",
+    "tags": ["statistics", "data-analysis", "paradox"]
+  },
+  {
+    "name": "Cobra Effect",
+    "short_description": "An incentive designed to solve a problem ends up making the problem worse.",
+    "long_description": "The cobra effect occurs when an attempted solution to a problem makes the problem worse, as a type of unintended consequence. The term is used to illustrate how incorrect stimulation in economics and politics can cause unintended consequences. It is named after an anecdote set in the time of British rule of colonial India. The British government, concerned about the number of venomous cobras in Delhi, offered a bounty for every dead cobra. Initially, this was a successful strategy; large numbers of snakes were killed for the reward. Eventually, however, enterprising people began to breed cobras for the income. When the government became aware of this, the reward program was scrapped, causing the cobra breeders to set the now-worthless snakes free.",
+    "example_application": "Paying for bug bounties by the number of bugs found, leading to developers writing more buggy code.",
+    "tags": ["incentives", "economics", "unintended-consequences"]
+  },
+  {
+    "name": "McNamara Fallacy",
+    "short_description": "Making a decision based solely on what is quantitatively measurable, while ignoring all other factors.",
+    "long_description": "The McNamara fallacy (also known as the quantitative fallacy), named for Robert McNamara, the US Secretary of Defense from 1961 to 1968, involves making a decision based solely on quantitative observations (or metrics) and ignoring all others. The first step is to measure whatever can be easily measured. The second step is to disregard that which can't be easily measured or to give it an arbitrary quantitative value. This is artificial and misleading. The third step is to presume that what can't be measured easily really isn't important. This is blindness. The fourth step is to say that what can't be easily measured really doesn't exist. This is suicide.",
+    "example_application": "Judging the success of a military campaign solely on the number of enemy casualties, ignoring factors like strategic position or public support.",
+    "tags": ["metrics", "decision-making", "qualitative"]
+  },
+  {
+    "name": "Gambler's Fallacy",
+    "short_description": "Belief that past random events influence future independent events.",
+    "long_description": "The gambler's fallacy, also known as the Monte Carlo fallacy or the fallacy of the maturity of chances, is the mistaken belief that, if something happens more frequently than normal during a given period, it will happen less frequently in the future (or vice versa). In situations where the outcome being observed is truly random and consists of independent trials of a random process, this belief is false. The fallacy can arise in many practical situations, but is most strongly associated with gambling, where it is common among players.",
+    "example_application": "Believing that a coin is 'due' to land on heads after a long streak of tails.",
+    "tags": ["probability", "randomness", "gambling"]
+  },
+  {
+    "name": "Hawthorne Effect",
+    "short_description": "The alteration of behavior by the subjects of a study due to their awareness of being observed.",
+    "long_description": "The Hawthorne effect is a type of reactivity in which individuals modify an aspect of their behavior in response to their awareness of being observed. This can negatively affect the validity of research, particularly in the social sciences. For example, in a study on productivity, workers might be more productive simply because they know they are being studied, not because of any change in their working conditions.",
+    "example_application": "Workers in a factory temporarily become more productive when they know they are being observed by researchers.",
+    "tags": ["research", "psychology", "observation"]
+  },
+  {
+    "name": "Regression to the Mean",
+    "short_description": "The tendency of extreme results to be followed by less extreme ones.",
+    "long_description": "Regression toward the mean is the phenomenon that if a variable is extreme on its first measurement, it will tend to be closer to the average on its second measurement—and if it is extreme on its second measurement, it will tend to have been closer to the average on its first. It is a common statistical phenomenon that can be mistaken for a causal effect. For example, a student who scores very high on a test is likely to score lower on the next test, and a student who scores very low is likely to score higher. This is not because of any change in their ability, but because their first score was likely affected by luck.",
+    "example_application": "A basketball player who has an exceptionally good game is likely to have a more average game next time.",
+    "tags": ["statistics", "performance", "luck"]
+  },
+  {
+    "name": "Texas Sharpshooter Fallacy",
+    "short_description": "Ignoring randomness when it happens, but highlighting it when it seems meaningful.",
+    "long_description": "The Texas sharpshooter fallacy is an informal fallacy which is committed when differences in data are ignored, but similarities are overemphasized. From this reasoning, a false conclusion is inferred. This fallacy is the philosophical/rhetorical application of the multiple comparisons problem (in statistics) and apophenia (in psychology). It is related to the clustering illusion; people have a tendency to under-predict the amount of structure that will appear in random data. The name comes from a joke about a Texan who fires some gunshots at the side of a barn, then paints a target centered on the tightest cluster of hits and claims to be a sharpshooter.",
+    "example_application": "A psychic makes many vague predictions, and when one of them happens to come true, they claim to have psychic powers.",
+    "tags": ["randomness", "pattern-recognition", "coincidence"]
+  },
+  {
+    "name": "Conjunction Fallacy",
+    "short_description": "Judging a combined event more likely than a single constituent event.",
+    "long_description": "The conjunction fallacy is an inference that a conjunction of two events is more probable than one of the events alone. It is a formal fallacy that is a special case of the broader category of extension neglect. The most famous example is the 'Linda problem,' where people are asked to judge whether it is more likely that Linda is a bank teller or a bank teller and a feminist. Most people choose the latter, even though it is logically impossible for a conjunction of two events to be more probable than one of the events alone.",
+    "example_application": "Believing that a man is more likely to be a professor and a politician than just a professor.",
+    "tags": ["probability", "logic", "judgment"]
+  },
+  {
+    "name": "Base Rate Fallacy",
+    "short_description": "Ignoring general prevalence when evaluating specific cases.",
+    "long_description": "The base rate fallacy, also called base rate neglect or base rate bias, is a formal fallacy. If presented with related base rate information (i.e., general statistical information) and specific information (i.e., information pertaining only to a certain case), the mind tends to ignore the former and focus on the latter. For example, if you are told that a certain test for a disease is 99% accurate, and you test positive, you might think you have a 99% chance of having the disease. However, if the disease is very rare, the probability that you actually have the disease is much lower.",
+    "example_application": "Assuming a person is a librarian because they are quiet and shy, even though there are far more salespeople than librarians in the population.",
+    "tags": ["probability", "statistics", "judgment"]
+  },
+  {
+    "name": "Ecological Fallacy",
+    "short_description": "Making inferences about an individual based on aggregate data for a group.",
+    "long_description": "The ecological fallacy is a formal fallacy in the interpretation of statistical data that occurs when inferences about the nature of individuals are deduced from inferences about the group to which those individuals belong. For example, if a study shows that countries with high average incomes have high rates of heart disease, it would be an ecological fallacy to conclude that rich people are more likely to have heart disease. It is possible that the association is due to other factors, such as the fact that people in rich countries are more likely to eat processed foods.",
+    "example_application": "Assuming that an individual from a wealthy country is wealthy.",
+    "tags": ["statistics", "correlation", "inference"]
+  }
+]

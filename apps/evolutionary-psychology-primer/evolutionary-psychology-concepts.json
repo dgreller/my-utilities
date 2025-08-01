@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Natural Selection",
+    "short_description": "The process whereby organisms better adapted to their environment tend to survive and produce more offspring.",
+    "long_description": "Natural selection is the differential survival and reproduction of individuals due to differences in phenotype. It is a key mechanism of evolution, the change in the heritable traits characteristic of a population over generations. Charles Darwin popularised the term 'natural selection', contrasting it with artificial selection, which is intentional, whereas natural selection is not.",
+    "example_application": "The peppered moth's coloration evolved to match the soot-covered trees in industrial England, making it harder for predators to spot.",
+    "tags": ["evolution", "adaptation", "survival"]
+  },
+  {
+    "name": "Sexual Selection",
+    "short_description": "A mode of natural selection in which members of one biological sex choose mates of the other sex to mate with, and compete with members of the same sex for access to members of the opposite sex.",
+    "long_description": "Sexual selection is a mode of natural selection where members of one biological sex choose mates of the other sex to mate with (intersexual selection), and compete with members of the same sex for access to members of the opposite sex (intrasexual selection). These two forms of selection mean that some individuals have greater reproductive success than others within a population, for example because they are more attractive or prefer more attractive partners to produce offspring.",
+    "example_application": "The peacock's elaborate tail is a result of peahens' preference for mates with bright, large tails.",
+    "tags": ["mating", "reproduction", "competition"]
+  },
+  {
+    "name": "Parental Investment Theory",
+    "short_description": "The sex that invests more in offspring will be more selective in mating.",
+    "long_description": "Parental investment theory, a term coined by Robert Trivers in 1972, predicts that the sex that invests more in its offspring will be more selective when choosing a mate, and the less-investing sex will have intrasexual competition for access to mates. The theory has been influential in shaping our understanding of sexual selection and mating systems.",
+    "example_application": "Human females are typically more selective in their choice of mates than males, due to the higher biological investment in pregnancy and childbirth.",
+    "tags": ["mating", "parenting", "reproduction"]
+  },
+  {
+    "name": "Reciprocal Altruism",
+    "short_description": "An organism acts in a manner that temporarily reduces its fitness while increasing another organism's fitness, with the expectation that the other organism will act in a similar manner at a later time.",
+    "long_description": "Reciprocal altruism is a behaviour whereby an organism acts in a manner that temporarily reduces its fitness while increasing another organism's fitness, with the expectation that the other organism will act in a similar manner at a later time. The concept was initially developed by Robert Trivers to explain the evolution of cooperation as instances of mutually altruistic acts.",
+    "example_application": "Vampire bats will share blood with other bats who have failed to feed, with the expectation that the favor will be returned in the future.",
+    "tags": ["cooperation", "altruism", "social-behavior"]
+  },
+  {
+    "name": "Kin Selection",
+    "short_description": "Evolutionary strategy that favors the reproductive success of an organism's relatives, even at a cost to the organism's own survival and reproduction.",
+    "long_description": "Kin selection is the evolutionary strategy that favours the reproductive success of an organism's relatives, even at a cost to the organism's own survival and reproduction. Kin altruism is altruistic behaviour whose evolution is driven by kin selection. Kin selection is an instance of inclusive fitness, which combines the number of offspring produced by an individual with the number of offspring it can ensure the production of by supporting others, such as siblings.",
+    "example_application": "Worker bees sterilely serving their queen and sisters, as they share a high proportion of their genes.",
+    "tags": ["altruism", "family", "cooperation"]
+  },
+  {
+    "name": "Cheater Detection",
+    "short_description": "The ability to identify individuals who are taking benefits without reciprocating.",
+    "long_description": "Cheater detection is a proposed cognitive module that has evolved to detect individuals who violate social contracts. This module is thought to be a species-specific adaptation for reasoning about social exchange. The Wason selection task is often used to test this hypothesis.",
+    "example_application": "People are better at solving logic puzzles when they are framed in terms of detecting someone who is breaking a social rule.",
+    "tags": ["social-cognition", "cooperation", "logic"]
+  },
+  {
+    "name": "Wason Selection Task",
+    "short_description": "A logic puzzle that is easier to solve when framed as a social contract.",
+    "long_description": "The Wason selection task is a logic puzzle devised by Peter Cathcart Wason. It is one of the most famous tasks in the study of deductive reasoning. An influential explanation of the results is that the Wason task is a test of cheater detection, and that people are better at solving it when it is framed as a social contract. This is used as evidence for the hypothesis that some of our reasoning abilities are domain-specific and have evolved to solve social problems.",
+    "example_application": "When asked to check for violations of a rule like 'If a person is drinking beer, they must be over 21,' people are much better at turning over the correct cards than when the puzzle is framed in abstract terms.",
+    "tags": ["logic", "reasoning", "social-cognition"]
+  },
+  {
+    "name": "Mismatch Theory",
+    "short_description": "The idea that our minds are adapted to an ancestral environment that is very different from our modern one.",
+    "long_description": "Mismatch theory, also known as the evolutionary mismatch hypothesis, proposes that the environment that organisms are adapted to (their 'environment of evolutionary adaptedness', or EEA) is different from their current environment, and that this mismatch can cause problems. For example, our craving for sugar and fat was adaptive in an environment where these resources were scarce, but can lead to health problems in a modern environment where they are abundant.",
+    "example_application": "The prevalence of obesity and diabetes in modern societies is partly due to our evolved craving for high-calorie foods, which are now readily available.",
+    "tags": ["adaptation", "modern-world", "health"]
+  },
+  {
+    "name": "Error Management Theory",
+    "short_description": "When the costs of making different types of errors are asymmetrical, we should be biased towards making the less costly error.",
+    "long_description": "Error management theory (EMT) proposes that where the costs of errors in judgment or inference are asymmetrical, selection will favor a bias toward making the less costly error. For example, when it comes to detecting threats, the cost of a false positive (thinking a stick is a snake) is much lower than the cost of a false negative (thinking a snake is a stick). Therefore, we have evolved a bias to be overly sensitive to potential threats.",
+    "example_application": "Men are more likely to perceive sexual interest from women than women are to perceive it from men, because the reproductive costs of a missed opportunity are higher for men.",
+    "tags": ["decision-making", "risk", "cognition"]
+  },
+  {
+    "name": "Savanna Principle",
+    "short_description": "The idea that we are psychologically adapted to the conditions of the African savanna, where our ancestors evolved.",
+    "long_description": "The Savanna Principle, proposed by Satoshi Kanazawa, is the idea that the human brain is adapted to the conditions of the ancestral environment, the African savanna, and may have difficulty comprehending and dealing with entities and situations that did not exist in that environment. For example, we are better at understanding and dealing with small, close-knit groups of people than with large, anonymous societies.",
+    "example_application": "Our preference for natural landscapes over urban environments may be a reflection of our evolved preference for the savanna.",
+    "tags": ["adaptation", "environment", "cognition"]
+  },
+  {
+    "name": "Theory of Mind",
+    "short_description": "The ability to attribute mental states—beliefs, intents, desires, emotions, knowledge, etc.—to oneself and to others.",
+    "long_description": "Theory of mind is the ability to attribute mental states—beliefs, intents, desires, pretending, knowledge, etc.—to oneself and to others and to understand that others have beliefs, desires, intentions, and perspectives that are different from one's own. It is a crucial ability for social interaction and is thought to have evolved as a way to predict and manipulate the behavior of others.",
+    "example_application": "Understanding that someone might have a false belief about the location of an object.",
+    "tags": ["social-cognition", "empathy", "cooperation"]
+  },
+  {
+    "name": "Life History Theory",
+    "short_description": "A framework of analysis of the evolution of life histories, which are the patterns of growth, development, and reproduction over an organism's lifetime.",
+    "long_description": "Life history theory is a framework of analysis of the evolution of life histories, which are the patterns of growth, development, and reproduction over an organism's lifetime. The theory seeks to explain how natural selection and other evolutionary forces have shaped organisms to optimize their survival and reproduction in the face of ecological challenges. It deals with trade-offs between different life history traits, such as growth, reproduction, and survival.",
+    "example_application": "The trade-off between investing in current reproduction versus future survival.",
+    "tags": ["evolution", "reproduction", "development"]
+  }
+]
