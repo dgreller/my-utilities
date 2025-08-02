@@ -44,9 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startSimulation() {
-        if (simulationRunning) {
-            return;
-        }
+        stopSimulation();
         simulationRunning = true;
         const selectedDistribution = distributionSelect.value;
         if (selectedDistribution === 'coin') {
