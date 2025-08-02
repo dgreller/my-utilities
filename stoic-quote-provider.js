@@ -891,4 +891,23 @@ philosopherFilter.addEventListener('change', filterQuotes);
     // Initial setup
     populateFilters();
     displayQuote(getRandomQuote());
+
+    // Modal functionality
+    const aboutBtn = document.getElementById('about-btn');
+    const aboutModal = document.getElementById('about-modal');
+    const closeBtn = document.querySelector('.close-btn');
+
+    aboutBtn.addEventListener('click', () => {
+        aboutModal.style.display = 'block';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        aboutModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target == aboutModal) {
+            aboutModal.style.display = 'none';
+        }
+    });
 });

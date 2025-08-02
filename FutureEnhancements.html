@@ -127,6 +127,36 @@
             header h1 { font-size: 2rem; }
             .accordion-header h2, .accordion-header h3 { font-size: 1.1rem; }
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: var(--surface-color);
+            margin: 15% auto;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            position: relative;
+        }
+        .close-btn {
+            color: var(--secondary-text-color);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -134,6 +164,7 @@
         <header>
             <h1>Future Enhancements</h1>
             <p>A collection of ideas for new productivity and learning apps.</p>
+            <button id="about-btn">About</button>
         </header>
         <div class="accordion-item">
             <div class="accordion-header">
@@ -658,6 +689,13 @@
             </div>
         </div>
     </main>
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>About This App</h2>
+            <p>This app is a collection of ideas for new productivity and learning apps, with a focus on personal automation, evolutionary psychology, game theory, and statistics.</p>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const accordionItems = document.querySelectorAll('.accordion-item');
@@ -683,6 +721,25 @@
                         content.style.maxHeight = '0px';
                     }
                 });
+            });
+
+            // Modal functionality
+            const aboutBtn = document.getElementById('about-btn');
+            const aboutModal = document.getElementById('about-modal');
+            const closeBtn = document.querySelector('.close-btn');
+
+            aboutBtn.addEventListener('click', () => {
+                aboutModal.style.display = 'block';
+            });
+
+            closeBtn.addEventListener('click', () => {
+                aboutModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target == aboutModal) {
+                    aboutModal.style.display = 'none';
+                }
             });
         });
     </script>
