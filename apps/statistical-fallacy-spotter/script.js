@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalTitle = document.getElementById('modal-title');
     const modalLongDescription = document.getElementById('modal-long-description');
     const modalExample = document.getElementById('modal-example');
+    const modalRealWorldExamples = document.getElementById('modal-real-world-examples');
     const closeButton = document.querySelector('.close-button');
 
     let fallacies = [];
@@ -58,6 +59,20 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTitle.textContent = fallacy.name;
         modalLongDescription.textContent = fallacy.long_description;
         modalExample.textContent = fallacy.example_application;
+
+        modalRealWorldExamples.innerHTML = '';
+        if (fallacy.real_world_examples && fallacy.real_world_examples.length > 0) {
+            const ul = document.createElement('ul');
+            fallacy.real_world_examples.forEach(example => {
+                const li = document.createElement('li');
+                li.textContent = example;
+                ul.appendChild(li);
+            });
+            modalRealWorldExamples.appendChild(ul);
+        } else {
+            modalRealWorldExamples.textContent = 'No real-world examples available.';
+        }
+
         modal.style.display = 'block';
     }
 
