@@ -1,18 +1,89 @@
-[
-  {
-    "title": "History of Bayesian Theory",
-    "content": "<p>The ideas behind Bayesian statistics were developed by the Reverend Thomas Bayes, an 18th-century English statistician, philosopher, and Presbyterian minister. His work was posthumously published in 'An Essay towards solving a Problem in the Doctrine of Chances' (1763). However, it was Pierre-Simon Laplace who independently developed and popularized what is now known as Bayes' theorem.</p>"
-  },
-  {
-    "title": "What is Bayes' Theorem?",
-    "content": "<p>Bayes' theorem is a mathematical formula for determining conditional probability. It describes the probability of an event, based on prior knowledge of conditions that might be related to the event. The formula is:</p><p><code>P(A|B) = [P(B|A) * P(A)] / P(B)</code></p><ul><li><code>P(A|B)</code> is the posterior probability: the probability of hypothesis A given the data B.</li><li><code>P(B|A)</code> is the likelihood: the probability of data B given that the hypothesis A is true.</li><li><code>P(A)</code> is the prior probability: the probability of hypothesis A being true, before any evidence.</li><li><code>P(B)</code> is the marginal likelihood: the probability of the data B under any hypothesis.</li></ul>"
-  },
-  {
-    "title": "Example: Medical Diagnosis",
-    "content": "<p>Imagine a patient is tested for a rare disease that affects 1% of the population. The test is 99% accurate (i.e., it correctly identifies 99% of people with the disease and 99% of people without it). If a patient tests positive, what is the probability they actually have the disease?</p><p>Using Bayes' theorem, we can calculate that the probability is only about 50%. This is because the number of false positives from the healthy population is much larger than the number of true positives from the small diseased population.</p>"
-  },
-  {
-    "title": "Example: Spam Filtering",
-    "content": "<p>Bayesian filters are a popular technique for email spam filtering. The filter learns from a training set of emails that have been manually classified as spam or not spam. When a new email arrives, the filter uses Bayes' theorem to calculate the probability that the email is spam, based on the words it contains.</p>"
-  }
-]
+{
+  "title": "A Primer on Bayesian Inference",
+  "sections": [
+    {
+      "title": "Introduction to Bayesian Thinking",
+      "id": "introduction",
+      "subsections": [
+        {
+          "title": "What is Bayesian Inference?",
+          "id": "what-is-bayesian-inference",
+          "content": "<p>Bayesian inference is a statistical method based on Bayes' theorem. It updates the probability of a hypothesis based on new evidence. Unlike classical (frequentist) statistics, which assumes probabilities are fixed long-run frequencies, Bayesian statistics treats probability as a degree of belief in a hypothesis. This allows for a more intuitive and flexible approach to data analysis.</p>"
+        },
+        {
+          "title": "The History of Bayesian Theory",
+          "id": "history",
+          "content": "<p>The core ideas were formulated by Reverend Thomas Bayes in the 18th century and published posthumously in 1763. However, it was French mathematician Pierre-Simon Laplace who independently developed and popularized the theorem, using it to solve problems in astronomy and other fields.</p>"
+        },
+        {
+          "title": "Bayesian vs. Frequentist Approaches",
+          "id": "bayesian-vs-frequentist",
+          "content": "<ul><li><strong>Interpretation of Probability:</strong> Frequentists see probability as the long-run frequency of an event, while Bayesians view it as a degree of belief.</li><li><strong>Parameters:</strong> Frequentists treat model parameters as fixed, unknown constants. Bayesians treat them as random variables with their own distributions.</li><li><strong>Results:</strong> Frequentist methods produce point estimates and confidence intervals, while Bayesian methods yield posterior distributions and credible intervals.</li></ul>"
+        }
+      ]
+    },
+    {
+      "title": "Core Concepts",
+      "id": "core-concepts",
+      "subsections": [
+        {
+          "title": "Bayes' Theorem Explained",
+          "id": "bayes-theorem",
+          "content": "<p>The formula <code>P(H|E) = [P(E|H) * P(H)] / P(E)</code> is the heart of Bayesian inference.</p><ul><li><strong>P(H|E) - Posterior:</strong> The probability of the hypothesis (H) given the evidence (E). This is what you want to compute.</li><li><strong>P(E|H) - Likelihood:</strong> The probability of observing the evidence (E) if the hypothesis (H) were true.</li><li><strong>P(H) - Prior:</strong> The initial belief in the hypothesis (H) before seeing any evidence.</li><li><strong>P(E) - Marginal Likelihood:</strong> The total probability of observing the evidence (E). It acts as a normalization constant.</li></ul>"
+        },
+        {
+          "title": "Prior, Posterior, and Likelihood",
+          "id": "prior-posterior-likelihood",
+          "content": "<p>The journey of Bayesian analysis involves moving from a prior belief to a posterior belief. The likelihood is the bridge that allows you to update your beliefs based on the data. The choice of prior can be subjective, but as more data is collected, the likelihood dominates and the posterior becomes more objective.</p>"
+        },
+        {
+          "title": "Credible Intervals",
+          "id": "credible-intervals",
+          "content": "<p>A Bayesian credible interval is a range in which an unobserved parameter value falls with a particular probability. For example, a 95% credible interval for a parameter means there is a 95% probability that the true value of the parameter lies within the interval. This is often more intuitive than the frequentist confidence interval.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Practical Applications",
+      "id": "applications",
+      "subsections": [
+        {
+          "title": "A/B Testing",
+          "id": "ab-testing",
+          "content": "<p>In A/B testing, Bayesian methods can determine the probability that version A is better than version B. Unlike frequentist tests that only yield a p-value, Bayesian approaches can provide more actionable insights, such as 'There is a 90% chance that version B's conversion rate is higher.' This allows for more informed business decisions.</p>"
+        },
+        {
+          "title": "Medical Diagnosis",
+          "id": "medical-diagnosis",
+          "content": "<p>Consider a test for a disease that is 99% accurate and the disease has a prevalence of 1 in 10,000. If a person tests positive, what is the actual probability they have the disease? A frequentist approach can be confusing, but Bayes' theorem shows the probability is less than 1%. This is because the large number of false positives in the healthy population outweighs the true positives in the sick population.</p>"
+        },
+        {
+          "title": "Spam Filtering",
+          "id": "spam-filtering",
+          "content": "<p>One of the earliest and most successful applications of Bayesian methods is in email spam filtering. By analyzing the frequency of words in known spam and non-spam emails (ham), a Bayesian filter can calculate the probability that a new email is spam. It continuously updates its beliefs as it processes more emails.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Advanced Topics",
+      "id": "advanced-topics",
+      "subsections": [
+        {
+          "title": "Markov Chain Monte Carlo (MCMC)",
+          "id": "mcmc",
+          "content": "<p>For many real-world problems, the posterior distribution is too complex to calculate directly. MCMC methods, such as Gibbs sampling and the Metropolis-Hastings algorithm, are computational techniques used to draw samples from the posterior distribution. This allows for the approximation of complex distributions without solving the math analytically.</p>"
+        },
+        {
+          "title": "Bayesian Networks",
+          "id": "bayesian-networks",
+          "content": "<p>Bayesian networks are probabilistic graphical models that represent a set of variables and their conditional dependencies via a directed acyclic graph. They are used for reasoning under uncertainty and are applied in fields like bioinformatics, medical diagnosis, and artificial intelligence.</p>"
+        },
+        {
+            "title": "Conjugate Priors",
+            "id": "conjugate-priors",
+            "content": "<p>In Bayesian analysis, if the posterior distribution is in the same probability distribution family as the prior probability distribution, the prior and posterior are then called conjugate distributions, and the prior is called a conjugate prior for the likelihood function. This can simplify the process of calculating the posterior, as it avoids the need for numerical integration. For example, the Beta distribution is a conjugate prior for the Bernoulli likelihood.</p>"
+        }
+      ]
+    }
+  ]
+}
