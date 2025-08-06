@@ -1,0 +1,86 @@
+[
+  {
+    "name": "First-Principles Thinking",
+    "short_description": "Breaking down complex problems into their most basic, foundational elements and reasoning up from there.",
+    "long_description": "First-principles thinking is the practice of deconstructing a problem into its fundamental truths or axioms, rather than relying on assumptions, analogies, or conventional wisdom. It involves questioning every assumption you think you know about a given problem or scenario, and then reasoning up from those basic truths to create new solutions. This approach allows for innovation and avoids the limitations of simply iterating on existing solutions.",
+    "example_application": "Instead of trying to make batteries cheaper by improving the existing manufacturing process (reasoning by analogy), Elon Musk asked, 'What are the fundamental material constituents of batteries?' and 'What is the stock market value of those materials?' By starting from these first principles, he realized the cost could be dramatically lower if they bought the raw materials and assembled the batteries themselves.",
+    "tags": ["problem-solving", "innovation", "decision-making"]
+  },
+  {
+    "name": "Occam's Razor",
+    "short_description": "Among competing hypotheses, the one with the fewest assumptions should be selected.",
+    "long_description": "Occam's Razor is a problem-solving principle that states that when presented with competing hypotheses about the same prediction, one should select the solution with the fewest assumptions. It is not a law or a guarantee of truth, but rather a heuristic or rule of thumb that guides scientists and thinkers to favor simplicity in their theories. Simpler explanations are generally preferable because they are easier to test and harder to falsify.",
+    "example_application": "If you hear hoofbeats, it's more likely to be a horse than a zebra (unless you're on an African savanna). The 'horse' explanation requires fewer specific assumptions than the 'zebra' explanation in most contexts.",
+    "tags": ["problem-solving", "logic", "simplicity"]
+  },
+  {
+    "name": "Inversion",
+    "short_description": "Thinking about a problem in reverse. Instead of aiming for success, consider what would guarantee failure.",
+    "long_description": "Inversion is a powerful thinking tool that involves approaching a problem from the opposite end of the spectrum. Instead of asking 'How can I achieve X?', you ask 'What could cause X to fail?' or 'What should I avoid to achieve X?'. By identifying and avoiding the paths that lead to failure, you significantly increase your chances of success. This model helps to identify hidden risks and obstacles that might not be apparent when only focusing on the direct path to success.",
+    "example_application": "To become a great investor, Charlie Munger suggests first understanding what makes a bad investor (e.g., trading frequently, letting emotions drive decisions, ignoring fundamentals) and then diligently avoiding those behaviors.",
+    "tags": ["problem-solving", "decision-making", "risk-management"]
+  },
+  {
+    "name": "Circle of Competence",
+    "short_description": "Understanding the boundaries of your own knowledge and operating within them.",
+    "long_description": "Popularized by Warren Buffett and Charlie Munger, the Circle of Competence is the idea that each person has areas of deep knowledge and skill, and areas where their knowledge is superficial or non-existent. The key to making good decisions is to honestly define the perimeter of your circle and primarily operate within it. It's not about how large your circle is, but about how well you know its boundaries. This model promotes intellectual humility and helps avoid costly mistakes made by venturing into areas one does not understand.",
+    "example_application": "A tech investor who understands software businesses might choose to pass on an investment in a complex biotechnology company, acknowledging that it falls outside their Circle of Competence, even if the opportunity seems promising.",
+    "tags": ["decision-making", "investing", "self-awareness"]
+  },
+  {
+    "name": "Second-Order Thinking",
+    "short_description": "Thinking beyond the immediate consequences of an action and considering its long-term effects.",
+    "long_description": "First-order thinking is fast and superficial, focusing only on the immediate result of an action (e.g., 'I will eat this cake because it tastes good'). Second-order thinking is deeper and more deliberate. It involves asking, 'And then what?' It considers the subsequent effects and ripple effects of a decision over time. Failing to consider second- and third-order consequences is a common cause of poor decisions.",
+    "example_application": "A city decides to build a new highway to reduce traffic congestion (first-order effect). A second-order effect might be that the new highway encourages more people to drive, leading to even worse congestion in the long run (induced demand).",
+    "tags": ["decision-making", "strategy", "systems-thinking"]
+  },
+  {
+    "name": "Hanlon's Razor",
+    "short_description": "Never attribute to malice that which is adequately explained by stupidity or incompetence.",
+    "long_description": "Hanlon's Razor is a heuristic that suggests we should not assume that a negative outcome was the result of a deliberate malicious act if a simpler, more likely explanation, such as carelessness or ignorance, exists. It encourages a more charitable interpretation of others' actions and can help avoid paranoia, unnecessary conflict, and misjudgment. While malice does exist, it is often less common than simple human error.",
+    "example_application": "If a colleague sends a poorly written email that seems dismissive, instead of assuming they are being intentionally rude (malice), it's more likely they were just rushed and careless (incompetence/stupidity).",
+    "tags": ["social-cognition", "decision-making", "psychology"]
+  },
+  {
+    "name": "Pareto Principle (80/20 Rule)",
+    "short_description": "Roughly 80% of the effects come from 20% of the causes.",
+    "long_description": "The Pareto Principle, or the 80/20 Rule, is an observation that for many events, roughly 80% of the outcomes are determined by 20% of the inputs. This principle helps to identify the most potent factors in any situation and focus efforts on them. It is a powerful tool for prioritization and resource allocation.",
+    "example_application": "In business, 80% of sales might come from 20% of customers. In software development, 80% of errors and crashes might be caused by 20% of the reported bugs.",
+    "tags": ["prioritization", "efficiency", "productivity"]
+  },
+  {
+    "name": "Systems Thinking",
+    "short_description": "Understanding how different parts of a system influence one another within a whole.",
+    "long_description": "Systems thinking is a holistic approach to analysis that focuses on the way that a system's constituent parts interrelate and how systems work over time and within the context of larger systems. Instead of viewing problems as isolated events, it encourages seeing them as part of a larger, interconnected web of relationships and feedback loops. This helps to identify root causes and avoid unintended consequences.",
+    "example_application": "Instead of just treating a patient's symptoms (isolated event), a doctor using systems thinking might also consider their diet, lifestyle, stress levels, and environment (the system) to address the root cause of the illness.",
+    "tags": ["problem-solving", "strategy", "holistic-thinking"]
+  },
+  {
+    "name": "Leverage",
+    "short_description": "Identifying the points in a system where a small amount of effort can lead to a large impact.",
+    "long_description": "Leverage is the principle of using a small input to achieve a large output. In any system, there are certain points where a small change can produce significant results. Finding and applying effort to these high-leverage points is far more effective than applying effort evenly across the entire system. This model is about finding the 'fulcrum' for your 'lever'.",
+    "example_application": "In education, teaching teachers how to teach better (a high-leverage activity) has a much larger impact than tutoring a few individual students.",
+    "tags": ["efficiency", "productivity", "systems-thinking"]
+  },
+  {
+    "name": "Confirmation Bias",
+    "short_description": "The tendency to search for, interpret, favor, and recall information in a way that confirms one's preexisting beliefs.",
+    "long_description": "Confirmation bias is a type of cognitive bias and a systematic error of inductive reasoning. People display this bias when they gather or remember information selectively, or when they interpret it in a biased way. The effect is stronger for emotionally charged issues and for deeply entrenched beliefs. To counteract it, one must actively seek out and consider disconfirming evidence.",
+    "example_application": "An investor who is bullish on a stock might only read positive news articles about it, while ignoring or dismissing any negative reports.",
+    "tags": ["cognitive-bias", "psychology", "decision-making"]
+  },
+  {
+    "name": "Availability Heuristic",
+    "short_description": "Overestimating the likelihood of events that are more easily recalled in memory.",
+    "long_description": "The availability heuristic is a mental shortcut that relies on immediate examples that come to a given person's mind when evaluating a specific topic, concept, method or decision. Because of this, people tend to overweight recent, vivid, or emotionally charged events. This can lead to inaccurate judgments about probability and risk.",
+    "example_application": "After seeing several news reports about shark attacks, you might believe that shark attacks are much more common than they actually are, because the vivid images are easily available in your memory.",
+    "tags": ["cognitive-bias", "psychology", "risk-assessment"]
+  },
+  {
+    "name": "Compounding",
+    "short_description": "The process in which an asset's earnings, from either capital gains or interest, are reinvested to generate additional earnings over time.",
+    "long_description": "Compounding is the process of generating earnings on an asset's reinvested earnings. The result is exponential growth. While often associated with finance, the principle of compounding applies to many other areas of life, such as knowledge, habits, and relationships. Small, consistent efforts can lead to massive results over time due to the power of compounding.",
+    "example_application": "Investing $100 at a 10% annual return will yield $10 in the first year. In the second year, you earn 10% on $110, yielding $11, and so on. Over many years, this effect becomes dramatic. Similarly, reading 20 pages a day seems small, but compounds into a massive amount of knowledge over a lifetime.",
+    "tags": ["finance", "growth", "long-term-thinking"]
+  }
+]

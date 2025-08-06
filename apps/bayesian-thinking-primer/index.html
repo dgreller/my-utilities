@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayesian Thinking Primer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Bayesian Thinking Primer</h1>
+        <p>An interactive guide to understanding and applying Bayesian reasoning.</p>
+    </header>
+
+    <main>
+        <div class="content-section">
+            <h2>What is Bayesian Thinking?</h2>
+            <p>Bayesian thinking is a way of updating our beliefs in light of new evidence. Instead of thinking in terms of absolute certainty, we think in terms of probabilities. As we gather more evidence, we update our probabilities to get closer to the truth.</p>
+            <p>The core of Bayesian thinking is Bayes' Theorem:</p>
+            <div class="formula">
+                P(A|B) = [P(B|A) * P(A)] / P(B)
+            </div>
+            <ul>
+                <li><strong>P(A|B)</strong> (Posterior): The probability of our hypothesis (A) being true, given the new evidence (B).</li>
+                <li><strong>P(B|A)</strong> (Likelihood): The probability of observing the evidence (B), assuming our hypothesis (A) is true.</li>
+                <li><strong>P(A)</strong> (Prior): The initial probability of our hypothesis (A) being true, before we see the new evidence.</li>
+                <li><strong>P(B)</strong> (Marginal): The total probability of observing the evidence (B).</li>
+            </ul>
+        </div>
+
+        <div class="calculator-section">
+            <h2>Interactive Bayes' Theorem Calculator</h2>
+            <div class="calculator">
+                <div class="input-group">
+                    <label for="prior">Prior Probability - P(A):</label>
+                    <input type="number" id="prior" min="0" max="1" step="0.01" placeholder="e.g., 0.01">
+                </div>
+                <div class="input-group">
+                    <label for="likelihood">Likelihood - P(B|A):</label>
+                    <input type="number" id="likelihood" min="0" max="1" step="0.01" placeholder="e.g., 0.9">
+                </div>
+                <div class="input-group">
+                    <label for="marginal">Marginal Probability - P(B):</label>
+                    <input type="number" id="marginal" min="0" max="1" step="0.01" placeholder="e.g., 0.1">
+                </div>
+                <button id="calculate-btn">Calculate</button>
+                <div class="result">
+                    <h3>Posterior Probability - P(A|B):</h3>
+                    <p id="result-text"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>A Practical Example: Medical Diagnosis</h2>
+            <p>Imagine a rare disease that affects 1% of the population. There is a test for this disease that is 99% accurate (i.e., if you have the disease, it will be positive 99% of the time, and if you don't have the disease, it will be negative 99% of the time).</p>
+            <p>You test positive. What is the probability that you actually have the disease?</p>
+            <ul>
+                <li><strong>P(A)</strong> (Prior): The probability of having the disease = 0.01</li>
+                <li><strong>P(B|A)</strong> (Likelihood): The probability of testing positive if you have the disease = 0.99</li>
+                <li><strong>P(B)</strong> (Marginal): The total probability of testing positive. This is the sum of true positives and false positives: (0.99 * 0.01) + (0.01 * 0.99) = 0.0198</li>
+            </ul>
+            <p>Using the calculator above, you can find the posterior probability.</p>
+        </div>
+    </main>
+
+    <footer>
+        <a href="../../hub.html">Back to Hub</a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

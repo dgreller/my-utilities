@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probability Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Probability Simulator</h1>
+        <p>An interactive tool to visualize and understand probability distributions.</p>
+    </header>
+
+    <main>
+        <div class="controls">
+            <label for="distribution">Distribution:</label>
+            <select id="distribution">
+                <option value="coin">Coin Flip</option>
+                <option value="dice">Dice Roll</option>
+                <option value="normal">Normal Distribution</option>
+            </select>
+            <button id="start-btn">Start Simulation</button>
+            <button id="stop-btn">Stop Simulation</button>
+        </div>
+        <div class="simulation-container">
+            <canvas id="simulation-canvas" width="800" height="400"></canvas>
+        </div>
+        <div class="results-container">
+            <h2>Results</h2>
+            <div id="results"></div>
+        </div>
+    </main>
+
+    <footer>
+        <a href="../../hub.html">Back to Hub</a>
+    </footer>
+
+    <button id="about-btn">About</button>
+
+    <div id="about-panel" class="about-panel">
+        <div class="about-content">
+            <span class="close-about-btn">&times;</span>
+            <h2>About</h2>
+            <p>Version: 1.0.1</p>
+            <p>Last Updated: 2025-08-02</p>
+            <h3>Release Notes:</h3>
+            <ul>
+                <li>🆕 Added About panel</li>
+                <li>🐛 Fixed simulation restart bug</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -39,7 +39,7 @@ function keyDownHandler(e) {
         rightPressed = true;
     } else if (e.key == 'Left' || e.key == 'ArrowLeft') {
         leftPressed = true;
-    } else if (e.key == ' ') {
+    } else if (e.key == ' ' && bullets.length < 5) {
         bullets.push({
             x: shipX + shipWidth / 2 - bulletWidth / 2,
             y: canvas.height - shipHeight,

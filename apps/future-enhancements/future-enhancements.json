@@ -1,0 +1,222 @@
+[
+  {
+    "name": "AI Meta-Skills Primer",
+    "features": [
+      "Add a 'case study' section with real-world examples of how these skills are applied.",
+      "Include a self-assessment tool to help users identify their strengths and weaknesses.",
+      "Add a 'resources' section with links to relevant books, articles, and courses.",
+      "Create a 'community' section where users can discuss the skills and share their experiences.",
+      "Develop a 'certification' program for users who demonstrate mastery of the skills."
+    ]
+  },
+  {
+    "name": "AI Future-Proof Skills",
+    "features": [
+      "Add a 'job board' with listings for AI-related roles.",
+      "Include interviews with professionals working in AI.",
+      "Add a 'skill tree' to visualize how different skills relate to each other.",
+      "Create a 'personalized learning path' feature that recommends skills based on a user's goals.",
+      "Develop a 'mentorship' program to connect users with experienced professionals."
+    ]
+  },
+  {
+    "name": "A-Z Lists",
+    "features": [
+      "Add the ability to create nested lists.",
+      "Include a 'random item' feature to help users make decisions.",
+      "Add a 'collaboration' feature to allow multiple users to edit a list.",
+      "Create a 'template' library for common types of lists (e.g., grocery lists, to-do lists).",
+      "Develop a 'sharing' feature to allow users to share their lists with others."
+    ]
+  },
+  {
+    "name": "Arizona Plants Guide",
+    "features": [
+      "Add a 'photo identification' feature that allows users to identify plants from a photo.",
+      "Include a 'map' feature that shows where different plants can be found in Arizona.",
+      "Add a 'gardening journal' to help users track their progress.",
+      "Create a 'community' section where users can share photos and tips.",
+      "Develop a 'plant of the day' feature to highlight a new plant each day."
+    ]
+  },
+  {
+    "name": "Conversion Calculators",
+    "features": [
+      "Add a 'currency converter' with real-time exchange rates.",
+      "Include a 'custom converter' feature that allows users to create their own conversion types.",
+      "Add a 'history' feature to save previous conversions.",
+      "Create a 'favorites' feature to allow users to quickly access their most-used converters.",
+      "Develop a 'dark mode' for the user interface."
+    ]
+  },
+  {
+    "name": "Evolutionary Psychology Primer",
+    "features": [
+      "Add a 'quiz' feature to test users' knowledge of the concepts.",
+      "Include interviews with evolutionary psychologists.",
+      "Add a 'timeline' of key discoveries in the field.",
+      "Create a 'glossary' of key terms.",
+      "Develop a 'case study' section with real-world examples of the concepts in action."
+    ]
+  },
+  {
+    "name": "Prompting Toolkit Index",
+    "features": [
+      "Add a 'search' feature to make it easier to find specific tools.",
+      "Include a 'rating' system to allow users to rate the different tools.",
+      "Add a 'comments' section for each tool.",
+      "Create a 'tutorial' for each tool to explain how to use it.",
+      "Develop a 'user submissions' feature to allow users to submit their own tools."
+    ]
+  },
+  {
+    "name": "macOS Shortcuts",
+    "features": [
+      "Add a 'quiz' feature to help users memorize the shortcuts.",
+      "Include a 'customizable' cheat sheet that allows users to choose which shortcuts to display.",
+      "Add a 'search' feature to make it easier to find specific shortcuts.",
+      "Create a 'most used shortcuts' section.",
+      "Develop a 'shortcut of the day' feature."
+    ]
+  },
+  {
+    "name": "Prompt Generator",
+    "features": [
+      "Add a 'random prompt' feature.",
+      "Include a 'prompt library' with pre-made prompts for different tasks.",
+      "Add a 'collaboration' feature to allow multiple users to work on a prompt together.",
+      "Create a 'prompt analysis' tool that provides feedback on the quality of a prompt.",
+      "Develop a 'prompt history' feature to save previous prompts."
+    ]
+  },
+  {
+    "name": "Prompt Templates",
+    "features": [
+      "Add a 'search' feature to make it easier to find specific templates.",
+      "Include a 'rating' system to allow users to rate the different templates.",
+      "Add a 'comments' section for each template.",
+      "Create a 'user submissions' feature to allow users to submit their own templates.",
+      "Develop a 'template of the week' feature."
+    ]
+  },
+  {
+    "name": "Prompting Primer",
+    "features": [
+      "Add a 'video' version of the primer.",
+      "Include interactive exercises to help users practice their prompting skills.",
+      "Add a 'case study' section with real-world examples of prompt engineering.",
+      "Create a 'community' section where users can discuss prompt engineering and share their tips.",
+      "Develop a 'certification' program for users who demonstrate mastery of prompt engineering."
+    ]
+  },
+  {
+    "name": "Report on AI Agents",
+    "features": [
+      "Add a 'live' Q&A session with the authors of the report.",
+      "Include a 'downloadable' PDF version of the report.",
+      "Add a 'comments' section for each section of the report.",
+      "Create a 'related resources' section with links to other articles and reports on AI agents.",
+      "Develop a 'subscribe' feature to notify users of future reports."
+    ]
+  },
+  {
+    "name": "Spanish Primer",
+    "features": [
+      "Add a 'pronunciation' guide with audio examples.",
+      "Include a 'flashcard' feature to help users memorize vocabulary.",
+      "Add a 'conversation' practice feature with a chatbot.",
+      "Create a 'grammar' guide with detailed explanations of Spanish grammar rules.",
+      "Develop a 'progress tracker' to help users monitor their learning."
+    ]
+  },
+  {
+    "name": "Talk Smarter",
+    "features": [
+      "Add a 'video' version of the primer.",
+      "Include interactive exercises to help users practice their speaking skills.",
+      "Add a 'case study' section with real-world examples of spontaneous speaking.",
+      "Create a 'community' section where users can discuss spontaneous speaking and share their tips.",
+      "Develop a 'certification' program for users who demonstrate mastery of spontaneous speaking."
+    ]
+  },
+  {
+    "name": "LLM Study Guide",
+    "features": [
+      "Add a 'quiz' feature to test users' knowledge of the concepts.",
+      "Include interviews with LLM researchers and engineers.",
+      "Add a 'timeline' of key developments in LLM research.",
+      "Create a 'glossary' of key terms.",
+      "Develop a 'case study' section with real-world examples of LLMs in action."
+    ]
+  },
+  {
+    "name": "Screenwriter's Prompt Companion",
+    "features": [
+      "Add a 'character' generator to help screenwriters create new characters.",
+      "Include a 'plot' generator to help screenwriters come up with new story ideas.",
+      "Add a 'dialogue' generator to help screenwriters write more natural-sounding dialogue.",
+      "Create a 'beat sheet' template to help screenwriters structure their stories.",
+      "Develop a 'collaboration' feature to allow multiple screenwriters to work on a script together."
+    ]
+  },
+  {
+    "name": "Statistical Fallacy Spotter",
+    "features": [
+      "Add a 'quiz' feature to test users' knowledge of the fallacies.",
+      "Include a 'real-world examples' section with examples of fallacies from the news and social media.",
+      "Add a 'submit a fallacy' feature to allow users to submit their own examples of fallacies.",
+      "Create a 'fallacy of the day' feature.",
+      "Develop a 'leaderboard' to track the users who are best at spotting fallacies."
+    ]
+  },
+  {
+    "name": "Stoic Quote Provider",
+    "features": [
+      "Add a 'journal' feature to allow users to write down their reflections on the quotes.",
+      "Include a 'biography' of each philosopher.",
+      "Add a 'related quotes' feature to show users other quotes that are similar to the one they are reading.",
+      "Create a 'community' section where users can discuss the quotes and share their interpretations.",
+      "Develop a 'quote of the day' widget for users' home screens."
+    ]
+  },
+  {
+    "name": "Future Projects",
+    "features": [
+      "Add a 'voting' feature to allow users to vote for the projects they are most interested in.",
+      "Include a 'comments' section for each project idea.",
+      "Add a 'progress tracker' to show the status of each project.",
+      "Create a 'subscribe' feature to notify users when a new project is launched.",
+      "Develop a 'submit an idea' feature to allow users to submit their own project ideas."
+    ]
+  },
+  {
+    "name": "Vocabulary Builder",
+    "features": [
+      "Add a 'quiz' feature to test users' knowledge of the words.",
+      "Include a 'spaced repetition' system to help users remember the words.",
+      "Add a 'related words' feature to show users other words that are similar to the one they are learning.",
+      "Create a 'community' section where users can discuss the words and share their own example sentences.",
+      "Develop a 'word of the day' widget for users' home screens."
+    ]
+  },
+  {
+    "name": "Space Invaders",
+    "features": [
+      "Add a 'high score' leaderboard.",
+      "Include different types of invaders with different abilities.",
+      "Add power-ups for the player's ship.",
+      "Create different levels with increasing difficulty.",
+      "Develop a 'two-player' mode."
+    ]
+  },
+  {
+    "name": "Cognitive Bias Explorer",
+    "features": [
+      "Add a 'quiz' feature to test users' knowledge of the biases.",
+      "Include a 'real-world examples' section with examples of biases from the news and social media.",
+      "Add a 'submit a bias' feature to allow users to submit their own examples of biases.",
+      "Create a 'bias of the day' feature.",
+      "Develop a 'leaderboard' to track the users who are best at spotting biases."
+    ]
+  }
+]
