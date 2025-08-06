@@ -1,0 +1,18 @@
+[
+  {
+    "title": "History of Bayesian Theory",
+    "content": "<p>The ideas behind Bayesian statistics were developed by the Reverend Thomas Bayes, an 18th-century English statistician, philosopher, and Presbyterian minister. His work was posthumously published in 'An Essay towards solving a Problem in the Doctrine of Chances' (1763). However, it was Pierre-Simon Laplace who independently developed and popularized what is now known as Bayes' theorem.</p>"
+  },
+  {
+    "title": "What is Bayes' Theorem?",
+    "content": "<p>Bayes' theorem is a mathematical formula for determining conditional probability. It describes the probability of an event, based on prior knowledge of conditions that might be related to the event. The formula is:</p><p><code>P(A|B) = [P(B|A) * P(A)] / P(B)</code></p><ul><li><code>P(A|B)</code> is the posterior probability: the probability of hypothesis A given the data B.</li><li><code>P(B|A)</code> is the likelihood: the probability of data B given that the hypothesis A is true.</li><li><code>P(A)</code> is the prior probability: the probability of hypothesis A being true, before any evidence.</li><li><code>P(B)</code> is the marginal likelihood: the probability of the data B under any hypothesis.</li></ul>"
+  },
+  {
+    "title": "Example: Medical Diagnosis",
+    "content": "<p>Imagine a patient is tested for a rare disease that affects 1% of the population. The test is 99% accurate (i.e., it correctly identifies 99% of people with the disease and 99% of people without it). If a patient tests positive, what is the probability they actually have the disease?</p><p>Using Bayes' theorem, we can calculate that the probability is only about 50%. This is because the number of false positives from the healthy population is much larger than the number of true positives from the small diseased population.</p>"
+  },
+  {
+    "title": "Example: Spam Filtering",
+    "content": "<p>Bayesian filters are a popular technique for email spam filtering. The filter learns from a training set of emails that have been manually classified as spam or not spam. When a new email arrives, the filter uses Bayes' theorem to calculate the probability that the email is spam, based on the words it contains.</p>"
+  }
+]
