@@ -382,14 +382,27 @@
   </div>
 
   <script>
+    const footerLink = document.getElementById('footer-link');
+
     function showList(id) {
       document.querySelector('.tiles').style.display = 'none';
       document.querySelectorAll('.list').forEach(el => el.style.display = 'none');
       document.getElementById(id).style.display = 'block';
+
+      footerLink.textContent = '← Back to All Lists';
+      footerLink.href = '#';
+      footerLink.onclick = (e) => {
+          e.preventDefault();
+          goBack();
+      };
     }
     function goBack() {
       document.querySelector('.tiles').style.display = 'grid';
       document.querySelectorAll('.list').forEach(el => el.style.display = 'none');
+
+      footerLink.textContent = 'Back to Hub';
+      footerLink.href = 'hub.html';
+      footerLink.onclick = null;
     }
 
     document.querySelectorAll('.list').forEach(list => {
@@ -430,8 +443,8 @@
         list.insertBefore(toggleButton, list.querySelector('table'));
     });
   </script>
-    <footer>
-        <a href="hub.html">Back to Hub</a>
+    <footer id="app-footer">
+        <a id="footer-link" href="hub.html">Back to Hub</a>
     </footer>
 </body>
 </html>

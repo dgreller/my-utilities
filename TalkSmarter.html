@@ -530,12 +530,18 @@
         const contentNavButtonsContainer = document.getElementById('content-nav-buttons');
         let activeSubsectionNavButton = null;
 
+        const footerLink = document.getElementById('footer-link');
+
 
         function initTilesView() {
             mainTilesView.classList.add('active');
             contentSections.forEach(section => section.classList.remove('active'));
             contentNavBar.classList.remove('active');
             window.scrollTo(0, 0); 
+
+            footerLink.textContent = 'Back to Hub';
+            footerLink.href = 'hub.html';
+            footerLink.onclick = null;
         }
 
         function showSectionContent(sectionId) {
@@ -547,6 +553,13 @@
             populateSubsectionNav(sectionId);
             contentNavBar.classList.add('active');
             window.scrollTo(0, 0); 
+
+            footerLink.textContent = '← All Sections';
+            footerLink.href = '#';
+            footerLink.onclick = (e) => {
+                e.preventDefault();
+                initTilesView();
+            };
         }
 
         function populateSubsectionNav(sectionId) {
@@ -848,8 +861,8 @@
             loadScenarioResponder(); 
         });
     </script>
-    <footer>
-        <a href="hub.html">Back to Hub</a>
+    <footer id="app-footer">
+        <a id="footer-link" href="hub.html">Back to Hub</a>
     </footer>
 </body>
 </html>
