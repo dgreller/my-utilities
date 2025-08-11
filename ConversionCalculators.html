@@ -383,6 +383,8 @@
         let clearTemperatureInputsBtnEl = document.getElementById('clearTemperatureInputsBtn');
         const temperatureInputErrorEl = document.getElementById('temperatureInputError');
 
+        const footerLinkEl = document.getElementById('footer-link');
+
 
         // --- State Variables ---
         let currentCategoryIndex = -1;
@@ -401,6 +403,10 @@
             flexibleLengthConverterViewEl.classList.add('hidden'); 
             flexibleGeneralVolumeConverterViewEl.classList.add('hidden'); 
             flexibleTemperatureConverterViewEl.classList.add('hidden'); 
+
+            footerLinkEl.textContent = 'Back to Hub';
+            footerLinkEl.href = 'hub.html';
+            footerLinkEl.onclick = null;
 
 
             categoryGridEl.innerHTML = '';
@@ -442,6 +448,13 @@
             flexibleGeneralVolumeConverterViewEl.classList.add('hidden');
             flexibleTemperatureConverterViewEl.classList.add('hidden');
 
+            footerLinkEl.textContent = 'Back to Categories';
+            footerLinkEl.href = '#';
+            footerLinkEl.onclick = (e) => {
+                e.preventDefault();
+                displayCategoriesView();
+            };
+
 
             conversionListTitleEl.textContent = category.name + " Conversions"; // Use original name for list view
             conversionListInnerEl.innerHTML = '';
@@ -466,6 +479,13 @@
             flexibleLengthConverterViewEl.classList.add('hidden');
             flexibleGeneralVolumeConverterViewEl.classList.add('hidden');
             flexibleTemperatureConverterViewEl.classList.add('hidden');
+
+            footerLinkEl.textContent = 'Back to Categories';
+            footerLinkEl.href = '#';
+            footerLinkEl.onclick = (e) => {
+                e.preventDefault();
+                displayCategoriesView();
+            };
 
 
             unitCalculatorTitleEl.textContent = converter.title;
@@ -511,6 +531,13 @@
             conversionListViewEl.classList.add('hidden');
             unitConverterCalculatorViewEl.classList.add('hidden');
             basicCalculatorViewEl.classList.add('hidden');
+
+            footerLinkEl.textContent = 'Back to Categories';
+            footerLinkEl.href = '#';
+            footerLinkEl.onclick = (e) => {
+                e.preventDefault();
+                displayCategoriesView();
+            };
             
             if (viewEl !== flexibleCookingConverterViewEl) flexibleCookingConverterViewEl.classList.add('hidden');
             if (viewEl !== flexibleLengthConverterViewEl) flexibleLengthConverterViewEl.classList.add('hidden');
@@ -678,6 +705,14 @@
             flexibleLengthConverterViewEl.classList.add('hidden');
             flexibleGeneralVolumeConverterViewEl.classList.add('hidden');
             flexibleTemperatureConverterViewEl.classList.add('hidden');
+
+            footerLinkEl.textContent = 'Back to Categories';
+            footerLinkEl.href = '#';
+            footerLinkEl.onclick = (e) => {
+                e.preventDefault();
+                displayCategoriesView();
+            };
+
             initializeBasicCalculatorButtons(); 
             resetBasicCalculator(); 
             updateCalcDisplay();
@@ -792,8 +827,8 @@
         displayCategoriesView();
         initializeBasicCalculatorButtons(); 
     </script>
-    <footer>
-        <a href="hub.html">Back to Hub</a>
+    <footer id="app-footer">
+        <a id="footer-link" href="hub.html">Back to Hub</a>
     </footer>
 </body>
 </html>
