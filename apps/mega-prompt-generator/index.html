@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Prompt Generator</title>
+    <style>
+        :root {
+            --app-primary-dark: #004225;
+            --app-primary-medium: #006A3E;
+            --app-accent-gold: #B8860B;
+            --app-gray-light: #f0f2f5;
+            --app-gray-medium: #cccccc;
+            --app-gray-dark: #4A4A4A;
+            --app-gray-sidebar: #e9ecef;
+            --app-white: #ffffff;
+            --app-text-on-dark: #ffffff;
+            --app-text-on-light: #333333;
+            --app-focus-ring: rgba(0, 106, 62, 0.3);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--app-gray-light);
+            color: var(--app-text-on-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container {
+            display: flex;
+            flex-grow: 1;
+            padding: 20px;
+            gap: 20px;
+        }
+        header {
+            background-color: var(--app-primary-dark);
+            color: var(--app-text-on-dark);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.75em;
+        }
+        .main-content {
+            flex: 3;
+            background-color: var(--app-white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .sidebar {
+            flex: 2;
+            background-color: var(--app-gray-sidebar);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar h3 {
+            margin-top: 0;
+            color: var(--app-primary-dark);
+            font-size: 1.25em;
+            border-bottom: 2px solid var(--app-gray-medium);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .step {
+            margin-bottom: 20px;
+        }
+        .step h2 {
+            font-size: 1.5em;
+            color: var(--app-primary-dark);
+            margin-bottom: 10px;
+        }
+        .input-field, .large-input-field {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 5px;
+            border: 1px solid var(--app-gray-medium);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .large-input-field {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .checkbox-group {
+            margin: 15px 0;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-size: 0.95em;
+            cursor: pointer;
+        }
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        #live-prompt-preview-area {
+            flex-grow: 1;
+            background-color: #f8f9fa;
+            border: 1px solid var(--app-gray-medium);
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            min-height: 200px;
+            font-size: 0.9em;
+        }
+        .sidebar-button {
+            background-color: var(--app-primary-medium);
+            color: var(--app-text-on-dark);
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.05em;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+        .sidebar-button:hover {
+            background-color: var(--app-primary-dark);
+        }
+        #copy-feedback {
+            text-align:center;
+            color: var(--app-primary-medium);
+            font-weight:bold;
+            height: 20px;
+            margin-top: 8px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--app-primary-dark);
+            color: white;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Mega Prompt Generator</h1>
+        <button id="reset-app-button" class="sidebar-button" style="width: auto;">Reset</button>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <div id="mega-prompt-form">
+                <div class="step">
+                    <h2>TASK</h2>
+                    <p>Clearly state your primary task. Be concise and direct.</p>
+                    <textarea id="task" class="large-input-field" placeholder="e.g., Analyze the provided customer feedback data and identify the top 3 most common complaints."></textarea>
+                </div>
+
+                <div class="step">
+                    <h2>Core Instructions</h2>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="plan-and-solve"> Plan and Solve</label>
+                        <label><input type="checkbox" id="self-consistency"> Self-Consistency Check</label>
+                        <label><input type="checkbox" id="program-of-thought"> Program-of-Thought</label>
+                        <label><input type="checkbox" id="meta-prompting"> Meta-Prompting</label>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <h2>STRUCTURAL GUIDELINES</h2>
+                    <p>Define constraints, fallbacks, and output format.</p>
+                    <label for="constraints">Constraints:</label>
+                    <textarea id="constraints" class="large-input-field" placeholder="e.g., The analysis must be completed in under 500 words."></textarea>
+                    <label for="fallback">Fallback:</label>
+                    <textarea id="fallback" class="large-input-field" placeholder="e.g., If the data is insufficient, state what is missing."></textarea>
+                    <label for="output-format">Output Format:</label>
+                    <textarea id="output-format" class="large-input-field" placeholder="e.g., Respond in Markdown with a clear heading and bullet points."></textarea>
+                </div>
+
+                <div class="step">
+                    <h2>CONTEXT POSITIONING</h2>
+                    <p>Place your most critical instructions at the beginning and end.</p>
+                    <label for="critical-instruction-start">Critical Instruction (Start):</label>
+                    <textarea id="critical-instruction-start" class="large-input-field" placeholder="e.g., The primary goal is to identify actionable insights."></textarea>
+                    <label for="critical-instruction-end">Critical Instruction (End):</label>
+                    <textarea id="critical-instruction-end" class="large-input-field" placeholder="e.g., The final output must be a numbered list."></textarea>
+                </div>
+
+                <div class="step">
+                    <h2>NEGATIVE EXAMPLES</h2>
+                    <p>Provide specific examples of what to avoid.</p>
+                    <label for="negative-examples">Avoid These:</label>
+                    <textarea id="negative-examples" class="large-input-field" placeholder="e.g., DO NOT use informal language."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <h3>Your Generated Mega Prompt</h3>
+            <div id="live-prompt-preview-area">
+                Prompt will appear here as you fill the form...
+            </div>
+            <button id="copy-prompt-button" class="sidebar-button">Copy to Clipboard</button>
+            <p id="copy-feedback"></p>
+        </div>
+    </div>
+
+    <footer>
+        <a href="../../hub.html">Back to Hub</a>
+    </footer>
+
+    <div id="about-panel" class="about-panel-hidden">
+        <h3>About This App</h3>
+        <p><strong>Version:</strong> 1.0.0</p>
+        <p><strong>Last Updated:</strong> 2025-08-13</p>
+        <strong>Release Notes:</strong>
+        <ul>
+            <li>Initial release of the Mega Prompt Generator.</li>
+        </ul>
+        <button id="close-about-panel">Close</button>
+    </div>
+
+    <button id="about-button">About</button>
+
+    <style>
+        #about-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--app-accent-gold);
+            color: var(--app-text-on-dark);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 1000;
+        }
+        #about-panel {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            width: 300px;
+            background-color: var(--app-white);
+            border: 1px solid var(--app-gray-medium);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1001;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .about-panel-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = [
+                'task', 'constraints', 'fallback', 'output-format',
+                'critical-instruction-start', 'critical-instruction-end', 'negative-examples'
+            ];
+            const checkboxes = ['plan-and-solve', 'self-consistency', 'program-of-thought', 'meta-prompting'];
+
+            const elements = {};
+            [...inputs, ...checkboxes].forEach(id => {
+                elements[id] = document.getElementById(id);
+            });
+
+            const livePreview = document.getElementById('live-prompt-preview-area');
+            const copyButton = document.getElementById('copy-prompt-button');
+            const resetButton = document.getElementById('reset-app-button');
+            const copyFeedback = document.getElementById('copy-feedback');
+
+            const aboutButton = document.getElementById('about-button');
+            const aboutPanel = document.getElementById('about-panel');
+            const closeAboutPanel = document.getElementById('close-about-panel');
+
+            aboutButton.addEventListener('click', () => {
+                aboutPanel.classList.toggle('about-panel-hidden');
+            });
+
+            closeAboutPanel.addEventListener('click', () => {
+                aboutPanel.classList.add('about-panel-hidden');
+            });
+
+            const updatePreview = () => {
+                let prompt = "";
+
+                if (elements['critical-instruction-start'].value.trim()) {
+                    prompt += `CONTEXT POSITIONING (Critical Instructions):\n• [${elements['critical-instruction-start'].value.trim()}]\n\n`;
+                }
+
+                if (elements['task'].value.trim()) {
+                    prompt += `TASK: [${elements['task'].value.trim()}]\n\n`;
+                }
+
+                if (elements['plan-and-solve'].checked) {
+                    prompt += "PLAN AND SOLVE: Before attempting to solve the TASK, first create a detailed, step-by-step plan. Outline your thinking process, the stages you'll go through, and any sub-tasks you'll address. Once the plan is approved (or implicitly, if you're executing immediately), then proceed with execution.\n\n";
+                }
+
+                if (elements['self-consistency'].checked) {
+                    prompt += "SELF-CONSISTENCY CHECK: For any critical outputs or complex problems within this TASK, generate at least 3-5 alternative solutions or approaches. After generating them, critically evaluate each option for consistency, accuracy, and adherence to the prompt's requirements. Identify the most robust solution and explain your reasoning for its selection, highlighting why the others were less suitable.\n\n";
+                }
+
+                if (elements['program-of-thought'].checked) {
+                    prompt += "PROGRAM-OF-THOUGHT: If the TASK involves calculations, data manipulation, or logical problem-solving that can benefit from precise computation, use code (e.g., Python) or mathematical tools to arrive at the solution. Write and execute the necessary functions within your thought process to ensure accuracy.\n\n";
+                }
+
+                let structuralGuidelines = "STRUCTURAL GUIDELINES (Guardrails & Edge Cases):\n";
+                let hasStructuralGuidelines = false;
+                if (elements['constraints'].value.trim()) {
+                    structuralGuidelines += `• Constraints: [${elements['constraints'].value.trim()}]\n`;
+                    hasStructuralGuidelines = true;
+                }
+                if (elements['fallback'].value.trim()) {
+                    structuralGuidelines += `• Fallback: ${elements['fallback'].value.trim()}\n`;
+                    hasStructuralGuidelines = true;
+                }
+                if (elements['output-format'].value.trim()) {
+                    structuralGuidelines += `• Output Format: [${elements['output-format'].value.trim()}]\n`;
+                    hasStructuralGuidelines = true;
+                }
+                if (hasStructuralGuidelines) {
+                    structuralGuidelines += `• Reflection: For particularly complex parts of the TASK, privately reflect on your process and potential pitfalls before generating the final output.\n`;
+                    prompt += structuralGuidelines + "\n";
+                }
+
+                if (elements['negative-examples'].value.trim()) {
+                    prompt += `NEGATIVE EXAMPLES (Avoid These):\n• [${elements['negative-examples'].value.trim()}]\n\n`;
+                }
+
+                if (elements['critical-instruction-end'].value.trim()) {
+                    prompt += `CONTEXT POSITIONING (Critical Instructions):\n• [${elements['critical-instruction-end'].value.trim()}]\n\n`;
+                }
+
+                if (elements['meta-prompting'].checked) {
+                    prompt += "META-PROMPTING (For Prompt Refinement):\n• After attempting the TASK, or if you encounter difficulties, suggest how this prompt could be improved to help you generate better, more accurate, or more efficient results in the future.\n• Highlight any parts of this request that are unclear, ambiguous, or where you had to make assumptions.\n• Suggest any additional information or tools that would have significantly improved your execution of this TASK.\n• Explain your reasoning step-by-step for the final output, and indicate which parts you are most or least confident about.\n\n";
+                }
+
+                livePreview.textContent = prompt.trim() ? prompt.trim() : "Prompt will appear here as you fill the form...";
+            };
+
+            [...inputs, ...checkboxes].forEach(id => {
+                elements[id].addEventListener('input', updatePreview);
+            });
+
+            copyButton.addEventListener('click', () => {
+                if (livePreview.textContent.trim() && livePreview.textContent !== "Prompt will appear here as you fill the form...") {
+                    navigator.clipboard.writeText(livePreview.textContent).then(() => {
+                        copyFeedback.textContent = 'Copied!';
+                        setTimeout(() => copyFeedback.textContent = '', 2000);
+                    }, () => {
+                        copyFeedback.textContent = 'Failed to copy.';
+                        setTimeout(() => copyFeedback.textContent = '', 2000);
+                    });
+                }
+            });
+
+            resetButton.addEventListener('click', () => {
+                [...inputs, ...checkboxes].forEach(id => {
+                    if (elements[id].type === 'checkbox') {
+                        elements[id].checked = false;
+                    } else {
+                        elements[id].value = '';
+                    }
+                });
+                updatePreview();
+            });
+
+            updatePreview(); // Initial call
+        });
+    </script>
+</body>
+</html>
