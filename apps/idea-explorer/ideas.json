@@ -1,0 +1,322 @@
+[
+  {
+    "category": "Cognitive & Learning Tools",
+    "ideas": [
+      {
+        "name": "Logical Fallacy of the Day",
+        "features": [
+          "Displays a new fallacy each day on page load.",
+          "Includes a concise definition and a real-world example.",
+          "Provides a 'Pro Tip' on how to spot or counter the fallacy.",
+          "Archive view to browse previously featured fallacies.",
+          "Simple search functionality to find specific fallacies."
+        ]
+      },
+      {
+        "name": "Rhetorical Device Analyzer",
+        "features": [
+          "Text area for user to input text.",
+          "Highlights potential rhetorical devices in the text upon analysis.",
+          "Clickable highlights that show the definition of the device.",
+          "Library of common rhetorical devices with examples.",
+          "Option to share the analysis with a permalink."
+        ]
+      },
+      {
+        "name": "Socratic Method Question Generator",
+        "features": [
+          "User inputs a core belief or statement.",
+          "Generates a series of probing questions based on the input.",
+          "Allows user to 'dig deeper' on a specific question, generating follow-ups.",
+          "'Save Session' feature to store the question-answer flow.",
+          "Export conversation as a text or markdown file."
+        ]
+      },
+      {
+        "name": "Analogical Thinking Helper",
+        "features": [
+          "User inputs a complex concept.",
+          "Suggests analogous concepts from different domains (e.g., biology, physics, cooking).",
+          "Visual mind-map view to connect the concepts.",
+          "User can add their own analogies.",
+          "Crowdsourced rating system for the best analogies."
+        ]
+      },
+      {
+        "name": "Debate Topic Generator",
+        "features": [
+          "Generates a random debate topic with one click.",
+          "Filter topics by category (e.g., technology, ethics, pop culture).",
+          "Provides 3 'pro' and 3 'con' starting points for the argument.",
+          "Timer feature for timed debate practice.",
+          "Option to submit new debate topics to a community list."
+        ]
+      },
+      {
+        "name": "Historical Timeline Explorer",
+        "features": [
+          "Dual-timeline view to compare two regions or themes.",
+          "Zoom and pan functionality for different historical eras.",
+          "Clickable events on the timeline with short descriptions and links.",
+          "Filter by event type (e.g., war, scientific discovery, art).",
+          "User-creatable custom timelines."
+        ]
+      },
+      {
+        "name": "Key Philosophers Primer",
+        "features": [
+          "Card-based interface for each philosopher.",
+          "Includes a summary of their core ideas, a short bio, and key works.",
+          "'Connections' feature showing which other philosophers they influenced or were influenced by.",
+          "Interactive quiz to test knowledge of concepts.",
+          "Search by philosopher, idea, or historical period."
+        ]
+      },
+      {
+        "name": "Speed Reading Trainer",
+        "features": [
+          "User can paste their own text to practice with.",
+          "Adjustable speed (Words Per Minute).",
+          "Different training modes (e.g., single word flash, chunking).",
+          "Comprehension tests after each training session.",
+          "Progress tracking chart to show WPM improvement over time."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Productivity & Lifestyle Utilities",
+    "ideas": [
+      {
+        "name": "'Eisenhower Matrix' To-Do List",
+        "features": [
+          "Drag-and-drop interface to move tasks between the four quadrants.",
+          "Color-coded tasks for easy visual identification.",
+          "'Focus Mode' which only shows tasks from the 'Urgent & Important' quadrant.",
+          "Daily summary of completed tasks.",
+          "Ability to add deadlines and reminders to tasks."
+        ]
+      },
+      {
+        "name": "Digital Detox Planner",
+        "features": [
+          "Schedule 'offline' blocks in a calendar view.",
+          "Set goals for daily or weekly screen time reduction.",
+          "Pre-populated list of offline activity suggestions.",
+          "Checklist for preparing for a detox session (e.g., notify friends, download music).",
+          "Journaling section to note feelings and experiences during the detox."
+        ]
+      },
+      {
+        "name": "Meal Prep Suggester",
+        "features": [
+          "User sets dietary preferences (e.g., vegan, low-carb) and number of meals.",
+          "Generates a weekly meal plan with one click.",
+          "Includes a simple shopping list based on the suggested meals.",
+          "Option to 'reroll' individual meal suggestions.",
+          "Save favorite meal plans for future use."
+        ]
+      },
+      {
+        "name": "Personal Finance Goal Tracker",
+        "features": [
+          "Create multiple savings goals with target amounts and dates.",
+          "Visual progress bars for each goal.",
+          "Log contributions and see a history of savings.",
+          "Calculates required monthly/weekly savings to meet the goal.",
+          "Motivational messages when milestones are reached."
+        ]
+      },
+      {
+        "name": "'Idea Inbox' Capture Tool",
+        "features": [
+          "Minimalist interface with a single text input field.",
+          "Automatically timestamps every entry.",
+          "Tagging system to categorize ideas.",
+          "Full-text search through all captured ideas.",
+          "Export all ideas as a CSV or JSON file."
+        ]
+      },
+      {
+        "name": "Conference/Talk Note Taker",
+        "features": [
+          "Structured template with fields for Speaker, Topic, Key Takeaways, Action Items, and Questions.",
+          "Markdown support for formatting notes.",
+          "Timer to track talk duration.",
+          "Ability to attach a photo (e.g., of a slide).",
+          "Export notes to PDF or Markdown format."
+        ]
+      },
+      {
+        "name": "Gift Idea Tracker",
+        "features": [
+          "Create profiles for friends and family.",
+          "Add gift ideas with links, prices, and notes for each person.",
+          "Mark ideas as 'purchased' or 'given'.",
+          "Set reminders for birthdays and anniversaries.",
+          "Bookmarklet to add ideas directly from shopping websites."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Creative & Technical Tools",
+    "ideas": [
+      {
+        "name": "CSS Flexbox & Grid Visualizer",
+        "features": [
+          "Live preview of the layout as you change CSS properties.",
+          "Interactive sliders and buttons for properties like `gap`, `justify-content`.",
+          "Generates the corresponding HTML and CSS code to copy.",
+          "Pre-built templates for common layouts (e.g., holy grail, card grid).",
+          "Toggleable guides and outlines to see item dimensions."
+        ]
+      },
+      {
+        "name": "Regex Tester",
+        "features": [
+          "Real-time highlighting of matches in the test string.",
+          "A library of common regex patterns (e.g., email, URL, phone number).",
+          "A 'cheat sheet' explaining common regex tokens.",
+          "Support for different regex 'flavors' (e.g., JavaScript, Python).",
+          "'Explain Regex' feature that breaks down the pattern in plain English."
+        ]
+      },
+      {
+        "name": "Color Palette Generator",
+        "features": [
+          "Generate palettes from a user-uploaded image.",
+          "Generate palettes based on a single color using harmony rules (e.g., complementary, triadic).",
+          "Adjustable number of colors in the palette.",
+          "Export palette as CSS variables, SASS variables, or an image.",
+          "Explore popular palettes created by other users."
+        ]
+      },
+      {
+        "name": "Simple Markdown Editor",
+        "features": [
+          "Live split-screen preview of the rendered HTML.",
+          "Toolbar with buttons for common markdown syntax (e.g., bold, italic, link).",
+          "'Copy HTML' and 'Copy Markdown' buttons.",
+          "Multiple editor themes (light and dark).",
+          "Word and character count."
+        ]
+      },
+      {
+        "name": "Code Snippet Manager",
+        "features": [
+          "Syntax highlighting for various programming languages.",
+          "Organize snippets with tags and folders.",
+          "Full-text search across all snippets.",
+          "'Copy to Clipboard' button for each snippet.",
+          "Cloud sync via local file or a service like Gist."
+        ]
+      },
+      {
+        "name": "JSON Formatter/Validator",
+        "features": [
+          "Automatically formats and indents raw JSON.",
+          "Identifies and highlights syntax errors with clear messages.",
+          "Collapsible nodes to explore large JSON objects.",
+          "'Minify' option to compress JSON into a single line.",
+          "Fetch JSON from a URL to validate."
+        ]
+      },
+      {
+        "name": "Simple API Request Tool",
+        "features": [
+          "Supports GET, POST, PUT, DELETE requests.",
+          "Easy-to-use interface for setting headers and body.",
+          "Formatted and highlighted JSON response viewer.",
+          "History of recent requests.",
+          "Save favorite requests for quick reuse."
+        ]
+      }
+    ]
+  },
+  {
+    "category": "Data & Logic Simulators",
+    "ideas": [
+      {
+        "name": "Game Theory Simulator",
+        "features": [
+          "Simulate classic games like Hawk-Dove, Stag Hunt, and Prisoner's Dilemma.",
+          "Adjust payoffs and see how it affects the optimal strategy.",
+          "Run population simulations to see strategies evolve over generations.",
+          "Play-by-play log of the simulation.",
+          "Explanations of the equilibrium (e.g., Nash Equilibrium) for each game."
+        ]
+      },
+      {
+        "name": "Supply and Demand Simulator",
+        "features": [
+          "Interactive graph with draggable supply and demand curves.",
+          "Simulate external events like a tax, subsidy, or price ceiling.",
+          "Real-time calculation of equilibrium price, quantity, and consumer/producer surplus.",
+          "'Scenario' mode with pre-built examples (e.g., housing market, oil prices).",
+          "Tutorial mode explaining the basic concepts."
+        ]
+      },
+      {
+        "name": "Simple Neural Network Visualizer",
+        "features": [
+          "Visualize a simple network with input, hidden, and output layers.",
+          "Adjust weights and biases with sliders to see how the output changes.",
+          "Train the network on a simple dataset (e.g., XOR) and watch it learn.",
+          "Step-by-step visualization of forward and backward propagation.",
+          "Clear explanations of concepts like activation functions and loss."
+        ]
+      },
+      {
+        "name": "Logic Gate Simulator",
+        "features": [
+          "Drag-and-drop interface for AND, OR, NOT, XOR, NAND, NOR gates.",
+          "Connect gates with wires to build complex circuits.",
+          "Toggle inputs to see the signal propagate through the circuit in real-time.",
+          "Build and save custom circuits (e.g., a half-adder).",
+          "Library of pre-built circuits to explore."
+        ]
+      },
+      {
+        "name": "Compound Interest Calculator",
+        "features": [
+          "Interactive sliders for principal, interest rate, time period, and monthly contribution.",
+          "Dynamic graph showing the growth of the investment.",
+          "Comparison chart to show growth with and without compound interest.",
+          "Table view with year-by-year breakdown.",
+          "'Future Value' and 'Time to Goal' calculation modes."
+        ]
+      },
+      {
+        "name": "Central Limit Theorem Visualizer",
+        "features": [
+          "Choose from different population distributions (e.g., normal, uniform, skewed, bimodal).",
+          "Set the sample size and number of samples to draw.",
+          "Animated simulation of drawing samples and calculating their means.",
+          "Live graph of the sampling distribution of the mean as it builds up.",
+          "Overlay a normal curve to see how well it fits."
+        ]
+      },
+      {
+        "name": "A/B Test Significance Calculator",
+        "features": [
+          "Simple input fields for visitors and conversions for versions A and B.",
+          "Calculates conversion rates, uplift, and statistical significance (p-value).",
+          "Clear, plain-English explanation of the results (e.g., 'You can be 95% confident...').",
+          "Confidence interval display for the uplift.",
+          "Calculates the required sample size for a desired level of significance."
+        ]
+      },
+      {
+        "name": "Simple Encryption/Decryption Tool",
+        "features": [
+          "Supports classic ciphers like Caesar, Atbash, and substitution ciphers.",
+          "User can input a message and a key (if applicable).",
+          "Real-time encryption/decryption as the user types.",
+          "'Analyze Text' feature showing letter frequency to aid in breaking ciphers.",
+          "Brief explanation of how each cipher works and its historical context."
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Add a subtle transition for the cards */
+.idea-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.idea-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Styling for the About Panel */
+#about-panel {
+    transition: opacity 0.3s ease;
+}
+
+/* A little animation for the feature list items */
+.feature-item {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
