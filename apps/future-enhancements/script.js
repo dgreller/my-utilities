@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
             enhancementsContainer.textContent = 'Failed to load future enhancements. Please try again later.';
         });
 
+    const completedEnhancements = [
+        "Include a 'prompt library' with pre-made prompts for different tasks.",
+        "Add a 'quiz' feature to test users' knowledge of the fallacies.",
+        "Add a 'quiz' feature to test users' knowledge of the words.",
+        "Add a 'quiz' feature to test users' knowledge of the biases."
+    ];
+
     function displayEnhancements(enhancements) {
         enhancementsContainer.innerHTML = '';
         enhancements.forEach(app => {
@@ -26,6 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
             app.features.forEach(feature => {
                 const featureItem = document.createElement('li');
                 featureItem.textContent = feature;
+
+                if (completedEnhancements.includes(feature)) {
+                    featureItem.classList.add('completed-enhancement');
+                }
+
                 featureList.appendChild(featureItem);
             });
 

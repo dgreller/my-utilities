@@ -45,9 +45,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return categoryWrapper;
     }
 
+    const completedIdeas = [
+        "Logical Fallacy of the Day",
+        "Key Philosophers Primer",
+        "'Idea Inbox' Capture Tool",
+        "Compound Interest Calculator",
+        "Central Limit Theorem Visualizer"
+    ];
+
     function createIdeaCard(idea) {
         const card = document.createElement('div');
         card.className = 'idea-card bg-white p-6 rounded-lg shadow-lg h-full flex flex-col';
+
+        const isCompleted = completedIdeas.includes(idea.name);
+        if (isCompleted) {
+            card.classList.add('completed-idea');
+        }
 
         const featuresHtml = idea.features.map((feature, index) => `
             <li class="feature-item flex items-start" style="animation-delay: ${index * 100}ms;">
@@ -65,6 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </ul>
             </div>
         `;
+
+        if (isCompleted) {
+            const completedBanner = document.createElement('div');
+            completedBanner.className = 'bg-green-100 text-green-800 text-sm font-semibold mt-4 px-3 py-1 rounded-full text-center';
+            completedBanner.textContent = 'Accomplished';
+            card.appendChild(completedBanner);
+        }
+
         return card;
     }
 
