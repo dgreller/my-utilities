@@ -75,6 +75,15 @@ Additional Notes:
 - Keep the entries sorted alphabetically by display name for easier navigation.
 * * *
 
+#### 3. ✅ Highlighting New Features
+
+When a new capability or app is added, it should be highlighted to the user.
+
+- In the `FutureProjects.html` and `apps/idea-explorer/index.html` files, mark the project or idea as "accomplished" by changing its title color to green.
+- Use the Tailwind CSS class `text-green-500` for this purpose.
+
+* * *
+
 Always have a Return to Hub button on the home page of an app
 
 Would you like a YAML or JSON version of this spec for use in other automation tools or LLM context windows?
