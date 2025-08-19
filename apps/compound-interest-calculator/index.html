@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-emerald-600 text-white p-6 shadow-md">
+        <h1 class="text-4xl font-bold text-center">Compound Interest Calculator</h1>
+        <p class="text-center text-emerald-100 mt-2">Visualize the power of compounding.</p>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Controls Column -->
+            <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-6 border-b pb-4">Parameters</h2>
+                <div class="space-y-6">
+                    <div>
+                        <label for="initialPrincipal" class="block font-medium mb-1">Initial Principal ($)</label>
+                        <input type="range" id="initialPrincipal" min="0" max="100000" step="1000" value="10000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <span id="initialPrincipalValue" class="text-lg font-semibold text-emerald-700">$10,000</span>
+                    </div>
+                    <div>
+                        <label for="annualRate" class="block font-medium mb-1">Annual Interest Rate (%)</label>
+                        <input type="range" id="annualRate" min="0" max="20" step="0.5" value="7" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <span id="annualRateValue" class="text-lg font-semibold text-emerald-700">7.0%</span>
+                    </div>
+                    <div>
+                        <label for="years" class="block font-medium mb-1">Years to Grow</label>
+                        <input type="range" id="years" min="1" max="50" step="1" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <span id="yearsValue" class="text-lg font-semibold text-emerald-700">20 years</span>
+                    </div>
+                    <div>
+                        <label for="monthlyContribution" class="block font-medium mb-1">Monthly Contribution ($)</label>
+                        <input type="range" id="monthlyContribution" min="0" max="5000" step="100" value="500" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        <span id="monthlyContributionValue" class="text-lg font-semibold text-emerald-700">$500</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart and Results Column -->
+            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-semibold mb-4">Projected Growth</h2>
+                <div class="mb-8">
+                    <canvas id="growthChart"></canvas>
+                </div>
+                <div class="text-center mb-8">
+                    <h3 class="text-lg text-gray-600">Future Value</h3>
+                    <p id="futureValue" class="text-5xl font-bold text-emerald-600">$0.00</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Year-by-Year Breakdown</h3>
+                    <div class="h-64 overflow-y-auto border rounded-lg">
+                        <table class="min-w-full">
+                            <thead class="bg-gray-100 sticky top-0">
+                                <tr>
+                                    <th class="py-2 px-4 text-left">Year</th>
+                                    <th class="py-2 px-4 text-left">Interest Earned</th>
+                                    <th class="py-2 px-4 text-left">End Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody">
+                                <!-- Data will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center p-6 mt-8 text-sm text-gray-600">
+        <a href="../../hub.html" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">&larr; Return to Hub</a>
+    </footer>
+
+    <!-- About Panel -->
+    <button id="about-button" class="fixed bottom-4 left-4 bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300">About</button>
+    <div id="about-panel" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full">
+            <h2 class="text-2xl font-bold mb-4">About This Calculator</h2>
+            <p class="mb-2"><span class="font-semibold">Version:</span> 1.0.0</p>
+            <p class="mb-4"><span class="font-semibold">Last Updated:</span> 2025-08-19</p>
+            <h3 class="font-semibold mb-2">Release Notes:</h3>
+            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                <li>Initial release of the Compound Interest Calculator.</li>
+                <li>Visualize growth with an interactive chart and table.</li>
+                <li>Adjust parameters with sliders for real-time updates.</li>
+            </ul>
+            <button id="close-about-panel" class="mt-6 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded w-full">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
