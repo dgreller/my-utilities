@@ -1,0 +1,15 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+#current-frog-text {
+    word-wrap: break-word;
+}
+
+button {
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+button:active {
+    transform: scale(0.98);
+}

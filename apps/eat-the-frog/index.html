@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"Eat the Frog" Task Prioritizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
+
+    <header class="bg-emerald-600 text-white p-6 shadow-md">
+        <h1 class="text-4xl font-bold text-center">"Eat the Frog" Prioritizer</h1>
+        <p class="text-center text-emerald-100 mt-2">Identify and conquer your most important task of the day.</p>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        <div id="app" class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+
+            <!-- Input Section -->
+            <div id="input-section">
+                <label for="frog-task" class="block text-lg font-semibold mb-2">What is your "frog" for today?</label>
+                <input type="text" id="frog-task-input" placeholder="e.g., Finish the quarterly report" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                <button id="save-frog-btn" class="w-full mt-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">Set My Frog</button>
+            </div>
+
+            <!-- Display Section -->
+            <div id="display-section" class="hidden text-center">
+                <h2 class="text-lg font-semibold text-gray-600">Today's Frog:</h2>
+                <p id="current-frog-text" class="text-2xl font-bold text-emerald-800 my-4 p-4 bg-emerald-50 rounded-lg"></p>
+                <button id="complete-frog-btn" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg text-lg transition duration-300">I Ate the Frog! 🐸</button>
+            </div>
+
+            <!-- Success Tracker -->
+            <div class="text-center mt-8">
+                <h3 class="text-xl font-semibold">Success Streak</h3>
+                <p class="text-4xl font-bold text-emerald-500" id="streak-count">0</p>
+                <p class="text-gray-500">days in a row</p>
+            </div>
+
+            <!-- Controls -->
+            <div class="text-center mt-6">
+                <button id="new-day-btn" class="text-sm text-gray-500 hover:text-emerald-600">Start a New Day</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center p-6 text-sm text-gray-600">
+        <a href="../../hub.html" class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">&larr; Return to Hub</a>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
