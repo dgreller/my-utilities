@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Apps</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center text-sky-400 mb-12">Future Apps</h1>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="utility-grid">
+        </div>
+        <div class="mt-12 text-center">
+            <a href="hub.html" class="text-sky-400 hover:text-sky-300 transition-colors duration-300">&larr; Back to Hub</a>
+        </div>
+    </div>
+
+    <script>
+        const utilities = [
+            { name: "Idea Explorer", href: "apps/idea-explorer/index.html", description: "An interactive explorer for new app ideas and their features." },
+            { name: "Future Projects", href: "FutureProjects.html", description: "A look at what's coming next." },
+            { name: "Future Enhancements", href: "apps/future-enhancements/index.html", description: "A list of potential new features for each app in the hub." }
+        ];
+
+        const utilityGrid = document.getElementById('utility-grid');
+
+        utilities.forEach(utility => {
+            const tile = document.createElement('a');
+            tile.href = utility.href;
+            tile.className = "block bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 hover:shadow-2xl transition-all duration-300";
+
+            const name = document.createElement('h3');
+            name.className = "text-xl font-bold text-sky-400 mb-2";
+            name.textContent = utility.name;
+
+            const description = document.createElement('p');
+            description.className = "text-gray-400 text-sm";
+            description.textContent = utility.description;
+
+            tile.appendChild(name);
+            tile.appendChild(description);
+
+            utilityGrid.appendChild(tile);
+        });
+    </script>
+</body>
+</html>
