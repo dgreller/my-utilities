@@ -14,62 +14,146 @@
 </head>
 <body class="bg-gray-900 text-gray-200">
     <div class="container mx-auto px-4 py-8">
-        <h1 class="text-4xl font-bold text-center text-sky-400 mb-12">Utility Hub</h1>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="utility-grid">
+        <h1 class="text-4xl font-bold text-center text-sky-400 mb-6">Utility Hub</h1>
+
+        <div class="flex justify-center items-center space-x-4 mb-10">
+            <span class="font-semibold text-gray-400">Sort Alphabetically</span>
+            <label for="sort-toggle" class="flex items-center cursor-pointer">
+                <div class="relative">
+                    <input type="checkbox" id="sort-toggle" class="sr-only">
+                    <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                    <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                </div>
+            </label>
+            <span class="font-semibold text-sky-400">Sort by Topic</span>
+        </div>
+
+        <div id="utility-container">
+            <!-- Tiles will be rendered here -->
         </div>
     </div>
 
     <script>
         const utilities = [
-            { name: "AI Meta-Skills Primer", href: "AI-Meta-Skills-Primer.html", description: "An interactive primer on the meta-skills needed to adapt and lead in the age of AI." },
-            { name: "AI Future-Proof Skills", href: "AIFutureProofSkills.html", description: "A detailed guide on future-proofing careers in the age of AI." },
-            { name: "A-Z Lists", href: "AZlists.html", description: "An A-Z list application for various categories." },
-            { name: "Arizona Plants Guide", href: "ArizonaPlants.html", description: "A comprehensive guide to residential native horticulture in Arizona." },
-            { name: "Bayesian Primer", href: "apps/bayesian-primer/index.html", description: "An introduction to Bayesian theory and its applications." },
-            { name: "Compound Interest Calculator", href: "apps/compound-interest-calculator/index.html", description: "A tool to visualize the power of compound interest over time." },
-            { name: "Conversion Calculators", href: "ConversionCalculators.html", description: "A universal unit converter with various categories and a basic calculator." },
-            { name: "Eat the Frog", href: "apps/eat-the-frog/index.html", description: "A simple to-do list app that forces you to identify and tackle your most important task of the day first." },
-            { name: "Evolutionary Psychology Primer", href: "apps/evolutionary-psychology-primer/index.html", description: "An interactive tool to learn about the foundational concepts of evolutionary psychology." },
-            { name: "Future", href: "future_submenu.html", description: "A submenu with future oriented apps." },
-            { name: "Prompting Toolkit Index", href: "Index.html", description: "The main index page for a 'Prompting Toolkit'." },
-            { name: "macOS Shortcuts", href: "MacOsShortcuts.html", description: "A cheat sheet for macOS shortcuts." },
-            { name: "Mental Model Primer", href: "apps/mental-model-primer/index.html", description: "An educational app that introduces users to various mental models to improve their thinking." },
-            { name: "Probability Simulator", href: "apps/probability-simulator/index.html", description: "An interactive tool to visualize and understand probability distributions." },
-            { name: "Prompt Generator", href: "PromptGeneratorV1.html", description: "An expert prompt crafter to create detailed and effective prompts for AI." },
-            { name: "Prompt Templates", href: "PromptTemplates.html", description: "A library of prompt templates for various tasks." },
-            { name: "Prompting Primer", href: "PromptingPrimer.html", description: "A detailed guide on prompt engineering." },
-            { name: "Report on AI Agents", href: "ReportonAIAgents.html", description: "An interactive report on the rise of AI agents and their impact on the enterprise." },
-            { name: "Spanish Primer", href: "SpanishPrimer.html", description: "A primer for learning Spanish verbs, including conjugation tables and a quiz." },
-            { name: "Talk Smarter", href: "TalkSmarter.html", description: "An interactive primer on spontaneous speaking." },
-            { name: "LLM Study Guide", href: "llm_study_guide.html", description: "A study guide for Large Language Models (LLMs)." },
-            { name: "Screenwriter's Prompt Companion", href: "screenwriterPromptCompanion.html", description: "A prompt companion for screenwriters." },
-            { name: "Statistical Fallacy Spotter", href: "apps/statistical-fallacy-spotter/index.html", description: "An interactive tool to learn about statistical fallacies." },
-            { name: "Stoic Quote Provider", href: "stoic-quote-provider.html", description: "A provider of stoic quotes with filters for virtues and philosophers." },
-            { name: "Vocabulary Builder", href: "vocabulary.html", description: "A simple app for learning new words." },
-            { name: "Space Invaders", href: "index.html", description: "A classic space invaders game." },
-            { name: "Cognitive Bias Explorer", href: "cognitive-bias-explorer.html", description: "An interactive educational app to help users learn about and identify common cognitive biases." }
+            { name: "AI Meta-Skills Primer", href: "AI-Meta-Skills-Primer.html", description: "An interactive primer on the meta-skills needed to adapt and lead in the age of AI.", topic: "AI & Prompting" },
+            { name: "AI Future-Proof Skills", href: "AIFutureProofSkills.html", description: "A detailed guide on future-proofing careers in the age of AI.", topic: "AI & Prompting" },
+            { name: "A-Z Lists", href: "AZlists.html", description: "An A-Z list application for various categories.", topic: "Tools & Calculators" },
+            { name: "Arizona Plants Guide", href: "ArizonaPlants.html", description: "A comprehensive guide to residential native horticulture in Arizona.", topic: "Reference" },
+            { name: "Bayesian Primer", href: "apps/bayesian-primer/index.html", description: "An introduction to Bayesian theory and its applications.", topic: "Learning & Primers" },
+            { name: "Compound Interest Calculator", href: "apps/compound-interest-calculator/index.html", description: "A tool to visualize the power of compound interest over time.", topic: "Tools & Calculators" },
+            { name: "Conversion Calculators", href: "ConversionCalculators.html", description: "A universal unit converter with various categories and a basic calculator.", topic: "Tools & Calculators" },
+            { name: "Eat the Frog", href: "apps/eat-the-frog/index.html", description: "A simple to-do list app that forces you to identify and tackle your most important task of the day first.", topic: "Productivity" },
+            { name: "Evolutionary Psychology Primer", href: "apps/evolutionary-psychology-primer/index.html", description: "An interactive tool to learn about the foundational concepts of evolutionary psychology.", topic: "Learning & Primers" },
+            { name: "Future", href: "future_submenu.html", description: "A submenu with future oriented apps.", topic: "Reference" },
+            { name: "Prompting Toolkit Index", href: "Index.html", description: "The main index page for a 'Prompting Toolkit'.", topic: "AI & Prompting" },
+            { name: "macOS Shortcuts", href: "MacOsShortcuts.html", description: "A cheat sheet for macOS shortcuts.", topic: "Reference" },
+            { name: "Mental Model Primer", href: "apps/mental-model-primer/index.html", description: "An educational app that introduces users to various mental models to improve their thinking.", topic: "Learning & Primers" },
+            { name: "Probability Simulator", href: "apps/probability-simulator/index.html", description: "An interactive tool to visualize and understand probability distributions.", topic: "Tools & Calculators" },
+            { name: "Prompt Generator", href: "PromptGeneratorV1.html", description: "An expert prompt crafter to create detailed and effective prompts for AI.", topic: "AI & Prompting" },
+            { name: "Prompt Templates", href: "PromptTemplates.html", description: "A library of prompt templates for various tasks.", topic: "AI & Prompting" },
+            { name: "Prompting Primer", href: "PromptingPrimer.html", a detailed guide on prompt engineering.", topic: "AI & Prompting" },
+            { name: "Report on AI Agents", href: "ReportonAIAgents.html", description: "An interactive report on the rise of AI agents and their impact on the enterprise.", topic: "AI & Prompting" },
+            { name: "Spanish Primer", href: "SpanishPrimer.html", description: "A primer for learning Spanish verbs, including conjugation tables and a quiz.", topic: "Learning & Primers" },
+            { name: "Talk Smarter", href: "TalkSmarter.html", description: "An interactive primer on spontaneous speaking.", topic: "Learning & Primers" },
+            { name: "LLM Study Guide", href: "llm_study_guide.html", description: "A study guide for Large Language Models (LLMs).", topic: "AI & Prompting" },
+            { name: "Screenwriter's Prompt Companion", href: "screenwriterPromptCompanion.html", description: "A prompt companion for screenwriters.", topic: "AI & Prompting" },
+            { name: "Statistical Fallacy Spotter", href: "apps/statistical-fallacy-spotter/index.html", description: "An interactive tool to learn about statistical fallacies.", topic: "Learning & Primers" },
+            { name: "Stoic Quote Provider", href: "stoic-quote-provider.html", description: "A provider of stoic quotes with filters for virtues and philosophers.", topic: "Learning & Primers" },
+            { name: "Vocabulary Builder", href: "vocabulary.html", description: "A simple app for learning new words.", topic: "Learning & Primers" },
+            { name: "Space Invaders", href: "index.html", description: "A classic space invaders game.", topic: "Games" },
+            { name: "Cognitive Bias Explorer", href: "cognitive-bias-explorer.html", description: "An interactive educational app to help users learn about and identify common cognitive biases.", topic: "Learning & Primers" }
         ];
 
-        const utilityGrid = document.getElementById('utility-grid');
+        const utilityContainer = document.getElementById('utility-container');
+        const topicColors = {
+            "AI & Prompting": "bg-sky-900/50",
+            "Learning & Primers": "bg-emerald-900/50",
+            "Tools & Calculators": "bg-amber-900/50",
+            "Reference": "bg-indigo-900/50",
+            "Productivity": "bg-rose-900/50",
+            "Games": "bg-purple-900/50",
+        };
 
-        utilities.forEach(utility => {
-            const tile = document.createElement('a');
-            tile.href = utility.href;
-            tile.className = "block bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 hover:shadow-2xl transition-all duration-300";
+        const defaultSorted = [...utilities].sort((a, b) => a.name.localeCompare(b.name));
 
-            const name = document.createElement('h3');
-            name.className = "text-xl font-bold text-sky-400 mb-2";
-            name.textContent = utility.name;
+        function renderGrid(items) {
+            utilityContainer.innerHTML = '';
+            const grid = document.createElement('div');
+            grid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
+            items.forEach(utility => {
+                const tile = document.createElement('a');
+                tile.href = utility.href;
+                tile.className = "block bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 hover:shadow-2xl transition-all duration-300 h-full";
+                const name = document.createElement('h3');
+                name.className = "text-xl font-bold text-sky-400 mb-2";
+                name.textContent = utility.name;
+                const description = document.createElement('p');
+                description.className = "text-gray-400 text-sm";
+                description.textContent = utility.description;
+                tile.appendChild(name);
+                tile.appendChild(description);
+                grid.appendChild(tile);
+            });
+            utilityContainer.appendChild(grid);
+        }
 
-            const description = document.createElement('p');
-            description.className = "text-gray-400 text-sm";
-            description.textContent = utility.description;
+        function renderByTopic(items) {
+            utilityContainer.innerHTML = '';
+            const groupedByTopic = items.reduce((acc, utility) => {
+                const topic = utility.topic || "Uncategorized";
+                if (!acc[topic]) acc[topic] = [];
+                acc[topic].push(utility);
+                return acc;
+            }, {});
+            const sortedTopics = Object.keys(groupedByTopic).sort();
+            sortedTopics.forEach(topic => {
+                const section = document.createElement('div');
+                section.className = `mb-12 p-4 rounded-lg ${topicColors[topic] || 'bg-gray-700/50'}`;
+                const topicTitle = document.createElement('h2');
+                topicTitle.className = "text-2xl font-bold text-white mb-6 border-b-2 border-gray-600 pb-2";
+                topicTitle.textContent = topic;
+                section.appendChild(topicTitle);
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
+                groupedByTopic[topic].sort((a, b) => a.name.localeCompare(b.name)).forEach(utility => {
+                    const tile = document.createElement('a');
+                    tile.href = utility.href;
+                    tile.className = "block bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 hover:shadow-2xl transition-all duration-300 h-full";
+                    const name = document.createElement('h3');
+                    name.className = "text-xl font-bold text-sky-400 mb-2";
+                    name.textContent = utility.name;
+                    const description = document.createElement('p');
+                    description.className = "text-gray-400 text-sm";
+                    description.textContent = utility.description;
+                    tile.appendChild(name);
+                    tile.appendChild(description);
+                    grid.appendChild(tile);
+                });
+                section.appendChild(grid);
+                utilityContainer.appendChild(section);
+            });
+        }
 
-            tile.appendChild(name);
-            tile.appendChild(description);
-
-            utilityGrid.appendChild(tile);
+        const toggle = document.getElementById('sort-toggle');
+        toggle.addEventListener('change', (event) => {
+            if (event.currentTarget.checked) {
+                renderByTopic(utilities);
+            } else {
+                renderGrid(defaultSorted);
+            }
         });
+
+        // Initial render
+        renderGrid(defaultSorted);
     </script>
+    <style>
+        /* Custom toggle styles */
+        input:checked ~ .dot {
+            transform: translateX(1.5rem);
+        }
+        input:checked ~ .block {
+            background-color: #0ea5e9; /* sky-500 */
+        }
+    </style>
 </body>
 </html>
