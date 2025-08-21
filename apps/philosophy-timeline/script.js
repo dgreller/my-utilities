@@ -65,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ideasList.appendChild(li);
         });
 
+        document.getElementById('modal-contributions').textContent = philosopher.detailed_contributions || "No detailed contributions available.";
+
         modal.classList.remove('hidden');
     }
 
