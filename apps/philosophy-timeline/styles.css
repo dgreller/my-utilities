@@ -1,0 +1,82 @@
+/* Basic body styling */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Timeline container */
+#timeline-container {
+    position: relative;
+    padding: 2rem 0;
+}
+
+/* The vertical line in the middle of the timeline */
+#timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 100%;
+    background-color: #3b82f6; /* blue-500 */
+}
+
+/* Styling for each period header */
+.period-header {
+    background-color: #1e40af; /* blue-800 */
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for the philosopher cards in a period */
+.period-philosophers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+/* Philosopher card */
+.philosopher-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    width: 300px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid #e5e7eb; /* gray-200 */
+}
+
+.philosopher-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.philosopher-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937; /* gray-800 */
+}
+
+.philosopher-card p {
+    color: #6b7280; /* gray-500 */
+    margin-bottom: 1rem;
+}
+
+/* Modal styling */
+#philosopher-modal.hidden {
+    display: none;
+}
+
+#philosopher-modal {
+    display: flex;
+}
