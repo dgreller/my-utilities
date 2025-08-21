@@ -84,6 +84,32 @@ When a new capability or app is added, it should be highlighted to the user.
 
 * * *
 
+### YAML File
+
+- apps_inventory.yaml
+
+#### 4. App Inventory File
+
+When a new app is added, the agent must:
+
+- Locate the `apps_inventory.yaml` file in the repo root.
+- Append a new entry for the app, including:
+    - `name`: The user-facing display name of the app.
+    - `description`: A detailed, well-written paragraph describing the app's purpose, key features, and user benefits.
+    - `path`: The relative path to the app's main HTML file (e.g., `apps/[app-folder-name]/index.html`).
+
+Example Entry:
+
+```yaml
+- name: "New Awesome App"
+  description: "This app helps users achieve [goal] by providing [key feature 1] and [key feature 2]. It is designed for [target audience] and solves the problem of [problem solved]."
+  path: "apps/new-awesome-app/index.html"
+```
+
+**Important:** Ensure the YAML syntax is valid. Keep the list sorted alphabetically by the `name` field.
+
+* * *
+
 Always have a Return to Hub button on the home page of an app
 
 Would you like a YAML or JSON version of this spec for use in other automation tools or LLM context windows?
