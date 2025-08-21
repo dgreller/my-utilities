@@ -1,0 +1,99 @@
+{
+  "periods": [
+    {
+      "name": "Ancient Philosophy",
+      "philosophers": [
+        {
+          "name": "Socrates",
+          "lifespan": "470–399 BCE",
+          "school": "Classical Greek",
+          "ideas": [
+            "The Socratic method of questioning.",
+            "\"The unexamined life is not worth living.\"",
+            "Knowledge is virtue."
+          ]
+        },
+        {
+          "name": "Plato",
+          "lifespan": "428–348 BCE",
+          "school": "Platonism",
+          "ideas": [
+            "Theory of Forms.",
+            "The allegory of the cave.",
+            "The ideal state ruled by philosopher-kings."
+          ]
+        },
+        {
+          "name": "Aristotle",
+          "lifespan": "384–322 BCE",
+          "school": "Peripatetic School",
+          "ideas": [
+            "Empirical observation and logic.",
+            "The Golden Mean.",
+            "Virtue ethics."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Enlightenment Philosophy",
+      "philosophers": [
+        {
+          "name": "John Locke",
+          "lifespan": "1632–1704",
+          "school": "Empiricism",
+          "ideas": [
+            "Tabula rasa (blank slate).",
+            "Natural rights: life, liberty, and property.",
+            "Social contract theory."
+          ]
+        },
+        {
+          "name": "Immanuel Kant",
+          "lifespan": "1724–1804",
+          "school": "Idealism",
+          "ideas": [
+            "Categorical Imperative.",
+            "Transcendental idealism.",
+            "Critique of pure reason."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Existentialism",
+      "philosophers": [
+        {
+          "name": "Søren Kierkegaard",
+          "lifespan": "1813–1855",
+          "school": "Existentialism",
+          "ideas": [
+            "The concept of 'leap of faith'.",
+            "Three stages of existence: aesthetic, ethical, and religious.",
+            "Subjectivity of truth."
+          ]
+        },
+        {
+          "name": "Friedrich Nietzsche",
+          "lifespan": "1844–1900",
+          "school": "Existentialism",
+          "ideas": [
+            "The Übermensch (Overman).",
+            "Will to power.",
+            "\"God is dead.\""
+          ]
+        },
+        {
+          "name": "Jean-Paul Sartre",
+          "lifespan": "1905–1980",
+          "school": "Existentialism",
+          "ideas": [
+            "\"Existence precedes essence.\"",
+            "Radical freedom and responsibility.",
+            "Bad faith."
+          ]
+        }
+      ]
+    }
+  ]
+}
