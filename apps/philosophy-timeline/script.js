@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const timelineContainer = document.getElementById('timeline-container');
-    const modal = document.getElementById('philosopher-modal');
-    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const aboutBtn = document.getElementById('about-btn');
+    const aboutPanel = document.getElementById('about-panel');
+    const aboutCloseBtn = document.getElementById('about-close-btn');
 
     // Fetch data and populate the timeline
     fetch('philosophy-data.json')
@@ -48,37 +49,27 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3 class="text-xl font-bold">${philosopher.name}</h3>
             <p class="text-sm text-gray-600">${philosopher.lifespan}</p>
         `;
-        card.addEventListener('click', () => openModal(philosopher));
+        card.addEventListener('click', () => {
+            window.location.href = `philosopher.html?name=${encodeURIComponent(philosopher.name)}`;
+        });
         return card;
     }
 
-    function openModal(philosopher) {
-        document.getElementById('modal-name').textContent = philosopher.name;
-        document.getElementById('modal-lifespan').textContent = philosopher.lifespan;
-        document.getElementById('modal-school').textContent = philosopher.school;
+    // About Panel Logic
+    aboutBtn.addEventListener('click', () => {
+        aboutPanel.classList.remove('hidden');
+        aboutPanel.classList.add('flex');
+    });
 
-        const ideasList = document.getElementById('modal-ideas');
-        ideasList.innerHTML = '';
-        philosopher.ideas.forEach(idea => {
-            const li = document.createElement('li');
-            li.textContent = idea;
-            ideasList.appendChild(li);
-        });
+    aboutCloseBtn.addEventListener('click', () => {
+        aboutPanel.classList.add('hidden');
+        aboutPanel.classList.remove('flex');
+    });
 
-        document.getElementById('modal-contributions').textContent = philosopher.detailed_contributions || "No detailed contributions available.";
-
-        modal.classList.remove('hidden');
-    }
-
-    function closeModal() {
-        modal.classList.add('hidden');
-    }
-
-    // Event listeners for closing the modal
-    modalCloseBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
+    aboutPanel.addEventListener('click', (e) => {
+        if (e.target === aboutPanel) {
+            aboutPanel.classList.add('hidden');
+            aboutPanel.classList.remove('flex');
         }
     });
 });
