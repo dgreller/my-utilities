@@ -69,11 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
             </li>
         `).join('');
 
-        const titleColor = isCompleted ? 'text-green-500' : 'text-indigo-700';
-
         card.innerHTML = `
             <div class="flex-grow">
-                <h3 class="text-2xl font-semibold ${titleColor} mb-4">${idea.name}</h3>
+                <h3 class="text-2xl font-semibold text-indigo-700 mb-4">${idea.name}</h3>
                 <h4 class="font-semibold mb-2 text-gray-600">Key Features:</h4>
                 <ul class="list-none text-gray-700 space-y-2">
                     ${featuresHtml}
