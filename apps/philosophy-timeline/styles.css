@@ -9,17 +9,6 @@ body {
     padding: 2rem 0;
 }
 
-/* The vertical line in the middle of the timeline */
-#timeline-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 3px;
-    height: 100%;
-    background-color: #3b82f6; /* blue-500 */
-}
 
 /* Styling for each period header */
 .period-header {
