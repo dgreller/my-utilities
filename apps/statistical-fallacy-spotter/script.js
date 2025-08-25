@@ -115,4 +115,125 @@ document.addEventListener('DOMContentLoaded', () => {
             aboutPanel.style.display = 'none';
         }
     });
+
+    // Quiz Logic
+    const startQuizBtn = document.getElementById('start-quiz-btn');
+    const quizModal = document.getElementById('quiz-modal');
+    const closeQuizBtn = document.querySelector('.close-quiz-btn');
+    const quizQuestion = document.getElementById('quiz-question');
+    const quizOptions = document.getElementById('quiz-options');
+    const quizNextBtn = document.getElementById('quiz-next-btn');
+    const quizFeedback = document.getElementById('quiz-feedback');
+    const quizResults = document.getElementById('quiz-results');
+    const quizContainer = document.getElementById('quiz-container');
+    const quizScore = document.getElementById('quiz-score');
+    const quizRestartBtn = document.getElementById('quiz-restart-btn');
+
+    let quizFallacies = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let selectedAnswer = null;
+
+    function startQuiz() {
+        quizFallacies = [...fallacies].sort(() => 0.5 - Math.random());
+        currentQuestionIndex = 0;
+        score = 0;
+        quizContainer.classList.remove('hidden');
+        quizResults.classList.add('hidden');
+        showQuestion();
+        quizModal.style.display = 'block';
+    }
+
+    function showQuestion() {
+        selectedAnswer = null;
+        quizFeedback.textContent = '';
+        quizNextBtn.disabled = true;
+        quizNextBtn.textContent = 'Next';
+
+        const currentFallacy = quizFallacies[currentQuestionIndex];
+        quizQuestion.textContent = currentFallacy.short_description;
+
+        const options = getQuizOptions(currentFallacy);
+        quizOptions.innerHTML = '';
+        options.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option.name;
+            button.dataset.fallacyName = option.name;
+            button.addEventListener('click', () => selectAnswer(button, currentFallacy));
+            quizOptions.appendChild(button);
+        });
+    }
+
+    function getQuizOptions(correctFallacy) {
+        const incorrectFallacies = fallacies
+            .filter(f => f.name !== correctFallacy.name)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 3);
+
+        const options = [correctFallacy, ...incorrectFallacies];
+        return options.sort(() => 0.5 - Math.random());
+    }
+
+    function selectAnswer(selectedButton, correctFallacy) {
+        if (selectedAnswer) return; // Prevent changing answer
+
+        selectedAnswer = selectedButton;
+        const isCorrect = selectedButton.dataset.fallacyName === correctFallacy.name;
+
+        if (isCorrect) {
+            score++;
+            quizFeedback.textContent = "Correct!";
+            quizFeedback.style.color = '#15803d'; // green-700
+        } else {
+            quizFeedback.textContent = `Incorrect. The correct answer is ${correctFallacy.name}.`;
+            quizFeedback.style.color = '#b91c1c'; // red-700
+        }
+
+        Array.from(quizOptions.children).forEach(button => {
+            button.disabled = true;
+            if (button.dataset.fallacyName === correctFallacy.name) {
+                button.classList.add('correct');
+            } else if (button === selectedButton) {
+                button.classList.add('incorrect');
+            }
+        });
+
+        quizNextBtn.disabled = false;
+        if (currentQuestionIndex === quizFallacies.length - 1) {
+            quizNextBtn.textContent = 'Show Results';
+        }
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizFallacies.length) {
+            resetOptionButtons();
+            showQuestion();
+        } else {
+            showResults();
+        }
+    }
+
+    function resetOptionButtons() {
+        Array.from(quizOptions.children).forEach(button => {
+            button.disabled = false;
+            button.classList.remove('correct', 'incorrect', 'selected');
+        });
+    }
+
+    function showResults() {
+        quizContainer.classList.add('hidden');
+        quizResults.classList.remove('hidden');
+        quizScore.textContent = `${score} / ${quizFallacies.length}`;
+    }
+
+    function closeQuiz() {
+        quizModal.style.display = 'none';
+        resetOptionButtons();
+    }
+
+    startQuizBtn.addEventListener('click', startQuiz);
+    quizNextBtn.addEventListener('click', nextQuestion);
+    quizRestartBtn.addEventListener('click', startQuiz);
+    closeQuizBtn.addEventListener('click', closeQuiz);
 });
