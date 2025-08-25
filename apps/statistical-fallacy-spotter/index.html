@@ -11,6 +11,7 @@
     <header>
         <h1>Statistical Fallacy Spotter</h1>
         <p>An interactive tool to learn about statistical fallacies and improve critical thinking.</p>
+        <button id="start-quiz-btn" class="start-quiz-btn">Start Quiz</button>
     </header>
 
     <main>
@@ -39,6 +40,23 @@
         </div>
     </div>
 
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-quiz-btn">&times;</span>
+            <div id="quiz-container">
+                <h2 id="quiz-question"></h2>
+                <div id="quiz-options" class="quiz-options"></div>
+                <button id="quiz-next-btn">Next</button>
+                <div id="quiz-feedback"></div>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <h2>Quiz Complete!</h2>
+                <p>Your final score is: <span id="quiz-score"></span></p>
+                <button id="quiz-restart-btn">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <a href="../../hub.html">Back to Hub</a>
     </footer>
@@ -49,10 +67,11 @@
         <div class="about-content">
             <span class="close-about-btn">&times;</span>
             <h2>About</h2>
-            <p>Version: 1.1.0</p>
-            <p>Last Updated: 2025-08-05</p>
+            <p>Version: 1.2.0</p>
+            <p>Last Updated: 2025-08-24</p>
             <h3>Release Notes:</h3>
             <ul>
+                <li>🚀 Added interactive quiz feature</li>
                 <li>✨ Added 'Real-World Examples' section</li>
                 <li>🆕 Initial release</li>
             </ul>
