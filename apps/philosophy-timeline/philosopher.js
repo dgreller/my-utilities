@@ -7,14 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const philosopherSchool = document.getElementById('philosopher-school');
     const philosopherQuote = document.getElementById('philosopher-quote');
     const philosopherIdeas = document.getElementById('philosopher-ideas');
-    const philosopherContributions = document.getElementById('philosopher-contributions');
+    const sectionsNav = document.getElementById('sections-nav');
+    const sectionContent = document.getElementById('section-content');
 
     const aboutBtn = document.getElementById('about-btn');
     const aboutPanel = document.getElementById('about-panel');
     const aboutCloseBtn = document.getElementById('about-close-btn');
 
     fetch('philosophy-data.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             const philosopher = findPhilosopher(data.periods, philosopherName);
             if (philosopher) {
@@ -57,7 +63,50 @@ document.addEventListener('DOMContentLoaded', () => {
             philosopherIdeas.appendChild(li);
         });
 
-        philosopherContributions.textContent = philosopher.detailed_contributions || "No detailed contributions available.";
+        // Handle structured detailed contributions
+        const contributions = philosopher.detailed_contributions;
+        if (typeof contributions === 'object' && contributions !== null) {
+            sectionsNav.innerHTML = '';
+            const sectionKeys = Object.keys(contributions);
+
+            sectionKeys.forEach((key, index) => {
+                const link = document.createElement('a');
+                link.href = '#';
+                link.textContent = key;
+                link.className = 'inline-block px-4 py-2 text-gray-600 hover:text-blue-600';
+                if (index === 0) {
+                    link.classList.add('font-bold', 'text-blue-600', 'border-b-2', 'border-blue-600');
+                }
+
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+
+                    // Update content
+                    let formattedContent = contributions[key].replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    sectionContent.innerHTML = formattedContent.replace(/\\n/g, '<br><br>');
+
+                    // Update active link style
+                    document.querySelectorAll('#sections-nav a').forEach(a => {
+                        a.classList.remove('font-bold', 'text-blue-600', 'border-b-2', 'border-blue-600');
+                    });
+                    link.classList.add('font-bold', 'text-blue-600', 'border-b-2', 'border-blue-600');
+                });
+                sectionsNav.appendChild(link);
+            });
+
+            // Display the first section by default
+            if (sectionKeys.length > 0) {
+                let formattedContent = contributions[sectionKeys[0]].replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                sectionContent.innerHTML = formattedContent.replace(/\\n/g, '<br><br>');
+            } else {
+                sectionContent.textContent = "No detailed contributions available.";
+            }
+
+        } else {
+            // Fallback for old string format
+            sectionsNav.style.display = 'none';
+            sectionContent.textContent = contributions || "No detailed contributions available.";
+        }
     }
 
     function displayError() {
