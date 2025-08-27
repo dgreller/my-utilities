@@ -63,6 +63,64 @@
       ]
     },
     {
+      "name": "Stoicism",
+      "philosophers": [
+        {
+          "name": "Marcus Aurelius",
+          "lifespan": "121–180 CE",
+          "school": "Stoicism",
+          "ideas": [
+            "The Dichotomy of Control.",
+            "Amor Fati (Love of Fate).",
+            "Memento Mori (Remember Death)."
+          ],
+          "detailed_contributions": {
+            "Power Over The Mind": "You have power over your mind - not outside events. Realize this, and you will find strength. This quote from Marcus Aurelius is a cornerstone of Stoic thought, reminding us that true power lies not in controlling external circumstances, but in mastering our internal responses. When you find yourself overwhelmed by events or anxieties beyond your control – be it work deadlines, unexpected news, or social pressures – pause and bring your attention inward. Recognize that while the event itself is external and indifferent, your judgment and reaction to it are entirely within your sphere of influence.",
+            "The Nature of Pain": "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it; and this you have the power to revoke at any moment. This powerful quote from Marcus Aurelius highlights the Stoic emphasis on subjective interpretation. When an external event or comment causes you distress, instead of blaming the event itself, consider that your suffering originates from your own judgment or 'estimate' of it.",
+            "On Revenge": "The best revenge is to be unlike him who performed the injury. This quote from Marcus Aurelius provides a powerful Stoic alternative to seeking retribution. When someone wrongs you, the natural inclination might be to retaliate. However, Marcus suggests that true victory lies in maintaining your own character and values, rather than descending to the level of the person who caused harm.",
+            "On Being a Good Man": "Waste no more time arguing about what a good man should be. Be one. This is a direct and powerful call to action from Marcus Aurelius, emphasizing the Stoic commitment to practical virtue over mere theoretical discussion. It's easy to intellectualize about what it means to be virtuous, but the true test lies in daily practice.",
+            "On Truth": "If anyone can refute me—show me that I'm making a mistake or thinking about things wrongly—I'll gladly change. It's the truth I'm after, and the truth never harmed anyone. It's only harm that harms. Marcus Aurelius exemplifies intellectual humility and a profound commitment to truth. He demonstrates that wisdom lies not in stubbornly clinging to one's own opinions, but in being open to correction and continuously seeking what is true and right.",
+            "The Quality of Thoughts": "The happiness of your life depends upon the quality of your thoughts. This quote is a powerful statement about the internal nature of happiness. Marcus Aurelius asserts that our inner state of contentment is not dictated by external circumstances, but by the quality of our internal dialogue and judgments. If your thoughts are consistently negative, critical, or anxious, your experience of life will reflect that.",
+            "On Tranquility": "The tranquility that comes when you stop caring what they say. Or think. Or do. Only what *you* do. Marcus Aurelius pinpoints a significant source of human suffering: our excessive concern with the opinions and actions of others. True tranquility, he suggests, is found when you liberate yourself from this external dependency and focus solely on what is within your control – your own actions, judgments, and character."
+          }
+        },
+        {
+          "name": "Seneca",
+          "lifespan": "c. 4 BCE–65 CE",
+          "school": "Stoicism",
+          "ideas": [
+            "The importance of living in the present.",
+            "The role of adversity in strengthening the mind.",
+            "The shortness of life."
+          ],
+          "detailed_contributions": {
+            "On Suffering": "We suffer more often in imagination than in reality. Seneca wisely points out that much of our suffering is self-inflicted through anxious anticipation and catastrophizing about future events that may never materialize. When you feel a wave of worry or fear, take a moment to distinguish between what is happening right now and what you are imagining might happen.",
+            "On Difficulties": "Difficulties strengthen the mind, as labor does the body. Seneca offers a profound re-framing of difficulties, viewing them not as obstacles to be avoided, but as opportunities for growth. Just as physical exercise strengthens muscles, confronting and overcoming challenges builds mental fortitude and resilience.",
+            "On Trials": "A gem cannot be polished without friction, nor a man perfected without trials. Seneca provides a beautiful metaphor for understanding the role of challenges in personal development. Just as a rough gem requires abrasive friction to reveal its brilliance, so too does a human being require facing and overcoming difficulties to develop virtue and character.",
+            "On Anger": "Anger: an acid that can do more harm to the vessel in which it is stored than to anything on which it is poured. Seneca's vivid metaphor for anger highlights its self-destructive nature. While we often direct anger outwards, hoping to harm or affect others, its primary damage is often inflicted upon ourselves – eroding our peace, clouding our judgment, and impacting our health.",
+            "On Time": "It is not that we have a short time to live, but that we waste a lot of it. Seneca delivers a blunt but essential truth about time. We often complain about the brevity of life, but he argues the real problem is how much of our precious time we squander on trivialities, idleness, or worrying about things outside our control."
+          }
+        },
+        {
+          "name": "Epictetus",
+          "lifespan": "c. 50–135 CE",
+          "school": "Stoicism",
+          "ideas": [
+            "The dichotomy of control.",
+            "The role of judgment in emotional response.",
+            "Living in accordance with nature."
+          ],
+          "detailed_contributions": {
+            "On Acceptance": "Don't seek for everything to happen as you wish it would, but rather wish that everything happens as it actually will – then your life will flow well. Epictetus offers a profound insight into achieving inner peace: true contentment comes not from having the world conform to your desires, but from aligning your desires with the reality of the world.",
+            "On Reaction": "It is not what happens to you, but how you react to it that matters. Epictetus succinctly captures a core Stoic principle: our well-being is determined not by external events, but by our internal response. Life will inevitably throw challenges your way, from minor annoyances to significant setbacks. Instead of succumbing to victimhood or despair, focus your energy on how you choose to react.",
+            "On Self-Definition": "First say to yourself what you would be; and then do what you have to do. Epictetus provides a clear two-step process for intentional living. Before embarking on tasks or navigating your day, take a moment to clarify the kind of person you aspire to be and the principles you wish to embody. Then, with that clarity, proceed to act in alignment with it.",
+            "On Self-Mastery": "No man is free who is not master of himself. Epictetus argues that true freedom isn't found in a lack of external constraints, but in the mastery of one's own desires, emotions, and impulses. If you are enslaved by your appetites, your anger, or your need for external validation, you are not truly free, regardless of your physical liberty.",
+            "On The Dichotomy of Control": "The chief task in life is simply this: to identify and separate matters so that I can say clearly to myself which are externals not under my control, and which have to do with the choices I actually control. Epictetus points to the fundamental Stoic exercise: distinguishing between what is within our control and what is not. Much of our anxiety and frustration stems from trying to control things that are external – other people's opinions, outcomes of events, the weather, past occurrences."
+          }
+        }
+      ]
+    },
+    {
       "name": "Enlightenment Philosophy",
       "philosophers": [
         {
