@@ -11,7 +11,7 @@
   description: "A comprehensive guide to residential native horticulture in Arizona. It provides information on why to use native plants, how to plan a native garden, and details on various types of native plants including trees, shrubs, cacti, succulents, perennials, and wildflowers. The guide features an interactive component where users can click on plant tiles to open a modal with detailed information about that plant."
   path: "ArizonaPlants.html"
 - name: "Bayesian Primer"
-  description: "An interactive primer on Bayesian inference. It covers an introduction to Bayesian thinking, core concepts like Bayes' Theorem, practical applications like A/B testing and spam filtering, and advanced topics like MCMC and Bayesian Networks. The content is loaded from a JSON file and displayed in a single-page application."
+  description: "A comprehensive, interactive primer on Bayesian inference. It covers an introduction to Bayesian thinking, core concepts like Bayes' Theorem and choosing priors, practical applications like A/B testing and parameter estimation, and advanced topics such as MCMC and Variational Inference. The primer also includes a section on the criticisms and limitations of the Bayesian approach. The content is loaded from a JSON file and displayed in a single-page application."
   path: "apps/bayesian-primer/index.html"
 - name: "Compound Interest Calculator"
   description: "A visual tool to understand the power of compound interest. It allows users to adjust parameters like initial principal, annual interest rate, years to grow, and monthly contribution using sliders. The application then displays the projected growth with an interactive chart and a year-by-year breakdown table."

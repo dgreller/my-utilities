@@ -40,6 +40,11 @@
           "title": "Credible Intervals",
           "id": "credible-intervals",
           "content": "<p>A Bayesian credible interval is a range of values that contains a parameter with a specific probability. For example, a 95% credible interval for a drug's effectiveness means that there is a 95% probability that the true effectiveness lies within that range. This direct probabilistic interpretation is a significant advantage over the frequentist confidence interval, which has a more convoluted definition related to long-run performance of the interval estimation procedure, not the specific interval calculated from a given sample.</p>"
+        },
+        {
+          "title": "Choosing a Prior",
+          "id": "choosing-a-prior",
+          "content": "<p>One of the most debated aspects of Bayesian inference is the selection of a prior distribution. The choice of prior can significantly influence the posterior, especially when data is scarce. Priors can be broadly categorized into two types:</p><ul><li><strong>Informative Priors:</strong> These priors incorporate specific, external information into the model. For example, if you are estimating the average height of adult males, you could use results from previous studies to construct a prior centered around 5'10\" (178 cm). Using an informative prior can lead to more precise estimates, but it also introduces subjectivity and can bias the results if the prior information is inaccurate.</li><li><strong>Uninformative Priors (or Vague/Diffuse Priors):</strong> These priors are intended to have minimal impact on the posterior distribution, letting the data 'speak for itself' as much as possible. A common choice is a flat prior (e.g., a uniform distribution across all possible values), which assigns equal probability to all outcomes. However, truly uninformative priors are difficult to define, and a prior that is uninformative in one parameterization may be informative in another. The goal is to choose a prior that is reasonable and to test how sensitive the results are to different prior choices.</li></ul>"
         }
       ]
     },
@@ -61,6 +66,11 @@
           "title": "Spam Filtering",
           "id": "spam-filtering",
           "content": "<p>Bayesian filters are a cornerstone of modern email systems. The filter is trained on a large corpus of emails already labeled as 'spam' or 'ham' (not spam). It learns the probability of certain words appearing in spam versus ham emails (e.g., 'Viagra', 'lottery'). When a new email arrives, the filter uses Bayes' theorem to calculate the probability that the email is spam given the words it contains. The filter's beliefs are continuously updated with every new email it processes and every time a user marks an email as spam, making it an adaptive learning system.</p>"
+        },
+        {
+          "title": "Parameter Estimation",
+          "id": "parameter-estimation",
+          "content": "<p>In scientific research, a primary goal is often to estimate the parameters of a model. For example, a biologist might want to estimate the average lifespan of a particular species of animal. A Bayesian approach to parameter estimation involves defining a prior distribution for the parameter (e.g., based on related species), collecting data (observing lifespans), and then computing a posterior distribution for the parameter. The result is not just a single point estimate (like an average), but a full probability distribution that quantifies the uncertainty about the parameter. This posterior can then be used to make probabilistic statements, such as 'there is a 95% probability that the average lifespan is between 10 and 12 years,' which is often more useful than a simple point estimate.</p>"
         }
       ]
     },
@@ -82,6 +92,27 @@
           "title": "Conjugate Priors",
           "id": "conjugate-priors",
           "content": "<p>A conjugate prior is a type of prior distribution that, when combined with the likelihood, results in a posterior distribution that belongs to the same family of distributions as the prior. This is a matter of mathematical convenience, as it allows for a simple, analytical update of the posterior without resorting to numerical methods like MCMC. For instance, the Beta distribution is a conjugate prior for the Bernoulli likelihood. If our prior belief about the probability of a coin landing heads is described by a Beta distribution, and our data (the coin flips) follows a Bernoulli distribution, then our posterior belief will also be a Beta distribution, just with updated parameters. While not always applicable, using conjugate priors when appropriate can greatly simplify Bayesian calculations.</p>"
+        },
+        {
+          "title": "Variational Inference",
+          "id": "variational-inference",
+          "content": "<p>Variational Inference (VI) is an alternative to MCMC for approximating complex posterior distributions. While MCMC methods are guaranteed to converge to the true posterior given enough time, they can be computationally very slow. VI reframes the problem of finding the posterior as an optimization problem. It tries to find the 'closest' distribution to the true posterior from a simpler family of distributions (e.g., a Gaussian). This is often much faster than MCMC, especially for large datasets and high-dimensional models. However, the trade-off is that the approximation is not guaranteed to be as accurate as that from a well-converged MCMC chain, as it is limited by the chosen family of approximating distributions.</p>"
+        }
+      ]
+    },
+    {
+      "title": "Criticism and Limitations",
+      "id": "criticism-and-limitations",
+      "subsections": [
+        {
+          "title": "Subjectivity of Priors",
+          "id": "subjectivity-of-priors",
+          "content": "<p>One of the most persistent criticisms of Bayesian inference is that the choice of prior is subjective. Two researchers with different prior beliefs may arrive at different posterior conclusions, even with the same data. This stands in contrast to frequentist methods, which are often portrayed as more 'objective.' Proponents of Bayesianism argue that subjectivity is not a weakness but a feature, as it makes the assumptions of a model explicit. They also point out that all statistical models, including frequentist ones, involve assumptions and subjective choices (e.g., in choosing a significance level or a particular statistical test). A common practice in Bayesian analysis is to perform a sensitivity analysis, where the model is run with different priors to see how much the conclusions change.</p>"
+        },
+        {
+          "title": "Computational Challenges",
+          "id": "computational-challenges",
+          "content": "<p>While modern algorithms like MCMC and VI have made Bayesian analysis practical for a wide range of problems, it can still be computationally expensive. MCMC algorithms, in particular, can require a long time to converge to the posterior distribution, especially for complex models with many parameters. This can make Bayesian methods slower than their frequentist counterparts. Furthermore, diagnosing convergence and ensuring the reliability of the results from these algorithms requires a significant degree of expertise. The complexity of the models and the computational cost can be a barrier to adoption in some fields.</p>"
         }
       ]
     }
