@@ -15,7 +15,7 @@ Each app must include an accessible About panel that displays:
 - Version number (e.g., Version: 1.2.3)
 - Last updated date (e.g., 2025-07-30)
 - Release notes: A short bulleted list of recent changes (3--5 items max)
-
+- Use .x for feature upgrades, .x.y for bug fixes. 
   
 
 Implementation Requirements:
