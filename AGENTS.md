@@ -33,7 +33,7 @@ Implementation Requirements:
     - Include a Close button or dismiss on outside click
 - Do not use hover-only behavior (must work on touch devices).
 
-  
+- if it doesn't exist, add a button by the title on the hub menu. when pressed it has a popup that tells the latest updates that were made to any app and the date of that update. Also if any new app was added. it only contains the last new or updated app. if it exists, update it. 
 
 Display Format Example:
     
