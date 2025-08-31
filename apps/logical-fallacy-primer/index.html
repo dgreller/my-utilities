@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logical Fallacy Primer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto p-4">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold">Logical Fallacy Primer</h1>
+            <p class="text-lg text-gray-600">An interactive guide to common logical fallacies.</p>
+        </header>
+
+        <div id="fallacy-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Fallacies will be loaded here by script.js -->
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="../../hub.html" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Return to Hub
+            </a>
+        </div>
+    </div>
+
+    <!-- About Button -->
+    <button id="about-button" class="fixed bottom-4 left-4 bg-gray-700 text-white p-3 rounded-full shadow-lg hover:bg-gray-800 transition">
+        About
+    </button>
+
+    <!-- About Panel -->
+    <div id="about-panel" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-4">About This App</h2>
+            <p><strong>Version:</strong> 1.0.0</p>
+            <p><strong>Last Updated:</strong> 2025-08-31</p>
+            <h3 class="font-bold mt-4">Release Notes:</h3>
+            <ul class="list-disc list-inside">
+                <li>Initial release of the Logical Fallacy Primer.</li>
+                <li>Includes 12 common logical fallacies.</li>
+                <li>Interactive UI to browse fallacies.</li>
+            </ul>
+            <button id="close-about-panel" class="mt-6 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Slippery Slope",
+    "definition": "This is a conclusion based on the premise that if A happens, then eventually through a series of small steps, through B, C,..., X, Y, Z will happen, too, basically equating A and Z. So, if we don't want Z to occur, A must not be allowed to occur either.",
+    "example": "If we ban Hummers because they are bad for the environment eventually the government will ban all cars, so we should not ban Hummers."
+  },
+  {
+    "name": "Hasty Generalization",
+    "definition": "This is a conclusion based on insufficient or biased evidence. In other words, you are rushing to a conclusion before you have all the relevant facts.",
+    "example": "Even though it's only the first day, I can tell this is going to be a boring course."
+  },
+  {
+    "name": "Post hoc ergo propter hoc",
+    "definition": "This is a conclusion that assumes that if 'A' occurred after 'B' then 'B' must have caused 'A.'",
+    "example": "I drank bottled water and now I am sick, so the water must have made me sick."
+  },
+  {
+    "name": "Genetic Fallacy",
+    "definition": "This conclusion is based on an argument that the origins of a person, idea, institute, or theory determine its character, nature, or worth.",
+    "example": "The Volkswagen Beetle is an evil car because it was originally designed by Hitler's army."
+  },
+  {
+    "name": "Begging the Claim",
+    "definition": "The conclusion that the writer should prove is validated within the claim.",
+    "example": "Filthy and polluting coal should be banned."
+  },
+  {
+    "name": "Circular Argument",
+    "definition": "This restates the argument rather than actually proving it.",
+    "example": "George Bush is a good communicator because he speaks effectively."
+  },
+  {
+    "name": "Either/or",
+    "definition": "This is a conclusion that oversimplifies the argument by reducing it to only two sides or choices.",
+    "example": "We can either stop using cars or destroy the earth."
+  },
+  {
+    "name": "Ad hominem",
+    "definition": "This is an attack on the character of a person rather than his or her opinions or arguments.",
+    "example": "Green Peace's strategies aren't effective because they are all dirty, lazy hippies."
+  },
+  {
+    "name": "Ad populum/Bandwagon Appeal",
+    "definition": "This is an appeal that presents what most people, or a group of people think, in order to persuade one to think the same way. Getting on the bandwagon is one such instance of an ad populum appeal.",
+    "example": "If you were a true American you would support the rights of people to choose whatever vehicle they want."
+  },
+  {
+    "name": "Red Herring",
+    "definition": "This is a diversionary tactic that avoids the key issues, often by avoiding opposing arguments rather than addressing them.",
+    "example": "The level of mercury in seafood may be unsafe, but what will fishers do to support their families?"
+  },
+  {
+    "name": "Straw Man",
+    "definition": "This move oversimplifies an opponent's viewpoint and then attacks that hollow argument.",
+    "example": "People who don't support the proposed state minimum wage increase hate the poor."
+  },
+  {
+    "name": "Moral Equivalence",
+    "definition": "This fallacy compares minor misdeeds with major atrocities, suggesting that both are equally immoral.",
+    "example": "That parking attendant who gave me a ticket is as bad as Hitler."
+  }
+]

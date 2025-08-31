@@ -4,6 +4,7 @@
     "ideas": [
       {
         "name": "Logical Fallacy of the Day",
+        "status": "accomplished",
         "features": [
           "Displays a new fallacy each day on page load.",
           "Includes a concise definition and a real-world example.",

@@ -1,0 +1,56 @@
+/* Custom styles for the Logical Fallacy Primer */
+
+.fallacy-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 150px; /* Fixed height for consistency */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.fallacy-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.fallacy-card .fallacy-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.fallacy-card .fallacy-details {
+    display: none; /* Hidden by default */
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+.fallacy-card.flipped {
+    height: auto; /* Auto height when flipped */
+}
+
+.fallacy-card.flipped .fallacy-name {
+    margin-bottom: 1rem;
+}
+
+.fallacy-card.flipped .fallacy-details {
+    display: block; /* Shown when flipped */
+}
+
+.fallacy-definition {
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.fallacy-example {
+    border-left: 4px solid #4a90e2;
+    padding-left: 1rem;
+    color: #555;
+}
