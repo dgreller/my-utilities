@@ -1,0 +1,129 @@
+/* Basic Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+h1, h2 {
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5em;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+/* Input Section */
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+#goal-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    resize: vertical;
+    min-height: 80px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+#model-select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #f9f9f9;
+}
+
+#generate-btn {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#generate-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Output Section */
+.output-section {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+#plan-output {
+    min-height: 100px;
+    white-space: pre-wrap; /* Preserves formatting */
+    font-family: "Courier New", Courier, monospace;
+    background-color: #fafafa;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px dashed #ccc;
+}
+
+.placeholder {
+    color: #888;
+    font-style: italic;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Action Buttons */
+.action-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.action-buttons button {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-buttons button:hover {
+    background-color: #e0e0e0;
+}
+
+.hidden {
+    display: none;
+}
