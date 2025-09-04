@@ -91,3 +91,6 @@
 - name: "Mega Prompt Generator"
   description: "A tool to help users generate detailed, structured prompts. It has fields for Task, Core Instructions, Structural Guidelines, Context Positioning, and Negative Examples. As the user fills out the form, a live preview of the generated prompt is updated in a sidebar."
   path: "apps/mega-prompt-generator/index.html"
+- name: "AI-Powered Goal Planner"
+  description: "A tool to help you break down large goals into smaller, actionable steps using AI and strategic models."
+  path: "apps/ai-goal-planner/index.html"
