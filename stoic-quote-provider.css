@@ -117,9 +117,11 @@ header p {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+    flex-wrap: wrap;
+    position: relative; /* For positioning context */
 }
 
-#random-quote-btn {
+#random-quote-btn, #share-quote-btn {
     background-color: var(--accent-color);
     color: white;
     border: none;
@@ -131,8 +133,42 @@ header p {
     transition: background-color 0.3s ease;
 }
 
-#random-quote-btn:hover {
+#random-quote-btn:hover, #share-quote-btn:hover {
     background-color: var(--accent-color-hover);
+}
+
+.share-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0; /* Will be adjusted by JS */
+    z-index: 100;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 160px;
+}
+
+.share-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: var(--primary-text-color);
+}
+
+.share-menu button:last-child {
+    border-bottom: none;
+}
+
+.share-menu button:hover {
+    background-color: var(--bg-color);
 }
 
 .filters {
@@ -160,16 +196,31 @@ select {
 
     .controls {
         flex-direction: column;
-        gap: 1.5rem;
+        align-items: stretch; /* Make items fill width */
+        gap: 1rem;
     }
 
     .filters {
         flex-direction: column;
         width: 100%;
+        gap: 0.5rem;
     }
 
     select {
         width: 100%;
+    }
+
+    #random-quote-btn, #share-quote-btn {
+        width: 100%;
+    }
+
+    .share-menu {
+        width: 100%;
+        top: auto;
+        left: 0;
+        right: 0;
+        position: static; /* Let it flow in the document */
+        margin-top: 0.5rem;
     }
 }
 
