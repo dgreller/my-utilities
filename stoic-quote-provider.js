@@ -7,8 +7,13 @@ document.addEventListener('db-ready', function () {
     const randomQuoteBtn = document.getElementById('random-quote-btn');
     const virtueFilter = document.getElementById('virtue-filter');
     const philosopherFilter = document.getElementById('philosopher-filter');
+    const shareQuoteBtn = document.getElementById('share-quote-btn');
+    const shareMenu = document.getElementById('share-menu');
+    const copyQuoteBtn = document.getElementById('copy-quote-btn');
+    const forwardQuoteBtn = document.getElementById('forward-quote-btn');
 
     let currentQuotes = [];
+    let currentQuote = null;
 
     function getUniqueValues(key) {
         let query;
@@ -44,6 +49,7 @@ document.addEventListener('db-ready', function () {
     }
 
     function displayQuote(quote) {
+        currentQuote = quote; // Store the current quote
         quoteText.textContent = `“${quote.quote}”`;
         quoteAuthor.textContent = `— ${quote.author}`;
         quoteApplication.textContent = quote.application;
@@ -162,6 +168,63 @@ document.addEventListener('db-ready', function () {
     });
     virtueFilter.addEventListener('change', filterQuotes);
     philosopherFilter.addEventListener('change', filterQuotes);
+
+    shareQuoteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isHidden = shareMenu.style.display === 'none';
+        if (isHidden) {
+            const btnRect = shareQuoteBtn.getBoundingClientRect();
+            const controlsRect = shareQuoteBtn.parentElement.getBoundingClientRect();
+            shareMenu.style.left = `${btnRect.left - controlsRect.left}px`;
+            shareMenu.style.display = 'block';
+            shareQuoteBtn.setAttribute('aria-expanded', 'true');
+        } else {
+            shareMenu.style.display = 'none';
+            shareQuoteBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    copyQuoteBtn.addEventListener('click', () => {
+        if (!currentQuote) return;
+        const textToCopy = `“${currentQuote.quote}” — ${currentQuote.author}`;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            copyQuoteBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyQuoteBtn.textContent = 'Copy Quote';
+                shareMenu.style.display = 'none';
+                shareQuoteBtn.setAttribute('aria-expanded', 'false');
+            }, 1000);
+        }).catch(err => {
+            console.error('Failed to copy text: ', err);
+            // Optional: Provide user feedback on error
+        });
+    });
+
+    forwardQuoteBtn.addEventListener('click', () => {
+        if (navigator.share && currentQuote) {
+            navigator.share({
+                title: 'A Stoic Quote',
+                text: `“${currentQuote.quote}” — ${currentQuote.author}`,
+                url: window.location.href
+            }).then(() => {
+                shareMenu.style.display = 'none';
+                shareQuoteBtn.setAttribute('aria-expanded', 'false');
+            }).catch((error) => console.log('Error sharing:', error));
+        }
+    });
+
+    // Hide the forward button if the Web Share API is not supported
+    if (!navigator.share) {
+        forwardQuoteBtn.style.display = 'none';
+    }
+
+    // Close the share menu if the user clicks outside of it
+    window.addEventListener('click', (e) => {
+        if (shareMenu.style.display === 'block' && !shareMenu.contains(e.target) && e.target !== shareQuoteBtn) {
+            shareMenu.style.display = 'none';
+            shareQuoteBtn.setAttribute('aria-expanded', 'false');
+        }
+    });
 
     // Initial setup
     function initializeApp() {
