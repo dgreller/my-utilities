@@ -57,11 +57,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         philosopherIdeas.innerHTML = '';
-        philosopher.ideas.forEach(idea => {
-            const li = document.createElement('li');
-            li.textContent = idea;
-            philosopherIdeas.appendChild(li);
-        });
+        if (Array.isArray(philosopher.ideas)) {
+            // Fallback for old array format
+            philosopher.ideas.forEach(idea => {
+                const li = document.createElement('li');
+                li.textContent = idea;
+                philosopherIdeas.appendChild(li);
+            });
+        } else if (typeof philosopher.ideas === 'object' && philosopher.ideas !== null) {
+            // Handle new object format
+            for (const idea in philosopher.ideas) {
+                const ideaContainer = document.createElement('div');
+                ideaContainer.className = 'mb-4';
+
+                const ideaTitle = document.createElement('h4');
+                ideaTitle.className = 'text-xl font-semibold text-gray-700';
+                ideaTitle.textContent = idea;
+
+                const ideaDescription = document.createElement('p');
+                ideaDescription.className = 'text-gray-600';
+                ideaDescription.textContent = philosopher.ideas[idea];
+
+                ideaContainer.appendChild(ideaTitle);
+                ideaContainer.appendChild(ideaDescription);
+                philosopherIdeas.appendChild(ideaContainer);
+            }
+        }
 
         // Handle structured detailed contributions
         const contributions = philosopher.detailed_contributions;
