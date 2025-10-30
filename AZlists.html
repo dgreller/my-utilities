@@ -74,7 +74,7 @@
     <div class="tile" style="background-color:#F5F5DC" onclick="showList('hotel')">🏨 Hotel/Resort Items</div>
     <div class="tile" style="background-color:#cce7ff" onclick="showList('aviation')">✈️ Aviation/Airports</div>
     <div class="tile" style="background-color:#d2ffd2" onclick="showList('shopping')">🛍️ Shopping Malls</div>
-    <div class="tile" style="background-color:#f8bbd0" onclick="showList('stadiums')">🏟️ Sports Stadiums</div>
+    <div class="tile" style="background-color:#ffcc80" onclick="showList('sports')">🏈 American Sports</div>
     <div class="tile" style="background-color:#c5cae9" onclick="showList('home')">🏠 Home Environments</div>
   </div>
     
@@ -489,45 +489,43 @@
     </table>
   </div>
 
-  <div class="list" id="stadiums">
+  <div class="list" id="sports">
     <span class="back" onclick="goBack()">← Back</span>
-    <h2>Sports Stadiums A–Z</h2>
-    <button>🔤 Toggle Hard Letters</button>
+    <h2>American Sports A–Z</h2>
     <table>
-      <tr><th>Letter</th><th>Stadiums</th></tr>
-      <tr><td>A</td><td>Anfield, Allianz Arena, AT&T Stadium</td></tr>
-      <tr><td>B</td><td>Bernabéu, Busch Stadium, Barclays Center</td></tr>
-      <tr><td>C</td><td>Camp Nou, Crypto.com Arena, Churchill Downs</td></tr>
-      <tr><td>D</td><td>Dodger Stadium, Daytona International Speedway, Ducati Arena</td></tr>
-      <tr><td>E</td><td>Emirates Stadium, Eden Park, Empower Field at Mile High</td></tr>
-      <tr><td>F</td><td>Fenway Park, FedExForum, Fiserv Forum</td></tr>
-      <tr><td>G</td><td>Gillette Stadium, Golden 1 Center, Goodison Park</td></tr>
-      <tr><td>H</td><td>Hard Rock Stadium, Heinz Field, Hayward Field</td></tr>
-      <tr><td>I</td><td>Indianapolis Motor Speedway, Investors Group Field, Ibrox Stadium</td></tr>
-      <tr><td>J</td><td>Johan Cruyff Arena, Jacobs Field, Juventus Stadium</td></tr>
-      <tr><td>K</td><td>Kauffman Stadium, Kyle Field, Kennington Oval</td></tr>
-      <tr><td>L</td><td>Lambeau Field, Lincoln Financial Field, Lord's Cricket Ground</td></tr>
-      <tr><td>M</td><td>Madison Square Garden, Melbourne Cricket Ground, Michigan Stadium</td></tr>
-      <tr><td>N</td><td>Nationals Park, Nissan Stadium, NRG Stadium</td></tr>
-      <tr><td>O</td><td>Old Trafford, Oracle Park, Ohio Stadium</td></tr>
-      <tr><td>P</td><td>PNC Park, Prudential Center, Parc des Princes</td></tr>
-      <tr><td>Q</td><td>Qualcomm Stadium, Queen's Club, Qudos Bank Arena</td></tr>
-      <tr><td>R</td><td>Rose Bowl, Rogers Centre, Red Bull Arena</td></tr>
-      <tr><td>S</td><td>SoFi Stadium, Stamford Bridge, Soldier Field</td></tr>
-      <tr><td>T</td><td>TD Garden, Tottenham Hotspur Stadium, T-Mobile Park</td></tr>
-      <tr><td>U</td><td>United Center, U.S. Bank Stadium, University of Phoenix Stadium</td></tr>
-      <tr><td>V</td><td>Vivint Smart Home Arena, Villa Park, Vodafone Arena</td></tr>
-      <tr><td>W</td><td>Wembley Stadium, Wrigley Field, Wimbledon</td></tr>
-      <tr><td>X</td><td>Xcel Energy Center, Xavier University Cintas Center, Xiamen Egret Stadium</td></tr>
-      <tr><td>Y</td><td>Yankee Stadium, Yokohama Stadium, Yost Ice Arena</td></tr>
-      <tr><td>Z</td><td>Zayed Sports City Stadium, Zions Bank Stadium, Zulfi SC Stadium</td></tr>
+      <tr><th>Letter</th><th>Items</th></tr>
+      <tr><td>A</td><td>Ace, Alley-oop, Arena</td></tr>
+      <tr><td>B</td><td>Bunt, Buzzer beater, Bullpen</td></tr>
+      <tr><td>C</td><td>Curveball, Center field, Court</td></tr>
+      <tr><td>D</td><td>Double play, Dunk, Defense</td></tr>
+      <tr><td>E</td><td>ERA, End zone, Extra innings</td></tr>
+      <tr><td>F</td><td>Foul ball, Free throw, Field goal</td></tr>
+      <tr><td>G</td><td>Grand slam, Goalie, Gridiron</td></tr>
+      <tr><td>H</td><td>Home run, Half-court shot, Hat-trick</td></tr>
+      <tr><td>I</td><td>Infield, Interception, Icing</td></tr>
+      <tr><td>J</td><td>Jump shot, Jumbotron, Jockey</td></tr>
+      <tr><td>K</td><td>K-strikeout, Kickoff, Knockout</td></tr>
+      <tr><td>L</td><td>Line drive, Layup, Locker room</td></tr>
+      <tr><td>M</td><td>Mound, MVP, Mascot</td></tr>
+      <tr><td>N</td><td>No-hitter, NFL, NBA</td></tr>
+      <tr><td>O</td><td>Outfield, Overtime, Offense</td></tr>
+      <tr><td>P</td><td>Pitcher, Point guard, Penalty box</td></tr>
+      <tr><td>Q</td><td>Quarterback, Quadruple-double, Qualifier</td></tr>
+      <tr><td>R</td><td>RBI, Rebound, Rookie</td></tr>
+      <tr><td>S</td><td>Stolen base, Slam dunk, Super Bowl</td></tr>
+      <tr><td>T</td><td>Triple play, Touchdown, Three-pointer</td></tr>
+      <tr><td>U</td><td>Umpire, Unsportsmanlike conduct, Underdog</td></tr>
+      <tr><td>V</td><td>Varsity, Volleyball, Victory</td></tr>
+      <tr><td>W</td><td>Walk-off, Wing player, World Series</td></tr>
+      <tr><td>X</td><td>X-factor, X-games</td></tr>
+      <tr><td>Y</td><td>Yankees, Yellow card, Yard line</td></tr>
+      <tr><td>Z</td><td>Zamboni, Zone defense, Zero-gravity dunk</td></tr>
     </table>
   </div>
 
   <div class="list" id="home">
     <span class="back" onclick="goBack()">← Back</span>
     <h2>Home Environments A–Z</h2>
-    <button>🔤 Toggle Hard Letters</button>
     <table>
       <tr><th>Letter</th><th>Items/Locations</th></tr>
       <tr><td>A</td><td>Attic, Aquarium, Artwork</td></tr>
