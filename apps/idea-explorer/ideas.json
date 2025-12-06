@@ -14,6 +14,15 @@
         ]
       },
       {
+        "name": "Rhetorical Devices Handbook",
+        "status": "accomplished",
+        "features": [
+          "Explore a library of rhetorical devices.",
+          "Read clear definitions and examples.",
+          "Interactive UI to browse devices."
+        ]
+      },
+      {
         "name": "Rhetorical Device Analyzer",
         "features": [
           "Text area for user to input text.",

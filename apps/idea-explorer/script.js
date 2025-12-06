@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const completedIdeas = [
         "Logical Fallacy of the Day",
+        "Rhetorical Devices Handbook",
         "Key Philosophers Primer",
         "'Idea Inbox' Capture Tool",
         "Compound Interest Calculator",
