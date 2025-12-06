@@ -1,0 +1,56 @@
+/* Custom styles for the Rhetorical Devices Handbook */
+
+.device-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 150px; /* Fixed height for consistency */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.device-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.device-card .device-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.device-card .device-details {
+    display: none; /* Hidden by default */
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+.device-card.flipped {
+    height: auto; /* Auto height when flipped */
+}
+
+.device-card.flipped .device-name {
+    margin-bottom: 1rem;
+}
+
+.device-card.flipped .device-details {
+    display: block; /* Shown when flipped */
+}
+
+.device-definition {
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.device-example {
+    border-left: 4px solid #9b59b6; /* Purple accent */
+    padding-left: 1rem;
+    color: #555;
+}

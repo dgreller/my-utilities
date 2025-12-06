@@ -1,0 +1,4 @@
+127.0.0.1 - - [06/Dec/2025 00:10:47] "GET /apps/rhetorical-devices-handbook/index.html HTTP/1.1" 200 -
+127.0.0.1 - - [06/Dec/2025 00:10:47] "GET /apps/rhetorical-devices-handbook/styles.css HTTP/1.1" 200 -
+127.0.0.1 - - [06/Dec/2025 00:10:47] "GET /apps/rhetorical-devices-handbook/script.js HTTP/1.1" 200 -
+127.0.0.1 - - [06/Dec/2025 00:10:47] "GET /apps/rhetorical-devices-handbook/rhetorical-devices.json HTTP/1.1" 200 -

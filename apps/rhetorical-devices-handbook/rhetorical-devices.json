@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Metaphor",
+    "definition": "A figure of speech that makes an implicit, implied, or hidden comparison between two things that are unrelated, but which share some common characteristics.",
+    "example": "The world is a stage."
+  },
+  {
+    "name": "Simile",
+    "definition": "A figure of speech involving the comparison of one thing with another thing of a different kind, used to make a description more emphatic or vivid (e.g., as brave as a lion, crazy like a fox).",
+    "example": "He is as strong as an ox."
+  },
+  {
+    "name": "Anaphora",
+    "definition": "The repetition of a word or phrase at the beginning of successive clauses.",
+    "example": "I have a dream... I have a dream... I have a dream."
+  },
+  {
+    "name": "Alliteration",
+    "definition": "The occurrence of the same letter or sound at the beginning of adjacent or closely connected words.",
+    "example": "She sells seashells by the seashore."
+  },
+  {
+    "name": "Hyperbole",
+    "definition": "Exaggerated statements or claims not meant to be taken literally.",
+    "example": "I'm so hungry I could eat a horse."
+  },
+  {
+    "name": "Irony",
+    "definition": "The expression of one's meaning by using language that normally signifies the opposite, typically for humorous or emphatic effect.",
+    "example": "A fire station burns down."
+  },
+  {
+    "name": "Oxymoron",
+    "definition": "A figure of speech in which apparently contradictory terms appear in conjunction.",
+    "example": "Deafening silence."
+  },
+  {
+    "name": "Paradox",
+    "definition": "A seemingly absurd or self-contradictory statement or proposition that when investigated or explained may prove to be well founded or true.",
+    "example": "Less is more."
+  },
+  {
+    "name": "Personification",
+    "definition": "The attribution of a personal nature or human characteristics to something nonhuman, or the representation of an abstract quality in human form.",
+    "example": "The wind howled in the night."
+  },
+  {
+    "name": "Synecdoche",
+    "definition": "A figure of speech in which a part is made to represent the whole or vice versa.",
+    "example": "Cleveland won by six runs (meaning 'Cleveland's baseball team')."
+  },
+  {
+    "name": "Understatement",
+    "definition": "The presentation of something as being smaller, worse, or less important than it actually is.",
+    "example": "It's just a flesh wound (after losing an arm)."
+  },
+  {
+    "name": "Antithesis",
+    "definition": "A person or thing that is the direct opposite of someone or something else.",
+    "example": "That's one small step for man, one giant leap for mankind."
+  },
+  {
+    "name": "Epistrophe",
+    "definition": "The repetition of a word at the end of successive clauses or sentences.",
+    "example": "Government of the people, by the people, for the people."
+  },
+  {
+    "name": "Euphemism",
+    "definition": "A mild or indirect word or expression substituted for one considered to be too harsh or blunt when referring to something unpleasant or embarrassing.",
+    "example": "He has passed away (instead of 'died')."
+  },
+  {
+    "name": "Onomatopoeia",
+    "definition": "The formation of a word from a sound associated with what is named.",
+    "example": "The bees buzzed."
+  }
+]
